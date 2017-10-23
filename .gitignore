@@ -1,1 +1,10 @@
-*.gitignore
+# compiled classes ignore
+*.class
+
+# log files
+*.log
+
+# package files
+*.jar
+*.rar
+*.zip
