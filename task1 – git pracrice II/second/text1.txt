@@ -1,1 +1,2 @@
 Edit file into 2 commits.
+Insert text to rebase commit.
