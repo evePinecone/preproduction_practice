@@ -10,3 +10,5 @@
 *.zip
 
 /bin/
+
+/.metadata/
