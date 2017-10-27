@@ -12,7 +12,7 @@ public class Computer extends Thing{
 		graphicsProcessor = "none";
 	}
 
-	public Computer(String nameModel, String firm, double price, String nameProcessor, int rAM,
+	public Computer(String nameModel, String firm, long price, String nameProcessor, int rAM,
 			String graphicsProcessor) {
 		super(nameModel, firm, price);
 		this.nameProcessor = nameProcessor;
@@ -42,6 +42,56 @@ public class Computer extends Thing{
 
 	public void setGraphicsProcessor(String graphicsProcessor) {
 		this.graphicsProcessor = graphicsProcessor;
+	}
+
+	
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + RAM;
+		result = prime * result + ((graphicsProcessor == null) ? 0 : graphicsProcessor.hashCode());
+		result = prime * result + ((nameProcessor == null) ? 0 : nameProcessor.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof Computer)) {
+			return false;
+		}
+		Computer other = (Computer) obj;
+		if (RAM != other.RAM) {
+			return false;
+		}
+		if (graphicsProcessor == null) {
+			if (other.graphicsProcessor != null) {
+				return false;
+			}
+		} else if (!graphicsProcessor.equals(other.graphicsProcessor)) {
+			return false;
+		}
+		if (nameProcessor == null) {
+			if (other.nameProcessor != null) {
+				return false;
+			}
+		} else if (!nameProcessor.equals(other.nameProcessor)) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override

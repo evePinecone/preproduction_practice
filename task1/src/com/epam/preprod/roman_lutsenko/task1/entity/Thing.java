@@ -12,7 +12,7 @@ public abstract class Thing {
 	 * Company manufacturer.
 	 */
 	String firm;
-	double price;
+	long price;
 
 	public Thing() {
 		nameModel = "none";
@@ -20,7 +20,7 @@ public abstract class Thing {
 		price = -1;
 	}
 
-	public Thing(String nameModel, String firm, double price) {
+	public Thing(String nameModel, String firm, long price) {
 		super();
 		this.nameModel = nameModel;
 		this.firm = firm;
@@ -43,12 +43,62 @@ public abstract class Thing {
 		this.firm = firm;
 	}
 
-	public double getPrice() {
+	public long getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(long price) {
 		this.price = price;
+	}
+
+	
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((firm == null) ? 0 : firm.hashCode());
+		result = prime * result + ((nameModel == null) ? 0 : nameModel.hashCode());
+		result = prime * result + (int) (price ^ (price >>> 32));
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof Thing)) {
+			return false;
+		}
+		Thing other = (Thing) obj;
+		if (firm == null) {
+			if (other.firm != null) {
+				return false;
+			}
+		} else if (!firm.equals(other.firm)) {
+			return false;
+		}
+		if (nameModel == null) {
+			if (other.nameModel != null) {
+				return false;
+			}
+		} else if (!nameModel.equals(other.nameModel)) {
+			return false;
+		}
+		if (price != other.price) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override
