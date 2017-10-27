@@ -17,6 +17,9 @@ public class Demo {
 		System.out.println(test);
 		System.out.println(test.size());
 		
+		Laptop laptop = new Laptop();
+		laptop.setPrice(5000);
+		test.add(laptop);
 		test.add(new Laptop());
 		test.add(2, new FitnessBraslet());
 		System.out.println(test);

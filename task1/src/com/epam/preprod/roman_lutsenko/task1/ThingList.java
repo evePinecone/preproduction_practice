@@ -11,7 +11,7 @@ import java.util.Objects;
 
 import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
 import com.epam.preprod.roman_lutsenko.task1.filters.Filter;
-import com.epam.preprod.roman_lutsenko.task1.filters.FilterThing;
+import com.epam.preprod.roman_lutsenko.task1.filters.ThingFilter;
 
 /**
  * 
@@ -36,8 +36,8 @@ public class ThingList<E extends Thing> implements List<Thing> {
 	}
 
 	public ThingList(int initialCapacity) {
-		if (initialCapacity < 0 || initialCapacity > MAX_LIST_SIZE) {
-
+		if ((initialCapacity < 0) || (initialCapacity > MAX_LIST_SIZE)) {
+			throw new IllegalArgumentException();
 		}
 		this.arrayList = new Thing[initialCapacity];
 	}
@@ -80,7 +80,7 @@ public class ThingList<E extends Thing> implements List<Thing> {
 	 */
 	@Override
 	public Iterator<Thing> iterator() {
-		return new FilteredIterator(new ItrImpl(), new FilterThing<Thing>());
+		return new FilteredIterator(new ItrImpl(), new ThingFilter<Thing>());
 		// return new FilteredIterator(new ItrImpl(), null);
 		// return new ItrImpl();
 	}
@@ -198,16 +198,6 @@ public class ThingList<E extends Thing> implements List<Thing> {
 	}
 
 	@Override
-	public boolean remove(Object o) {
-		if (!contains(o))
-			return false;
-		int indexRemove = indexOf(o);
-		System.arraycopy(arrayList, indexRemove, arrayList, indexRemove - 1, size - indexRemove - 1);
-		size--;
-		return true;
-	}
-
-	@Override
 	public boolean containsAll(Collection<?> c) {
 		for (int i = 0; i < size; i++) {
 			if (!c.contains(arrayList[i]))
@@ -309,10 +299,14 @@ public class ThingList<E extends Thing> implements List<Thing> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public E remove(int index) {
-		if (index < 0 || index > size)
+		if (index < 0 || index > size || size == 0)
 			throw new IndexOutOfBoundsException("Incorrect input index");
 		E removedElement;
-		if (contains(arrayList[index])) {
+		if (contains(arrayList[index]) && index > 0) {
+			removedElement = (E) arrayList[index];
+			System.arraycopy(arrayList, index + 1, arrayList, index, size - index - 1);
+			size--;
+		} else if (index == 0){
 			removedElement = (E) arrayList[index];
 			System.arraycopy(arrayList, index + 1, arrayList, index, size - index - 1);
 			size--;
@@ -320,6 +314,18 @@ public class ThingList<E extends Thing> implements List<Thing> {
 			removedElement = null;
 		}
 		return removedElement;
+	}
+	
+	@Override
+	public boolean remove(Object o) {
+		if (!contains(o))
+			return false;
+		int indexRemove = indexOf(o);
+		if(indexRemove >= 0) {
+			System.arraycopy(arrayList, indexRemove + 1, arrayList, indexRemove, size - indexRemove - 1);
+			size--;
+		}
+		return true;
 	}
 
 	@SuppressWarnings("unchecked")
