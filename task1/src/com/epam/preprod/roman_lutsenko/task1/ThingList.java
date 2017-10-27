@@ -14,6 +14,8 @@ import com.epam.preprod.roman_lutsenko.task1.filters.Filter;
 import com.epam.preprod.roman_lutsenko.task1.filters.ThingFilter;
 
 /**
+ * Container for elements that extends Things.
+ * Based on array. Extension by step STEP_RESIZE.
  * 
  * @author Roman_Lutsenko
  *
@@ -78,6 +80,9 @@ public class ThingList<E extends Thing> implements List<Thing> {
 	 * 
 	 * @see java.util.List#iterator()
 	 */
+	/**
+	 * Edited for custom filter.
+	 */
 	@Override
 	public Iterator<Thing> iterator() {
 		return new FilteredIterator(new ItrImpl(), new ThingFilter<Thing>());
@@ -85,6 +90,14 @@ public class ThingList<E extends Thing> implements List<Thing> {
 		// return new ItrImpl();
 	}
 
+	/**
+	 * Custom filtered iterator for collection. To get instance need to implement
+	 * interface com.epam.preprod.roman_lutsenko.task1.filters.Filter with needed
+	 * attr and use new instance of ItrImpl.
+	 * 
+	 * @author Roman_Lutsenko
+	 *
+	 */
 	public final class FilteredIterator implements Iterator<Thing> {
 		private final Iterator<Thing> iterator;
 		private final Filter<Thing> filter;
@@ -93,6 +106,14 @@ public class ThingList<E extends Thing> implements List<Thing> {
 		private Thing next;
 		int cursor;
 
+		/**
+		 * Constructor for custom iterator.
+		 * 
+		 * @param iterator basic realisation of iterator.
+		 * @param filter
+		 *            implementetion of interface
+		 *            com.epam.preprod.roman_lutsenko.task1.filters.Filter
+		 */
 		public FilteredIterator(final Iterator<Thing> iterator, final Filter<Thing> filter) {
 			this.iterator = iterator;
 			Objects.requireNonNull(iterator);
@@ -122,6 +143,10 @@ public class ThingList<E extends Thing> implements List<Thing> {
 			throw new UnsupportedOperationException();
 		}
 
+		/**
+		 * Finding next element that satisfies to filter.
+		 * 
+		 */
 		private void findNext() {
 			while (this.iterator.hasNext()) {
 				this.next = iterator.next();
@@ -134,6 +159,12 @@ public class ThingList<E extends Thing> implements List<Thing> {
 
 	}
 
+	/**
+	 * If filter is not set.
+	 * 
+	 * @author Roman_Lutsenko
+	 *
+	 */
 	private static final class AcceptAllFilter implements Filter<Thing> {
 		public boolean accept(final Thing thing) {
 			return true;
@@ -306,7 +337,7 @@ public class ThingList<E extends Thing> implements List<Thing> {
 			removedElement = (E) arrayList[index];
 			System.arraycopy(arrayList, index + 1, arrayList, index, size - index - 1);
 			size--;
-		} else if (index == 0){
+		} else if (index == 0) {
 			removedElement = (E) arrayList[index];
 			System.arraycopy(arrayList, index + 1, arrayList, index, size - index - 1);
 			size--;
@@ -315,13 +346,13 @@ public class ThingList<E extends Thing> implements List<Thing> {
 		}
 		return removedElement;
 	}
-	
+
 	@Override
 	public boolean remove(Object o) {
 		if (!contains(o))
 			return false;
 		int indexRemove = indexOf(o);
-		if(indexRemove >= 0) {
+		if (indexRemove >= 0) {
 			System.arraycopy(arrayList, indexRemove + 1, arrayList, indexRemove, size - indexRemove - 1);
 			size--;
 		}
