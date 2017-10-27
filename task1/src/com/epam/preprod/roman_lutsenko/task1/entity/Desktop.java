@@ -10,9 +10,9 @@ public class Desktop extends Computer {
 		typeWorkspace = "none";
 	}
 
-	public Desktop(String nameModel, String firm, long price, String nameProcessor, int rAM, String graphicsProcessor,
+	public Desktop(String nameModel, String firm, long price, String nameProcessor, int rAM,
 			String formFactor, String typeWorkspace) {
-		super(nameModel, firm, price, nameProcessor, rAM, graphicsProcessor);
+		super(nameModel, firm, price, nameProcessor, rAM);
 		this.formFactor = formFactor;
 		this.typeWorkspace = typeWorkspace;
 	}
@@ -81,7 +81,7 @@ public class Desktop extends Computer {
 	@Override
 	public String toString() {
 		return "Desktop [formFactor=" + formFactor + ", typeWorkspace=" + typeWorkspace + ", nameProcessor="
-				+ nameProcessor + ", RAM=" + RAM + ", graphicsProcessor=" + graphicsProcessor + ", nameModel="
+				+ nameProcessor + ", RAM=" + RAM + ", nameModel="
 				+ nameModel + ", firm=" + firm + ", price=" + price + "]";
 	}
 

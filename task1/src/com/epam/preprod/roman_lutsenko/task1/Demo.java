@@ -21,6 +21,7 @@ public class Demo {
 		test.add(2, new FitnessBraslet());
 		System.out.println(test);
 		System.out.println(test.get(3));
+		test.add(new Laptop());
 		System.out.println("_______________________________________");
 		for (Thing thing : test) {
 			System.out.println(thing + System.lineSeparator());

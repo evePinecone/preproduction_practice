@@ -3,21 +3,17 @@ package com.epam.preprod.roman_lutsenko.task1.entity;
 public class Computer extends Thing{
 	String nameProcessor;
 	int RAM;
-	String graphicsProcessor;
 
 	public Computer() {
 		super();
 		nameProcessor = "none";
 		RAM = -1;
-		graphicsProcessor = "none";
 	}
 
-	public Computer(String nameModel, String firm, long price, String nameProcessor, int rAM,
-			String graphicsProcessor) {
+	public Computer(String nameModel, String firm, long price, String nameProcessor, int rAM) {
 		super(nameModel, firm, price);
 		this.nameProcessor = nameProcessor;
 		RAM = rAM;
-		this.graphicsProcessor = graphicsProcessor;
 	}
 
 	public String getNameProcessor() {
@@ -36,25 +32,14 @@ public class Computer extends Thing{
 		RAM = rAM;
 	}
 
-	public String getGraphicsProcessor() {
-		return graphicsProcessor;
-	}
-
-	public void setGraphicsProcessor(String graphicsProcessor) {
-		this.graphicsProcessor = graphicsProcessor;
-	}
-
-	
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + RAM;
-		result = prime * result + ((graphicsProcessor == null) ? 0 : graphicsProcessor.hashCode());
 		result = prime * result + ((nameProcessor == null) ? 0 : nameProcessor.hashCode());
 		return result;
 	}
@@ -67,7 +52,7 @@ public class Computer extends Thing{
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
+		if (!super.equals(obj)) {
 			return false;
 		}
 		if (!(obj instanceof Computer)) {
@@ -75,13 +60,6 @@ public class Computer extends Thing{
 		}
 		Computer other = (Computer) obj;
 		if (RAM != other.RAM) {
-			return false;
-		}
-		if (graphicsProcessor == null) {
-			if (other.graphicsProcessor != null) {
-				return false;
-			}
-		} else if (!graphicsProcessor.equals(other.graphicsProcessor)) {
 			return false;
 		}
 		if (nameProcessor == null) {
@@ -94,12 +72,14 @@ public class Computer extends Thing{
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
-		return "Computer [nameProcessor=" + nameProcessor + ", RAM=" + RAM + ", graphicsProcessor=" + graphicsProcessor
-				+ ", nameModel=" + nameModel + ", firm=" + firm + ", price=" + price + "]";
+		return "Computer [nameProcessor=" + nameProcessor + ", RAM=" + RAM + ", nameModel=" + nameModel + ", firm="
+				+ firm + ", price=" + price + "]";
 	}
-
 	
 
 }

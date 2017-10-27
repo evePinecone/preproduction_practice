@@ -2,21 +2,18 @@ package com.epam.preprod.roman_lutsenko.task1.entity;
 
 public class Laptop extends Computer {
 	double displayResolution;
-	String autonomy;
 	double weight;
 
 	public Laptop() {
 		super();
 		displayResolution = -1;
-		autonomy = "none";
 		weight = -1;
 	}
 
-	public Laptop(String nameModel, String firm, long price, String nameProcessor, int rAM, String graphicsProcessor,
-			double displayResolution, String autonomy, double weight) {
-		super(nameModel, firm, price, nameProcessor, rAM, graphicsProcessor);
+	public Laptop(String nameModel, String firm, long price, String nameProcessor, int rAM,
+			double displayResolution, double weight) {
+		super(nameModel, firm, price, nameProcessor, rAM);
 		this.displayResolution = displayResolution;
-		this.autonomy = autonomy;
 		this.weight = weight;
 	}
 
@@ -26,14 +23,6 @@ public class Laptop extends Computer {
 
 	public void setDisplayResolution(double displayResolution) {
 		this.displayResolution = displayResolution;
-	}
-
-	public String getAutonomy() {
-		return autonomy;
-	}
-
-	public void setAutonomy(String autonomy) {
-		this.autonomy = autonomy;
 	}
 
 	public double getWeight() {
@@ -51,7 +40,6 @@ public class Laptop extends Computer {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((autonomy == null) ? 0 : autonomy.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(displayResolution);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
@@ -75,13 +63,6 @@ public class Laptop extends Computer {
 			return false;
 		}
 		Laptop other = (Laptop) obj;
-		if (autonomy == null) {
-			if (other.autonomy != null) {
-				return false;
-			}
-		} else if (!autonomy.equals(other.autonomy)) {
-			return false;
-		}
 		if (Double.doubleToLongBits(displayResolution) != Double.doubleToLongBits(other.displayResolution)) {
 			return false;
 		}
@@ -91,12 +72,14 @@ public class Laptop extends Computer {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
-		return "Laptop [displayResolution=" + displayResolution + ", autonomy=" + autonomy + ", weight=" + weight
-				+ ", nameProcessor=" + nameProcessor + ", RAM=" + RAM + ", graphicsProcessor=" + graphicsProcessor
-				+ ", nameModel=" + nameModel + ", firm=" + firm + ", price=" + price + "]";
+		return "Laptop [displayResolution=" + displayResolution + ", weight=" + weight + ", nameProcessor="
+				+ nameProcessor + ", RAM=" + RAM + ", nameModel=" + nameModel + ", firm=" + firm + ", price=" + price
+				+ "]";
 	}
-
-	
+		
 }

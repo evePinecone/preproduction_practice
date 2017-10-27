@@ -2,12 +2,16 @@ package com.epam.preprod.roman_lutsenko.task1;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
+import com.epam.preprod.roman_lutsenko.task1.filters.Filter;
+import com.epam.preprod.roman_lutsenko.task1.filters.FilterThing;
 
 /**
  * 
@@ -60,12 +64,8 @@ public class ThingList<E extends Thing> implements List<Thing> {
 
 	@Override
 	public boolean isEmpty() {
-		if (arrayList == null || size == 0)
-			return true;
-		return false;
-		/*
-		 * return (arrayList == null || size == 0)
-		 */
+		return (arrayList == null || size == 0);
+
 	}
 
 	@Override
@@ -74,35 +74,104 @@ public class ThingList<E extends Thing> implements List<Thing> {
 	}
 
 	/*
-	 * Not added if to iterator. Just simple.
-	 * (non-Javadoc)
+	 * Not added if to iterator. Just simple. (non-Javadoc)
+	 * 
 	 * @see java.util.List#iterator()
 	 */
 	@Override
 	public Iterator<Thing> iterator() {
-		return new ItrImpl();
+		return new FilteredIterator(new ItrImpl(), new FilterThing<Thing>());
+		// return new FilteredIterator(new ItrImpl(), null);
+		// return new ItrImpl();
 	}
-	
+
+	public final class FilteredIterator implements Iterator<Thing> {
+		private final Iterator<Thing> iterator;
+		private final Filter<Thing> filter;
+
+		private boolean hasNext = true;
+		private Thing next;
+		int cursor;
+
+		public FilteredIterator(final Iterator<Thing> iterator, final Filter<Thing> filter) {
+			this.iterator = iterator;
+			Objects.requireNonNull(iterator);
+
+			if (filter == null) {
+				this.filter = new AcceptAllFilter();
+			} else {
+				this.filter = filter;
+			}
+			this.findNext();
+		}
+
+		@Override
+		public boolean hasNext() {
+			return hasNext;
+		}
+
+		@Override
+		public Thing next() {
+			Thing returnValue = this.next;
+			this.findNext();
+			return returnValue;
+		}
+
+		@Override
+		public void remove() {
+			throw new UnsupportedOperationException();
+		}
+
+		private void findNext() {
+			while (this.iterator.hasNext()) {
+				this.next = iterator.next();
+				if (this.filter.accept(this.next)) {
+					return;
+				}
+			}
+			this.hasNext = false;
+		}
+
+	}
+
+	private static final class AcceptAllFilter implements Filter<Thing> {
+		public boolean accept(final Thing thing) {
+			return true;
+		}
+	}
+
 	private class ItrImpl implements Iterator<Thing> {
-		int cursor;       // index of next element to return
-        int lastRet = -1;
-		
+		int cursor; // index of next element to return
+		int lastRet = -1;
+
 		@Override
 		public boolean hasNext() {
 			return cursor != size;
 		}
 
-		@SuppressWarnings("unchecked")
 		@Override
-		public E next() {
-            int index = cursor;
-            if (index >= size)
-                throw new NoSuchElementException();
-            Object[] elementData = ThingList.this.arrayList;
-            cursor = index + 1;
-            return (E) arrayList[lastRet = index];
+		public Thing next() {
+			int index = cursor;
+			if (index >= size)
+				throw new NoSuchElementException();
+			Object[] arrayList = ThingList.this.arrayList;
+			cursor = index + 1;
+			return (Thing) arrayList[lastRet = index];
 		}
-		
+
+		@Override
+		public void remove() {
+			if (lastRet < 0)
+				throw new IllegalStateException();
+			try {
+				ThingList.this.remove(lastRet);
+				cursor = lastRet;
+				lastRet = -1;
+			} catch (IndexOutOfBoundsException ex) {
+				throw new ConcurrentModificationException();
+			}
+		}
+
 	}
 
 	@Override
@@ -156,7 +225,7 @@ public class ThingList<E extends Thing> implements List<Thing> {
 			 */
 		}
 		System.arraycopy(c, 0, arrayList, size - 1, c.size());
-		size+=c.size();
+		size += c.size();
 		return true;
 	}
 
@@ -170,7 +239,7 @@ public class ThingList<E extends Thing> implements List<Thing> {
 		}
 		System.arraycopy(arrayList, index, arrayList, index + c.size(), c.size());
 		System.arraycopy(c, 0, arrayList, index, c.size());
-		size+=c.size();
+		size += c.size();
 		return true;
 	}
 
@@ -204,23 +273,25 @@ public class ThingList<E extends Thing> implements List<Thing> {
 		arrayList = new Thing[INITIAL_CAPACITY];
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Thing get(int index) {
+	public E get(int index) {
 		if (index < 0 || index > size)
 			throw new IndexOutOfBoundsException("Incorrect input index");
 		if (contains(arrayList[index]))
-			return arrayList[index];
+			return (E) arrayList[index];
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Thing set(int index, Thing element) {
+	public E set(int index, Thing element) {
 		// Need to place element to the last empty element?
 		if (index < 0 || index >= size)
 			throw new IndexOutOfBoundsException("Incorrect input index");
 		Thing bufElement = arrayList[index];
 		arrayList[index] = element;
-		return bufElement;
+		return (E) bufElement;
 	}
 
 	@Override
@@ -237,7 +308,7 @@ public class ThingList<E extends Thing> implements List<Thing> {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Thing remove(int index) {
+	public E remove(int index) {
 		if (index < 0 || index > size)
 			throw new IndexOutOfBoundsException("Incorrect input index");
 		E removedElement;
