@@ -9,10 +9,13 @@
 *.rar
 *.zip
 
-/bin/
+/task1/bin/
 
 /.metadata/
+
 /.recommenders/
 *.classpath
 *.project
 /.settings/
+/task1 – git pracrice I
+/task1 – git pracrice II
