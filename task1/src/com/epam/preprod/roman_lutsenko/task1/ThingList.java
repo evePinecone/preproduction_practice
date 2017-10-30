@@ -86,9 +86,9 @@ public class ThingList<E extends Thing> implements List<Thing> {
 	 */
 	@Override
 	public Iterator<Thing> iterator() {
-		return new FilteredIterator(new ItrImpl(), new ThingFilter<Thing>());
+		//return new FilteredIterator(new ItrImpl(), new ThingFilter<Thing>());
 		// return new FilteredIterator(new ItrImpl(), null);
-		// return new ItrImpl();
+		 return new ItrImpl();
 	}
 
 	/**
