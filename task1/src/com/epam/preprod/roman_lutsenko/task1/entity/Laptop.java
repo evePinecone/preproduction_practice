@@ -1,17 +1,14 @@
 package com.epam.preprod.roman_lutsenko.task1.entity;
 
 public class Laptop extends Computer {
-	double displayResolution;
-	double weight;
+	private double displayResolution;
+	private double weight;
 
 	public Laptop() {
-		super();
-		displayResolution = -1;
-		weight = -1;
 	}
 
-	public Laptop(String nameModel, String firm, long price, String nameProcessor, int rAM,
-			double displayResolution, double weight) {
+	public Laptop(String nameModel, String firm, long price, String nameProcessor, int rAM, double displayResolution,
+			double weight) {
 		super(nameModel, firm, price, nameProcessor, rAM);
 		this.displayResolution = displayResolution;
 		this.weight = weight;
@@ -33,7 +30,9 @@ public class Laptop extends Computer {
 		this.weight = weight;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -48,7 +47,9 @@ public class Laptop extends Computer {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -59,7 +60,7 @@ public class Laptop extends Computer {
 		if (!super.equals(obj)) {
 			return false;
 		}
-		if (!(obj instanceof Laptop)) {
+		if (!(obj.getClass().equals(this.getClass()))) {
 			return false;
 		}
 		Laptop other = (Laptop) obj;
@@ -72,14 +73,15 @@ public class Laptop extends Computer {
 		return true;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "Laptop [displayResolution=" + displayResolution + ", weight=" + weight + ", nameProcessor="
-				+ nameProcessor + ", RAM=" + RAM + ", nameModel=" + nameModel + ", firm=" + firm + ", price=" + price
-				+ "]";
+		return "Laptop " + super.toString() + "[displayResolution=" + displayResolution + ", weight=" + weight + "]";
 	}
-		
+
+
 }

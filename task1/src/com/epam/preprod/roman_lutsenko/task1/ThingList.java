@@ -14,8 +14,8 @@ import com.epam.preprod.roman_lutsenko.task1.filters.Filter;
 import com.epam.preprod.roman_lutsenko.task1.filters.ThingFilter;
 
 /**
- * Container for elements that extends Things.
- * Based on array. Extension by step STEP_RESIZE.
+ * Container for elements that extends Things. Based on array. Extension by step
+ * STEP_RESIZE.
  * 
  * @author Roman_Lutsenko
  *
@@ -57,8 +57,9 @@ public class ThingList<E extends Thing> implements List<Thing> {
 	 */
 	@SuppressWarnings("unused")
 	private void resizePlus() throws IndexOutOfBoundsException {
-		if (size + STEP_RESIZE >= MAX_LIST_SIZE)
+		if (size + STEP_RESIZE >= MAX_LIST_SIZE) {
 			throw new IndexOutOfBoundsException("Can't resize an array");
+		}
 		Thing[] bufArrayList = new Thing[size + STEP_RESIZE];
 		System.arraycopy(arrayList, 0, bufArrayList, 0, size);
 		arrayList = bufArrayList;
@@ -66,13 +67,13 @@ public class ThingList<E extends Thing> implements List<Thing> {
 
 	@Override
 	public boolean isEmpty() {
-		return (arrayList == null || size == 0);
+		return size == 0;
 
 	}
 
 	@Override
 	public boolean contains(Object o) {
-		return (indexOf(o) >= 0);
+		return indexOf(o) >= 0;
 	}
 
 	/*
@@ -109,7 +110,8 @@ public class ThingList<E extends Thing> implements List<Thing> {
 		/**
 		 * Constructor for custom iterator.
 		 * 
-		 * @param iterator basic realisation of iterator.
+		 * @param iterator
+		 *            basic realisation of iterator.
 		 * @param filter
 		 *            implementetion of interface
 		 *            com.epam.preprod.roman_lutsenko.task1.filters.Filter
@@ -183,8 +185,9 @@ public class ThingList<E extends Thing> implements List<Thing> {
 		@Override
 		public Thing next() {
 			int index = cursor;
-			if (index >= size)
+			if (index >= size) {
 				throw new NoSuchElementException();
+			}
 			Object[] arrayList = ThingList.this.arrayList;
 			cursor = index + 1;
 			return (Thing) arrayList[lastRet = index];
@@ -192,8 +195,9 @@ public class ThingList<E extends Thing> implements List<Thing> {
 
 		@Override
 		public void remove() {
-			if (lastRet < 0)
+			if (lastRet < 0) {
 				throw new IllegalStateException();
+			}
 			try {
 				ThingList.this.remove(lastRet);
 				cursor = lastRet;
@@ -213,8 +217,11 @@ public class ThingList<E extends Thing> implements List<Thing> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T[] toArray(T[] a) {
-		if (a.length < size)
+		if (a.length < size) {
 			return (T[]) Arrays.copyOf(arrayList, size, a.getClass());
+		}
+		if (a.length > size)
+			a[size] = null;
 		System.arraycopy(arrayList, 0, a, 0, size);
 		return a;
 	}
@@ -231,8 +238,9 @@ public class ThingList<E extends Thing> implements List<Thing> {
 	@Override
 	public boolean containsAll(Collection<?> c) {
 		for (int i = 0; i < size; i++) {
-			if (!c.contains(arrayList[i]))
+			if (!c.contains(arrayList[i])) {
 				return false;
+			}
 		}
 		return true;
 	}
@@ -297,10 +305,12 @@ public class ThingList<E extends Thing> implements List<Thing> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public E get(int index) {
-		if (index < 0 || index > size)
+		if (index < 0 || index > size) {
 			throw new IndexOutOfBoundsException("Incorrect input index");
-		if (contains(arrayList[index]))
+		}
+		if (contains(arrayList[index])) {
 			return (E) arrayList[index];
+		}
 		return null;
 	}
 
@@ -308,8 +318,9 @@ public class ThingList<E extends Thing> implements List<Thing> {
 	@Override
 	public E set(int index, Thing element) {
 		// Need to place element to the last empty element?
-		if (index < 0 || index >= size)
+		if (index < 0 || index >= size) {
 			throw new IndexOutOfBoundsException("Incorrect input index");
+		}
 		Thing bufElement = arrayList[index];
 		arrayList[index] = element;
 		return (E) bufElement;
@@ -317,8 +328,9 @@ public class ThingList<E extends Thing> implements List<Thing> {
 
 	@Override
 	public void add(int index, Thing element) {
-		if (index < 0 || index > size)
+		if (index < 0 || index > size) {
 			throw new IndexOutOfBoundsException("Incorrect input index");
+		}
 		if (size >= arrayList.length) {
 			resizePlus();
 		}
@@ -330,8 +342,9 @@ public class ThingList<E extends Thing> implements List<Thing> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public E remove(int index) {
-		if (index < 0 || index > size || size == 0)
+		if (index < 0 || index > size || size == 0) {
 			throw new IndexOutOfBoundsException("Incorrect input index");
+		}
 		E removedElement;
 		if (contains(arrayList[index]) && index > 0) {
 			removedElement = (E) arrayList[index];
@@ -349,8 +362,9 @@ public class ThingList<E extends Thing> implements List<Thing> {
 
 	@Override
 	public boolean remove(Object o) {
-		if (!contains(o))
+		if (!contains(o)) {
 			return false;
+		}
 		int indexRemove = indexOf(o);
 		if (indexRemove >= 0) {
 			System.arraycopy(arrayList, indexRemove + 1, arrayList, indexRemove, size - indexRemove - 1);
@@ -364,13 +378,17 @@ public class ThingList<E extends Thing> implements List<Thing> {
 	public int indexOf(Object o) {
 		E bufObj = (E) o;
 		if (bufObj == null) {
-			for (int i = 0; i < size; i++)
-				if (arrayList[i] == null)
+			for (int i = 0; i < size; i++) {
+				if (arrayList[i] == null) {
 					return i;
+				}
+			}
 		}
-		for (int i = 0; i < size; i++)
-			if (bufObj.equals(arrayList[i]))
+		for (int i = 0; i < size; i++) {
+			if (bufObj.equals(arrayList[i])) {
 				return i;
+			}
+		}
 		return -1;
 	}
 
@@ -379,13 +397,17 @@ public class ThingList<E extends Thing> implements List<Thing> {
 	public int lastIndexOf(Object o) {
 		E bufObj = (E) o;
 		if (bufObj == null) {
-			for (int i = size - 1; i >= 0; i--)
-				if (arrayList[i] == null)
+			for (int i = size - 1; i >= 0; i--) {
+				if (arrayList[i] == null) {
 					return i;
+				}
+			}
 		}
-		for (int i = size - 1; i >= 0; i--)
-			if (bufObj.equals(arrayList[i]))
+		for (int i = size - 1; i >= 0; i--) {
+			if (bufObj.equals(arrayList[i])) {
 				return i;
+			}
+		}
 		return -1;
 	}
 

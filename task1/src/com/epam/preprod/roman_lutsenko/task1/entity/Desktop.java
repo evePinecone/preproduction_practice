@@ -1,14 +1,10 @@
 package com.epam.preprod.roman_lutsenko.task1.entity;
 
 public class Desktop extends Computer {
-	String formFactor;
-	String typeWorkspace;
+	private String formFactor;
+	private String typeWorkspace;
 
-	public Desktop() {
-		super();
-		formFactor = "none";
-		typeWorkspace = "none";
-	}
+	public Desktop() {	}
 
 	public Desktop(String nameModel, String firm, long price, String nameProcessor, int rAM,
 			String formFactor, String typeWorkspace) {
@@ -57,7 +53,7 @@ public class Desktop extends Computer {
 		if (!super.equals(obj)) {
 			return false;
 		}
-		if (!(obj instanceof Desktop)) {
+		if (!(obj.getClass().equals(this.getClass()))) {
 			return false;
 		}
 		Desktop other = (Desktop) obj;
@@ -78,11 +74,15 @@ public class Desktop extends Computer {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
-		return "Desktop [formFactor=" + formFactor + ", typeWorkspace=" + typeWorkspace + ", nameProcessor="
-				+ nameProcessor + ", RAM=" + RAM + ", nameModel="
-				+ nameModel + ", firm=" + firm + ", price=" + price + "]";
+		
+		return "Desktop " + super.toString()+"[formFactor=" + formFactor + ", typeWorkspace=" + typeWorkspace + "]";
 	}
+
+	
 
 }

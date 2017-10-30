@@ -7,21 +7,16 @@ package com.epam.preprod.roman_lutsenko.task1.entity;
  *
  */
 public abstract class Thing {
-	String nameModel;
+	private String nameModel;
 	/**
 	 * Company manufacturer.
 	 */
-	String firm;
-	long price;
+	private String firm;
+	private long price;
 
-	public Thing() {
-		nameModel = "none";
-		firm = "none";
-		price = -1;
-	}
+	public Thing() { }
 
 	public Thing(String nameModel, String firm, long price) {
-		super();
 		this.nameModel = nameModel;
 		this.firm = firm;
 		this.price = price;
@@ -77,7 +72,7 @@ public abstract class Thing {
 		if (obj == null) {
 			return false;
 		}
-		if (!(obj instanceof Thing)) {
+		if (!(obj.getClass().equals(this.getClass()))) {
 			return false;
 		}
 		Thing other = (Thing) obj;
@@ -103,7 +98,7 @@ public abstract class Thing {
 
 	@Override
 	public String toString() {
-		return "Thing [nameModel=" + nameModel + ", firm=" + firm + ", price=" + price + "]";
+		return "[nameModel=" + nameModel + ", firm=" + firm + ", price=" + price + "]";
 	}
  
 	

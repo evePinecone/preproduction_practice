@@ -1,14 +1,10 @@
 package com.epam.preprod.roman_lutsenko.task1.entity;
 
 public class FitnessBraslet extends PortableGadget {
-	String display;
-	String strapMaterial;
+	private String display;
+	private String strapMaterial;
 	
-	public FitnessBraslet() {
-		super();
-		this.display = "none";
-		this.strapMaterial = "none";
-	}
+	public FitnessBraslet() { }
 
 	public FitnessBraslet(String nameModel, String firm, long price, String autonomy, String display,
 			String strapMaterial) {
@@ -56,7 +52,7 @@ public class FitnessBraslet extends PortableGadget {
 		if (obj == null) {
 			return false;
 		}
-		if (!(obj instanceof FitnessBraslet)) {
+		if (!(obj.getClass().equals(this.getClass()))) {
 			return false;
 		}
 		FitnessBraslet other = (FitnessBraslet) obj;
@@ -77,11 +73,12 @@ public class FitnessBraslet extends PortableGadget {
 		return true;
 	}
 
-
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
-		return "FitnessBraslet [display=" + display + ", strapMaterial=" + strapMaterial + ", autonomy=" + autonomy
-				+ ", nameModel=" + nameModel + ", firm=" + firm + ", price=" + price + "]";
+		return "FitnessBraslet" + super.toString()+"[display=" + display + ", strapMaterial=" + strapMaterial + "]";
 	}
 	
 }

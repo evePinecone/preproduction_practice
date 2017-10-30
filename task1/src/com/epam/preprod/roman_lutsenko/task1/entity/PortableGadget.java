@@ -1,12 +1,9 @@
 package com.epam.preprod.roman_lutsenko.task1.entity;
 
 public class PortableGadget extends Thing {
-	String autonomy;
+	private String autonomy;
 	
-	public PortableGadget() {
-		super();
-		autonomy = "none";
-	}
+	public PortableGadget() {}
 
 	public PortableGadget(String nameModel, String firm, long price, String autonomy) {
 		super(nameModel, firm, price);
@@ -43,7 +40,7 @@ public class PortableGadget extends Thing {
 		if (obj == null) {
 			return false;
 		}
-		if (!(obj instanceof PortableGadget)) {
+		if (!(obj.getClass().equals(this.getClass()))) {
 			return false;
 		}
 		PortableGadget other = (PortableGadget) obj;
@@ -57,10 +54,12 @@ public class PortableGadget extends Thing {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
-		return "PortableGadget [autonomy=" + autonomy + ", nameModel=" + nameModel + ", firm=" + firm + ", price="
-				+ price + "]";
+		return super.toString()+"[autonomy=" + autonomy + "]";
 	}
-	
+
 }

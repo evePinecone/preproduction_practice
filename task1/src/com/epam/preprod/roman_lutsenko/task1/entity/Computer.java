@@ -1,19 +1,16 @@
 package com.epam.preprod.roman_lutsenko.task1.entity;
 
-public class Computer extends Thing{
-	String nameProcessor;
-	int RAM;
+public class Computer extends Thing {
+	private String nameProcessor;
+	private int ram;
 
 	public Computer() {
-		super();
-		nameProcessor = "none";
-		RAM = -1;
 	}
 
 	public Computer(String nameModel, String firm, long price, String nameProcessor, int rAM) {
 		super(nameModel, firm, price);
 		this.nameProcessor = nameProcessor;
-		RAM = rAM;
+		ram = rAM;
 	}
 
 	public String getNameProcessor() {
@@ -25,26 +22,30 @@ public class Computer extends Thing{
 	}
 
 	public int getRAM() {
-		return RAM;
+		return ram;
 	}
 
 	public void setRAM(int rAM) {
-		RAM = rAM;
+		ram = rAM;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + RAM;
+		result = prime * result + ram;
 		result = prime * result + ((nameProcessor == null) ? 0 : nameProcessor.hashCode());
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -55,11 +56,11 @@ public class Computer extends Thing{
 		if (!super.equals(obj)) {
 			return false;
 		}
-		if (!(obj instanceof Computer)) {
+		if (!(obj.getClass().equals(this.getClass()))) {
 			return false;
 		}
 		Computer other = (Computer) obj;
-		if (RAM != other.RAM) {
+		if (ram != other.ram) {
 			return false;
 		}
 		if (nameProcessor == null) {
@@ -72,14 +73,14 @@ public class Computer extends Thing{
 		return true;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "Computer [nameProcessor=" + nameProcessor + ", RAM=" + RAM + ", nameModel=" + nameModel + ", firm="
-				+ firm + ", price=" + price + "]";
+		return super.toString() + "[nameProcessor=" + nameProcessor + ", ram=" + ram + "]";
 	}
-	
 
 }
