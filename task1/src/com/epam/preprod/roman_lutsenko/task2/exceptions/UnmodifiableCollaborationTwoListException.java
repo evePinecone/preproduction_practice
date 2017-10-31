@@ -1,4 +1,4 @@
-package com.epam.preprod.roman_lutsenko.task2;
+package com.epam.preprod.roman_lutsenko.task2.exceptions;
 
 public class UnmodifiableCollaborationTwoListException extends RuntimeException {
 

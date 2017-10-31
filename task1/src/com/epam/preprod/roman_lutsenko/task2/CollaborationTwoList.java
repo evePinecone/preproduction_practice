@@ -6,6 +6,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+import com.epam.preprod.roman_lutsenko.task2.exceptions.ClearCollaborationTwoListException;
+import com.epam.preprod.roman_lutsenko.task2.exceptions.UnmodifiableCollaborationTwoListException;
+
 public class CollaborationTwoList<E> implements List<E> {
 
 	private List<E> unmodifable;
@@ -194,7 +197,7 @@ public class CollaborationTwoList<E> implements List<E> {
 		if (unmodifable.contains(object)) {
 			return unmodifable.indexOf(object);
 		} else if (modifable.contains(object)) {
-			return modifable.indexOf(object);
+			return unmodifable.size()+modifable.indexOf(object);
 		}
 		return -1;
 	}
@@ -202,7 +205,7 @@ public class CollaborationTwoList<E> implements List<E> {
 	@Override
 	public int lastIndexOf(Object object) {
 		if (unmodifable.contains(object)) {
-			return unmodifable.lastIndexOf(object);
+			return unmodifable.lastIndexOf(object)+modifable.size();
 		} else if (modifable.contains(object)) {
 			return modifable.lastIndexOf(object);
 		}
