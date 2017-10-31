@@ -7,7 +7,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
-import java.util.Objects;
 
 import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
 import com.epam.preprod.roman_lutsenko.task1.filters.Filter;
@@ -86,9 +85,9 @@ public class ThingList<E extends Thing> implements List<Thing> {
 	 */
 	@Override
 	public Iterator<Thing> iterator() {
-		//return new FilteredIterator(new ItrImpl(), new ThingFilter<Thing>());
+		return new FilteredIterator(new ThingFilter<Thing>());
 		// return new FilteredIterator(new ItrImpl(), null);
-		 return new ItrImpl();
+//		return new ItrImpl();
 	}
 
 	/**
@@ -100,44 +99,42 @@ public class ThingList<E extends Thing> implements List<Thing> {
 	 *
 	 */
 	public final class FilteredIterator implements Iterator<Thing> {
-		private final Iterator<Thing> iterator;
 		private final Filter<Thing> filter;
 
-		private boolean hasNext = true;
-		private Thing next;
-		int cursor;
+		int cursor = 0;
+		int indexFind = 0;
 
 		/**
 		 * Constructor for custom iterator.
 		 * 
-		 * @param iterator
-		 *            basic realisation of iterator.
 		 * @param filter
 		 *            implementetion of interface
 		 *            com.epam.preprod.roman_lutsenko.task1.filters.Filter
 		 */
-		public FilteredIterator(final Iterator<Thing> iterator, final Filter<Thing> filter) {
-			this.iterator = iterator;
-			Objects.requireNonNull(iterator);
-
+		public FilteredIterator(final Filter<Thing> filter) {
 			if (filter == null) {
 				this.filter = new AcceptAllFilter();
 			} else {
 				this.filter = filter;
 			}
-			this.findNext();
+			findNext();
 		}
 
 		@Override
 		public boolean hasNext() {
-			return hasNext;
+			return cursor != size;
 		}
 
 		@Override
 		public Thing next() {
-			Thing returnValue = this.next;
-			this.findNext();
-			return returnValue;
+			 int i = cursor;
+	            if (i >= size)
+	                throw new NoSuchElementException();
+	            Object[] elementData = ThingList.this.arrayList;
+	            if (i >= elementData.length)
+	                throw new ConcurrentModificationException();
+	            findNext();
+	            return (E) elementData[i];
 		}
 
 		@Override
@@ -150,13 +147,13 @@ public class ThingList<E extends Thing> implements List<Thing> {
 		 * 
 		 */
 		private void findNext() {
-			while (this.iterator.hasNext()) {
-				this.next = iterator.next();
-				if (this.filter.accept(this.next)) {
+			while(indexFind <= size ) {
+				if (this.filter.accept(arrayList[indexFind++])) {
+					cursor = indexFind-1;
 					return;
 				}
 			}
-			this.hasNext = false;
+			cursor = size;
 		}
 
 	}

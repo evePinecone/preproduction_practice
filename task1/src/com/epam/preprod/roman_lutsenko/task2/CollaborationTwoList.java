@@ -8,8 +8,8 @@ import java.util.ListIterator;
 
 public class CollaborationTwoList<E> implements List<E> {
 
-	List<E> unmodifable;
-	List<E> modifable;
+	private List<E> unmodifable;
+	private List<E> modifable;
 
 	public CollaborationTwoList(List<E> unmodifableCollecion, List<E> modifableCollection) {
 		this.unmodifable = unmodifableCollecion;
@@ -65,19 +65,22 @@ public class CollaborationTwoList<E> implements List<E> {
 
 	@Override
 	public Object[] toArray() {
-		Object[] objectResult = unmodifable.toArray();
-		System.arraycopy(modifable.toArray(), 0, objectResult, unmodifable.size(), modifable.size());
-		return objectResult;
+		Object[] result = new Object[unmodifable.size() + modifable.size()];
+		System.arraycopy(unmodifable.toArray(), 0, result, 0, unmodifable.size());
+		System.arraycopy(modifable.toArray(), 0, result, unmodifable.size(), modifable.size());
+		return result;
 	}
-	
+
 	@Override
 	public <T> T[] toArray(T[] array) {
-		if (array.length < size())
-            return (T[]) Arrays.copyOf(toArray(), size(), array.getClass());
-        System.arraycopy(toArray(), 0, array, 0, size());
-        if (array.length > size())
-            array[size()] = null;
-        return array;
+		if (array.length < size()) {
+			return (T[]) Arrays.copyOf(toArray(), size(), array.getClass());
+		}
+		System.arraycopy(toArray(), 0, array, 0, size());
+		if (array.length > size()) {
+			array[size()] = null;
+		}
+		return array;
 	}
 
 	@Override
@@ -110,6 +113,12 @@ public class CollaborationTwoList<E> implements List<E> {
 
 	@Override
 	public boolean addAll(int index, Collection<? extends E> collection) {
+		if (index < 0 || index > size()) {
+			throw new IndexOutOfBoundsException();
+		}
+		if (index <= unmodifable.size()) {
+			throw new UnmodifiableCollaborationTwoListException();
+		}
 		return modifable.addAll(index, collection);
 	}
 

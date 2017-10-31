@@ -26,7 +26,7 @@ public class ThingListCOW<E extends Thing> implements List<Thing> {
 	private final int STEP_RESIZE = 100;
 
 	private int size;
-	private Thing[] arrayList, snapshot;
+	private Thing[] arrayList;
 
 	private boolean isEdited;
 
@@ -114,11 +114,6 @@ public class ThingListCOW<E extends Thing> implements List<Thing> {
 
 		@Override
 		public boolean hasNext() {
-			if (isEdited) {
-				linkSave = snapshot;
-				sizeSave = snapshot.length;
-				System.out.println("Is edited = " + isEdited);
-			}
 			return cursor != sizeSave;
 		}
 
@@ -377,7 +372,7 @@ public class ThingListCOW<E extends Thing> implements List<Thing> {
 	private void checkEdit() {
 		if (!isEdited) {
 			isEdited = true;
-			snapshot = Arrays.copyOf(arrayList, size);
+			arrayList = Arrays.copyOf(arrayList, size);
 		}
 	}
 

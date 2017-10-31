@@ -90,6 +90,7 @@ public class ThingListTest {
 		list.add(fit);
 		int counter = 0;
 		for (Thing thing : list) {
+			System.out.println(thing);
 			counter++;
 		}
 		assertEquals(counter, 1);
