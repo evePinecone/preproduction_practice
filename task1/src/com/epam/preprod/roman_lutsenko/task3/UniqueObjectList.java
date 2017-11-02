@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Objects;
+import java.util.function.UnaryOperator;
 
 public class UniqueObjectList<E> extends ArrayList<E> implements List<E> {
 
@@ -23,7 +25,7 @@ public class UniqueObjectList<E> extends ArrayList<E> implements List<E> {
 		}
 	}
 
-	private void checkCollectionForDuplicates(Collection<? extends E> collection) {
+	private boolean checkCollectionForDuplicates(Collection<? extends E> collection) {
 		Object[] array = collection.toArray();
 		Arrays.sort(array);
 		for (int index = 0; index < array.length - 1; index++) {
@@ -31,6 +33,7 @@ public class UniqueObjectList<E> extends ArrayList<E> implements List<E> {
 				throw new IllegalArgumentException();
 			}
 		}
+		return false;
 	}
 
 	/*
@@ -91,21 +94,17 @@ public class UniqueObjectList<E> extends ArrayList<E> implements List<E> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see java.util.ArrayList#listIterator(int)
+	 * @see java.util.ArrayList#replaceAll(java.util.function.UnaryOperator)
 	 */
 	@Override
-	public ListIterator<E> listIterator(int index) {
-		throw new UnsupportedOperationException();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.util.ArrayList#listIterator()
-	 */
-	@Override
-	public ListIterator<E> listIterator() {
-		throw new UnsupportedOperationException();
+	public void replaceAll(UnaryOperator<E> operator) {
+		Objects.requireNonNull(operator);
+		List<E> list = new UniqueObjectList<>();
+		for (int i = 0; i < size(); i++) {
+			list.add(operator.apply(get(i)));
+		}
+		clear();
+		addAll(list);
 	}
 
 }
