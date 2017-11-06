@@ -1,37 +1,56 @@
 # compiled classes ignore
 
+
 *.class
+
 
 
 # log files
 
+
 *.log
+
 
 
 # package files
 
+
 *.jar
+
 
 *.rar
 
+
 *.zip
+
 
 
 /task1/bin/
 
 
+
 /.metadata/
+
 
 
 /.recommenders/
 
+
 *.classpath
 
+
 *.project
+
 /
 .settings/
 
+
 /task1 – git pracrice I/
+
 /task1 – git pracrice II/
+
 /task1 git pracrice I/
+
 /task1 git pracrice II/
+
+/.idea/
