@@ -67,10 +67,7 @@ public class Laptop extends Computer {
 		if (Double.doubleToLongBits(displayResolution) != Double.doubleToLongBits(other.displayResolution)) {
 			return false;
 		}
-		if (Double.doubleToLongBits(weight) != Double.doubleToLongBits(other.weight)) {
-			return false;
-		}
-		return true;
+		return Double.doubleToLongBits(weight) == Double.doubleToLongBits(other.weight);
 	}
 
 	/*
