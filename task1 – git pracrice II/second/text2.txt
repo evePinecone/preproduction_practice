@@ -1,2 +1,0 @@
-Edit file into two commits(2).
-Second commit in rebasing.
