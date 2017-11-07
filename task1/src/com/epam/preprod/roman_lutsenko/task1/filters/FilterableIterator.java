@@ -4,5 +4,5 @@ import java.util.Iterator;
 
 public interface FilterableIterator<T> extends Iterable<T> {
  
-	public Iterator<T> iterator(Filter<T> filter);
+	Iterator<T> iterator(Filter<T> filter);
 }

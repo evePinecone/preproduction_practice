@@ -33,6 +33,15 @@ public class ThingListTest {
 	}
 
 	@Test
+	public void addingToTheEmptyListNewCollectionWithOneElement_lsitWithOneElementInto() {
+		List<Thing> added = new ThingList<Thing>();
+		added.add(new Laptop());
+		list.addAll(added);
+		System.out.println(added);
+		assertEquals(list.get(0), added.get(0));
+	}
+	
+	@Test
 	public void testListInit() {
 		list = new ThingList<Laptop>();
 		assertTrue(list.isEmpty());

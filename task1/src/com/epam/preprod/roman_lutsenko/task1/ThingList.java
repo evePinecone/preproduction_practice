@@ -54,8 +54,7 @@ public class ThingList<E extends Thing> implements List<Thing>, FilterableIterat
 	 * @throws IndexOutOfBoundsException
 	 *             if we can't resize array.
 	 */
-	@SuppressWarnings("unused")
-	private void resizePlus(final int step_resize) throws IndexOutOfBoundsException {
+	private void resizePlus(final int step_resize) {
 		if (size + step_resize >= MAX_LIST_SIZE) {
 			throw new IndexOutOfBoundsException("Can't resize an array");
 		}
@@ -66,6 +65,12 @@ public class ThingList<E extends Thing> implements List<Thing>, FilterableIterat
 
 	private void checkIndex(int index) {
 		if (index < 0 || index >= size) {
+			throw new IndexOutOfBoundsException("Incorrect input index");
+		}
+	}
+
+	private void checkIndexAdding(int index) {
+		if (index < 0 || index > size) {
 			throw new IndexOutOfBoundsException("Incorrect input index");
 		}
 	}
@@ -117,7 +122,7 @@ public class ThingList<E extends Thing> implements List<Thing>, FilterableIterat
 		 * Constructor for custom iterator.
 		 * 
 		 * @param filter
-		 *            implementetion of interface
+		 *            Implementation of interface
 		 *            com.epam.preprod.roman_lutsenko.task1.filters.Filter
 		 */
 		public FilteredIterator(final Filter<Thing> filter) {
@@ -136,7 +141,7 @@ public class ThingList<E extends Thing> implements List<Thing>, FilterableIterat
 
 		@Override
 		public Thing next() {
-			int i = cursor; 
+			int i = cursor;
 			if (i >= size) {
 				throw new NoSuchElementException();
 			}
@@ -238,8 +243,11 @@ public class ThingList<E extends Thing> implements List<Thing>, FilterableIterat
 
 	@Override
 	public boolean containsAll(Collection<?> collection) {
-		for (int i = 0; i < size; i++) {
-			if (!collection.contains(arrayList[i])) {
+		if (collection.isEmpty()) {
+			return true;
+		}
+		for (Object object : collection) {
+			if (!contains(object)) {
 				return false;
 			}
 		}
@@ -248,24 +256,28 @@ public class ThingList<E extends Thing> implements List<Thing>, FilterableIterat
 
 	@Override
 	public boolean addAll(Collection<? extends Thing> collection) {
-		if(collection.isEmpty()) {
+		if (collection.isEmpty()) {
 			return false;
 		}
-		resizePlus(collection.size() + 1);
-		System.arraycopy(collection, 0, arrayList, size - 1, collection.size());
+		if (size + collection.size() >= arrayList.length) {
+			resizePlus(collection.size() + 1);
+		}
+		System.arraycopy(collection.toArray(), 0, arrayList, size, collection.size());
 		size += collection.size();
 		return true;
 	}
 
 	@Override
 	public boolean addAll(int index, Collection<? extends Thing> collection) {
-		if(collection.isEmpty()) {
+		if (collection.isEmpty()) {
 			return false;
 		}
-		checkIndex(index);
-		resizePlus(collection.size() + 1);
+		checkIndexAdding(index);
+		if (size + collection.size() >= arrayList.length) {
+			resizePlus(collection.size() + 1);
+		}
 		System.arraycopy(arrayList, index, arrayList, index + collection.size(), collection.size());
-		System.arraycopy(collection, 0, arrayList, index, collection.size());
+		System.arraycopy(collection.toArray(), 0, arrayList, index, collection.size());
 		size += collection.size();
 		return true;
 	}
@@ -273,9 +285,9 @@ public class ThingList<E extends Thing> implements List<Thing>, FilterableIterat
 	@Override
 	public boolean removeAll(Collection<?> collection) {
 		boolean flagChanges = false;
-		for (Object object : collection) {
-			if (contains(object)) {
-				remove(object);
+		for (int i = 0; i < size; i++) {
+			if (collection.contains(arrayList[i])) {
+				remove(arrayList[i]);
 				flagChanges = true;
 			}
 		}
@@ -318,7 +330,7 @@ public class ThingList<E extends Thing> implements List<Thing>, FilterableIterat
 
 	@Override
 	public void add(int index, Thing element) {
-		checkIndex(index);
+		checkIndexAdding(index);
 		if (size >= arrayList.length) {
 			resizePlus(STEP_RESIZE);
 		}
@@ -415,5 +427,5 @@ public class ThingList<E extends Thing> implements List<Thing>, FilterableIterat
 		resultString.append(arrayList[size - 1]).append(".");
 		return resultString.toString();
 	}
-	
+
 }

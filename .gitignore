@@ -41,8 +41,7 @@
 
 *.project
 
-/
-.settings/
+/.settings/
 
 
 /task1 – git pracrice I/
