@@ -18,12 +18,12 @@ import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
  */
 public class ThingListCOW<E extends Thing> implements List<Thing> {
 
-	private final int INITIAL_CAPACITY = 100;
-	private final int MAX_LIST_SIZE = Integer.MAX_VALUE - 2;
+	private static final int INITIAL_CAPACITY = 100;
+	private static final int MAX_LIST_SIZE = Integer.MAX_VALUE - 2;
 	/**
 	 * Step to resize an array;
 	 */
-	private final int STEP_RESIZE = 100;
+	private static final int STEP_RESIZE = 100;
 
 	private int size;
 	private Thing[] arrayList;
@@ -67,14 +67,26 @@ public class ThingListCOW<E extends Thing> implements List<Thing> {
 	 * @throws IndexOutOfBoundsException
 	 *             if we can't resize array.
 	 */
-	@SuppressWarnings("unused")
-	private void resizePlus() throws IndexOutOfBoundsException {
-		if (size + STEP_RESIZE >= MAX_LIST_SIZE) {
+	private void resizePlus(int stepResize) throws IndexOutOfBoundsException {
+		if (size + stepResize >= MAX_LIST_SIZE) {
 			throw new IndexOutOfBoundsException("Can't resize an array");
 		}
-		Thing[] bufArrayList = new Thing[size + STEP_RESIZE];
+		Thing[] bufArrayList = new Thing[size + stepResize];
 		System.arraycopy(arrayList, 0, bufArrayList, 0, size);
 		arrayList = bufArrayList;
+	}
+
+	private void checkIndex(int index) {
+		if (index < 0 || index >= size) {
+			throw new IndexOutOfBoundsException("Incorrect input index");
+		}
+	}
+	
+	private void checkEdit() {
+		if (!isEdited) {
+			isEdited = true;
+			arrayList = Arrays.copyOf(arrayList, size);
+		}
 	}
 
 	@Override
@@ -123,7 +135,6 @@ public class ThingListCOW<E extends Thing> implements List<Thing> {
 			if (index >= sizeSave) {
 				throw new NoSuchElementException();
 			}
-			// Thing[] linkSave = ThingListCOW.this.linkSave;
 			cursor = index + 1;
 			return linkSave[index];
 		}
@@ -137,32 +148,30 @@ public class ThingListCOW<E extends Thing> implements List<Thing> {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T> T[] toArray(T[] a) {
-		if (a.length < size) {
-			return (T[]) Arrays.copyOf(arrayList, size, a.getClass());
+	public <T> T[] toArray(T[] array) {
+		if (array.length < size) {
+			return (T[]) Arrays.copyOf(arrayList, size, array.getClass());
 		}
-		if (a.length > size)
-			a[size] = null;
-		System.arraycopy(arrayList, 0, a, 0, size);
-		return a;
+		if (array.length > size)
+			array[size] = null;
+		System.arraycopy(arrayList, 0, array, 0, size);
+		return array;
 	}
 
 	@Override
 	public boolean add(Thing element) {
-		if (arrayList.length <= size - 1) {
-			resizePlus();
-		}
 		checkEdit();
-		// Thing[] bufArrayList = Arrays.copyOf(arrayList, arrayList.length);
+		if (arrayList.length <= size + 1) {
+			resizePlus(STEP_RESIZE);
+		}
 		arrayList[size++] = element;
-		// setArrayList(bufArrayList);
 		return true;
 	}
 
 	@Override
-	public boolean containsAll(Collection<?> c) {
-		for (int i = 0; i < size; i++) {
-			if (!c.contains(arrayList[i])) {
+	public boolean containsAll(Collection<?> collection) {
+		for (Object object : collection) {
+			if(!contains(object)) {
 				return false;
 			}
 		}
@@ -171,52 +180,56 @@ public class ThingListCOW<E extends Thing> implements List<Thing> {
 
 	@Override
 	public boolean addAll(Collection<? extends Thing> collection) {
-		while (arrayList.length <= collection.size()) {
-			resizePlus();
-			/*
-			 * if we catch IndexOutOfBoundsException; return false;
-			 */
+		if(collection.isEmpty()) {
+			return false;
 		}
 		checkEdit();
+		resizePlus(collection.size());
 		System.arraycopy(collection, 0, arrayList, size - 1, collection.size());
 		size += collection.size();
 		return true;
 	}
 
 	@Override
-	public boolean addAll(int index, Collection<? extends Thing> c) {
-		while (arrayList.length <= size + c.size()) {
-			resizePlus();
-			/*
-			 * if we try to catch IndexOutOfBoundsException; return false;
-			 */
+	public boolean addAll(int index, Collection<? extends Thing> collection) {
+		if(collection.isEmpty()) {
+			return false;
 		}
+		checkIndex(index);
 		checkEdit();
-		System.arraycopy(arrayList, index, arrayList, index + c.size(), c.size());
-		System.arraycopy(c, 0, arrayList, index, c.size());
-		size += c.size();
+		resizePlus(collection.size());
+		System.arraycopy(arrayList, index, arrayList, index + collection.size(), collection.size());
+		System.arraycopy(collection, 0, arrayList, index, collection.size());
+		size += collection.size();
 		return true;
 	}
 
 	@Override
-	public boolean removeAll(Collection<?> c) {
+	public boolean removeAll(Collection<?> collection) {
+		if(collection.isEmpty()) {
+			return false;
+		}
 		checkEdit();
 		boolean flagChanges = false;
-		for (int i = 0; i < size; i++) {
-			if (c.contains(arrayList[i])) {
-				remove(arrayList[i]);
+		for (Object object : collection) {
+			if (contains(object)) {
+				remove(object);
 				flagChanges = true;
 			}
 		}
 		return flagChanges;
 	}
 
+	
 	@Override
-	public boolean retainAll(Collection<?> c) {
+	public boolean retainAll(Collection<?> collection) {
+		if(collection.isEmpty()) {
+			return false;
+		}
 		checkEdit();
 		boolean flagChanges = false;
 		for (int i = 0; i < size; i++) {
-			if (!c.contains(arrayList[i])) {
+			if (!collection.contains(arrayList[i])) {
 				remove(arrayList[i]);
 				flagChanges = true;
 			}
@@ -234,22 +247,14 @@ public class ThingListCOW<E extends Thing> implements List<Thing> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public E get(int index) {
-		if (index < 0 || index > size) {
-			throw new IndexOutOfBoundsException("Incorrect input index");
-		}
-		if (contains(arrayList[index])) {
-			return (E) arrayList[index];
-		}
-		return null;
+		checkIndex(index);
+		return (E) arrayList[index];
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public E set(int index, Thing element) {
-		// Need to place element to the last empty element?
-		if (index < 0 || index >= size) {
-			throw new IndexOutOfBoundsException("Incorrect input index");
-		}
+		checkIndex(index);
 		checkEdit();
 		Thing bufElement = arrayList[index];
 		arrayList[index] = element;
@@ -258,13 +263,11 @@ public class ThingListCOW<E extends Thing> implements List<Thing> {
 
 	@Override
 	public void add(int index, Thing element) {
-		if (index < 0 || index > size) {
-			throw new IndexOutOfBoundsException("Incorrect input index");
-		}
-		if (size >= arrayList.length) {
-			resizePlus();
-		}
+		checkIndex(index);
 		checkEdit();
+		if (arrayList.length < size + 1) {
+			resizePlus(STEP_RESIZE);
+		}
 		System.arraycopy(arrayList, index, arrayList, index + 1, size - index);
 		arrayList[index] = element;
 		size++;
@@ -273,53 +276,41 @@ public class ThingListCOW<E extends Thing> implements List<Thing> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public E remove(int index) {
-		if (index < 0 || index > size || size == 0) {
-			throw new IndexOutOfBoundsException("Incorrect input index");
-		}
-		E removedElement;
+		checkIndex(index);
 		checkEdit();
-		if (contains(arrayList[index]) && index > 0) {
-			removedElement = (E) arrayList[index];
-			System.arraycopy(arrayList, index + 1, arrayList, index, size - index - 1);
-			size--;
-		} else if (index == 0) {
-			removedElement = (E) arrayList[index];
-			System.arraycopy(arrayList, index + 1, arrayList, index, size - index - 1);
-			size--;
-		} else {
-			removedElement = null;
-		}
+		E removedElement = (E) arrayList[index];
+		System.arraycopy(arrayList, index + 1, arrayList, index, size - index - 1);
+		size--;
 		return removedElement;
 	}
 
 	@Override
-	public boolean remove(Object o) {
-		if (!contains(o)) {
+	public boolean remove(Object object) {
+		int indexRemove = indexOf(object);
+		if (indexRemove == -1) {
 			return false;
 		}
-		int indexRemove = indexOf(o);
 		checkEdit();
-		if (indexRemove >= 0) {
-			System.arraycopy(arrayList, indexRemove + 1, arrayList, indexRemove, size - indexRemove - 1);
-			size--;
-		}
+		System.arraycopy(arrayList, indexRemove + 1, arrayList, indexRemove, size - indexRemove - 1);
+		size--;
 		return true;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public int indexOf(Object o) {
-		E bufObj = (E) o;
+	public int indexOf(Object object) {
+		E bufObj = (E) object;
 		if (bufObj == null) {
 			for (int i = 0; i < size; i++) {
 				if (arrayList[i] == null) {
 					return i;
 				}
 			}
-		}
-		for (int i = 0; i < size; i++) {
-			if (bufObj.equals(arrayList[i])) {
-				return i;
+		} else {
+			for (int i = 0; i < size; i++) {
+				if (bufObj.equals(arrayList[i])) {
+					return i;
+				}
 			}
 		}
 		return -1;
@@ -327,18 +318,19 @@ public class ThingListCOW<E extends Thing> implements List<Thing> {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public int lastIndexOf(Object o) {
-		E bufObj = (E) o;
+	public int lastIndexOf(Object object) {
+		E bufObj = (E) object;
 		if (bufObj == null) {
 			for (int i = size - 1; i >= 0; i--) {
 				if (arrayList[i] == null) {
 					return i;
 				}
 			}
-		}
-		for (int i = size - 1; i >= 0; i--) {
-			if (bufObj.equals(arrayList[i])) {
-				return i;
+		} else {
+			for (int i = size - 1; i >= 0; i--) {
+				if (bufObj.equals(arrayList[i])) {
+					return i;
+				}
 			}
 		}
 		return -1;
@@ -367,13 +359,6 @@ public class ThingListCOW<E extends Thing> implements List<Thing> {
 		}
 		resultString.append(arrayList[size - 1]).append(".");
 		return resultString.toString();
-	}
-
-	private void checkEdit() {
-		if (!isEdited) {
-			isEdited = true;
-			arrayList = Arrays.copyOf(arrayList, size);
-		}
 	}
 
 }
