@@ -30,8 +30,24 @@ public class ThingListCOWTest {
 	public void testListInit() {
 		list = new ThingList<Laptop>();
 		assertTrue(list.isEmpty());
-		assertTrue(list.size() == 0);
+		assertEquals(list.size(), 0);
 	}
+
+	@Test
+	public void addAllEmptyListAddedListWithOneElement_firstElementEquals(){
+	    List<Thing> addedList = new ThingListCOW<>();
+	    addedList.add(new Laptop());
+	    list.addAll(addedList);
+	    assertEquals(list.get(0), addedList.get(0));
+    }
+
+    @Test
+	public void addAllEmptyListAddedListWithOneElementToZeroPosition_firstElementEquals(){
+	    List<Thing> addedList = new ThingListCOW<>();
+	    addedList.add(new Laptop());
+	    list.addAll(0,addedList);
+	    assertEquals(list.get(0), addedList.get(0));
+    }
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidCapacity() {
@@ -61,7 +77,7 @@ public class ThingListCOWTest {
 	}
 
 	@Test
-	public void testRemoveByIndex() {
+	public void addedOneLaptopAndDeleteItByIndex_EmptyCollection() {
 		Thing laptop = new Laptop();
 		list.add(laptop);
 		list.remove(0);
@@ -69,7 +85,7 @@ public class ThingListCOWTest {
 	}
 
 	@Test
-	public void testRemoveByObj() {
+	public void addedOneLaptopAndDeleteItByObject_EmptyCollection() {
 		Thing laptop = new Laptop();
 		list.add(laptop);
 		list.remove(laptop);
@@ -77,7 +93,7 @@ public class ThingListCOWTest {
 	}
 	
 	@Test
-	public void CopyOfListByOneElementToNewListWithRemovingFrom_NotEqualsLists() {
+	public void copyOfListByOneElementToNewListWithRemovingFrom_NotEqualsLists() {
 		list.add(new Laptop());
 		list.add(new Desktop());
 		Iterator<Thing> iterator = list.iterator();
@@ -90,7 +106,7 @@ public class ThingListCOWTest {
 	} 
 	
 	@Test
-	public void CopyOfListByOneElementToNewListWithAdding_NotEqualsLists() {
+	public void copyOfListByOneElementToNewListWithAdding_NotEqualsLists() {
 		Iterator<Thing> iterator = list.iterator();
 		list.add(new Desktop());
 		List<Thing> listTest = new ThingListCOW<>();
@@ -99,6 +115,18 @@ public class ThingListCOWTest {
 		}
 		assertNotEquals(listTest, list);
 	}
+
+	@Test
+    public void containsAllAddedCollectionAllInList_TrueResultOfOperation() {
+	    list.add(new FitnessBraslet());
+	    list.add(new FitnessBraslet());
+	    list.add(new Desktop());
+        List<Thing> addedList = new ThingListCOW<>();
+        addedList.add(new Laptop());
+        addedList.add(new Desktop());
+        list.addAll(addedList);
+        assertTrue(list.containsAll(addedList));
+    }
 	
 	@Test
 	public void setElementOnZeroPosition_OnFirstPositionLaptop() {
