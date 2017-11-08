@@ -16,30 +16,54 @@ import com.epam.preprod.roman_lutsenko.task2.exceptions.UnmodifiableCollaboratio
 public class CollaborationTwoListTest {
 
 	private List<String> test;
-	private List<String> unmodifable;
-	private List<String> modifable;
+	private List<String> unmodifiable;
+	private List<String> modifiable;
 
 	@Before
 	public void setUp() {
-		unmodifable = new ArrayList<>();
-		unmodifable.add("primaryFirst");
-		unmodifable.add("primarySecond");
-		unmodifable.add("primaryThird");
+		unmodifiable = new ArrayList<>();
+		unmodifiable.add("primaryFirst");
+		unmodifiable.add("primarySecond");
+		unmodifiable.add("primaryThird");
 
-		modifable = new ArrayList<>();
-		modifable.add("one");
-		modifable.add("two");
-		modifable.add("three");
-		modifable.add("four");
-		modifable.add("five");
-		test = new CollaborationTwoList<>(unmodifable, modifable);
+		modifiable = new ArrayList<>();
+		modifiable.add("one");
+		modifiable.add("two");
+		modifiable.add("three");
+		modifiable.add("four");
+		modifiable.add("five");
+		test = new CollaborationTwoList<>(unmodifiable, modifiable);
 	}
 
-	@Test
+	@Test(expected = UnmodifiableCollaborationTwoListException.class)
+    public void throwsException_whenRemoveFromUnmodifiablePart(){
+	    test.remove("primaryFirst");
+    }
+
+    @Test
+    public void retainAllUnmodifiablePart_listWithoutModifiablePart() {
+	    assertTrue(test.retainAll(unmodifiable));
+    }
+
+    @Test(expected = UnmodifiableCollaborationTwoListException.class)
+    public void retainAllModifiablePart_ThrowUnmodifableCollaborationTwoListException(){
+	    test.retainAll(modifiable);
+    }
+
+    @Test
+    public void retainAllUmodifablePartWithElementOne_listContainsElementOne() {
+        List<String> list = new ArrayList<>();
+        list.addAll(unmodifiable);
+        list.add("one");
+        test.retainAll(list);
+        assertTrue(test.contains("one"));
+    }
+
+    @Test
 	public void testIterator() {
 		int counter = 0;
 		for (String string : test) {
-			// System.out.println(string);
+//			System.out.println(string);
 			counter++;
 		}
 		assertEquals(counter, 8);
@@ -97,14 +121,8 @@ public class CollaborationTwoListTest {
 	}
 
 	@Test
-	public void testRemoveUnmod() {
-		assertFalse(test.remove("primaryFirst"));
-	}
-
-	@Test
 	public void testRemoveMod() {
-		test.remove("one");
-		assertFalse(test.contains("one"));
+		assertTrue(test.remove("one"));
 	}
 
 	@Test
@@ -114,12 +132,12 @@ public class CollaborationTwoListTest {
 
 	@Test
 	public void testContainsAllUnmod() {
-		assertTrue(test.containsAll(unmodifable));
+		assertTrue(test.containsAll(unmodifiable));
 	}
 
 	@Test
 	public void testContainsAllMod() {
-		assertTrue(test.containsAll(modifable));
+		assertTrue(test.containsAll(modifiable));
 	}
 
 	@Test
@@ -136,10 +154,10 @@ public class CollaborationTwoListTest {
 
 	@Test(expected = UnmodifiableCollaborationTwoListException.class)
 	public void addingToIndexInUnmodifiblePart_UnmodifableCollaborationTwoListException() {
-		test.addAll(0, unmodifable);
+		test.addAll(0, unmodifiable);
 	}
 
-	@Test(expected = ClearCollaborationTwoListException.class)
+	@Test(expected = UnmodifiableCollaborationTwoListException.class)
 	public void clearingTestList_exception() {
 		test.clear();
 	}
