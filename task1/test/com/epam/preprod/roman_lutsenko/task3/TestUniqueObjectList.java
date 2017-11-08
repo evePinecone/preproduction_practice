@@ -1,4 +1,4 @@
-package com.epam.preprod.roman_lustenko.task3;
+package com.epam.preprod.roman_lutsenko.task3;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

@@ -1,4 +1,4 @@
-package com.epam.preprod.roman_lustenko.task3;
+package com.epam.preprod.roman_lutsenko.task3;
 
 import java.util.HashMap;
 import java.util.Iterator;
