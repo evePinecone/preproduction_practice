@@ -6,5 +6,10 @@ import java.util.List;
 
 public interface ThingsDAO {
     List<Thing> getAllItems();
+
     void setAllItems(List<Thing> thingList);
+
+    void add(Thing thing);
+
+    Thing get(int index);
 }

@@ -24,6 +24,18 @@ public class InnerThingsDAO implements ThingsDAO {
         this.thingList = thingList;
     }
 
+    @Override
+    public void add(Thing thing) {
+        thingList.add(thing);
+    }
+
+    @Override
+    public Thing get(int index) {
+        return thingList.get(index);
+    }
+
+
+
   /*  public InnerThingsDAO fill() {
         Laptop laptop;
         List<Thing> list = new ArrayList<>();
