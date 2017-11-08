@@ -120,7 +120,7 @@ public class ThingList<E extends Thing> implements List<Thing>, FilterableIterat
 
 		/**
 		 * Constructor for custom iterator.
-		 * 
+		 *
 		 * @param filter
 		 *            Implementation of interface
 		 *            com.epam.preprod.roman_lutsenko.task1.filters.Filter
@@ -342,9 +342,7 @@ public class ThingList<E extends Thing> implements List<Thing>, FilterableIterat
 	@SuppressWarnings("unchecked")
 	@Override
 	public E remove(int index) {
-		if (index < 0 || index >= size) {
-			throw new IndexOutOfBoundsException("Incorrect input index");
-		}
+		checkIndex(index);
 		E removedElement = (E) arrayList[index];
 		System.arraycopy(arrayList, index + 1, arrayList, index, size - index - 1);
 		size--;
@@ -379,7 +377,6 @@ public class ThingList<E extends Thing> implements List<Thing>, FilterableIterat
 				}
 			}
 		}
-
 		return -1;
 	}
 

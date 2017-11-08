@@ -79,7 +79,6 @@ public class Desktop extends Computer {
 	 */
 	@Override
 	public String toString() {
-		
 		return "Desktop " + super.toString()+"[formFactor=" + formFactor + ", typeWorkspace=" + typeWorkspace + "]";
 	}
 

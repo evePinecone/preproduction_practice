@@ -45,7 +45,7 @@ public class ThingListTest {
 	public void testListInit() {
 		list = new ThingList<Laptop>();
 		assertTrue(list.isEmpty());
-		assertTrue(list.size() == 0);
+		assertEquals(list.size(),0);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
