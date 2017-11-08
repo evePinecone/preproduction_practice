@@ -5,11 +5,11 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
+import com.epam.preprod.roman_lutsenko.task1.entity.FitnessBracelet;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.epam.preprod.roman_lutsenko.task1.entity.Desktop;
-import com.epam.preprod.roman_lutsenko.task1.entity.FitnessBraslet;
 import com.epam.preprod.roman_lutsenko.task1.entity.Laptop;
 import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
 
@@ -48,16 +48,16 @@ public class ThingListTest {
 	@Test
 	public void testAddElements() {
 		list.add(new Laptop());
-		list.add(new FitnessBraslet());
+		list.add(new FitnessBracelet());
 
 		assertEquals(new Laptop(), list.get(0));
-		assertEquals(new FitnessBraslet(), list.get(1));
+		assertEquals(new FitnessBracelet(), list.get(1));
 
 		list.add(1, new Desktop());
 
 		assertEquals(new Laptop(), list.get(0));
 		assertEquals(new Desktop(), list.get(1));
-		assertEquals(new FitnessBraslet(), list.get(2));
+		assertEquals(new FitnessBracelet(), list.get(2));
 
 		assertTrue(list.size() == 3);
 	}
@@ -82,7 +82,7 @@ public class ThingListTest {
 	public void testIterator() {
 		Thing laptop = new Laptop();
 		Thing desktop = new Desktop();
-		Thing fit = new FitnessBraslet();
+		Thing fit = new FitnessBracelet();
 		laptop.setPrice(5000);
 		
 		list.add(laptop);

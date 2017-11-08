@@ -5,11 +5,11 @@ import static org.junit.Assert.assertEquals;
 import java.util.Iterator;
 import java.util.List;
 
+import com.epam.preprod.roman_lutsenko.task1.entity.FitnessBracelet;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.epam.preprod.roman_lutsenko.task1.entity.Desktop;
-import com.epam.preprod.roman_lutsenko.task1.entity.FitnessBraslet;
 import com.epam.preprod.roman_lutsenko.task1.entity.Laptop;
 import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
 
@@ -23,7 +23,7 @@ public class ThingListCOWTest {
 		test = new ThingListCOW<Thing>();
 		test.add(new Laptop());
 		test.add(new Laptop());
-		test.add(2, new FitnessBraslet());
+		test.add(2, new FitnessBracelet());
 	}
 	
 	@Test
