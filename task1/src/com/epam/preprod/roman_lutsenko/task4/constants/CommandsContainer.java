@@ -1,9 +1,6 @@
 package com.epam.preprod.roman_lutsenko.task4.constants;
 
-import com.epam.preprod.roman_lutsenko.task4.commands.Command;
-import com.epam.preprod.roman_lutsenko.task4.commands.ExitCommand;
-import com.epam.preprod.roman_lutsenko.task4.commands.NoSuchCommand;
-import com.epam.preprod.roman_lutsenko.task4.commands.ShowCommand;
+import com.epam.preprod.roman_lutsenko.task4.commands.*;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -14,7 +11,9 @@ public class CommandsContainer {
 
     {
         //Here put elements.
-        commandsList.put("1", new ShowCommand());
+        commandsList.put("1", new ShowAllProductsCommand());
+        commandsList.put("2", new AddProductCommand());
+        commandsList.put("3", new ShowCartCommand());
         commandsList.put("666", new NoSuchCommand());
         commandsList.put("exit", new ExitCommand());
     }

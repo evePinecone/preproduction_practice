@@ -69,7 +69,7 @@ public abstract class Thing{
 
     @Override
 	public String toString() {
-		return "[nameModel=" + nameModel + ", id=" + id + ", price=" + price + "]";
+		return "[id=" + id + ", nameModel=" + nameModel +  ", price=" + price + "]";
 	}
  
 	

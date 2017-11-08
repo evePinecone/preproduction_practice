@@ -1,27 +1,25 @@
 package com.epam.preprod.roman_lutsenko.task4.services;
 
 import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
-import com.epam.preprod.roman_lutsenko.task4.dao.InnerThingsDAO;
-import com.epam.preprod.roman_lutsenko.task4.dao.ThingsDAO;
 
 import java.util.List;
 
-public class ProductService {
+public interface ProductService {
+    List getAllItemsFromLocalProduct();
 
-    private ThingsDAO thingsDAO;
+    void setAllItemsToLocalProduct(List<Thing> thingList);
 
-    public ThingsDAO getAllItems(){
-        this.thingsDAO = new InnerThingsDAO();
-        return thingsDAO;
-    }
+    void addLocalProduct(Thing thing);
 
-    public void setAllItems(List<Thing> thingList) {
-        thingsDAO.setAllItems(thingList);
-    }
+    Thing getLocalProduct(int index);
 
-    public void addProduct(Thing thing) {
-        thingsDAO.add(thing);
-    }
+    void setLocalProduct(int index, Thing thing);
 
+    Thing removeLocalProduct(int index);
 
+    boolean removeLocalProduct(Object object);
+
+    void clearLocalProduct();
+
+    void showLocalProduct();
 }
