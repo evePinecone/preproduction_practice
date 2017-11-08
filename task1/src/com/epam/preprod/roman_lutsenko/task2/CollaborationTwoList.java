@@ -1,6 +1,5 @@
 package com.epam.preprod.roman_lutsenko.task2;
 
-import com.epam.preprod.roman_lutsenko.task2.exceptions.ClearCollaborationTwoListException;
 import com.epam.preprod.roman_lutsenko.task2.exceptions.UnmodifiableCollaborationTwoListException;
 
 import java.util.*;
@@ -136,7 +135,7 @@ public class CollaborationTwoList<E> implements List<E> {
                 throw new UnmodifiableCollaborationTwoListException();
             }
         }
-            return modifiable.removeAll(collection);
+        return modifiable.removeAll(collection);
     }
 
     @Override
@@ -153,7 +152,7 @@ public class CollaborationTwoList<E> implements List<E> {
         if (unmodifiable.isEmpty()) {
             modifiable.clear();
         } else {
-            throw new ClearCollaborationTwoListException();
+            throw new UnmodifiableCollaborationTwoListException();
         }
     }
 
@@ -192,9 +191,9 @@ public class CollaborationTwoList<E> implements List<E> {
         checkIndex(index);
         if (index < unmodifiable.size()) {
             throw new UnmodifiableCollaborationTwoListException();
-        } else {
-            return modifiable.remove(index - unmodifiable.size());
         }
+        return modifiable.remove(index - unmodifiable.size());
+
     }
 
     @Override
@@ -209,10 +208,10 @@ public class CollaborationTwoList<E> implements List<E> {
 
     @Override
     public int lastIndexOf(Object object) {
-        if (unmodifiable.contains(object)) {
-            return unmodifiable.lastIndexOf(object) + modifiable.size();
-        } else if (modifiable.contains(object)) {
-            return modifiable.lastIndexOf(object);
+        if (modifiable.contains(object)) {
+            return modifiable.lastIndexOf(object) + unmodifiable.size();
+        } else if (unmodifiable.contains(object)) {
+            return unmodifiable.lastIndexOf(object);
         }
         return -1;
     }

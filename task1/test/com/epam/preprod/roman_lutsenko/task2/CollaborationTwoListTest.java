@@ -157,7 +157,7 @@ public class CollaborationTwoListTest {
 		test.addAll(0, unmodifiable);
 	}
 
-	@Test(expected = ClearCollaborationTwoListException.class)
+	@Test(expected = UnmodifiableCollaborationTwoListException.class)
 	public void clearingTestList_exception() {
 		test.clear();
 	}

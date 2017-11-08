@@ -44,7 +44,6 @@ hs_err_pid*
 out
 gen
 .gitignore
-task1.iml
 .classpath
 .project
 bin
