@@ -5,8 +5,8 @@ public class PortableGadget extends Thing {
 	
 	public PortableGadget() {}
 
-	public PortableGadget(String nameModel, Integer firm, long price, String autonomy) {
-		super(nameModel, firm, price);
+	public PortableGadget(String nameModel, int id, long price, String autonomy) {
+		super(nameModel, id, price);
 		this.autonomy = autonomy;
 	}
 

@@ -6,9 +6,9 @@ public class FitnessBracelet extends PortableGadget {
 	
 	public FitnessBracelet() { }
 
-	public FitnessBracelet(String nameModel, Integer firm, long price, String autonomy, String display,
+	public FitnessBracelet(String nameModel, int id, long price, String autonomy, String display,
                            String strapMaterial) {
-		super(nameModel, firm, price, autonomy);
+		super(nameModel, id, price, autonomy);
 		this.display = display;
 		this.strapMaterial = strapMaterial;
 	}

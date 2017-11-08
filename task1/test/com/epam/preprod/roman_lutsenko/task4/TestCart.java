@@ -20,7 +20,7 @@ public class TestCart {
         Laptop laptop;
         for (int index = 0; index < 5; index++) {
             laptop = new Laptop();
-            laptop.setId(index);
+          //  laptop.setId(index);
             productService.addProduct(laptop);
         }
     }

@@ -1,21 +1,17 @@
 package com.epam.preprod.roman_lutsenko.task2;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
+import com.epam.preprod.roman_lutsenko.task1.ThingList;
+import com.epam.preprod.roman_lutsenko.task1.entity.Desktop;
+import com.epam.preprod.roman_lutsenko.task1.entity.FitnessBracelet;
+import com.epam.preprod.roman_lutsenko.task1.entity.Laptop;
+import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.Iterator;
 import java.util.List;
 
-import com.epam.preprod.roman_lutsenko.task1.entity.FitnessBracelet;
-import org.junit.Before;
-import org.junit.Test;
-
-import com.epam.preprod.roman_lutsenko.task1.ThingList;
-import com.epam.preprod.roman_lutsenko.task1.entity.Desktop;
-import com.epam.preprod.roman_lutsenko.task1.entity.FitnessBraslet;
-import com.epam.preprod.roman_lutsenko.task1.entity.Laptop;
-import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
+import static org.junit.Assert.*;
 
 public class ThingListCOWTest {
 
