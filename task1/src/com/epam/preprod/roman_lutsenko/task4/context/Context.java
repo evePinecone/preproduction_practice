@@ -2,12 +2,15 @@ package com.epam.preprod.roman_lutsenko.task4.context;
 
 import com.epam.preprod.roman_lutsenko.task4.dao.impl.LocalAllCartAddingDAO;
 import com.epam.preprod.roman_lutsenko.task4.dao.impl.LocalCartDAO;
+import com.epam.preprod.roman_lutsenko.task4.dao.impl.LocalOrderDAO;
 import com.epam.preprod.roman_lutsenko.task4.dao.impl.LocalProductDAO;
 import com.epam.preprod.roman_lutsenko.task4.services.impl.LocalAllCartAddingService;
 import com.epam.preprod.roman_lutsenko.task4.services.impl.LocalCartService;
+import com.epam.preprod.roman_lutsenko.task4.services.impl.LocalOrderService;
 import com.epam.preprod.roman_lutsenko.task4.services.impl.LocalProductService;
 import com.epam.preprod.roman_lutsenko.task4.services.inerfaces.AllCartAddingService;
 import com.epam.preprod.roman_lutsenko.task4.services.inerfaces.CartService;
+import com.epam.preprod.roman_lutsenko.task4.services.inerfaces.OrderService;
 import com.epam.preprod.roman_lutsenko.task4.services.inerfaces.ProductService;
 
 public class Context {
@@ -15,18 +18,20 @@ public class Context {
     private ProductService localProductService;
     private CartService localCartService;
     private AllCartAddingService localAllCartAddingService;
+    private OrderService localOrderService;
 
     public Context() {
         localProductService = new LocalProductService(new LocalProductDAO());
         localCartService = new LocalCartService(new LocalCartDAO());
         localAllCartAddingService = new LocalAllCartAddingService(new LocalAllCartAddingDAO());
+        localOrderService = new LocalOrderService(new LocalOrderDAO());
     }
 
-    public Context(LocalProductService localProductService, LocalCartService localCartService,
-                   LocalAllCartAddingService localAllCartAddingService) {
+    public Context(ProductService localProductService, CartService localCartService, AllCartAddingService localAllCartAddingService, OrderService localOrderService) {
         this.localProductService = localProductService;
         this.localCartService = localCartService;
         this.localAllCartAddingService = localAllCartAddingService;
+        this.localOrderService = localOrderService;
     }
 
     public ProductService getLocalProductService() {
@@ -53,4 +58,11 @@ public class Context {
         this.localAllCartAddingService = localAllCartAddingService;
     }
 
+    public OrderService getLocalOrderService() {
+        return localOrderService;
+    }
+
+    public void setLocalOrderService(OrderService localOrderService) {
+        this.localOrderService = localOrderService;
+    }
 }
