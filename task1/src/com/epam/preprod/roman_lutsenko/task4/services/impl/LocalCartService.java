@@ -1,45 +1,45 @@
 package com.epam.preprod.roman_lutsenko.task4.services.impl;
 
-import com.epam.preprod.roman_lutsenko.task4.dao.impl.LocalCartDAO;
-import com.epam.preprod.roman_lutsenko.task4.services.CartService;
+import com.epam.preprod.roman_lutsenko.task4.dao.interfaces.CartDAO;
+import com.epam.preprod.roman_lutsenko.task4.services.inerfaces.CartService;
 
 import java.util.Map;
 
 public class LocalCartService implements CartService {
 
-    private LocalCartDAO localCartDAO;
+    private CartDAO cartDAO;
 
-    public LocalCartService(LocalCartDAO localCartDAO) {
-        this.localCartDAO = localCartDAO;
+    public LocalCartService(CartDAO cartDAO) {
+        this.cartDAO = cartDAO;
     }
 
     @Override
     public Map<Integer, Integer> getAllLocalCartService() {
-        return localCartDAO.getAllCart();
+        return cartDAO.getAllCart();
     }
 
     @Override
-    public void addLocalCartService(int thingId) {
-        localCartDAO.add(thingId);
+    public void add(int thingId) {
+        cartDAO.add(thingId);
     }
 
     @Override
-    public int getCounterProductLocalCartService(int thingId) {
-        return localCartDAO.getCounterProduct(thingId);
+    public int getCounterProduct(int thingId) {
+        return cartDAO.getCounterProduct(thingId);
     }
 
     @Override
-    public void clearLocalCartService() {
-        localCartDAO.clear();
+    public void clear() {
+        cartDAO.clear();
     }
 
     @Override
-    public boolean removeLocalCartService(int thingId) {
-        return localCartDAO.remove(thingId);
+    public boolean remove(int thingId) {
+        return cartDAO.remove(thingId);
     }
 
     @Override
-    public boolean removeAllLocalCartService(int thingId) {
-        return localCartDAO.removeAll(thingId);
+    public boolean removeAll(int thingId) {
+        return cartDAO.removeAll(thingId);
     }
 }

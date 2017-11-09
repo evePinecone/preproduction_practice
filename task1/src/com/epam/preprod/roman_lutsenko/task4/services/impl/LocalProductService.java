@@ -1,66 +1,66 @@
 package com.epam.preprod.roman_lutsenko.task4.services.impl;
 
 import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
-import com.epam.preprod.roman_lutsenko.task4.dao.impl.LocalProductDAO;
-import com.epam.preprod.roman_lutsenko.task4.services.ProductService;
+import com.epam.preprod.roman_lutsenko.task4.dao.interfaces.ProductDAO;
+import com.epam.preprod.roman_lutsenko.task4.services.inerfaces.ProductService;
 
 import java.util.List;
 
 public class LocalProductService implements ProductService {
 
-    private LocalProductDAO localProductDAO;
+    private ProductDAO productDAO;
 
-    public LocalProductService(LocalProductDAO localProductDAO) {
-        this.localProductDAO = localProductDAO;
+    public LocalProductService(ProductDAO productDAO) {
+        this.productDAO = productDAO;
     }
 
     @Override
-    public List getAllItemsFromLocalProduct(){
-        return localProductDAO.getAllItems();
+    public List getAllItems() {
+        return productDAO.getAllItems();
     }
 
     @Override
-    public void setAllItemsToLocalProduct(List<Thing> thingList) {
-        localProductDAO.setAllItems(thingList);
+    public void setAllItems(List<Thing> thingList) {
+        productDAO.setAllItems(thingList);
     }
 
     @Override
-    public void addLocalProduct(Thing thing) {
-        localProductDAO.add(thing);
+    public void add(Thing thing) {
+        productDAO.add(thing);
     }
 
     @Override
-    public Thing getLocalProduct(int index) {
-        return localProductDAO.get(index);
+    public Thing get(int thingId) {
+        return productDAO.get(thingId);
     }
 
     @Override
-    public void setLocalProduct(int index, Thing thing) {
-        localProductDAO.set(index, thing);
+    public void set(int index, Thing thing) {
+        productDAO.set(index, thing);
     }
 
     @Override
-    public Thing removeLocalProduct(int index) {
-        return localProductDAO.remove(index);
+    public Thing remove(int index) {
+        return productDAO.remove(index);
     }
 
     @Override
-    public boolean removeLocalProduct(Object object) {
-        return localProductDAO.remove(object);
+    public boolean remove(Object object) {
+        return productDAO.remove(object);
     }
 
     @Override
-    public void clearLocalProduct() {
-        localProductDAO.clear();
+    public void clear() {
+        productDAO.clear();
     }
 
     @Override
-    public void showLocalProduct() {
-        localProductDAO.show();
+    public void show() {
+        productDAO.show();
     }
 
     @Override
     public String toString() {
-        return localProductDAO.toString();
+        return productDAO.toString();
     }
 }

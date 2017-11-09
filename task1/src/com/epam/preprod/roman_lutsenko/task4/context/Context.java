@@ -1,62 +1,105 @@
 package com.epam.preprod.roman_lutsenko.task4.context;
 
-import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
+import com.epam.preprod.roman_lutsenko.task4.dao.impl.LocalAllCartAddingDAO;
 import com.epam.preprod.roman_lutsenko.task4.dao.impl.LocalCartDAO;
 import com.epam.preprod.roman_lutsenko.task4.dao.impl.LocalProductDAO;
+import com.epam.preprod.roman_lutsenko.task4.services.inerfaces.AllCartAddingService;
+import com.epam.preprod.roman_lutsenko.task4.services.inerfaces.CartService;
+import com.epam.preprod.roman_lutsenko.task4.services.inerfaces.ProductService;
+import com.epam.preprod.roman_lutsenko.task4.services.impl.LocalAllCartAddingService;
 import com.epam.preprod.roman_lutsenko.task4.services.impl.LocalCartService;
 import com.epam.preprod.roman_lutsenko.task4.services.impl.LocalProductService;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
-
 public class Context {
-    private LocalProductService localProductService;
-    private LocalCartService localCartService;
+
+    private ProductService localProductService;
+    private CartService localCartService;
+    private AllCartAddingService localAllCartAddingService;
 
     public Context() {
         localProductService = new LocalProductService(new LocalProductDAO());
         localCartService = new LocalCartService(new LocalCartDAO());
+        localAllCartAddingService = new LocalAllCartAddingService(new LocalAllCartAddingDAO());
     }
 
+    public Context(LocalProductService localProductService, LocalCartService localCartService,
+                   LocalAllCartAddingService localAllCartAddingService) {
+        this.localProductService = localProductService;
+        this.localCartService = localCartService;
+        this.localAllCartAddingService = localAllCartAddingService;
+    }
+
+    public ProductService getLocalProductService() {
+        return localProductService;
+    }
+
+    public void setLocalProductService(ProductService localProductService) {
+        this.localProductService = localProductService;
+    }
+
+    public CartService getLocalCartService() {
+        return localCartService;
+    }
+
+    public void setLocalCartService(CartService localCartService) {
+        this.localCartService = localCartService;
+    }
+
+    public AllCartAddingService getLocalAllCartAddingService() {
+        return localAllCartAddingService;
+    }
+
+    public void setLocalAllCartAddingService(AllCartAddingService localAllCartAddingService) {
+        this.localAllCartAddingService = localAllCartAddingService;
+    }
+
+    /*  // PRODUCT SERVICE
     public List getAllItemsFromLocalProductService() {
-        return localProductService.getAllItemsFromLocalProduct();
+        return localProductService.getAllItems();
     }
 
     public void setAllItemsToLocalProductService(List<Thing> thingList) {
-        localProductService.setAllItemsToLocalProduct(thingList);
+        localProductService.setAllItems(thingList);
     }
 
     public void addLocalProductService(Thing thing) {
-        localProductService.addLocalProduct(thing);
+        localProductService.add(thing);
     }
 
+    *//**
+     * Return Thing with id = thingId.
+     *
+     * @param thingId
+     * @return Thing element with Id = thingId. Or null if no element.
+     *//*
     public Thing getLocalProductService(int thingId) {
-        return localProductService.getLocalProduct(thingId);
+        return localProductService.get(thingId);
     }
 
     public void setLocalProductService(int index, Thing thing) {
-        localProductService.setLocalProduct(index, thing);
+        localProductService.set(index, thing);
     }
 
     public Thing removeLocalProductService(int index) {
-        return localProductService.removeLocalProduct(index);
+        return localProductService.remove(index);
     }
 
     public boolean removeLocalProductService(Object object) {
-        return localProductService.removeLocalProduct(object);
+        return localProductService.remove(object);
     }
 
     public void clearLocalProductService() {
-        localProductService.clearLocalProduct();
+        localProductService.clear();
     }
 
     public void showLocalProductService() {
-        localProductService.showLocalProduct();
+        localProductService.show();
     }
 
+    // CART SERVICE
+    @Deprecated
     public void showLocalCartService() {
-        Map<Integer, Integer> map = localCartService.getAllLocalCartService();
+        Map<Integer, Integer> map = getAllLocalCartService();
         if (map.isEmpty()) {
             System.out.println("Cart is empty");
         } else {
@@ -67,36 +110,95 @@ public class Context {
         }
     }
 
-    public void addLocalCartService() {
-        System.out.println("Enter id Thing to add to cart");
-        showLocalProductService();
-        Scanner scanner = new Scanner(System.in);
-        String string = scanner.nextLine();
-        if(!string.equals("back")) {
-            localCartService.addLocalCartService(Integer.parseInt(string));
-        }
+    public Map<Integer, Integer> getAllLocalCartService() {
+        return localCartService.getAllLocalCartService();
     }
 
-    public void byAllItemsInCartLocalCartService() {
-        Map<Integer, Integer> map = localCartService.getAllLocalCartService();
-        if (map.isEmpty()) {
-            System.out.println("Cart is empty");
-        } else {
-            long totalPrice = 0;
-            for(Map.Entry entry : map.entrySet()) {
-                totalPrice += getLocalProductService((int)entry.getKey()).getPrice() * (int)entry.getValue();
+    *//**
+     * Adding a thing to the cart by it id.
+     *//*
+    public void add(int thingId) {
+        localCartService.add(thingId);
+    }
+
+    *//**
+     * @return total price of orders in cart,
+     *//*
+    @Deprecated
+    public long byAllItemsInCartLocalCartService() {
+        Map<Integer, Integer> map = getAllLocalCartService();
+        long totalPrice = -1;
+        if (!map.isEmpty()) {
+            totalPrice = 0;
+            // System.out.println("Cart is empty");
+            for (Map.Entry entry : map.entrySet()) {
+                totalPrice += getLocalProductService((int) entry.getKey()).getPrice() * (int) entry.getValue();
             }
-            System.out.println("Total price :" + totalPrice);
         }
-
+        //   System.out.println("Total price :" + totalPrice);
+        return totalPrice;
     }
 
-    public void showMenu() {
-        System.out.println("\t1. Show all items");
-        System.out.println("\t2. Add item to cart");
-        System.out.println("\t3. Show the cart");
-        System.out.println("\t4. By all items in cart.(Show total price order)");
-        System.out.println("\t5. Show information about last five items in cart");
-        System.out.println("\texit. End of program.");
+    *//**
+     * @param thingId
+     * @return Counter of product with thingId in cart
+     * or -1 if there is no such product in cart.
+     *//*
+    public int getCounterProduct(int thingId) {
+        return localCartService.getCounterProduct(thingId);
     }
+
+    *//**
+     * Clear cart.
+     *//*
+    public void clear() {
+        localCartService.clear();
+    }
+
+    *//**
+     * Removes one element with id = thingId from cart.
+     * @param thingId id
+     * @return true if elemetnt removed.
+     *//*
+    public boolean removeLocalChartService(int thingId) {
+        localCartService.remove(thingId);
+    }
+    // ALL CART ADDING SERVICE
+
+    *//**
+     * Add an element to Cart on position that equals its Id field.
+     * Calculate all addings Cart.
+     *
+     * @param thingId id of adding element
+     *//*
+    public void addLocalAllCartAddingService(int thingId) {
+        localAllCartAddingService.add(thingId);
+    }
+
+    public Map<Integer, Integer> getLocalAllCartAddingService() {
+        return localAllCartAddingService.getAllCartAdding();
+    }
+
+    public void clearLocalAllCartAddingService() {
+        localAllCartAddingService.clear();
+    }
+
+    *//**
+     * Return thingId of element in indexInCartItemsMap position in LocalAllCartAddingDAO map.
+     *
+     * @param indexInCartItemsMap index of needed element
+     * @return thingId of element in indexInCartItemsMap position in LocalAllCartAddingDAO map.
+     *//*
+    public int getThingIdByIndexInAllCartAddingItemsMap(int indexInCartItemsMap) {
+        return localAllCartAddingService.getThingIdByIndexInCartItemsMap(indexInCartItemsMap);
+    }
+
+    public int sizeAllCartAddingService() {
+        return localAllCartAddingService.size();
+    }
+
+    public boolean isEmpty() {
+        return localAllCartAddingService.isEmpty();
+    }
+*/
 }

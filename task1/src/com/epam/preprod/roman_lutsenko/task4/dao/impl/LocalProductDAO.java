@@ -2,11 +2,10 @@ package com.epam.preprod.roman_lutsenko.task4.dao.impl;
 
 import com.epam.preprod.roman_lutsenko.task1.entity.Laptop;
 import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
-import com.epam.preprod.roman_lutsenko.task4.dao.ProductDAO;
+import com.epam.preprod.roman_lutsenko.task4.dao.interfaces.ProductDAO;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 public class LocalProductDAO implements ProductDAO {
 
@@ -35,11 +34,12 @@ public class LocalProductDAO implements ProductDAO {
     @Override
     public Thing get(int thingId) {
         for (Thing thing : productList) {
-            if(thing.getId() == thingId) {
+            if (thing.getId() == thingId) {
                 return thing;
             }
         }
-        throw new NoSuchElementException();
+        //return new NoSuchElementException();
+        return null;
     }
 
     @Override
@@ -78,12 +78,13 @@ public class LocalProductDAO implements ProductDAO {
         return stringBuilder.toString();
     }
 
-
     private LocalProductDAO fill() {
         Laptop laptop;
         for (int index = 1; index < 6; index++) {
             laptop = new Laptop();
             laptop.setId(index);
+            laptop.setPrice(index * 100);
+            laptop.setNameModel("laptop" + index);
             productList.add(laptop);
         }
         return this;
