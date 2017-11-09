@@ -14,22 +14,19 @@ public class MakeAnOrderCommand implements Command {
         } else {
             new ShowCartCommand().execute(context);
             System.out.println("Total order price: " + totalPrice);
-            context.clearLocalCartService();
+            context.getLocalCartService().clear();
         }
     }
 
-    // create a method
     public long byAllItemsInCartLocalCartService(Context context) {
-        Map<Integer, Integer> map = context.getAllLocalCartService();
+        Map<Integer, Integer> map = context.getLocalCartService().getAllCart();
         long totalPrice = -1;
         if (!map.isEmpty()) {
             totalPrice = 0;
-            // System.out.println("Cart is empty");
             for (Map.Entry entry : map.entrySet()) {
-                totalPrice += context.getLocalProductService((int) entry.getKey()).getPrice() * (int) entry.getValue();
+                totalPrice += context.getLocalProductService().get((int) entry.getKey()).getPrice() * (int) entry.getValue();
             }
         }
-        //   System.out.println("Total price :" + totalPrice);
         return totalPrice;
     }
 }

@@ -7,13 +7,12 @@ import java.util.Map;
 public class ShowCartCommand implements Command {
     @Override
     public void execute(Context context) {
-      //  context.showLocalCartService();
-        Map<Integer, Integer> map = context.getAllLocalCartService();
+        Map<Integer, Integer> map = context.getLocalCartService().getAllCart();
         if (map.isEmpty()) {
             System.out.println("Cart is empty");
         } else {
             for (Map.Entry entry : map.entrySet()) {
-                System.out.println(context.getLocalProductService((int) entry.getKey()) + " | pcs:"
+                System.out.println(context.getLocalProductService().get((int) entry.getKey()) + " | pcs:"
                         + entry.getValue());
             }
         }

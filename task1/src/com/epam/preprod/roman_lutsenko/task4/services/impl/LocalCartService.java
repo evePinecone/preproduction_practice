@@ -14,7 +14,7 @@ public class LocalCartService implements CartService {
     }
 
     @Override
-    public Map<Integer, Integer> getAllLocalCartService() {
+    public Map<Integer, Integer> getAllCart() {
         return cartDAO.getAllCart();
     }
 

@@ -20,8 +20,8 @@ public class CommandsContainer {
         commandsList.put("exit", new ExitCommand());
     }
 
-    public Command getCommand(String key){
-        if(commandsList.containsKey(key) && key != null) {
+    public Command getCommand(String key) {
+        if (commandsList.containsKey(key) && key != null) {
             return commandsList.get(key);
         }
         return commandsList.get("666");
