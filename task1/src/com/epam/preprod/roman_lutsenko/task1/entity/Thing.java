@@ -90,10 +90,7 @@ public abstract class Thing {
 		} else if (!nameModel.equals(other.nameModel)) {
 			return false;
 		}
-		if (price != other.price) {
-			return false;
-		}
-		return true;
+		return price == other.price;
 	}
 
 	@Override

@@ -3,15 +3,19 @@ package com.epam.preprod.roman_lutsenko.task1;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.manipulation.Filter;
 
 import com.epam.preprod.roman_lutsenko.task1.entity.Desktop;
 import com.epam.preprod.roman_lutsenko.task1.entity.FitnessBraslet;
 import com.epam.preprod.roman_lutsenko.task1.entity.Laptop;
 import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
+import com.epam.preprod.roman_lutsenko.task1.filters.ThingFilter;
 
 /**
  * Testing the ArrayList implementation.
@@ -25,14 +29,23 @@ public class ThingListTest {
 
 	@Before
 	public void setUp() {
-		list = new ThingList<Laptop>();
+		list = new ThingList<Thing>();
 	}
 
+	@Test
+	public void addingToTheEmptyListNewCollectionWithOneElement_lsitWithOneElementInto() {
+		List<Thing> added = new ThingList<Thing>();
+		added.add(new Laptop());
+		list.addAll(added);
+		System.out.println(added);
+		assertEquals(list.get(0), added.get(0));
+	}
+	
 	@Test
 	public void testListInit() {
 		list = new ThingList<Laptop>();
 		assertTrue(list.isEmpty());
-		assertTrue(list.size() == 0);
+		assertEquals(list.size(),0);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -79,22 +92,24 @@ public class ThingListTest {
 	}
 
 	@Test
-	public void testIterator() {
+	public void testFiltredIterator_resultListContainsOneLaptop() {
 		Thing laptop = new Laptop();
 		Thing desktop = new Desktop();
 		Thing fit = new FitnessBraslet();
 		laptop.setPrice(5000);
-		
+
 		list.add(laptop);
 		list.add(desktop);
 		list.add(fit);
-		int counter = 0;
-		for (Thing thing : list) {
-			System.out.println(thing);
-			counter++;
+
+		Iterator<Thing> iterator = ((ThingList<Thing>) list).iterator(new ThingFilter<Thing>());
+		list.add(new Desktop());
+
+		List<Thing> testList = new ThingList<>();
+		while (iterator.hasNext()) {
+			testList.add(iterator.next());
 		}
-		assertEquals(counter, 1);
+		assertTrue(testList.contains(laptop));
 	}
-	
-	// Problem with iterator testing.
+
 }
