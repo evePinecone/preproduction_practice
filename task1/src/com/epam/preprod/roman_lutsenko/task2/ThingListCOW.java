@@ -149,10 +149,10 @@ public class ThingListCOW<E extends Thing> implements List<Thing> {
 
 	@Override
 	public boolean add(Thing element) {
-		if (arrayList.length <= size - 1) {
+        checkEdit();
+        if (arrayList.length <= size) {
 			resizePlus();
 		}
-		checkEdit();
 		// Thing[] bufArrayList = Arrays.copyOf(arrayList, arrayList.length);
 		arrayList[size++] = element;
 		// setArrayList(bufArrayList);
@@ -171,13 +171,13 @@ public class ThingListCOW<E extends Thing> implements List<Thing> {
 
 	@Override
 	public boolean addAll(Collection<? extends Thing> collection) {
-		while (arrayList.length <= collection.size()) {
+        checkEdit();
+	    while (arrayList.length <= collection.size()) {
 			resizePlus();
 			/*
 			 * if we catch IndexOutOfBoundsException; return false;
 			 */
 		}
-		checkEdit();
 		System.arraycopy(collection, 0, arrayList, size - 1, collection.size());
 		size += collection.size();
 		return true;
@@ -185,13 +185,13 @@ public class ThingListCOW<E extends Thing> implements List<Thing> {
 
 	@Override
 	public boolean addAll(int index, Collection<? extends Thing> c) {
-		while (arrayList.length <= size + c.size()) {
+        checkEdit();
+	    while (arrayList.length <= size + c.size()) {
 			resizePlus();
 			/*
 			 * if we try to catch IndexOutOfBoundsException; return false;
 			 */
 		}
-		checkEdit();
 		System.arraycopy(arrayList, index, arrayList, index + c.size(), c.size());
 		System.arraycopy(c, 0, arrayList, index, c.size());
 		size += c.size();
@@ -246,7 +246,6 @@ public class ThingListCOW<E extends Thing> implements List<Thing> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public E set(int index, Thing element) {
-		// Need to place element to the last empty element?
 		if (index < 0 || index >= size) {
 			throw new IndexOutOfBoundsException("Incorrect input index");
 		}
@@ -261,10 +260,10 @@ public class ThingListCOW<E extends Thing> implements List<Thing> {
 		if (index < 0 || index > size) {
 			throw new IndexOutOfBoundsException("Incorrect input index");
 		}
+        checkEdit();
 		if (size >= arrayList.length) {
 			resizePlus();
 		}
-		checkEdit();
 		System.arraycopy(arrayList, index, arrayList, index + 1, size - index);
 		arrayList[index] = element;
 		size++;

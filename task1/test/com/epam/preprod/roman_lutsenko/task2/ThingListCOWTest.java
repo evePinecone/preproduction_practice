@@ -30,7 +30,8 @@ public class ThingListCOWTest {
 	public void testIterator() {
 		Iterator<Thing> iterator = test.iterator();
 		test.add(new Desktop());
-		int counter = 0;
+
+        int counter = 0;
 		while (iterator.hasNext()) {
 			//iterator.next();
 			System.out.println(iterator.next());
