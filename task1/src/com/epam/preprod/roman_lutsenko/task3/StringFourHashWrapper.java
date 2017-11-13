@@ -24,56 +24,24 @@ public class StringFourHashWrapper {
         this.strToHash = strToHash;
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see java.lang.Object#hashCode()
-     */
     @Override
     public int hashCode() {
         int index = 0;
         int result = 0;
         while (index < NUMBER_LETTERS_FROM_STRING && index < strToHash.length()) {
-            result += Integer.parseInt(String.valueOf(strToHash.charAt(index++)));
+            result += strToHash.charAt(index++);
         }
         return result;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
 
-        StringFourHashWrapper that = (StringFourHashWrapper) o;
+        StringFourHashWrapper that = (StringFourHashWrapper) object;
 
         return strToHash != null ? strToHash.equals(that.strToHash) : that.strToHash == null;
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
-    /*@Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (!(obj instanceof StringFourHashWrapper)) {
-            return false;
-        }
-        StringFourHashWrapper other = (StringFourHashWrapper) obj;
-        if (strToHash == null) {
-            if (other.strToHash != null) {
-                return false;
-            }
-        } else if (!strToHash.equals(other.strToHash)) {
-            return false;
-        }
-        return true;
-    }
-    */
 }
