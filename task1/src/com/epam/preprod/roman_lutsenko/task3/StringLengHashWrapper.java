@@ -22,17 +22,12 @@ public class StringLengHashWrapper {
         this.stringToHash = stringToHash;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#hashCode()
-     */
+
     @Override
     public int hashCode() {
         return stringToHash.length();
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
