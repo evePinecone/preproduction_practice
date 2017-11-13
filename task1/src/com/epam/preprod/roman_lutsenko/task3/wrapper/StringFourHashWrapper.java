@@ -1,4 +1,4 @@
-package com.epam.preprod.roman_lutsenko.task3;
+package com.epam.preprod.roman_lutsenko.task3.wrapper;
 
 public class StringFourHashWrapper {
 
@@ -17,12 +17,6 @@ public class StringFourHashWrapper {
         return strToHash;
     }
 
-    /**
-     * @param strToHash the strToHash to set
-     */
-    public void setStrToHash(String strToHash) {
-        this.strToHash = strToHash;
-    }
 
     @Override
     public int hashCode() {
