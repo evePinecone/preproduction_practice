@@ -36,9 +36,12 @@ public class StringFourHashWrapper {
 
     @Override
     public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
         StringFourHashWrapper that = (StringFourHashWrapper) object;
 
         return strToHash != null ? strToHash.equals(that.strToHash) : that.strToHash == null;
