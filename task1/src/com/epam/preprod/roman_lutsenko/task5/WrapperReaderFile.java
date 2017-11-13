@@ -1,6 +1,5 @@
 package com.epam.preprod.roman_lutsenko.task5;
 
-import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,7 +18,6 @@ public class WrapperReaderFile implements Iterable<String>{
         }
     }
 
-    @NotNull
     @Override
     public Iterator<String> iterator() {
         return new ItrImpl();
