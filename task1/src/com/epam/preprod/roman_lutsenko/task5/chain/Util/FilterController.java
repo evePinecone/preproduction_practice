@@ -17,6 +17,10 @@ public class FilterController {
     private List<File> filteredFileList = new ArrayList<>();
     private String directory;
 
+    public void setFilter(Filter filter) {
+        this.filter = filter;
+    }
+
     /**
      * Init filter controller with directory.
      */
@@ -25,7 +29,7 @@ public class FilterController {
         do {
             directory = scanner.nextLine();
         } while (!(new File(directory).isDirectory()));
-        //filter = new DirectoryFilter(filter ,directory);
+        //Uncomment to correct file Search.
     }
 
     public void runController() {
@@ -76,7 +80,7 @@ public class FilterController {
             for (File file1 : files) {
                 if(file1.isDirectory()) {
                     searchFile(file1);
-                } else if(filter.execute(file1)) {
+                } else if(filter!= null && filter.execute(file1)) {
                     filteredFileList.add(file1);
                 }
             }
