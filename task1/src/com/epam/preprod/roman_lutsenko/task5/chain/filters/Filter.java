@@ -19,8 +19,5 @@ public abstract class Filter {
         return execute(file);
     }
 
-    /*protected boolean executeNext(String directory) {
-        return next == null || next.execute(directory);
-    } */
 
 }
