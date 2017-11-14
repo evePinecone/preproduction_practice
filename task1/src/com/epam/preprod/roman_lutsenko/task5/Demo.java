@@ -5,7 +5,7 @@ import com.epam.preprod.roman_lutsenko.task5.Chain.*;
 public class Demo {
     public static void main(String[] args) {
         Filter filter = new DirectoryFilter();
-        filter.linkWith(new FileNameFilter()).linkWith(new ExtensionFilter()).linkWith(new ShowFiltered());
+        filter.linkWith(new FileNameFilter()).linkWith(new ExtensionFilter()).linkWith(new SizeFilter()).linkWith(new ShowFiltered());
 //        filter.linkWith(new FileNameFilter()).linkWith(new ShowFiltered());
         boolean success;
         do {
@@ -13,3 +13,4 @@ public class Demo {
         } while (!success);
     }
 }
+/*добавить ещё 2 метода в абстрактный класс с выполнением?*/
