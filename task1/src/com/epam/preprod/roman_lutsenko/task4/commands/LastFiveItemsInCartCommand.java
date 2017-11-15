@@ -6,7 +6,7 @@ public class LastFiveItemsInCartCommand implements Command {
     @Override
     public void execute(Context context) {
         if (context.getLocalAllCartAddingService().isEmpty()) {
-            System.out.println("You did not add elements to the cart.");
+            System.out.println("You did not put elements to the cart.");
         } else {
             int lastIndexMap = context.getLocalAllCartAddingService().size();
             int counter = 0;

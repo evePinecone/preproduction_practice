@@ -4,7 +4,9 @@ import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
 import com.epam.preprod.roman_lutsenko.task4.dao.interfaces.ProductDAO;
 import com.epam.preprod.roman_lutsenko.task4.services.inerfaces.ProductService;
 
-import java.util.List;
+import java.awt.color.ICC_Profile;
+import java.util.Map;
+import java.util.Set;
 
 public class LocalProductService implements ProductService {
 
@@ -15,18 +17,14 @@ public class LocalProductService implements ProductService {
     }
 
     @Override
-    public List getAllItems() {
+    public Map<Integer, Thing> getAllItems() {
         return productDAO.getAllItems();
     }
 
-    @Override
-    public void setAllItems(List<Thing> thingList) {
-        productDAO.setAllItems(thingList);
-    }
 
     @Override
-    public void add(Thing thing) {
-        productDAO.add(thing);
+    public void put(Thing thing) {
+        productDAO.put(thing);
     }
 
     @Override
@@ -34,33 +32,36 @@ public class LocalProductService implements ProductService {
         return productDAO.get(thingId);
     }
 
+
     @Override
-    public void set(int index, Thing thing) {
-        productDAO.set(index, thing);
+    public Thing remove(int thingId) {
+        return productDAO.remove(thingId);
     }
 
     @Override
-    public Thing remove(int index) {
-        return productDAO.remove(index);
-    }
-
-    @Override
-    public boolean remove(Object object) {
+    public Thing remove(Thing object) {
         return productDAO.remove(object);
     }
 
-    @Override
-    public void clear() {
-        productDAO.clear();
-    }
 
     @Override
     public void show() {
-        productDAO.show();
+        Map<Integer, Thing> productList = getAllItems();
+        if(productList.isEmpty()) {
+            System.out.println("Empty list");
+        }
+        for (Map.Entry<Integer, Thing> thingEntry : productList.entrySet()) {
+            System.out.println(thingEntry.getValue());
+        }
     }
 
     @Override
     public String toString() {
-        return productDAO.toString();
+        Map<Integer, Thing> productList = getAllItems();
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Map.Entry<Integer, Thing> thingEntry : productList.entrySet()) {
+            stringBuilder.append(thingEntry.getValue()).append(System.lineSeparator());
+        }
+        return stringBuilder.toString();
     }
 }

@@ -15,7 +15,7 @@ public class MakeAnOrderCommand implements Command {
         long totalPrice = byAllItemsInCartLocalCartService(context);
 
         if (totalPrice == -1) {
-            System.out.println("Cart is empty! Please add an items into the cart to make an order.");
+            System.out.println("Cart is empty! Please put an items into the cart to make an order.");
         } else {
             //new ShowCartCommand().execute(context);
             showCart(context);

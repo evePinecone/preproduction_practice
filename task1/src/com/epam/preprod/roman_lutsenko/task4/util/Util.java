@@ -1,5 +1,6 @@
 package com.epam.preprod.roman_lutsenko.task4.util;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -23,6 +24,7 @@ public class Util {
             } catch (DateTimeParseException ex) {
                 System.out.println("Incorrect date format");
             }
+
         }
         return localDateTime;
     }

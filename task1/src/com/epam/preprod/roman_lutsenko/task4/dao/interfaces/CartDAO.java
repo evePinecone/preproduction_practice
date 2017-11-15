@@ -12,7 +12,7 @@ public interface CartDAO {
     /**
      * Adding thing into cart.
      *
-     * @param thingId item to add.
+     * @param thingId item to put.
      */
     void add(int thingId);
 

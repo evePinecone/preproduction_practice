@@ -20,6 +20,7 @@ public class Context {
     private AllCartAddingService localAllCartAddingService;
     private OrderService localOrderService;
 
+    @Deprecated
     public Context() {
         localProductService = new LocalProductService(new LocalProductDAO());
         localCartService = new LocalCartService(new LocalCartDAO());

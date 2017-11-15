@@ -15,27 +15,23 @@ public class LocalCartDAO implements CartDAO {
 
     @Override
     public Map<Integer, Integer> getAllCart() {
-        return new HashMap<Integer, Integer>(cartMap);
+        return new HashMap<>(cartMap);
     }
 
     @Override
     public void add(int thingId) {
-        if (cartMap.containsKey(thingId)) {
-            cartMap.put(thingId, cartMap.get(thingId) + 1);
-        } else {
-            cartMap.put(thingId, 1);
+        Integer amount = cartMap.putIfAbsent(thingId, 1);
+        if (amount != null) {
+            cartMap.put(thingId, amount + 1);
         }
     }
 
     @Override
     public int getCounterProduct(int thingId) {
-        if (cartMap.containsKey(thingId)) {
-            return cartMap.get(thingId);
-        } else {
-            return -1;
-        }
+        return cartMap.getOrDefault(thingId, -1);
     }
 
+    @Deprecated
     @Override
     public void clear() {
         cartMap.clear();

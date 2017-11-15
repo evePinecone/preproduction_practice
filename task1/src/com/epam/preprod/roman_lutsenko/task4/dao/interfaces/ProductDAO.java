@@ -2,7 +2,7 @@ package com.epam.preprod.roman_lutsenko.task4.dao.interfaces;
 
 import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
 
-import java.util.List;
+import java.util.Map;
 
 public interface ProductDAO {
 
@@ -11,21 +11,15 @@ public interface ProductDAO {
      *
      * @return copy of product List.
      */
-    List<Thing> getAllItems();
+    Map<Integer, Thing> getAllItems();
+
 
     /**
-     * Replaces product list with thingList.
+     * Adding Thing to List.
      *
-     * @param thingList change for our base list.
+     * @param thing element to put.
      */
-    void setAllItems(List<Thing> thingList);
-
-    /**
-     * Adding some Thing to List.
-     *
-     * @param thing element to add.
-     */
-    void add(Thing thing);
+    void put(Thing thing);
 
     /**
      * Return thing by its id, or
@@ -36,37 +30,27 @@ public interface ProductDAO {
      */
     Thing get(int thingId);
 
-    /**
-     * Set element thing on index position.
-     *
-     * @param index index setting into list.
-     * @param thing Thing that set on index position.
-     */
-    void set(int index, Thing thing);
 
     /**
-     * Removes element from index position.
+     * Removes element with thingId.
      *
-     * @param index of removing element.
+     * @param thingId of removing element.
      * @return removement element.
      */
-    Thing remove(int index);
+    Thing remove(int thingId);
 
     /**
-     * Removes first occurens object in list.
+     * Removes occurrence object in map.
      *
      * @param object element to remove.
      * @return <b>true</b> if removement took place.
      */
-    boolean remove(Object object);
+    Thing remove(Thing object);
 
     /**
-     * Clear list.
+     * Check if map of products is empty.
+     *
+     * @return <tt>true</tt> if this map contains no key-value mappings
      */
-    void clear();
-
-    /**
-     * Format output list to console.
-     */
-    void show();
+    boolean isEmpty();
 }

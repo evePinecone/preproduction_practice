@@ -3,6 +3,8 @@ package com.epam.preprod.roman_lutsenko.task4.services.inerfaces;
 import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public interface ProductService {
     /**
@@ -10,21 +12,15 @@ public interface ProductService {
      *
      * @return copy of product List.
      */
-    List getAllItems();
+    Map<Integer, Thing> getAllItems();
+
 
     /**
-     * Replaces product list with thingList.
+     * Adding Thing to List.
      *
-     * @param thingList change for our base list.
+     * @param thing element to put.
      */
-    void setAllItems(List<Thing> thingList);
-
-    /**
-     * Adding some Thing to List.
-     *
-     * @param thing element to add.
-     */
-    void add(Thing thing);
+    void put(Thing thing);
 
     /**
      * Return thing by its id, or
@@ -33,36 +29,24 @@ public interface ProductService {
      * @param thingId id element to find
      * @return Thing by id;
      */
-    Thing get(int index);
+    Thing get(int thingId);
+
 
     /**
-     * Set element thing on index position.
+     * Removes element with thingId.
      *
-     * @param index index setting into list.
-     * @param thing Thing that set on index position.
-     */
-    void set(int index, Thing thing);
-
-    /**
-     * Removes element from index position.
-     *
-     * @param index of removing element.
+     * @param thingId of removing element.
      * @return removement element.
      */
-    Thing remove(int index);
+    Thing remove(int thingId);
 
     /**
-     * Removes first occurens object in list.
+     * Removes occurrence object in map.
      *
      * @param object element to remove.
      * @return <b>true</b> if removement took place.
      */
-    boolean remove(Object object);
-
-    /**
-     * Clear list.
-     */
-    void clear();
+    Thing remove(Thing object);
 
     /**
      * Format output list to console.

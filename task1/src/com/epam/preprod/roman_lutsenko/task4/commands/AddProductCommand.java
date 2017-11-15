@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class AddProductCommand implements Command {
     @Override
     public void execute(Context context) {
-        System.out.println("Enter id Thing to add to cart, or type \"back\" to go back.");
+        System.out.println("Enter id Thing to put to cart, or type \"back\" to go back.");
         context.getLocalProductService().show();
         Scanner scanner = new Scanner(System.in);
         String string = scanner.nextLine();

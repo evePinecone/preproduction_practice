@@ -1,92 +1,53 @@
 package com.epam.preprod.roman_lutsenko.task4.dao.impl;
 
-import com.epam.preprod.roman_lutsenko.task1.entity.Laptop;
 import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
 import com.epam.preprod.roman_lutsenko.task4.dao.interfaces.ProductDAO;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LocalProductDAO implements ProductDAO {
 
-    private List<Thing> productList;
+    //заменить на хеш сет
+    private Map<Integer, Thing> productList;
 
+    @Deprecated
     public LocalProductDAO() {
-        productList = new ArrayList<>();
-        fill();
+        productList = new HashMap<>();
+    }
+
+    public LocalProductDAO(Map<Integer, Thing> productList) {
+        this.productList = productList;
     }
 
     @Override
-    public List<Thing> getAllItems() {
-        return productList;
+    public Map<Integer, Thing> getAllItems() {
+        return new HashMap<>(productList);
     }
 
     @Override
-    public void setAllItems(List<Thing> thingList) {
-        this.productList = thingList;
-    }
-
-    @Override
-    public void add(Thing thing) {
-        productList.add(thing);
+    public void put(Thing thing) {
+        productList.put(thing.getId(), thing);
     }
 
     @Override
     public Thing get(int thingId) {
-        for (Thing thing : productList) {
-            if (thing.getId() == thingId) {
-                return thing;
-            }
-        }
-        //return new NoSuchElementException();
-        return null;
+        return productList.get(thingId);
     }
 
     @Override
-    public void set(int index, Thing thing) {
-        productList.set(index, thing);
+    public Thing remove(int thingId) {
+        return productList.remove(thingId);
     }
 
     @Override
-    public Thing remove(int index) {
-        return productList.remove(index);
+    public Thing remove(Thing object) {
+        return productList.remove(object.getId());
     }
 
     @Override
-    public boolean remove(Object object) {
-        return productList.remove(object);
+    public boolean isEmpty() {
+        return productList.isEmpty();
     }
 
-    @Override
-    public void clear() {
-        productList.clear();
-    }
-
-    @Override
-    public void show() {
-        for (Thing thing : productList) {
-            System.out.println(thing);
-        }
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Thing thing : productList) {
-            stringBuilder.append(thing).append(System.lineSeparator());
-        }
-        return stringBuilder.toString();
-    }
-
-    private LocalProductDAO fill() {
-        Laptop laptop;
-        for (int index = 1; index < 6; index++) {
-            laptop = new Laptop();
-            laptop.setId(index);
-            laptop.setPrice(index * 100);
-            laptop.setNameModel("laptop" + index);
-            productList.add(laptop);
-        }
-        return this;
-    }
 }

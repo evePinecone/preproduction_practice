@@ -10,22 +10,23 @@ import java.util.Map;
 public class ShowNearestOrderCommand implements Command {
     @Override
     public void execute(Context context) {
-        System.out.println("Enter date >");
-        LocalDateTime localDateTime = Util.readDateTime();
+        LocalDateTime dateToSearch = Util.readDateTime();
 
         Map<LocalDateTime, Order> map = context.getLocalOrderService().getOrderMap();
 
         LocalDateTime nearestDateTime = LocalDateTime.now(); //= context.getLocalOrderService().getOrder(map.keySet().);
         int nearestCompareResult = 0;
         for (LocalDateTime tempLocalDateTime : map.keySet()) {
-            nearestCompareResult = tempLocalDateTime.compareTo(localDateTime);
+            nearestCompareResult = tempLocalDateTime.compareTo(dateToSearch);
             nearestDateTime = tempLocalDateTime;
+            break;
         }
 
         for (LocalDateTime tempLocalDateTime : map.keySet()) {
-            int compareTo = tempLocalDateTime.compareTo(localDateTime);
+            int compareTo = tempLocalDateTime.compareTo(dateToSearch);
             if (Math.abs(compareTo) < nearestCompareResult) {
                 nearestDateTime = tempLocalDateTime;
+                nearestCompareResult = compareTo;
             }
         }
         System.out.println("Nearest order > " + context.getLocalOrderService().getOrder(nearestDateTime));

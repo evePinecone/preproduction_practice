@@ -1,12 +1,13 @@
 package com.epam.preprod.roman_lutsenko.task4.dao.impl;
 
+import com.epam.preprod.roman_lutsenko.task4.dao.interfaces.OrderDAO;
 import com.epam.preprod.roman_lutsenko.task4.entities.Order;
 
 import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class LocalOrderDAO implements com.epam.preprod.roman_lutsenko.task4.dao.interfaces.OrderDAO {
+public class LocalOrderDAO implements OrderDAO {
 
     private Map<LocalDateTime, Order> orderMap;
 
