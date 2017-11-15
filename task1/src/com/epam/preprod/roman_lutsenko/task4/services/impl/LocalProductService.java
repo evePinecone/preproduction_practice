@@ -1,6 +1,7 @@
 package com.epam.preprod.roman_lutsenko.task4.services.impl;
 
 import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
+import com.epam.preprod.roman_lutsenko.task4.constants.Paths;
 import com.epam.preprod.roman_lutsenko.task4.dao.interfaces.ProductDAO;
 import com.epam.preprod.roman_lutsenko.task4.services.inerfaces.ProductService;
 
@@ -68,7 +69,7 @@ public class LocalProductService implements ProductService {
     @Override
     public void serializeProduct() {
         try {
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Thing.out"));
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(Paths.SERIALIZE_PRODUCT_FILE_NAME_PATH));
             oos.writeObject(getAllItems());
             oos.flush();
             oos.close();
@@ -79,17 +80,17 @@ public class LocalProductService implements ProductService {
 
     @Override
     public void unSerializeProduct() {
-        Map<Integer, Thing> map = new HashMap<>();
+        Map map = new HashMap<>();
         try {
-            ObjectInputStream oos = new ObjectInputStream(new FileInputStream("Thing.out"));
+            ObjectInputStream oos = new ObjectInputStream(new FileInputStream(Paths.SERIALIZE_PRODUCT_FILE_NAME_PATH));
             map = (Map) oos.readObject();
             oos.close();
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        for (Map.Entry<Integer, Thing> entry : map.entrySet()) {
-            put(entry.getValue());
+            System.err.println("No file to deserialize.");
         }
 
+        for (Object value : map.values()) {
+            put((Thing)value);
+        }
     }
 }

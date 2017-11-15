@@ -31,10 +31,11 @@ public class TestCart {
         LocalAllCartAddingService localAllCartAddingService = new LocalAllCartAddingService(localAllCartAddingDAO);
 
         Context context = new Context(localProductService, localCartService, localAllCartAddingService, localOrderService);
+
         new MenuController().menu(context);
     }
 
-    private static Map<Integer, Thing> fill() {
+    public static Map<Integer, Thing> fill() {
         Laptop laptop;
         Map<Integer, Thing> productList = new HashMap<>();
         for (int index = 1; index < 6; index++) {
