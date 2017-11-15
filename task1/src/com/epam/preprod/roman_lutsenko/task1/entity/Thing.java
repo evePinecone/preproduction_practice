@@ -1,12 +1,14 @@
 package com.epam.preprod.roman_lutsenko.task1.entity;
 
+import java.io.Serializable;
+
 /**
  * The base class for our entities.
  *
  * @author Roman_Lutsenko
  *
  */
-public abstract class Thing{
+public abstract class Thing implements Serializable{
 	private String nameModel;
 	/**
 	 * Company manufacturer.

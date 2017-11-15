@@ -4,9 +4,9 @@ import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
 import com.epam.preprod.roman_lutsenko.task4.dao.interfaces.ProductDAO;
 import com.epam.preprod.roman_lutsenko.task4.services.inerfaces.ProductService;
 
-import java.awt.color.ICC_Profile;
+import java.io.*;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class LocalProductService implements ProductService {
 
@@ -47,7 +47,7 @@ public class LocalProductService implements ProductService {
     @Override
     public void show() {
         Map<Integer, Thing> productList = getAllItems();
-        if(productList.isEmpty()) {
+        if (productList.isEmpty()) {
             System.out.println("Empty list");
         }
         for (Map.Entry<Integer, Thing> thingEntry : productList.entrySet()) {
@@ -63,5 +63,33 @@ public class LocalProductService implements ProductService {
             stringBuilder.append(thingEntry.getValue()).append(System.lineSeparator());
         }
         return stringBuilder.toString();
+    }
+
+    @Override
+    public void serializeProduct() {
+        try {
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Thing.out"));
+            oos.writeObject(getAllItems());
+            oos.flush();
+            oos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void unSerializeProduct() {
+        Map<Integer, Thing> map = new HashMap<>();
+        try {
+            ObjectInputStream oos = new ObjectInputStream(new FileInputStream("Thing.out"));
+            map = (Map) oos.readObject();
+            oos.close();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        for (Map.Entry<Integer, Thing> entry : map.entrySet()) {
+            put(entry.getValue());
+        }
+
     }
 }

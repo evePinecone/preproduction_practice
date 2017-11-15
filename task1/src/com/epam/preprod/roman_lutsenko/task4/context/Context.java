@@ -33,6 +33,7 @@ public class Context {
         this.localCartService = localCartService;
         this.localAllCartAddingService = localAllCartAddingService;
         this.localOrderService = localOrderService;
+        getLocalProductService().unSerializeProduct();
     }
 
     public ProductService getLocalProductService() {

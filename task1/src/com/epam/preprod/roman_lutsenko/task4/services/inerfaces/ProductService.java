@@ -52,4 +52,8 @@ public interface ProductService {
      * Format output list to console.
      */
     void show();
+
+    void serializeProduct();
+
+    void unSerializeProduct();
 }
