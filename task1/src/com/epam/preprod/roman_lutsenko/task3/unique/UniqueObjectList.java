@@ -1,4 +1,4 @@
-package com.epam.preprod.roman_lutsenko.task3;
+package com.epam.preprod.roman_lutsenko.task3.unique;
 
 import java.util.*;
 import java.util.function.UnaryOperator;
@@ -7,7 +7,7 @@ public class UniqueObjectList<E> extends ArrayList<E> implements List<E> {
 
     private static final long serialVersionUID = 1L;
 
-    private void chechContainsElement(E element) {
+    private void checkElementAlreadyExists(E element) {
         if (contains(element)) {
             throw new IllegalArgumentException();
         }
@@ -16,11 +16,11 @@ public class UniqueObjectList<E> extends ArrayList<E> implements List<E> {
     private void checkContainsCollection(Collection<? extends E> collection) {
         checkCollectionForDuplicates(collection);
         for (E element : collection) {
-            chechContainsElement(element);
+            checkElementAlreadyExists(element);
         }
     }
 
-    private boolean checkCollectionForDuplicates(Collection<? extends E> collection) {
+    private void checkCollectionForDuplicates(Collection<? extends E> collection) {
         Object[] array = collection.toArray();
         Arrays.sort(array);
         for (int index = 0; index < array.length - 1; index++) {
@@ -28,7 +28,6 @@ public class UniqueObjectList<E> extends ArrayList<E> implements List<E> {
                 throw new IllegalArgumentException();
             }
         }
-        return false;
     }
 
     /*
@@ -38,7 +37,7 @@ public class UniqueObjectList<E> extends ArrayList<E> implements List<E> {
      */
     @Override
     public E set(int index, E element) {
-        chechContainsElement(element);
+        checkElementAlreadyExists(element);
         return super.set(index, element);
     }
 
@@ -49,7 +48,7 @@ public class UniqueObjectList<E> extends ArrayList<E> implements List<E> {
      */
     @Override
     public boolean add(E element) {
-        chechContainsElement(element);
+        checkElementAlreadyExists(element);
         return super.add(element);
     }
 
@@ -60,7 +59,7 @@ public class UniqueObjectList<E> extends ArrayList<E> implements List<E> {
      */
     @Override
     public void add(int index, E element) {
-        chechContainsElement(element);
+        checkElementAlreadyExists(element);
         super.add(index, element);
     }
 
@@ -95,8 +94,8 @@ public class UniqueObjectList<E> extends ArrayList<E> implements List<E> {
     public void replaceAll(UnaryOperator<E> operator) {
         Objects.requireNonNull(operator);
         List<E> list = new UniqueObjectList<>();
-        for (int i = 0; i < size(); i++) {
-            list.add(operator.apply(get(i)));
+        for (E obj : this) {
+            list.add(operator.apply(obj));
         }
         clear();
         addAll(list);
