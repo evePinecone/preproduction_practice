@@ -12,12 +12,13 @@ public class CommandsContainer {
     {
         //Here put elements.
         commandsList.put("1", new ShowAllProductsCommand());
-        commandsList.put("2", new AddProductCommand());
+        commandsList.put("2", new AddProductToCartCommand());
         commandsList.put("3", new ShowCartCommand());
         commandsList.put("4", new MakeAnOrderCommand());
         commandsList.put("5", new LastFiveItemsInCartCommand());
         commandsList.put("6", new ShowOrdersBetweenDateTimeCommand());
         commandsList.put("7", new ShowNearestOrderCommand());
+        commandsList.put("8", new AddThingCommand());
         commandsList.put("666", new NoSuchCommand());
         commandsList.put("exit", new ExitCommand());
     }

@@ -25,7 +25,10 @@ public class LocalProductService implements ProductService {
 
     @Override
     public void put(Thing thing) {
-        productDAO.put(thing);
+        if (productDAO.get(thing.getId()) == null) {
+            productDAO.put(thing);
+        }
+        throw new IllegalArgumentException();
     }
 
     @Override
@@ -90,7 +93,7 @@ public class LocalProductService implements ProductService {
         }
 
         for (Object value : map.values()) {
-            put((Thing)value);
+            put((Thing) value);
         }
     }
 }

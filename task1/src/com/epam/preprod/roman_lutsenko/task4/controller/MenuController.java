@@ -1,7 +1,9 @@
 package com.epam.preprod.roman_lutsenko.task4.controller;
 
 import com.epam.preprod.roman_lutsenko.task4.commands.Command;
+import com.epam.preprod.roman_lutsenko.task4.commands.strategys.InputStrategy;
 import com.epam.preprod.roman_lutsenko.task4.constants.CommandsContainer;
+import com.epam.preprod.roman_lutsenko.task4.constants.StrategyContainer;
 import com.epam.preprod.roman_lutsenko.task4.context.Context;
 
 import java.util.Scanner;
@@ -10,10 +12,17 @@ public class MenuController {
 
     public void menu(Context context) {
         Command command;
+        InputStrategy inputStrategy;
+        String choice;
+
         try (Scanner scanner = new Scanner(System.in)) {
+            showStrategyInput();
+            choice = scanner.nextLine();
+            inputStrategy = (new StrategyContainer()).getStrategy(choice);
+            context.setInputStrategy(inputStrategy);
             while (true) {
                 showMenu();
-                String choice = scanner.nextLine();
+                choice = scanner.nextLine();
                 command = (new CommandsContainer()).getCommand(choice);
                 command.execute(context);
             }
@@ -30,6 +39,13 @@ public class MenuController {
         System.out.println("\t5. Show information about last five items in cart");
         System.out.println("\t6. Show orders between DateTime");
         System.out.println("\t7. Show nearest order");
+        System.out.println("\t8. Add thing to catalog");
         System.out.println("\texit. End of program.");
+    }
+
+    public void showStrategyInput() {
+        System.out.println("1. With keyboard.");
+        System.out.println("2. With random.");
+
     }
 }

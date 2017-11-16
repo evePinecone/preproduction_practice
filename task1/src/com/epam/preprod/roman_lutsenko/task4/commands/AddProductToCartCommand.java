@@ -4,7 +4,7 @@ import com.epam.preprod.roman_lutsenko.task4.context.Context;
 
 import java.util.Scanner;
 
-public class AddProductCommand implements Command {
+public class AddProductToCartCommand implements Command {
     @Override
     public void execute(Context context) {
         System.out.println("Enter id Thing to put to cart, or type \"back\" to go back.");
