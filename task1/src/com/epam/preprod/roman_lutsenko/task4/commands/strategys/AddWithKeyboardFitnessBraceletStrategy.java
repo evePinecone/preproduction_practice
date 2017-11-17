@@ -2,6 +2,7 @@ package com.epam.preprod.roman_lutsenko.task4.commands.strategys;
 
 import com.epam.preprod.roman_lutsenko.task1.entity.Desktop;
 import com.epam.preprod.roman_lutsenko.task1.entity.FitnessBracelet;
+import com.epam.preprod.roman_lutsenko.task4.util.Util;
 
 import java.util.Scanner;
 
@@ -11,11 +12,11 @@ public class AddWithKeyboardFitnessBraceletStrategy implements InputStrategy<Fit
     public FitnessBracelet input(FitnessBracelet thing) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter Id > ");
-        thing.setId(Integer.parseInt(scanner.nextLine()));
+        thing.setId(Util.intValidationInput());
         System.out.println("Enter nameModel ");
         thing.setNameModel(scanner.nextLine());
         System.out.println("Enter price ");
-        thing.setPrice(Long.parseLong(scanner.nextLine()));
+        thing.setPrice(Util.longValidationInput());
         System.out.println("Enter autonomy ");
         thing.setAutonomy(scanner.nextLine());
         System.out.println("Enter RAM ");

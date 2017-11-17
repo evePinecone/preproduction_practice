@@ -16,7 +16,7 @@ public class MenuController {
         String choice;
 
         try (Scanner scanner = new Scanner(System.in)) {
-            showStrategyInput();
+            StrategyContainer.showStrategyInput();
             choice = scanner.nextLine();
             inputStrategy = (new StrategyContainer()).getStrategy(choice);
             context.setInputStrategy(inputStrategy);
@@ -43,9 +43,4 @@ public class MenuController {
         System.out.println("\texit. End of program.");
     }
 
-    public void showStrategyInput() {
-        System.out.println("1. With keyboard.");
-        System.out.println("2. With random.");
-
-    }
 }
