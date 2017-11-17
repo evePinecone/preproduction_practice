@@ -1,6 +1,8 @@
 package com.epam.preprod.roman_lutsenko.task4.context;
 
+import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
 import com.epam.preprod.roman_lutsenko.task4.commands.strategys.InputStrategy;
+import com.epam.preprod.roman_lutsenko.task4.constants.StrategyContainer;
 import com.epam.preprod.roman_lutsenko.task4.dao.impl.LocalAllCartAddingDAO;
 import com.epam.preprod.roman_lutsenko.task4.dao.impl.LocalCartDAO;
 import com.epam.preprod.roman_lutsenko.task4.dao.impl.LocalOrderDAO;
@@ -20,7 +22,9 @@ public class Context {
     private CartService localCartService;
     private AllCartAddingService localAllCartAddingService;
     private OrderService localOrderService;
-    private InputStrategy inputStrategy;
+    private StrategyContext strategyContext;
+    //context with strategy
+    // контекст на мапе оформить
 
     @Deprecated
     public Context() {
@@ -70,12 +74,11 @@ public class Context {
         this.localOrderService = localOrderService;
     }
 
-    public InputStrategy getInputStrategy() {
-        return inputStrategy;
+    public StrategyContext getStrategyContext() {
+        return strategyContext;
     }
 
-    public void setInputStrategy(InputStrategy inputStrategy) {
-        this.inputStrategy = inputStrategy;
+    public void setStrategyContext(StrategyContext strategyContext) {
+        this.strategyContext = strategyContext;
     }
-
 }

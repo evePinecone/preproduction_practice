@@ -27,8 +27,9 @@ public class LocalProductService implements ProductService {
     public void put(Thing thing) {
         if (productDAO.get(thing.getId()) == null) {
             productDAO.put(thing);
+        } else {
+            throw new IllegalArgumentException();
         }
-        throw new IllegalArgumentException();
     }
 
     @Override

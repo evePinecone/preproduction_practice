@@ -16,6 +16,8 @@ public class AddProductToCartCommand implements Command {
             if (context.getLocalProductService().get(thingId) != null) {
                 context.getLocalCartService().add(thingId);
                 context.getLocalAllCartAddingService().add(thingId);
+            } else {
+                System.out.println("No such item in shop");
             }
         }
     }

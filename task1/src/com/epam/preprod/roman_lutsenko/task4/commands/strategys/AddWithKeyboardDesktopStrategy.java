@@ -31,7 +31,7 @@ public class AddWithKeyboardDesktopStrategy implements InputStrategy<Desktop> {
         System.out.println("Enter form factor ");
         thing.setFormFactor(scanner.nextLine());
 
-        System.out.println("Enter type w ");
+        System.out.println("Enter type workspace ");
         thing.setTypeWorkspace(scanner.nextLine());
         return thing;
     }
