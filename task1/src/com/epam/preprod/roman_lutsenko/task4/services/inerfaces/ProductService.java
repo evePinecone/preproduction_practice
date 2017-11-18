@@ -53,10 +53,4 @@ public interface ProductService {
      */
     void show();
 
-    /**
-     * Serialize product into file with name Paths.SERIALIZE_PRODUCT_FILE_NAME
-     */
-    void serializeProduct();
-
-    void unSerializeProduct();
 }

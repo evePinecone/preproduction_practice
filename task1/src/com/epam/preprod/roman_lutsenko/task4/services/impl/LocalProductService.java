@@ -4,12 +4,13 @@ import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
 import com.epam.preprod.roman_lutsenko.task4.constants.Paths;
 import com.epam.preprod.roman_lutsenko.task4.dao.interfaces.ProductDAO;
 import com.epam.preprod.roman_lutsenko.task4.services.inerfaces.ProductService;
+import com.epam.preprod.roman_lutsenko.task4.services.inerfaces.ToFileSavable;
 
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LocalProductService implements ProductService {
+public class LocalProductService implements ProductService, ToFileSavable {
 
     private ProductDAO productDAO;
 
@@ -71,7 +72,7 @@ public class LocalProductService implements ProductService {
     }
 
     @Override
-    public void serializeProduct() {
+    public void toFileSever() {
         try {
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(Paths.SERIALIZE_PRODUCT_FILE_NAME_PATH));
             oos.writeObject(getAllItems());
@@ -83,7 +84,7 @@ public class LocalProductService implements ProductService {
     }
 
     @Override
-    public void unSerializeProduct() {
+    public void fromFileReader() {
         Map map = new HashMap<>();
         try {
             ObjectInputStream oos = new ObjectInputStream(new FileInputStream(Paths.SERIALIZE_PRODUCT_FILE_NAME_PATH));
