@@ -24,6 +24,7 @@ public class AddThingCommand implements Command {
 
     public Thing chooseThingToADD() {
         EntityContainer.show();
+        //дергать с ютилки врапер ввода.
         Scanner scanner = new Scanner(System.in);
         return new EntityContainer().getEntity(scanner.nextLine());
     }

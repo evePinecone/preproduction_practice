@@ -6,6 +6,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Util {
+    static Scanner scanner = new Scanner(System.in);
 
     public static LocalDateTime readDateTime() {
         LocalDateTime localDateTime = LocalDateTime.now();
@@ -29,7 +30,6 @@ public class Util {
     }
 
     public static int intValidationInput() {
-        Scanner scanner = new Scanner(System.in);
         int parseInt = 0;
         boolean flagUnParse = true;
         do {

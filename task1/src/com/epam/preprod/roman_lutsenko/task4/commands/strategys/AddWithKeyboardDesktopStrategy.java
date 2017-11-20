@@ -16,6 +16,7 @@ public class AddWithKeyboardDesktopStrategy implements InputStrategy<Desktop> {
         System.out.println("Enter Id > ");
         thing.setId(Util.intValidationInput());
 
+        // перекинуть в обвертку считывание строки.
         System.out.println("Enter nameModel ");
         thing.setNameModel(scanner.nextLine());
 

@@ -38,6 +38,9 @@ public class LocalAllCartAddingService implements AllCartAddingService {
         return allCartAddingDAO.size();
     }
 
+    /**
+     * @inheritdoc
+     */
     @Override
     public boolean isEmpty() {
         return allCartAddingDAO.isEmpty();

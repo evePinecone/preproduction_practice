@@ -7,7 +7,10 @@ import java.util.Map;
 
 public class StrategyContext {
 
+    // инициализация через конструктор
     private Map<Class, InputStrategy> strategyMap = new HashMap<>();
+
+
 
     public void put(Class clazz, InputStrategy inputStrategy) {
         strategyMap.put(clazz, inputStrategy);

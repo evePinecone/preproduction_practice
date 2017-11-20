@@ -28,6 +28,7 @@ public class LocalProductService implements ProductService {
         if (productDAO.get(thing.getId()) == null) {
             productDAO.put(thing);
         } else {
+            //wraper exception
             throw new IllegalArgumentException();
         }
     }
