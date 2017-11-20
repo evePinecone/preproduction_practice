@@ -1,27 +1,27 @@
-package com.epam.preprod.roman_lutsenko.task4.services.inerfaces;
+package com.epam.preprod.roman_lutsenko.task4.dao;
 
 import java.util.Map;
 
-public interface CartService {
+public interface CartDAO {
+
+    Map<Integer, Integer> getCacheOfLastFiveAddings();
+
+    void addToCash(int thingId);
+
 
     /**
-     * Returns the copy of Cart map.
-     *
-     * @return the copy of Cart map
+     * @return return copy HashMap with all items inside.
      */
     Map<Integer, Integer> getAllCart();
 
     /**
-     * Add item by it id to current Cart.
-     * If this item contains in Cart, increment counter in map.
+     * Adding thing into cart.
      *
-     * @param thingId id of adding element
+     * @param thingId item to put.
      */
     void add(int thingId);
 
     /**
-     * Return number of included element to Cart with id = thingId.
-     *
      * @param thingId id of Thing
      * @return Counter of product with thingId in cart
      * or -1 if there is no such product in cart.
@@ -29,7 +29,7 @@ public interface CartService {
     int getCounterProduct(int thingId);
 
     /**
-     * Clear cart map.
+     * Clear our HashMap.
      */
     void clear();
 
@@ -48,6 +48,4 @@ public interface CartService {
      * @return true if element removed, false if no such element.
      */
     boolean removeAll(int thingId);
-
-
 }

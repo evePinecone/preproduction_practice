@@ -1,11 +1,11 @@
-package com.epam.preprod.roman_lutsenko.task4.services.inerfaces;
+package com.epam.preprod.roman_lutsenko.task4.dao;
 
 import com.epam.preprod.roman_lutsenko.task4.entities.Order;
 
 import java.time.LocalDateTime;
 import java.util.Map;
 
-public interface OrderService {
+public interface OrderDAO {
 
     /**
      * Returns copy of orderMap

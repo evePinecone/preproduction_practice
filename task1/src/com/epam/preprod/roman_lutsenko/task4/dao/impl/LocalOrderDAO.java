@@ -1,6 +1,6 @@
 package com.epam.preprod.roman_lutsenko.task4.dao.impl;
 
-import com.epam.preprod.roman_lutsenko.task4.dao.interfaces.OrderDAO;
+import com.epam.preprod.roman_lutsenko.task4.dao.OrderDAO;
 import com.epam.preprod.roman_lutsenko.task4.entities.Order;
 
 import java.time.LocalDateTime;

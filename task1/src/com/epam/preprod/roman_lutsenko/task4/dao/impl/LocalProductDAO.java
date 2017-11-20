@@ -1,23 +1,17 @@
 package com.epam.preprod.roman_lutsenko.task4.dao.impl;
 
 import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
-import com.epam.preprod.roman_lutsenko.task4.dao.interfaces.ProductDAO;
+import com.epam.preprod.roman_lutsenko.task4.dao.ProductDAO;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class LocalProductDAO implements ProductDAO {
 
-    //заменить на хеш сет
     private Map<Integer, Thing> productList;
 
-    @Deprecated
-    public LocalProductDAO() {
-        productList = new HashMap<>();
-    }
-
     public LocalProductDAO(Map<Integer, Thing> productList) {
-        this.productList = productList;
+        this.productList = new HashMap<>(productList);
     }
 
     @Override

@@ -1,12 +1,10 @@
 package com.epam.preprod.roman_lutsenko.task4.services.impl;
 
 import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
-import com.epam.preprod.roman_lutsenko.task4.dao.interfaces.ProductDAO;
-import com.epam.preprod.roman_lutsenko.task4.services.inerfaces.ProductService;
+import com.epam.preprod.roman_lutsenko.task4.dao.ProductDAO;
+import com.epam.preprod.roman_lutsenko.task4.services.ProductService;
 
-import java.awt.color.ICC_Profile;
 import java.util.Map;
-import java.util.Set;
 
 public class LocalProductService implements ProductService {
 
@@ -47,7 +45,7 @@ public class LocalProductService implements ProductService {
     @Override
     public void show() {
         Map<Integer, Thing> productList = getAllItems();
-        if(productList.isEmpty()) {
+        if (productList.isEmpty()) {
             System.out.println("Empty list");
         }
         for (Map.Entry<Integer, Thing> thingEntry : productList.entrySet()) {
@@ -55,13 +53,6 @@ public class LocalProductService implements ProductService {
         }
     }
 
-    @Override
-    public String toString() {
-        Map<Integer, Thing> productList = getAllItems();
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Map.Entry<Integer, Thing> thingEntry : productList.entrySet()) {
-            stringBuilder.append(thingEntry.getValue()).append(System.lineSeparator());
-        }
-        return stringBuilder.toString();
-    }
+
+
 }

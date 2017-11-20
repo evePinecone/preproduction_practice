@@ -3,46 +3,49 @@ package com.epam.preprod.roman_lutsenko.task4.commands;
 import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
 import com.epam.preprod.roman_lutsenko.task4.context.Context;
 import com.epam.preprod.roman_lutsenko.task4.entities.Order;
-import com.epam.preprod.roman_lutsenko.task4.util.Util;
+import com.epam.preprod.roman_lutsenko.task4.util.InputUtil;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Creates an order with all items in cart. Request for input date from keyboard.
+ */
 public class MakeAnOrderCommand implements Command {
     @Override
     public void execute(Context context) {
-        long totalPrice = byAllItemsInCartLocalCartService(context);
+        long totalPrice = buyAllItemsInCartLocalCartService(context);
 
         if (totalPrice == -1) {
             System.out.println("Cart is empty! Please put an items into the cart to make an order.");
         } else {
-            //new ShowCartCommand().execute(context);
             showCart(context);
             System.out.println("Total order price: " + totalPrice);
             context.getLocalCartService().clear();
         }
     }
 
-    private long byAllItemsInCartLocalCartService(Context context) {
-        List<Thing> listItemsOrder;
+    private long buyAllItemsInCartLocalCartService(Context context) {
+        List<Thing> listItemsOrder = new ArrayList<>();
         Thing thing;
         Map<Integer, Integer> map = context.getLocalCartService().getAllCart();
-        long totalPrice = -1;
-        if (!map.isEmpty()) {
-            totalPrice = 0;
-            for (Map.Entry entry : map.entrySet()) {
-                listItemsOrder = new ArrayList<>();
-                thing = context.getLocalProductService().get((int) entry.getKey());
-
-                int counter = (int) entry.getValue();
-                for (int index = 0; index < counter; index++) {
-                    listItemsOrder.add(thing);
-                }
-                context.getLocalOrderService().add(Util.readDateTime(), new Order(listItemsOrder));
-                totalPrice += context.getLocalProductService().get((int) entry.getKey()).getPrice() * (int) entry.getValue();
-            }
+        if (map.isEmpty()) {
+            return -1;
         }
+        long totalPrice = 0;
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            thing = context.getLocalProductService().get(entry.getKey());
+
+            int counter = entry.getValue();
+            for (int index = 0; index < counter; index++) {
+                listItemsOrder.add(thing);
+            }
+            totalPrice += context.getLocalProductService().get(entry.getKey()).getPrice() * entry.getValue();
+        }
+        LocalDateTime localDateTime = InputUtil.readDateTime();
+        context.getLocalOrderService().add(localDateTime, new Order(localDateTime, listItemsOrder));
         return totalPrice;
     }
 
