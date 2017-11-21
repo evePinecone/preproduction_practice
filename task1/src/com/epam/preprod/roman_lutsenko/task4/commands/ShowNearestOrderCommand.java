@@ -20,37 +20,6 @@ public class ShowNearestOrderCommand implements Command {
         Map<LocalDateTime, Order> map = context.getLocalOrderService().getOrderMap();
         LocalDateTime nearHigh = ((NavigableMap<LocalDateTime, Order>) map).ceilingKey(dateToSearch);
         LocalDateTime nearLow = ((NavigableMap<LocalDateTime, Order>) map).floorKey(dateToSearch);
-//        if (!map.isEmpty()) {
-//            LocalDateTime nearHigh = ((NavigableMap<LocalDateTime, Order>) map).ceilingKey(dateToSearch);
-//            LocalDateTime nearLow = ((NavigableMap<LocalDateTime, Order>) map).floorKey(dateToSearch);
-//
-//            if (nearHigh == null) {
-//                System.out.println("Nearest order > " + context.getLocalOrderService().getOrder(nearLow));
-//            } else if (nearLow == null) {
-//                System.out.println("Nearest order > " + context.getLocalOrderService().getOrder(nearHigh));
-//            } else if (nearHigh.compareTo(dateToSearch) < nearLow.compareTo(dateToSearch)) {
-//                System.out.println("Nearest order > " + context.getLocalOrderService().getOrder(nearHigh));
-//            } else {
-//                System.out.println("Nearest order > " + context.getLocalOrderService().getOrder(nearLow));
-//            }
-       // } //else {
-//        LocalDateTime nearestDateTime = LocalDateTime.now();
-//        int nearestCompareResult = 0;
-//        for (LocalDateTime tempLocalDateTime : map.keySet()) {
-//            nearestCompareResult = tempLocalDateTime.compareTo(dateToSearch);
-//            nearestDateTime = tempLocalDateTime;
-//            break;
-//        }
-//
-//        for (LocalDateTime tempLocalDateTime : map.keySet()) {
-//            int compareTo = tempLocalDateTime.compareTo(dateToSearch);
-//            if (Math.abs(compareTo) < nearestCompareResult) {
-//                nearestDateTime = tempLocalDateTime;
-//                nearestCompareResult = compareTo;
-//            }
-//        }
-         //   System.out.println("No orders!");
-      //  }
 
         if (nearHigh == null ^ nearLow == null) {
             LocalDateTime dateToPrint = nearHigh == null ? nearLow : nearHigh;
