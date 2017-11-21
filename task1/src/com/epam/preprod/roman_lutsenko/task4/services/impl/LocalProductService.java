@@ -2,6 +2,7 @@ package com.epam.preprod.roman_lutsenko.task4.services.impl;
 
 import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
 import com.epam.preprod.roman_lutsenko.task4.dao.ProductDAO;
+import com.epam.preprod.roman_lutsenko.task4.services.FileSavable;
 import com.epam.preprod.roman_lutsenko.task4.services.ProductService;
 import com.epam.preprod.roman_lutsenko.task4.constants.Paths;
 
@@ -9,7 +10,7 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LocalProductService implements ProductService {
+public class LocalProductService implements ProductService, FileSavable{
 
     private ProductDAO productDAO;
 

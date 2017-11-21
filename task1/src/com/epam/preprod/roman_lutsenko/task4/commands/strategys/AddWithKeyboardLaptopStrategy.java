@@ -9,18 +9,18 @@ public class AddWithKeyboardLaptopStrategy implements InputStrategy<Laptop> {
 
     @Override
     public Laptop input(Laptop thing) {
-        Scanner scanner = new Scanner(System.in);
+
         System.out.println("Enter Id > ");
         thing.setId(InputUtil.intValidationInput());
 
         System.out.println("Enter nameModel ");
-        thing.setNameModel(scanner.nextLine());
+        thing.setNameModel(InputUtil.stringValidationInput());
 
         System.out.println("Enter price ");
         thing.setPrice(InputUtil.longValidationInput());
 
         System.out.println("Enter processors name ");
-        thing.setNameProcessor(scanner.nextLine());
+        thing.setNameProcessor(InputUtil.stringValidationInput());
 
         System.out.println("Enter RAM ");
         thing.setRAM(InputUtil.intValidationInput());
@@ -30,6 +30,7 @@ public class AddWithKeyboardLaptopStrategy implements InputStrategy<Laptop> {
 
         System.out.println("Enter weight ");
         thing.setWeight(InputUtil.doubleValidationInput());
+
         return thing;
     }
 }

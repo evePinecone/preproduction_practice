@@ -9,19 +9,24 @@ public class AddWithKeyboardFitnessBraceletStrategy implements InputStrategy<Fit
 
     @Override
     public FitnessBracelet input(FitnessBracelet thing) {
-        Scanner scanner = new Scanner(System.in);
+
         System.out.println("Enter Id > ");
         thing.setId(InputUtil.intValidationInput());
+
         System.out.println("Enter nameModel ");
-        thing.setNameModel(scanner.nextLine());
+        thing.setNameModel(InputUtil.stringValidationInput());
+
         System.out.println("Enter price ");
         thing.setPrice(InputUtil.longValidationInput());
+
         System.out.println("Enter autonomy ");
-        thing.setAutonomy(scanner.nextLine());
+        thing.setAutonomy(InputUtil.stringValidationInput());
+
         System.out.println("Enter RAM ");
-        thing.setDisplay(scanner.nextLine());
+        thing.setDisplay(InputUtil.stringValidationInput());
+
         System.out.println("Enter form factor ");
-        thing.setStrapMaterial(scanner.nextLine());
+        thing.setStrapMaterial(InputUtil.stringValidationInput());
         return thing;
     }
 }

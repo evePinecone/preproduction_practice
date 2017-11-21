@@ -5,6 +5,7 @@ import com.epam.preprod.roman_lutsenko.task4.commands.strategys.InputStrategy;
 import com.epam.preprod.roman_lutsenko.task4.constants.containers.EntityContainer;
 import com.epam.preprod.roman_lutsenko.task4.context.Context;
 import com.epam.preprod.roman_lutsenko.task4.context.StrategyContext;
+import com.epam.preprod.roman_lutsenko.task4.util.InputUtil;
 
 import java.util.Scanner;
 
@@ -24,9 +25,7 @@ public class AddThingCommand implements Command {
 
     private Thing chooseThingToADD() {
         EntityContainer.show();
-        //дергать с ютилки врапер ввода.
-        Scanner scanner = new Scanner(System.in);
-        return new EntityContainer().getEntity(scanner.nextLine());
+        return new EntityContainer().getEntity(InputUtil.stringValidationInput());
     }
 
 }

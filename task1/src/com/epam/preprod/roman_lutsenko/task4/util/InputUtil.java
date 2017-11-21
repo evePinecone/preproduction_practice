@@ -1,7 +1,6 @@
 package com.epam.preprod.roman_lutsenko.task4.util;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class InputUtil {
@@ -20,6 +19,7 @@ public class InputUtil {
         }
         return localDateTime;
     }
+
     public static int intValidationInput() {
         int parseInt = 0;
         boolean flagUnParse = true;
@@ -35,7 +35,6 @@ public class InputUtil {
     }
 
     public static long longValidationInput() {
-        Scanner scanner = new Scanner(System.in);
         long parseInt = 0;
         boolean flagUnParse = true;
         do {
@@ -50,7 +49,6 @@ public class InputUtil {
     }
 
     public static double doubleValidationInput() {
-        Scanner scanner = new Scanner(System.in);
         double parseInt = 0;
         boolean flagUnParse = true;
         do {
@@ -62,6 +60,10 @@ public class InputUtil {
             }
         } while (flagUnParse);
         return parseInt;
+    }
+
+    public static String stringValidationInput() {
+        return scanner.nextLine();
     }
 }
 
