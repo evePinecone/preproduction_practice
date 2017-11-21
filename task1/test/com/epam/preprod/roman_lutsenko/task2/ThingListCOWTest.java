@@ -1,20 +1,17 @@
 package com.epam.preprod.roman_lutsenko.task2;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
+import com.epam.preprod.roman_lutsenko.task1.ThingList;
+import com.epam.preprod.roman_lutsenko.task1.entity.Desktop;
+import com.epam.preprod.roman_lutsenko.task1.entity.FitnessBracelet;
+import com.epam.preprod.roman_lutsenko.task1.entity.Laptop;
+import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.Iterator;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
-
-import com.epam.preprod.roman_lutsenko.task1.ThingList;
-import com.epam.preprod.roman_lutsenko.task1.entity.Desktop;
-import com.epam.preprod.roman_lutsenko.task1.entity.FitnessBraslet;
-import com.epam.preprod.roman_lutsenko.task1.entity.Laptop;
-import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
+import static org.junit.Assert.*;
 
 public class ThingListCOWTest {
 
@@ -62,16 +59,16 @@ public class ThingListCOWTest {
 	@Test
 	public void testAddElements() {
 		list.add(new Laptop());
-		list.add(new FitnessBraslet());
+		list.add(new FitnessBracelet());
 
 		assertEquals(new Laptop(), list.get(0));
-		assertEquals(new FitnessBraslet(), list.get(1));
+		assertEquals(new FitnessBracelet(), list.get(1));
 
 		list.add(1, new Desktop());
 
 		assertEquals(new Laptop(), list.get(0));
 		assertEquals(new Desktop(), list.get(1));
-		assertEquals(new FitnessBraslet(), list.get(2));
+		assertEquals(new FitnessBracelet(), list.get(2));
 
 		assertTrue(list.size() == 3);
 	}
@@ -91,7 +88,7 @@ public class ThingListCOWTest {
 		list.remove(laptop);
 		assertTrue(list.isEmpty());
 	}
-	
+
 	@Test
 	public void copyOfListByOneElementToNewListWithRemovingFrom_NotEqualsLists() {
 		list.add(new Laptop());
@@ -103,8 +100,8 @@ public class ThingListCOWTest {
 			listTest.add(iterator.next());
 		}
 		assertNotEquals(listTest, list);
-	} 
-	
+	}
+
 	@Test
 	public void copyOfListByOneElementToNewListWithAdding_NotEqualsLists() {
 		Iterator<Thing> iterator = list.iterator();
@@ -118,8 +115,8 @@ public class ThingListCOWTest {
 
 	@Test
     public void containsAllAddedCollectionAllInList_TrueResultOfOperation() {
-	    list.add(new FitnessBraslet());
-	    list.add(new FitnessBraslet());
+	    list.add(new FitnessBracelet());
+	    list.add(new FitnessBracelet());
 	    list.add(new Desktop());
         List<Thing> addedList = new ThingListCOW<>();
         addedList.add(new Laptop());
@@ -127,7 +124,7 @@ public class ThingListCOWTest {
         list.addAll(addedList);
         assertTrue(list.containsAll(addedList));
     }
-	
+
 	@Test
 	public void setElementOnZeroPosition_OnFirstPositionLaptop() {
 		list.add(new Desktop());

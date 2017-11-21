@@ -6,9 +6,9 @@ public class Desktop extends Computer {
 
 	public Desktop() {	}
 
-	public Desktop(String nameModel, String firm, long price, String nameProcessor, int rAM,
-			String formFactor, String typeWorkspace) {
-		super(nameModel, firm, price, nameProcessor, rAM);
+	public Desktop(String nameModel, int id, long price, String nameProcessor, int ram,
+                   String formFactor, String typeWorkspace) {
+		super(nameModel, id, price, nameProcessor, ram);
 		this.formFactor = formFactor;
 		this.typeWorkspace = typeWorkspace;
 	}

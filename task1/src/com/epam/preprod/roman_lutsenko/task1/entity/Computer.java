@@ -7,10 +7,10 @@ public class Computer extends Thing {
 	public Computer() {
 	}
 
-	public Computer(String nameModel, String firm, long price, String nameProcessor, int rAM) {
-		super(nameModel, firm, price);
+	public Computer(String nameModel, int id, long price, String nameProcessor, int ram) {
+		super(nameModel, id, price);
 		this.nameProcessor = nameProcessor;
-		ram = rAM;
+		this.ram = ram;
 	}
 
 	public String getNameProcessor() {

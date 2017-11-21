@@ -6,19 +6,19 @@ package com.epam.preprod.roman_lutsenko.task1.entity;
  * @author Roman_Lutsenko
  *
  */
-public abstract class Thing {
+public abstract class Thing{
 	private String nameModel;
 	/**
 	 * Company manufacturer.
 	 */
-	private String firm;
+	private int id;
 	private long price;
 
 	public Thing() { }
 
-	public Thing(String nameModel, String firm, long price) {
+	public Thing(String nameModel, int id, long price) {
 		this.nameModel = nameModel;
-		this.firm = firm;
+		this.id = id;
 		this.price = price;
 	}
 
@@ -30,12 +30,12 @@ public abstract class Thing {
 		this.nameModel = nameModel;
 	}
 
-	public String getFirm() {
-		return firm;
+	public int getId() {
+		return id;
 	}
 
-	public void setFirm(String firm) {
-		this.firm = firm;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public long getPrice() {
@@ -46,56 +46,30 @@ public abstract class Thing {
 		this.price = price;
 	}
 
-	
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((firm == null) ? 0 : firm.hashCode());
-		result = prime * result + ((nameModel == null) ? 0 : nameModel.hashCode());
-		result = prime * result + (int) (price ^ (price >>> 32));
-		return result;
-	}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (!(obj.getClass().equals(this.getClass()))) {
-			return false;
-		}
-		Thing other = (Thing) obj;
-		if (firm == null) {
-			if (other.firm != null) {
-				return false;
-			}
-		} else if (!firm.equals(other.firm)) {
-			return false;
-		}
-		if (nameModel == null) {
-			if (other.nameModel != null) {
-				return false;
-			}
-		} else if (!nameModel.equals(other.nameModel)) {
-			return false;
-		}
-		return price == other.price;
-	}
+        Thing thing = (Thing) o;
 
-	@Override
+        if (id != thing.id) return false;
+        if (price != thing.price) return false;
+        return nameModel != null ? nameModel.equals(thing.nameModel) : thing.nameModel == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = nameModel != null ? nameModel.hashCode() : 0;
+        result = 31 * result + id;
+        result = 31 * result + (int) (price ^ (price >>> 32));
+        return result;
+    }
+
+    @Override
 	public String toString() {
-		return "[nameModel=" + nameModel + ", firm=" + firm + ", price=" + price + "]";
+		return "[id=" + id + ", nameModel=" + nameModel +  ", price=" + price + "]";
 	}
  
 	

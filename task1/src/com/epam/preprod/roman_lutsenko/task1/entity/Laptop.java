@@ -7,9 +7,9 @@ public class Laptop extends Computer {
 	public Laptop() {
 	}
 
-	public Laptop(String nameModel, String firm, long price, String nameProcessor, int rAM, double displayResolution,
-			double weight) {
-		super(nameModel, firm, price, nameProcessor, rAM);
+	public Laptop(String nameModel, int id, long price, String nameProcessor, int ram, double displayResolution,
+                  double weight) {
+		super(nameModel, id, price, nameProcessor, ram);
 		this.displayResolution = displayResolution;
 		this.weight = weight;
 	}
