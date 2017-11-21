@@ -1,4 +1,6 @@
-package com.epam.preprod.roman_lutsenko.task4.commands;
+package com.epam.preprod.roman_lutsenko.task4.constants.containers;
+
+import com.epam.preprod.roman_lutsenko.task4.commands.*;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -20,8 +22,8 @@ public class CommandsContainer {
         commandsList.put("6", new ShowOrdersBetweenDateTimeCommand());
         commandsList.put("7", new ShowNearestOrderCommand());
         commandsList.put("noSuchCommand", new NoSuchCommand());
-        commandsList.put("8", new AddThingCommand());
         commandsList.put("exit", new ExitCommand());
+        commandsList.put("8", new AddThingCommand());
     }
 
     public Command getCommand(String key) {

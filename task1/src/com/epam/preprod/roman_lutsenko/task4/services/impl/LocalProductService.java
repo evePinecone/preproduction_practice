@@ -4,8 +4,6 @@ import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
 import com.epam.preprod.roman_lutsenko.task4.dao.ProductDAO;
 import com.epam.preprod.roman_lutsenko.task4.services.ProductService;
 import com.epam.preprod.roman_lutsenko.task4.constants.Paths;
-import com.epam.preprod.roman_lutsenko.task4.dao.interfaces.ProductDAO;
-import com.epam.preprod.roman_lutsenko.task4.services.inerfaces.ProductService;
 
 import java.io.*;
 import java.util.HashMap;

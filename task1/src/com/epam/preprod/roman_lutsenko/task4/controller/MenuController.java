@@ -4,11 +4,9 @@ import com.epam.preprod.roman_lutsenko.task1.entity.Desktop;
 import com.epam.preprod.roman_lutsenko.task1.entity.FitnessBracelet;
 import com.epam.preprod.roman_lutsenko.task1.entity.Laptop;
 import com.epam.preprod.roman_lutsenko.task4.commands.Command;
-import com.epam.preprod.roman_lutsenko.task4.commands.CommandsContainer;
-import com.epam.preprod.roman_lutsenko.task4.constants.CommandsContainer;
-import com.epam.preprod.roman_lutsenko.task4.constants.StrategyContainer;
+import com.epam.preprod.roman_lutsenko.task4.constants.containers.CommandsContainer;
+import com.epam.preprod.roman_lutsenko.task4.constants.containers.StrategyContainer;
 import com.epam.preprod.roman_lutsenko.task4.context.Context;
-import com.epam.preprod.roman_lutsenko.task4.context.StrategyContext;
 import com.epam.preprod.roman_lutsenko.task4.context.StrategyContext;
 
 import java.util.Scanner;
@@ -49,21 +47,22 @@ public class MenuController {
     private void showAndInstanceContext(StrategyContext strategyContext) {
         Scanner scanner = new Scanner(System.in);
         String choice;
+        StrategyContainer strategyContainer = new StrategyContainer();
 
         System.out.println("Desktop insert with ");
         showStrategyInput();
         choice = scanner.nextLine();
-        strategyContext.put(Desktop.class ,(new StrategyContainer()).getStrategy("Desktop" + choice));
+        strategyContext.put(Desktop.class, strategyContainer.getStrategy("Desktop" + choice));
 
         System.out.println("Laptop insert with ");
         showStrategyInput();
         choice = scanner.nextLine();
-        strategyContext.put(Laptop.class,(new StrategyContainer()).getStrategy("Laptop" + choice));
+        strategyContext.put(Laptop.class, strategyContainer.getStrategy("Laptop" + choice));
 
         System.out.println("FitnessBracelet insert with ");
         showStrategyInput();
         choice = scanner.nextLine();
-        strategyContext.put(FitnessBracelet.class,(new StrategyContainer()).getStrategy("FitnessBracelet" + choice));
+        strategyContext.put(FitnessBracelet.class, strategyContainer.getStrategy("FitnessBracelet" + choice));
 
     }
 

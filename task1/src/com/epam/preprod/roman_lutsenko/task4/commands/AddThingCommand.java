@@ -2,7 +2,7 @@ package com.epam.preprod.roman_lutsenko.task4.commands;
 
 import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
 import com.epam.preprod.roman_lutsenko.task4.commands.strategys.InputStrategy;
-import com.epam.preprod.roman_lutsenko.task4.constants.EntityContainer;
+import com.epam.preprod.roman_lutsenko.task4.constants.containers.EntityContainer;
 import com.epam.preprod.roman_lutsenko.task4.context.Context;
 import com.epam.preprod.roman_lutsenko.task4.context.StrategyContext;
 
@@ -22,7 +22,7 @@ public class AddThingCommand implements Command {
         //сделать сущности Computer и PortableGadget абстрактными, в базовом классе сделать абстрактный метод build.
     }
 
-    public Thing chooseThingToADD() {
+    private Thing chooseThingToADD() {
         EntityContainer.show();
         //дергать с ютилки врапер ввода.
         Scanner scanner = new Scanner(System.in);

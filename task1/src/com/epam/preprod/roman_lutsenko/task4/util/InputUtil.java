@@ -20,5 +20,48 @@ public class InputUtil {
         }
         return localDateTime;
     }
+    public static int intValidationInput() {
+        int parseInt = 0;
+        boolean flagUnParse = true;
+        do {
+            try {
+                parseInt = Integer.parseInt(scanner.nextLine());
+                flagUnParse = false;
+            } catch (NumberFormatException ex) {
+                System.out.println("Non correct symbol, write int format symbol");
+            }
+        } while (flagUnParse);
+        return parseInt;
+    }
+
+    public static long longValidationInput() {
+        Scanner scanner = new Scanner(System.in);
+        long parseInt = 0;
+        boolean flagUnParse = true;
+        do {
+            try {
+                parseInt = Long.parseLong(scanner.nextLine());
+                flagUnParse = false;
+            } catch (NumberFormatException ex) {
+                System.out.println("Non correct symbol, write long format symbol");
+            }
+        } while (flagUnParse);
+        return parseInt;
+    }
+
+    public static double doubleValidationInput() {
+        Scanner scanner = new Scanner(System.in);
+        double parseInt = 0;
+        boolean flagUnParse = true;
+        do {
+            try {
+                parseInt = Double.parseDouble(scanner.nextLine());
+                flagUnParse = false;
+            } catch (NumberFormatException ex) {
+                System.out.println("Non correct symbol, write double format symbol");
+            }
+        } while (flagUnParse);
+        return parseInt;
+    }
 }
 
