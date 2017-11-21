@@ -30,7 +30,6 @@ public class LocalProductService implements ProductService {
         return productDAO.get(thingId);
     }
 
-
     @Override
     public Thing remove(int thingId) {
         return productDAO.remove(thingId);

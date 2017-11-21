@@ -19,16 +19,15 @@ public class AddProductToCartCommand implements Command {
             String inputId = scanner.nextLine().trim();
             if (inputId.equals("back")) {
                 break;
-            } else {
-                try {
-                    int thingId = Integer.parseInt(inputId);
-                    flagCorrectInput = false;
-                    if (context.getLocalProductService().get(thingId) != null) {
-                        context.getLocalCartService().add(thingId);
-                    }
-                } catch (NumberFormatException e) {
-                    System.out.println("Incorrect number format. Please type an Id number.");
+            }
+            try {
+                int thingId = Integer.parseInt(inputId);
+                flagCorrectInput = false;
+                if (context.getLocalProductService().get(thingId) != null) {
+                    context.getLocalCartService().add(thingId);
                 }
+            } catch (NumberFormatException e) {
+                System.out.println("Incorrect number format. Please type an Id number.");
             }
         }
         while (flagCorrectInput);

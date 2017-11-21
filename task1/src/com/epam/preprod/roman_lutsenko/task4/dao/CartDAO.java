@@ -6,8 +6,6 @@ public interface CartDAO {
 
     Map<Integer, Integer> getCacheOfLastFiveAddings();
 
-    void addToCash(int thingId);
-
 
     /**
      * @return return copy HashMap with all items inside.

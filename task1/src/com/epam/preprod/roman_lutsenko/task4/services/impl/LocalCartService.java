@@ -21,7 +21,6 @@ public class LocalCartService implements CartService {
     @Override
     public void add(int thingId) {
         cartDAO.add(thingId);
-        cartDAO.addToCash(thingId);
     }
 
     @Override

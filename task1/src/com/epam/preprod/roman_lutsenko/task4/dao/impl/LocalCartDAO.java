@@ -28,11 +28,6 @@ public class LocalCartDAO implements CartDAO {
     }
 
     @Override
-    public void addToCash(int thingId) {
-        addingItemsIntoCart.put(addingItemsIntoCart.size() + 1, thingId);
-    }
-
-    @Override
     public Map<Integer, Integer> getAllCart() {
         return new HashMap<>(cartMap);
     }
@@ -43,6 +38,7 @@ public class LocalCartDAO implements CartDAO {
         if (amount != null) {
             cartMap.put(thingId, amount + 1);
         }
+        addingItemsIntoCart.put(addingItemsIntoCart.size() + 1, thingId);
     }
 
     @Override

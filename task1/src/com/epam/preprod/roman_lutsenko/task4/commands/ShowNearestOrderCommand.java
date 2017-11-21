@@ -24,10 +24,10 @@ public class ShowNearestOrderCommand implements Command {
         if (nearHigh == null ^ nearLow == null) {
             LocalDateTime dateToPrint = nearHigh == null ? nearLow : nearHigh;
             System.out.println(context.getLocalOrderService().getOrder(dateToPrint));
-        } else if (nearHigh == null && nearLow == null) {
+        } else if (nearHigh == null) {
             System.out.println("No orders!");
         } else {
-            LocalDateTime dateToPrint = nearHigh.compareTo(dateToSearch) < nearHigh.compareTo(dateToSearch) ? nearLow : nearLow;
+            LocalDateTime dateToPrint = nearLow.compareTo(dateToSearch) < nearHigh.compareTo(dateToSearch) ? nearLow : nearHigh;
             System.out.println(context.getLocalOrderService().getOrder(dateToPrint));
         }
     }
