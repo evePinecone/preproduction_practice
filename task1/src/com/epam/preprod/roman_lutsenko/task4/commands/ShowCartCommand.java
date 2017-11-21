@@ -15,8 +15,8 @@ public class ShowCartCommand implements Command {
         if (map.isEmpty()) {
             System.out.println("Cart is empty");
         } else {
-            for (Map.Entry entry : map.entrySet()) {
-                System.out.println(context.getLocalProductService().get((int) entry.getKey()) + CommandConstants.SEPARATOR_FOR_THING_PIECES
+            for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+                System.out.println(context.getLocalProductService().get(entry.getKey()) + CommandConstants.SEPARATOR_FOR_THING_PIECES
                         + entry.getValue());
             }
         }

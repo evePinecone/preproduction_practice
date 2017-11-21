@@ -40,9 +40,4 @@ public class LocalOrderDAO implements OrderDAO {
         return orderMap.remove(localDateTime, order);
     }
 
-    @Override
-    public void clear() {
-        orderMap.clear();
-    }
-
 }

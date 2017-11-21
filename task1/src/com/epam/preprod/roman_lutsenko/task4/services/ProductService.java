@@ -2,9 +2,7 @@ package com.epam.preprod.roman_lutsenko.task4.services;
 
 import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
 
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public interface ProductService {
     /**

@@ -1,6 +1,7 @@
 package com.epam.preprod.roman_lutsenko.task4.commands;
 
 import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
+import com.epam.preprod.roman_lutsenko.task4.constants.CommandConstants;
 import com.epam.preprod.roman_lutsenko.task4.context.Context;
 import com.epam.preprod.roman_lutsenko.task4.entities.Order;
 import com.epam.preprod.roman_lutsenko.task4.util.InputUtil;
@@ -29,14 +30,13 @@ public class MakeAnOrderCommand implements Command {
 
     private long buyAllItemsInCartLocalCartService(Context context) {
         List<Thing> listItemsOrder = new ArrayList<>();
-        Thing thing;
         Map<Integer, Integer> map = context.getLocalCartService().getAllCart();
         if (map.isEmpty()) {
             return -1;
         }
         long totalPrice = 0;
         for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-            thing = context.getLocalProductService().get(entry.getKey());
+            Thing thing = context.getLocalProductService().get(entry.getKey());
 
             int counter = entry.getValue();
             for (int index = 0; index < counter; index++) {
@@ -54,8 +54,8 @@ public class MakeAnOrderCommand implements Command {
         if (map.isEmpty()) {
             System.out.println("Cart is empty");
         } else {
-            for (Map.Entry entry : map.entrySet()) {
-                System.out.println(context.getLocalProductService().get((int) entry.getKey()) + " | pcs:"
+            for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+                System.out.println(context.getLocalProductService().get(entry.getKey()) + CommandConstants.SEPARATOR_FOR_THING_PIECES
                         + entry.getValue());
             }
         }

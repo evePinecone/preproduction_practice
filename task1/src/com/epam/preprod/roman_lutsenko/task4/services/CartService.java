@@ -6,8 +6,6 @@ public interface CartService {
 
     Map<Integer, Integer> getCacheOfLastFiveAddings();
 
-    void addToCash(int thingId);
-
     /**
      * Returns the copy of Cart map.
      *

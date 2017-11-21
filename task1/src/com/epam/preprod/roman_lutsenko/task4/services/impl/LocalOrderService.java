@@ -40,8 +40,4 @@ public class LocalOrderService implements OrderService {
         return orderDAO.remove(localDateTime, order);
     }
 
-    @Override
-    public void clear() {
-        orderDAO.clear();
-    }
 }

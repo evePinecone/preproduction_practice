@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class InputUtil {
 
     private static Scanner scanner = new Scanner(System.in);
-    
+
     public static LocalDateTime readDateTime() {
         LocalDateTime localDateTime = LocalDateTime.now();
 

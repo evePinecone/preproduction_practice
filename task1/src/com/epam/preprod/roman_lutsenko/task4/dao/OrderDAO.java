@@ -9,19 +9,22 @@ public interface OrderDAO {
 
     /**
      * Returns copy of orderMap
+     *
      * @return copy of orderMap
      */
     Map<LocalDateTime, Order> getOrderMap();
 
     /**
      * Adding new order to the orderMap.
+     *
      * @param localDateTime key
-     * @param order value
+     * @param order         value
      */
     void add(LocalDateTime localDateTime, Order order);
 
     /**
      * Returns order by key localDateTime.
+     *
      * @param localDateTime key for search
      * @return order item.
      */
@@ -29,6 +32,7 @@ public interface OrderDAO {
 
     /**
      * Removes order frop map by key localDateTime.
+     *
      * @param localDateTime ket for removing
      * @return order that removed
      */
@@ -36,14 +40,11 @@ public interface OrderDAO {
 
     /**
      * Removes order from map by key and value.
+     *
      * @param localDateTime key
-     * @param order value
+     * @param order         value
      * @return <b>true</b> if delete element.
      */
     boolean remove(LocalDateTime localDateTime, Order order);
 
-    /**
-     * Clear orderMap.
-     */
-    void clear();
 }

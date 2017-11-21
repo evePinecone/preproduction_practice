@@ -1,8 +1,7 @@
 package com.epam.preprod.roman_lutsenko.task4.controller;
 
 import com.epam.preprod.roman_lutsenko.task4.commands.Command;
-import com.epam.preprod.roman_lutsenko.task4.constants.CommandConstants;
-import com.epam.preprod.roman_lutsenko.task4.constants.CommandsContainer;
+import com.epam.preprod.roman_lutsenko.task4.commands.CommandsContainer;
 import com.epam.preprod.roman_lutsenko.task4.context.Context;
 
 import java.util.Scanner;
@@ -15,7 +14,7 @@ public class MenuController {
         try (Scanner scanner = new Scanner(System.in)) {
             while (true) {
                 showMenu();
-                String choice = scanner.nextLine();
+                String choice = scanner.nextLine().trim();
                 command = commandsContainer.getCommand(choice);
                 command.execute(context);
             }

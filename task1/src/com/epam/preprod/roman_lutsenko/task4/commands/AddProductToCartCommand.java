@@ -16,7 +16,7 @@ public class AddProductToCartCommand implements Command {
         Scanner scanner = new Scanner(System.in);
         boolean flagCorrectInput = true;
         do {
-            String inputId = scanner.nextLine();
+            String inputId = scanner.nextLine().trim();
             if (inputId.equals("back")) {
                 break;
             } else {
@@ -25,9 +25,8 @@ public class AddProductToCartCommand implements Command {
                     flagCorrectInput = false;
                     if (context.getLocalProductService().get(thingId) != null) {
                         context.getLocalCartService().add(thingId);
-                        context.getLocalCartService().addToCash(thingId);
                     }
-                } catch (NumberFormatException | NullPointerException e) {
+                } catch (NumberFormatException e) {
                     System.out.println("Incorrect number format. Please type an Id number.");
                 }
             }

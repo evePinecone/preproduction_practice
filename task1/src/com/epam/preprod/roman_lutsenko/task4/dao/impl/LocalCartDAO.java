@@ -57,24 +57,17 @@ public class LocalCartDAO implements CartDAO {
 
     @Override
     public boolean remove(int thingId) {
-        if (cartMap.containsKey(thingId)) {
-            if (cartMap.get(thingId) > 1) {
-                cartMap.put(thingId, cartMap.get(thingId) - 1);
-            } else {
-                cartMap.remove(thingId);
-            }
+        Integer amount = cartMap.get(thingId);
+        if (amount != null && amount > 1) {
+            cartMap.put(thingId, amount - 1);
             return true;
         }
-        return false;
+        return removeAll(thingId);
     }
 
     @Override
     public boolean removeAll(int thingId) {
-        if (cartMap.containsKey(thingId)) {
-            cartMap.remove(thingId);
-            return true;
-        }
-        return false;
+        return cartMap.remove(thingId) != null;
     }
 
 }
