@@ -5,6 +5,9 @@ import com.epam.preprod.roman_lutsenko.task4.context.Context;
 
 import java.util.Map;
 
+/**
+ * Show all items from catalog.
+ */
 public class ShowAllProductsCommand implements Command {
     @Override
     public void execute(Context context) {
@@ -12,8 +15,9 @@ public class ShowAllProductsCommand implements Command {
         if (listShow.isEmpty()) {
             System.out.println("Empty list");
         } else {
-            System.out.println(context.getLocalProductService());
-            // context.getLocalProductService().show();
+            for (Map.Entry<Integer, Thing> thingEntry : listShow.entrySet()) {
+                System.out.println(thingEntry.getValue());
+            }
         }
     }
 }

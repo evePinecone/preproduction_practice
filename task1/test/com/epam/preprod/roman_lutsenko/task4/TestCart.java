@@ -4,11 +4,9 @@ import com.epam.preprod.roman_lutsenko.task1.entity.Laptop;
 import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
 import com.epam.preprod.roman_lutsenko.task4.context.Context;
 import com.epam.preprod.roman_lutsenko.task4.controller.MenuController;
-import com.epam.preprod.roman_lutsenko.task4.dao.impl.LocalAllCartAddingDAO;
 import com.epam.preprod.roman_lutsenko.task4.dao.impl.LocalCartDAO;
 import com.epam.preprod.roman_lutsenko.task4.dao.impl.LocalOrderDAO;
 import com.epam.preprod.roman_lutsenko.task4.dao.impl.LocalProductDAO;
-import com.epam.preprod.roman_lutsenko.task4.services.impl.LocalAllCartAddingService;
 import com.epam.preprod.roman_lutsenko.task4.services.impl.LocalCartService;
 import com.epam.preprod.roman_lutsenko.task4.services.impl.LocalOrderService;
 import com.epam.preprod.roman_lutsenko.task4.services.impl.LocalProductService;
@@ -23,19 +21,16 @@ public class TestCart {
         LocalProductDAO localProductDAO = new LocalProductDAO(fill());
         LocalCartDAO localCartDAO = new LocalCartDAO();
         LocalOrderDAO localOrderDAO = new LocalOrderDAO();
-        LocalAllCartAddingDAO localAllCartAddingDAO = new LocalAllCartAddingDAO();
 
         LocalProductService localProductService = new LocalProductService(localProductDAO);
         LocalCartService localCartService = new LocalCartService(localCartDAO);
         LocalOrderService localOrderService = new LocalOrderService(localOrderDAO);
-        LocalAllCartAddingService localAllCartAddingService = new LocalAllCartAddingService(localAllCartAddingDAO);
 
-        Context context = new Context(localProductService, localCartService, localAllCartAddingService, localOrderService);
-
+        Context context = new Context(localProductService, localCartService, localOrderService);
         new MenuController().menu(context);
     }
 
-    public static Map<Integer, Thing> fill() {
+    private static Map<Integer, Thing> fill() {
         Laptop laptop;
         Map<Integer, Thing> productList = new HashMap<>();
         for (int index = 1; index < 6; index++) {

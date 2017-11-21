@@ -4,9 +4,11 @@ import com.epam.preprod.roman_lutsenko.task1.entity.Desktop;
 import com.epam.preprod.roman_lutsenko.task1.entity.FitnessBracelet;
 import com.epam.preprod.roman_lutsenko.task1.entity.Laptop;
 import com.epam.preprod.roman_lutsenko.task4.commands.Command;
+import com.epam.preprod.roman_lutsenko.task4.commands.CommandsContainer;
 import com.epam.preprod.roman_lutsenko.task4.constants.CommandsContainer;
 import com.epam.preprod.roman_lutsenko.task4.constants.StrategyContainer;
 import com.epam.preprod.roman_lutsenko.task4.context.Context;
+import com.epam.preprod.roman_lutsenko.task4.context.StrategyContext;
 import com.epam.preprod.roman_lutsenko.task4.context.StrategyContext;
 
 import java.util.Scanner;
@@ -16,7 +18,7 @@ public class MenuController {
     public void menu(Context context) {
         Command command;
         StrategyContext strategyContext = new StrategyContext();
-        String choice;
+        CommandsContainer commandsContainer = new CommandsContainer();
         Scanner scanner = new Scanner(System.in);
 
         showAndInstanceContext(strategyContext);
@@ -25,8 +27,8 @@ public class MenuController {
 
         while (true) {
             showMenu();
-            choice = scanner.nextLine();
-            command = (new CommandsContainer()).getCommand(choice);
+            String choice = scanner.nextLine().trim();
+            command = commandsContainer.getCommand(choice);
             command.execute(context);
         }
 

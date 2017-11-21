@@ -15,29 +15,25 @@ import com.epam.preprod.roman_lutsenko.task4.services.inerfaces.AllCartAddingSer
 import com.epam.preprod.roman_lutsenko.task4.services.inerfaces.CartService;
 import com.epam.preprod.roman_lutsenko.task4.services.inerfaces.OrderService;
 import com.epam.preprod.roman_lutsenko.task4.services.inerfaces.ProductService;
+import com.epam.preprod.roman_lutsenko.task4.services.CartService;
+import com.epam.preprod.roman_lutsenko.task4.services.OrderService;
+import com.epam.preprod.roman_lutsenko.task4.services.ProductService;
 
+/**
+ * Wrapper to unite services.
+ */
 public class Context {
 
     private ProductService localProductService;
     private CartService localCartService;
-    private AllCartAddingService localAllCartAddingService;
     private OrderService localOrderService;
     private StrategyContext strategyContext;
     //context with strategy
     // контекст на мапе оформить
 
-    @Deprecated
-    public Context() {
-        localProductService = new LocalProductService(new LocalProductDAO());
-        localCartService = new LocalCartService(new LocalCartDAO());
-        localAllCartAddingService = new LocalAllCartAddingService(new LocalAllCartAddingDAO());
-        localOrderService = new LocalOrderService(new LocalOrderDAO());
-    }
-
-    public Context(ProductService localProductService, CartService localCartService, AllCartAddingService localAllCartAddingService, OrderService localOrderService) {
+    public Context(ProductService localProductService, CartService localCartService, OrderService localOrderService) {
         this.localProductService = localProductService;
         this.localCartService = localCartService;
-        this.localAllCartAddingService = localAllCartAddingService;
         this.localOrderService = localOrderService;
         getLocalProductService().unSerializeProduct();
     }
@@ -46,32 +42,12 @@ public class Context {
         return localProductService;
     }
 
-    public void setLocalProductService(ProductService localProductService) {
-        this.localProductService = localProductService;
-    }
-
     public CartService getLocalCartService() {
         return localCartService;
     }
 
-    public void setLocalCartService(CartService localCartService) {
-        this.localCartService = localCartService;
-    }
-
-    public AllCartAddingService getLocalAllCartAddingService() {
-        return localAllCartAddingService;
-    }
-
-    public void setLocalAllCartAddingService(AllCartAddingService localAllCartAddingService) {
-        this.localAllCartAddingService = localAllCartAddingService;
-    }
-
     public OrderService getLocalOrderService() {
         return localOrderService;
-    }
-
-    public void setLocalOrderService(OrderService localOrderService) {
-        this.localOrderService = localOrderService;
     }
 
     public StrategyContext getStrategyContext() {

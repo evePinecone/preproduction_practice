@@ -1,11 +1,10 @@
-package com.epam.preprod.roman_lutsenko.task4.dao.interfaces;
+package com.epam.preprod.roman_lutsenko.task4.services;
 
 import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
 
 import java.util.Map;
 
-public interface ProductDAO {
-
+public interface ProductService {
     /**
      * Return copy of productList.
      *
@@ -48,9 +47,14 @@ public interface ProductDAO {
     Thing remove(Thing object);
 
     /**
-     * Check if map of products is empty.
-     *
-     * @return <tt>true</tt> if this map contains no key-value mappings
+     * Format output list to console.
      */
-    boolean isEmpty();
+    void show();
+
+    /**
+     * Serialize product into file with name Paths.SERIALIZE_PRODUCT_FILE_NAME
+     */
+    void serializeProduct();
+
+    void unSerializeProduct();
 }

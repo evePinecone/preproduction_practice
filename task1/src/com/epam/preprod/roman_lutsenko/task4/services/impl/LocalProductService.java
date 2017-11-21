@@ -1,6 +1,8 @@
 package com.epam.preprod.roman_lutsenko.task4.services.impl;
 
 import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
+import com.epam.preprod.roman_lutsenko.task4.dao.ProductDAO;
+import com.epam.preprod.roman_lutsenko.task4.services.ProductService;
 import com.epam.preprod.roman_lutsenko.task4.constants.Paths;
 import com.epam.preprod.roman_lutsenko.task4.dao.interfaces.ProductDAO;
 import com.epam.preprod.roman_lutsenko.task4.services.inerfaces.ProductService;
@@ -38,7 +40,6 @@ public class LocalProductService implements ProductService {
         return productDAO.get(thingId);
     }
 
-
     @Override
     public Thing remove(int thingId) {
         return productDAO.remove(thingId);
@@ -59,16 +60,6 @@ public class LocalProductService implements ProductService {
         for (Map.Entry<Integer, Thing> thingEntry : productList.entrySet()) {
             System.out.println(thingEntry.getValue());
         }
-    }
-
-    @Override
-    public String toString() {
-        Map<Integer, Thing> productList = getAllItems();
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Map.Entry<Integer, Thing> thingEntry : productList.entrySet()) {
-            stringBuilder.append(thingEntry.getValue()).append(System.lineSeparator());
-        }
-        return stringBuilder.toString();
     }
 
     @Override
@@ -98,4 +89,5 @@ public class LocalProductService implements ProductService {
             put((Thing) value);
         }
     }
+
 }

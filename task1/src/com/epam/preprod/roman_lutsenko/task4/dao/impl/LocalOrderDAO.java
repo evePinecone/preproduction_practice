@@ -1,6 +1,6 @@
 package com.epam.preprod.roman_lutsenko.task4.dao.impl;
 
-import com.epam.preprod.roman_lutsenko.task4.dao.interfaces.OrderDAO;
+import com.epam.preprod.roman_lutsenko.task4.dao.OrderDAO;
 import com.epam.preprod.roman_lutsenko.task4.entities.Order;
 
 import java.time.LocalDateTime;
@@ -38,11 +38,6 @@ public class LocalOrderDAO implements OrderDAO {
     @Override
     public boolean remove(LocalDateTime localDateTime, Order order) {
         return orderMap.remove(localDateTime, order);
-    }
-
-    @Override
-    public void clear() {
-        orderMap.clear();
     }
 
 }

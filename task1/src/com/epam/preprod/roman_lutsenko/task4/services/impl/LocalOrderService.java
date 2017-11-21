@@ -1,12 +1,13 @@
 package com.epam.preprod.roman_lutsenko.task4.services.impl;
 
-import com.epam.preprod.roman_lutsenko.task4.dao.interfaces.OrderDAO;
+import com.epam.preprod.roman_lutsenko.task4.dao.OrderDAO;
 import com.epam.preprod.roman_lutsenko.task4.entities.Order;
+import com.epam.preprod.roman_lutsenko.task4.services.OrderService;
 
 import java.time.LocalDateTime;
 import java.util.Map;
 
-public class LocalOrderService implements com.epam.preprod.roman_lutsenko.task4.services.inerfaces.OrderService {
+public class LocalOrderService implements OrderService {
 
     private OrderDAO orderDAO;
 
@@ -39,8 +40,4 @@ public class LocalOrderService implements com.epam.preprod.roman_lutsenko.task4.
         return orderDAO.remove(localDateTime, order);
     }
 
-    @Override
-    public void clear() {
-        orderDAO.clear();
-    }
 }
