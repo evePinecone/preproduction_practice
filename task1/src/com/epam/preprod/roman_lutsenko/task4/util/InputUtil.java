@@ -21,45 +21,27 @@ public class InputUtil {
     }
 
     public static int intValidationInput() {
-        int parseInt = 0;
-        boolean flagUnParse = true;
+        Integer parseInt = null;
         do {
-            try {
-                parseInt = Integer.parseInt(scanner.nextLine());
-                flagUnParse = false;
-            } catch (NumberFormatException ex) {
-                System.out.println("Non correct symbol, write int format symbol");
-            }
-        } while (flagUnParse);
+                parseInt = ValidationUtil.parseInt(scanner.nextLine());
+        } while (parseInt == null);
         return parseInt;
     }
 
     public static long longValidationInput() {
-        long parseInt = 0;
-        boolean flagUnParse = true;
+        Long parseLong = null;
         do {
-            try {
-                parseInt = Long.parseLong(scanner.nextLine());
-                flagUnParse = false;
-            } catch (NumberFormatException ex) {
-                System.out.println("Non correct symbol, write long format symbol");
-            }
-        } while (flagUnParse);
-        return parseInt;
+            parseLong = ValidationUtil.parseLong(scanner.next());
+        } while (parseLong == null);
+        return parseLong;
     }
 
     public static double doubleValidationInput() {
-        double parseInt = 0;
-        boolean flagUnParse = true;
+        Double parseDouble = null;
         do {
-            try {
-                parseInt = Double.parseDouble(scanner.nextLine());
-                flagUnParse = false;
-            } catch (NumberFormatException ex) {
-                System.out.println("Non correct symbol, write double format symbol");
-            }
-        } while (flagUnParse);
-        return parseInt;
+            parseDouble = ValidationUtil.parseDouble(scanner.next());
+        } while (parseDouble == null);
+        return parseDouble;
     }
 
     public static String stringValidationInput() {

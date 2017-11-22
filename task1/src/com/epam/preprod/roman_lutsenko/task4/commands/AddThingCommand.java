@@ -19,8 +19,6 @@ public class AddThingCommand implements Command {
         InputStrategy inputStrategy = strategyContext.get(thing.getClass());
         inputStrategy.input(thing);
         context.getLocalProductService().put(thing);
-        //из этой команды передавать выбранный элемент в инпут
-        //сделать сущности Computer и PortableGadget абстрактными, в базовом классе сделать абстрактный метод build.
     }
 
     private Thing chooseThingToADD() {
