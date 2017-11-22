@@ -3,10 +3,9 @@ package com.epam.preprod.roman_lutsenko.task4.commands.strategys;
 import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
 import com.epam.preprod.roman_lutsenko.task4.util.InputUtil;
 
-public abstract class AddWithKeyboardThingStrategy implements InputStrategy<Thing>{
+public abstract class AddWithKeyboardThingStrategy{
 
-    @Override
-    public Thing input(Thing thing) {
+    public Thing inputThing(Thing thing) {
         System.out.println("Enter Id > ");
         thing.setId(InputUtil.intValidationInput());
 
@@ -15,7 +14,6 @@ public abstract class AddWithKeyboardThingStrategy implements InputStrategy<Thin
 
         System.out.println("Enter price ");
         thing.setPrice(InputUtil.longValidationInput());
-
         return thing;
     }
 }

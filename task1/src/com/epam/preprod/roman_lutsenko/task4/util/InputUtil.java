@@ -23,7 +23,7 @@ public class InputUtil {
     public static int intValidationInput() {
         Integer parseInt = null;
         do {
-                parseInt = ValidationUtil.parseInt(scanner.nextLine());
+            parseInt = ValidationUtil.parseInt(scanner.nextLine());
         } while (parseInt == null);
         return parseInt;
     }
@@ -45,7 +45,11 @@ public class InputUtil {
     }
 
     public static String stringValidationInput() {
-        return scanner.nextLine();
+        String string = null;
+        do {
+            string = scanner.nextLine();
+        } while (string == null || string.equals(""));
+        return string;
     }
 }
 

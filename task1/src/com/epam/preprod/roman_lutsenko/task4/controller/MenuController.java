@@ -8,6 +8,7 @@ import com.epam.preprod.roman_lutsenko.task4.constants.containers.CommandsContai
 import com.epam.preprod.roman_lutsenko.task4.constants.containers.StrategyContainer;
 import com.epam.preprod.roman_lutsenko.task4.context.Context;
 import com.epam.preprod.roman_lutsenko.task4.context.StrategyContext;
+import com.epam.preprod.roman_lutsenko.task4.util.InputUtil;
 
 import java.util.Scanner;
 
@@ -45,23 +46,22 @@ public class MenuController {
     }
 
     private void showAndInstanceContext(StrategyContext strategyContext) {
-        Scanner scanner = new Scanner(System.in);
         String choice;
         StrategyContainer strategyContainer = new StrategyContainer();
 
         System.out.println("Desktop insert with ");
         showStrategyInput();
-        choice = scanner.nextLine();
+        choice = InputUtil.stringValidationInput();
         strategyContext.put(Desktop.class, strategyContainer.getStrategy("Desktop" + choice));
 
         System.out.println("Laptop insert with ");
         showStrategyInput();
-        choice = scanner.nextLine();
+        choice = InputUtil.stringValidationInput();
         strategyContext.put(Laptop.class, strategyContainer.getStrategy("Laptop" + choice));
 
         System.out.println("FitnessBracelet insert with ");
         showStrategyInput();
-        choice = scanner.nextLine();
+        choice = InputUtil.stringValidationInput();
         strategyContext.put(FitnessBracelet.class, strategyContainer.getStrategy("FitnessBracelet" + choice));
 
     }
