@@ -8,16 +8,19 @@ import java.time.format.DateTimeParseException;
 
 public class ValidationUtil {
 
+    private static final String DATE_PATTERN_VISUAL = "yyyy-MM-dd HH:mm";
+    private static final String DATE_REGEX = "\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}";
+    private static final String INTEGER_REGEX = "\\d+";
+    private static final String DOUBLE_REGEX = "\\d+\\.\\d+";
+
+
     public static LocalDateTime parseDateTime(String timeInString) {
-        if (!timeInString.matches("\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}")) {
+        if (!timeInString.matches(DATE_REGEX)) {
             return null;
         }
         try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-            simpleDateFormat.setLenient(false);
-            DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            DateTimeFormatter format = DateTimeFormatter.ofPattern(DATE_PATTERN_VISUAL);
             return LocalDateTime.parse(timeInString, format);
-           // return LocalDateTime.parse(simpleDateFormat.parse(timeInString));
         } catch (IllegalArgumentException e) {
             System.out.println("Incorrect date format");
             return null;
@@ -25,7 +28,7 @@ public class ValidationUtil {
     }
 
     public static Integer parseInt(String intString) {
-        if (intString.matches("\\d+")) {
+        if (intString.matches(INTEGER_REGEX)) {
             return Integer.parseInt(intString);
         }
         System.out.println("Non correct symbol, write int format symbol");
@@ -33,7 +36,7 @@ public class ValidationUtil {
     }
 
     public static Long parseLong(String longString) {
-        if (longString.matches("\\d+")) {
+        if (longString.matches(INTEGER_REGEX)) {
             return Long.parseLong(longString);
         }
         System.out.println("Non correct symbol, write long format symbol");
@@ -41,10 +44,10 @@ public class ValidationUtil {
     }
 
     public static Double parseDouble(String intString) {
-        if (intString.matches("\\d+\\.\\d+")) {
+        if (intString.matches(DOUBLE_REGEX)) {
             return Double.parseDouble(intString);
         }
-        System.out.println("Non correct symbol, write \"\\d+\\.\\d+\" format symbol");
+        System.out.println("Non correct symbol, write \""+ DOUBLE_REGEX + "\" format symbol");
         return null;
     }
 

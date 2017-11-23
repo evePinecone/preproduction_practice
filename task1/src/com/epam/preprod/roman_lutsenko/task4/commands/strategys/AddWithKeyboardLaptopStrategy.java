@@ -6,11 +6,11 @@ import com.epam.preprod.roman_lutsenko.task4.util.InputUtil;
 
 import java.util.Scanner;
 
-public class AddWithKeyboardLaptopStrategy extends AddWithKeyboardComputerStrategy implements InputStrategy <Laptop>{
+public class AddWithKeyboardLaptopStrategy<T extends Laptop> extends AddWithKeyboardComputerStrategy<T>{
 
     @Override
-    public Laptop input(Laptop thing) {
-        inputComputer(thing);
+    public T input(T thing) {
+        super.input(thing);
 
         System.out.println("Enter displayResolution ");
         thing.setDisplayResolution(InputUtil.doubleValidationInput());

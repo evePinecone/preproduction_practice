@@ -1,6 +1,7 @@
 package com.epam.preprod.roman_lutsenko.task4.context;
 
 import com.epam.preprod.roman_lutsenko.task4.services.CartService;
+import com.epam.preprod.roman_lutsenko.task4.services.FileSavable;
 import com.epam.preprod.roman_lutsenko.task4.services.OrderService;
 import com.epam.preprod.roman_lutsenko.task4.services.ProductService;
 
@@ -13,14 +14,12 @@ public class Context {
     private CartService localCartService;
     private OrderService localOrderService;
     private StrategyContext strategyContext;
-    //context with strategy
-    // контекст на мапе оформить
 
     public Context(ProductService localProductService, CartService localCartService, OrderService localOrderService) {
         this.localProductService = localProductService;
         this.localCartService = localCartService;
         this.localOrderService = localOrderService;
-        getLocalProductService().unSerializeProduct();
+        ((FileSavable)getLocalProductService()).unSerializeProduct();
     }
 
     public ProductService getLocalProductService() {

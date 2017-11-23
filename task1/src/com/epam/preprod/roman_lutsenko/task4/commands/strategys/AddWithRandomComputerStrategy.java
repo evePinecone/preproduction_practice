@@ -1,12 +1,15 @@
 package com.epam.preprod.roman_lutsenko.task4.commands.strategys;
 
 import com.epam.preprod.roman_lutsenko.task1.entity.Computer;
+import com.epam.preprod.roman_lutsenko.task4.util.InputRandomUtil;
 
-public abstract class AddWithRandomComputerStrategy extends AddWithRandomThingStrategy {
-    public Computer inputComputer(Computer thing) {
-        inputThing(thing);
-        thing.setRAM((int)(Math.random() * 5000 + 1000));
-        thing.setNameProcessor("processor" + (int)(Math.random() * 10000 + 1000));
+public abstract class AddWithRandomComputerStrategy<T extends Computer> extends AddWithRandomThingStrategy<T> {
+    private final String PROCESSORS_FIELD = "processor" + InputRandomUtil.getRandomInt();
+
+    public T input(T thing) {
+        super.input(thing);
+        thing.setRAM(InputRandomUtil.getRandomInt());
+        thing.setNameProcessor(PROCESSORS_FIELD);
         return thing;
     }
 }

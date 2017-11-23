@@ -5,11 +5,11 @@ import com.epam.preprod.roman_lutsenko.task4.util.InputUtil;
 
 import java.util.Scanner;
 
-public class AddWithKeyboardDesktopStrategy extends  AddWithKeyboardComputerStrategy implements InputStrategy<Desktop> {
+public class AddWithKeyboardDesktopStrategy<T extends Desktop> extends AddWithKeyboardComputerStrategy<T> {
 
     @Override
-    public Desktop input(Desktop thing) {
-        inputComputer(thing);
+    public T input(T thing) {
+        super.input(thing);
         System.out.println("Enter form factor ");
         thing.setFormFactor(InputUtil.stringValidationInput());
 

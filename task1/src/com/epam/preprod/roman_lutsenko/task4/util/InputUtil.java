@@ -1,10 +1,14 @@
 package com.epam.preprod.roman_lutsenko.task4.util;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.Scanner;
+
+import static java.util.Objects.isNull;
 
 public class InputUtil {
 
+    private static final String EMPTY_STING = "";
     private static Scanner scanner = new Scanner(System.in);
 
 
@@ -24,7 +28,7 @@ public class InputUtil {
         Integer parseInt = null;
         do {
             parseInt = ValidationUtil.parseInt(scanner.nextLine());
-        } while (parseInt == null);
+        } while (isNull(parseInt));
         return parseInt;
     }
 
@@ -32,7 +36,7 @@ public class InputUtil {
         Long parseLong = null;
         do {
             parseLong = ValidationUtil.parseLong(scanner.next());
-        } while (parseLong == null);
+        } while (isNull(parseLong));
         return parseLong;
     }
 
@@ -40,7 +44,7 @@ public class InputUtil {
         Double parseDouble = null;
         do {
             parseDouble = ValidationUtil.parseDouble(scanner.next());
-        } while (parseDouble == null);
+        } while (isNull(parseDouble));
         return parseDouble;
     }
 
@@ -48,7 +52,7 @@ public class InputUtil {
         String string = null;
         do {
             string = scanner.nextLine();
-        } while (string == null || string.equals(""));
+        } while (Objects.equals(string, EMPTY_STING));
         return string;
     }
 }

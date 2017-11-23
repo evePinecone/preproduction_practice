@@ -1,16 +1,17 @@
 package com.epam.preprod.roman_lutsenko.task4.services.impl;
 
 import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
+import com.epam.preprod.roman_lutsenko.task4.constants.Paths;
 import com.epam.preprod.roman_lutsenko.task4.dao.ProductDAO;
 import com.epam.preprod.roman_lutsenko.task4.services.FileSavable;
 import com.epam.preprod.roman_lutsenko.task4.services.ProductService;
-import com.epam.preprod.roman_lutsenko.task4.constants.Paths;
+import com.epam.preprod.roman_lutsenko.task4.util.IncorrectIdException;
 
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LocalProductService implements ProductService, FileSavable{
+public class LocalProductService implements ProductService, FileSavable {
 
     private ProductDAO productDAO;
 
@@ -30,7 +31,7 @@ public class LocalProductService implements ProductService, FileSavable{
             productDAO.put(thing);
         } else {
             //wraper exception
-            throw new IllegalArgumentException();
+            throw new IncorrectIdException("In LocalProductService.class");
         }
     }
 
@@ -63,11 +64,9 @@ public class LocalProductService implements ProductService, FileSavable{
 
     @Override
     public void serializeProduct() {
-        try {
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(Paths.SERIALIZE_PRODUCT_FILE_NAME_PATH));
+        try (ObjectOutputStream oos = new ObjectOutputStream(
+                new FileOutputStream(Paths.SERIALIZE_PRODUCT_FILE_NAME_PATH))){
             oos.writeObject(getAllItems());
-            oos.flush();
-            oos.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -75,17 +74,17 @@ public class LocalProductService implements ProductService, FileSavable{
 
     @Override
     public void unSerializeProduct() {
-        Map map = new HashMap<>();
+        Map<Integer, Thing> map = new HashMap<>();
         try {
             ObjectInputStream oos = new ObjectInputStream(new FileInputStream(Paths.SERIALIZE_PRODUCT_FILE_NAME_PATH));
-            map = (Map) oos.readObject();
+            map = (Map<Integer, Thing>) oos.readObject();
             oos.close();
         } catch (IOException | ClassNotFoundException e) {
             System.err.println("No file to deserialize.");
         }
 
-        for (Object value : map.values()) {
-            put((Thing) value);
+        for (Thing value : map.values()) {
+            put(value);
         }
     }
 
