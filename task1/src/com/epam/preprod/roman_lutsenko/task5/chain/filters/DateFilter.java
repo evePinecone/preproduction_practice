@@ -7,7 +7,7 @@ public class DateFilter extends Filter {
     private long timeMin;
     private long timeMax;
 
-    public DateFilter(Filter nextFilter, long timeMin, long timeMax) {
+    public DateFilter(FilterInterface nextFilter, long timeMin, long timeMax) {
         super(nextFilter);
         this.timeMin = timeMin;
         this.timeMax = timeMax;

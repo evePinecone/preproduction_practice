@@ -6,7 +6,7 @@ public class FileNameFilter extends Filter {
 
     private String fileName;
 
-    public FileNameFilter(Filter filter, String fileName) {
+    public FileNameFilter(FilterInterface filter, String fileName) {
         super(filter);
         this.fileName = fileName;
     }

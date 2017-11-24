@@ -6,7 +6,7 @@ public class ExtensionFilter extends Filter {
 
     private String extension;
 
-    public ExtensionFilter(Filter filter, String extension) {
+    public ExtensionFilter(FilterInterface filter, String extension) {
         super(filter);
         this.extension = extension;
     }

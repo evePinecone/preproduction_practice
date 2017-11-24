@@ -1,7 +1,7 @@
 package com.epam.preprod.roman_lutsenko.task5;
 
 
-import com.epam.preprod.roman_lutsenko.task5.chain.Util.FilterController;
+import com.epam.preprod.roman_lutsenko.task5.chain.FilterController;
 import com.epam.preprod.roman_lutsenko.task5.chain.filters.FileNameFilter;
 import com.epam.preprod.roman_lutsenko.task5.chain.filters.Filter;
 import org.junit.Before;

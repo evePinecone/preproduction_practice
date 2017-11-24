@@ -7,7 +7,7 @@ public class SizeFilter extends Filter{
     private long minSize;
     private long maxSize;
 
-    public SizeFilter(Filter filter, long minSize, long maxSize) {
+    public SizeFilter(FilterInterface filter, long minSize, long maxSize) {
         super(filter);
         this.minSize = minSize;
         this.maxSize = maxSize;

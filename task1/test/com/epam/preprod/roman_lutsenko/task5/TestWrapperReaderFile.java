@@ -1,5 +1,6 @@
 package com.epam.preprod.roman_lutsenko.task5;
 
+import com.epam.preprod.roman_lutsenko.task5.file_reader.WrapperReaderFile;
 import org.junit.Test;
 
 public class TestWrapperReaderFile {
