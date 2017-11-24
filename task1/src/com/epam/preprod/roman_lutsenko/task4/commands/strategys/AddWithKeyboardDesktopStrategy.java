@@ -1,38 +1,20 @@
 package com.epam.preprod.roman_lutsenko.task4.commands.strategys;
 
 import com.epam.preprod.roman_lutsenko.task1.entity.Desktop;
-import com.epam.preprod.roman_lutsenko.task1.entity.Laptop;
-import com.epam.preprod.roman_lutsenko.task4.util.Util;
+import com.epam.preprod.roman_lutsenko.task4.util.InputUtil;
 
-import java.util.List;
 import java.util.Scanner;
 
-public class AddWithKeyboardDesktopStrategy implements InputStrategy<Desktop> {
+public class AddWithKeyboardDesktopStrategy<T extends Desktop> extends AddWithKeyboardComputerStrategy<T> {
 
     @Override
-    public Desktop input(Desktop thing) {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Enter Id > ");
-        thing.setId(Util.intValidationInput());
-
-        System.out.println("Enter nameModel ");
-        thing.setNameModel(scanner.nextLine());
-
-        System.out.println("Enter price ");
-        thing.setPrice(Util.longValidationInput());
-
-        System.out.println("Enter processors name ");
-        thing.setNameProcessor(scanner.nextLine());
-
-        System.out.println("Enter RAM ");
-        thing.setRAM(Util.intValidationInput());
-
+    public T input(T thing) {
+        super.input(thing);
         System.out.println("Enter form factor ");
-        thing.setFormFactor(scanner.nextLine());
+        thing.setFormFactor(InputUtil.stringValidationInput());
 
         System.out.println("Enter type workspace ");
-        thing.setTypeWorkspace(scanner.nextLine());
+        thing.setTypeWorkspace(InputUtil.stringValidationInput());
         return thing;
     }
 }

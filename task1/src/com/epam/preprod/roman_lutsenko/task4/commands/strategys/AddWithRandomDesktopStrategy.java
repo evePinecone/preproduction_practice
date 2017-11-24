@@ -1,22 +1,20 @@
 package com.epam.preprod.roman_lutsenko.task4.commands.strategys;
 
 import com.epam.preprod.roman_lutsenko.task1.entity.Desktop;
+import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
+import com.epam.preprod.roman_lutsenko.task4.util.InputRandomUtil;
 
 import java.util.Scanner;
 
-public class AddWithRandomDesktopStrategy implements InputStrategy<Desktop>{
+public class AddWithRandomDesktopStrategy<T extends Desktop> extends AddWithRandomComputerStrategy<T>{
+    private final String FORM_FACTOR_FIELD = "form" + InputRandomUtil.getRandomInt();
+    private final String TYPE_WORKSPACE_FIELD = "workspace" + InputRandomUtil.getRandomInt();
 
     @Override
-    public Desktop input(Desktop thing) {
-        Scanner scanner = new Scanner(System.in);
-        int id = (int)(Math.random()*10000+1000);
-        thing.setId(id);
-        thing.setNameModel("Desktop" + id);
-        thing.setPrice((long)(Math.random() * 10000 + 1000));
-        thing.setNameProcessor("processor" + id);
-        thing.setRAM((int)(Math.random() * 5000 + 1000));
-        thing.setFormFactor("form" + id);
-        thing.setTypeWorkspace("workspace" + id);
+    public T input(T thing) {
+        super.input(thing);
+        thing.setFormFactor(FORM_FACTOR_FIELD);
+        thing.setTypeWorkspace(TYPE_WORKSPACE_FIELD);
         return thing;
     }
 }

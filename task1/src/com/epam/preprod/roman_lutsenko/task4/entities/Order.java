@@ -2,27 +2,26 @@ package com.epam.preprod.roman_lutsenko.task4.entities;
 
 import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
 
+    private LocalDateTime dateOrder;
     private List<Thing> orderList;
 
-    public Order() {
-        orderList = new ArrayList<>();
+    public Order(LocalDateTime localDateTime, List<Thing> orderList) {
+        this.dateOrder = localDateTime;
+        this.orderList = new ArrayList<>(orderList);
     }
 
-    public Order(List<Thing> orderList) {
-        this.orderList = orderList;
+    public LocalDateTime getDateOrder() {
+        return dateOrder;
     }
 
     public List<Thing> getOrderList() {
-        return orderList;
-    }
-
-    public void setOrderList(List<Thing> orderList) {
-        this.orderList = orderList;
+        return new ArrayList<>(orderList);
     }
 
     @Override

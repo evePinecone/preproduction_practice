@@ -1,21 +1,17 @@
 package com.epam.preprod.roman_lutsenko.task4.commands.strategys;
 
 import com.epam.preprod.roman_lutsenko.task1.entity.Laptop;
+import com.epam.preprod.roman_lutsenko.task4.util.InputRandomUtil;
 
 import java.util.Scanner;
 
-public class AddWithRandomLaptopStrategy implements InputStrategy<Laptop> {
+public class AddWithRandomLaptopStrategy<T extends Laptop> extends AddWithRandomComputerStrategy<T>{
 
     @Override
-    public Laptop input(Laptop thing) {
-        int id = (int)(Math.random()*10000+1000);
-        thing.setId(id);
-        thing.setNameModel("Laptop" + id);
-        thing.setPrice((long)(Math.random() * 10000 + 1000));
-        thing.setNameProcessor("processor" + id);
-        thing.setRAM((int)(Math.random() * 5000 + 1000));
-        thing.setDisplayResolution(Math.random() * 8 + 12);
-        thing.setWeight(Math.random() * 2 + 0.5);
+    public T input(T thing) {
+        super.input(thing);
+        thing.setDisplayResolution(InputRandomUtil.getRandomDouble(8,12));
+        thing.setWeight(InputRandomUtil.getRandomDouble(2, 0.5));
         return thing;
     }
 }

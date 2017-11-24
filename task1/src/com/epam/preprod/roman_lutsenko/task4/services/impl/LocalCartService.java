@@ -1,7 +1,7 @@
 package com.epam.preprod.roman_lutsenko.task4.services.impl;
 
-import com.epam.preprod.roman_lutsenko.task4.dao.interfaces.CartDAO;
-import com.epam.preprod.roman_lutsenko.task4.services.inerfaces.CartService;
+import com.epam.preprod.roman_lutsenko.task4.dao.CartDAO;
+import com.epam.preprod.roman_lutsenko.task4.services.CartService;
 
 import java.util.Map;
 
@@ -42,4 +42,10 @@ public class LocalCartService implements CartService {
     public boolean removeAll(int thingId) {
         return cartDAO.removeAll(thingId);
     }
+
+    @Override
+    public Map<Integer, Integer> getCacheOfLastFiveAddings(){
+        return cartDAO.getCacheOfLastFiveAddings();
+    }
+
 }

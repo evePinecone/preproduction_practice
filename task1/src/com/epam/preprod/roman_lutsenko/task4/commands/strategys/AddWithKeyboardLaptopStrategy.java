@@ -1,36 +1,23 @@
 package com.epam.preprod.roman_lutsenko.task4.commands.strategys;
 
-import com.epam.preprod.roman_lutsenko.task1.entity.Desktop;
+import com.epam.preprod.roman_lutsenko.task1.entity.Computer;
 import com.epam.preprod.roman_lutsenko.task1.entity.Laptop;
-import com.epam.preprod.roman_lutsenko.task4.util.Util;
+import com.epam.preprod.roman_lutsenko.task4.util.InputUtil;
 
 import java.util.Scanner;
 
-public class AddWithKeyboardLaptopStrategy implements InputStrategy<Laptop> {
+public class AddWithKeyboardLaptopStrategy<T extends Laptop> extends AddWithKeyboardComputerStrategy<T>{
 
     @Override
-    public Laptop input(Laptop thing) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter Id > ");
-        thing.setId(Util.intValidationInput());
-
-        System.out.println("Enter nameModel ");
-        thing.setNameModel(scanner.nextLine());
-
-        System.out.println("Enter price ");
-        thing.setPrice(Util.longValidationInput());
-
-        System.out.println("Enter processors name ");
-        thing.setNameProcessor(scanner.nextLine());
-
-        System.out.println("Enter RAM ");
-        thing.setRAM(Util.intValidationInput());
+    public T input(T thing) {
+        super.input(thing);
 
         System.out.println("Enter displayResolution ");
-        thing.setDisplayResolution(Util.doubleValidationInput());
+        thing.setDisplayResolution(InputUtil.doubleValidationInput());
 
         System.out.println("Enter weight ");
-        thing.setWeight(Util.doubleValidationInput());
+        thing.setWeight(InputUtil.doubleValidationInput());
+
         return thing;
     }
 }
