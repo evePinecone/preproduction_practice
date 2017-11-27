@@ -3,7 +3,10 @@ package com.epam.preprod.roman_lutsenko.task4.test_serialize;
 import com.epam.preprod.roman_lutsenko.task1.entity.Desktop;
 import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.zip.GZIPOutputStream;

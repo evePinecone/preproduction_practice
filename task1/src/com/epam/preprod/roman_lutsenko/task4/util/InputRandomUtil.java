@@ -8,6 +8,11 @@ public final class InputRandomUtil {
 
     private static final int RANDOM_DELTA_NUMBER = 10000;
     private static final int RANDOM_LOWER_THRESHOLD_NUMBER = 1000;
+
+    /**
+     * Blocked constructor.
+     */
+    private InputRandomUtil() {}
     /**
      * Returns random int number.
      * @return int random number in range RANDOM_LOWER_THRESHOLD_NUMBER with delta = RANDOM_DELTA_NUMBER.
