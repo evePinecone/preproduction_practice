@@ -1,5 +1,7 @@
 package com.epam.preprod.roman_lutsenko.task1.entity;
 
+import com.epam.preprod.roman_lutsenko.task7.SetAnnotation;
+
 import java.io.Serializable;
 
 /**
@@ -28,6 +30,7 @@ public abstract class Thing implements Serializable{
 		return nameModel;
 	}
 
+	@SetAnnotation(name = "thingNameModel")
 	public void setNameModel(String nameModel) {
 		this.nameModel = nameModel;
 	}
@@ -36,6 +39,7 @@ public abstract class Thing implements Serializable{
 		return id;
 	}
 
+    @SetAnnotation(name = "thingId")
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -44,6 +48,7 @@ public abstract class Thing implements Serializable{
 		return price;
 	}
 
+    @SetAnnotation(name = "thingPrice")
 	public void setPrice(long price) {
 		this.price = price;
 	}
@@ -75,4 +80,4 @@ public abstract class Thing implements Serializable{
 	}
  
 	
-}
+}

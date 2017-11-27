@@ -1,5 +1,7 @@
 package com.epam.preprod.roman_lutsenko.task1.entity;
 
+import com.epam.preprod.roman_lutsenko.task7.SetAnnotation;
+
 public abstract class Computer extends Thing {
 	private String nameProcessor;
 	private int ram;
@@ -17,6 +19,7 @@ public abstract class Computer extends Thing {
 		return nameProcessor;
 	}
 
+	@SetAnnotation(name = "computerNameProcessor")
 	public void setNameProcessor(String nameProcessor) {
 		this.nameProcessor = nameProcessor;
 	}
@@ -25,6 +28,7 @@ public abstract class Computer extends Thing {
 		return ram;
 	}
 
+    @SetAnnotation(name = "computerRAM")
 	public void setRAM(int rAM) {
 		ram = rAM;
 	}
@@ -83,4 +87,4 @@ public abstract class Computer extends Thing {
 		return super.toString() + "[nameProcessor=" + nameProcessor + ", ram=" + ram + "]";
 	}
 
-}
+}
