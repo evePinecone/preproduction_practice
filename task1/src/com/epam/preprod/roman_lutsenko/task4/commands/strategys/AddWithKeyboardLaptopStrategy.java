@@ -1,12 +1,13 @@
 package com.epam.preprod.roman_lutsenko.task4.commands.strategys;
 
-import com.epam.preprod.roman_lutsenko.task1.entity.Computer;
 import com.epam.preprod.roman_lutsenko.task1.entity.Laptop;
 import com.epam.preprod.roman_lutsenko.task4.util.InputUtil;
 
-import java.util.Scanner;
-
-public class AddWithKeyboardLaptopStrategy<T extends Laptop> extends AddWithKeyboardComputerStrategy<T>{
+/**
+ * Setting with keyboard fields of element specified by type Laptop.
+ * @param <T>
+ */
+public class AddWithKeyboardLaptopStrategy<T extends Laptop> extends AddWithKeyboardComputerStrategy<T> {
 
     @Override
     public T input(T thing) {

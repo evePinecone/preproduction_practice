@@ -3,8 +3,10 @@ package com.epam.preprod.roman_lutsenko.task4.commands.strategys;
 import com.epam.preprod.roman_lutsenko.task1.entity.Desktop;
 import com.epam.preprod.roman_lutsenko.task4.util.InputUtil;
 
-import java.util.Scanner;
-
+/**
+ * Setting with keyboard fields of element specified by type Desktop.
+ * @param <T>
+ */
 public class AddWithKeyboardDesktopStrategy<T extends Desktop> extends AddWithKeyboardComputerStrategy<T> {
 
     @Override

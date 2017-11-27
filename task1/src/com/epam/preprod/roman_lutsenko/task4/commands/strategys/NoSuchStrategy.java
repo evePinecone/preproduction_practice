@@ -6,7 +6,7 @@ public class NoSuchStrategy implements InputStrategy {
 
     @Override
     public Thing input(Thing thing) {
-        System.out.println("Incorrect command, gl hf");
+        System.out.println("Incorrect strategy");
         return null;
     }
 }

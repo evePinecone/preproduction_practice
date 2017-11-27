@@ -9,6 +9,10 @@ import com.epam.preprod.roman_lutsenko.task4.util.InputUtil;
 
 import java.util.Scanner;
 
+/**
+ * Add specified type element to the catalog with setted strategy.
+ * Strategies established at the beginning of program.
+ */
 public class AddThingCommand implements Command {
 
     @Override

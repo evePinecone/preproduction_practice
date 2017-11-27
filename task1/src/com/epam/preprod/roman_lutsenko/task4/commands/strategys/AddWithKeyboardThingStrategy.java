@@ -3,7 +3,12 @@ package com.epam.preprod.roman_lutsenko.task4.commands.strategys;
 import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
 import com.epam.preprod.roman_lutsenko.task4.util.InputUtil;
 
-public abstract class AddWithKeyboardThingStrategy<T extends Thing> implements InputStrategy<T>{
+/**
+ * Setting with keyboard fields of element specified by type Thing.
+ *
+ * @param <T>
+ */
+public abstract class AddWithKeyboardThingStrategy<T extends Thing> implements InputStrategy<T> {
 
     public T input(T thing) {
         System.out.println("Enter Id > ");

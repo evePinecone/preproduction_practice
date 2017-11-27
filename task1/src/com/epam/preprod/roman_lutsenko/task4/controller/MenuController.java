@@ -20,10 +20,6 @@ public class MenuController {
         CommandsContainer commandsContainer = new CommandsContainer();
         Scanner scanner = new Scanner(System.in);
 
-        showAndInstanceContext(strategyContext);
-        context.setStrategyContext(strategyContext);
-        //add strategies to context;
-
         while (true) {
             showMenu();
             String choice = scanner.nextLine().trim();
@@ -45,30 +41,6 @@ public class MenuController {
         System.out.println("\texit. End of program.");
     }
 
-    private void showAndInstanceContext(StrategyContext strategyContext) {
-        String choice;
-        StrategyContainer strategyContainer = new StrategyContainer();
 
-        System.out.println("Desktop insert with ");
-        showStrategyInput();
-        choice = InputUtil.stringValidationInput();
-        strategyContext.put(Desktop.class, strategyContainer.getStrategy("Desktop" + choice));
-
-        System.out.println("Laptop insert with ");
-        showStrategyInput();
-        choice = InputUtil.stringValidationInput();
-        strategyContext.put(Laptop.class, strategyContainer.getStrategy("Laptop" + choice));
-
-        System.out.println("FitnessBracelet insert with ");
-        showStrategyInput();
-        choice = InputUtil.stringValidationInput();
-        strategyContext.put(FitnessBracelet.class, strategyContainer.getStrategy("FitnessBracelet" + choice));
-
-    }
-
-    private void showStrategyInput() {
-        System.out.println("\t1. Add with Keyboard");
-        System.out.println("\t2. Add with Random");
-    }
 
 }

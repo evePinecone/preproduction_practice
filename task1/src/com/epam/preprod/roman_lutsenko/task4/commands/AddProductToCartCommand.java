@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 /**
  * Add product from catalog to cart command.
- * Adding elemetn saved to cache.
+ * Adding element saved to cache.
  */
 public class AddProductToCartCommand implements Command {
     @Override

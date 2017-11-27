@@ -3,7 +3,12 @@ package com.epam.preprod.roman_lutsenko.task4.commands.strategys;
 import com.epam.preprod.roman_lutsenko.task1.entity.Computer;
 import com.epam.preprod.roman_lutsenko.task4.util.InputUtil;
 
-public abstract class AddWithKeyboardComputerStrategy<T extends Computer> extends AddWithKeyboardThingStrategy<T>{
+/**
+ * Setting with keyboard fields of element specified by type Computer.
+ *
+ * @param <T>
+ */
+public abstract class AddWithKeyboardComputerStrategy<T extends Computer> extends AddWithKeyboardThingStrategy<T> {
 
     @Override
     public T input(T thing) {

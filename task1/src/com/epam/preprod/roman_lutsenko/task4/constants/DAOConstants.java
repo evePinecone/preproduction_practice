@@ -1,7 +1,7 @@
 package com.epam.preprod.roman_lutsenko.task4.constants;
 
 /**
- * Constanst using in DAO.
+ * Constants using in DAO.
  */
 public class DAOConstants {
     /**

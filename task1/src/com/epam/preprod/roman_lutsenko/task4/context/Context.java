@@ -15,10 +15,11 @@ public class Context {
     private OrderService localOrderService;
     private StrategyContext strategyContext;
 
-    public Context(ProductService localProductService, CartService localCartService, OrderService localOrderService) {
+    public Context(ProductService localProductService, CartService localCartService, OrderService localOrderService, StrategyContext strategyContext) {
         this.localProductService = localProductService;
         this.localCartService = localCartService;
         this.localOrderService = localOrderService;
+        this.strategyContext = strategyContext;
         ((FileSavable)getLocalProductService()).unSerializeProduct();
     }
 
@@ -38,7 +39,4 @@ public class Context {
         return strategyContext;
     }
 
-    public void setStrategyContext(StrategyContext strategyContext) {
-        this.strategyContext = strategyContext;
-    }
 }

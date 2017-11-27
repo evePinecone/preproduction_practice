@@ -9,6 +9,6 @@ public class NoSuchCommand implements Command {
 
     @Override
     public void execute(Context context) {
-        System.out.println("Incorrect command, gl hf");
+        System.out.println("Incorrect command");
     }
 }

@@ -4,7 +4,7 @@ import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
 
 import java.util.Map;
 
-public interface ProductService{
+public interface ProductService {
     /**
      * Return copy of productList.
      *

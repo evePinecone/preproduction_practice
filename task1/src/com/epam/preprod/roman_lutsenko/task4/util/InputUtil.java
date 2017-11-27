@@ -6,12 +6,32 @@ import java.util.Scanner;
 
 import static java.util.Objects.isNull;
 
-public class InputUtil {
+/**
+ * Class contains input from keyboard methods for different types of data.
+ */
+public final class InputUtil {
 
+    /**
+     * Constant to introduce an empty string.
+     */
     private static final String EMPTY_STING = "";
+
+    /**
+     * Scanner for all inputted data.
+     */
     private static Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Blocked constructor.
+     */
+    private InputUtil() {
+    }
 
+    /**
+     * Read and validate string in similar date form from console to LocalDateTime.
+     *
+     * @return LocalDateTime date.
+     */
     public static LocalDateTime readDateTime() {
         LocalDateTime localDateTime = null;
 
@@ -24,6 +44,11 @@ public class InputUtil {
         return localDateTime;
     }
 
+    /**
+     * Read and validate string from console to int value.
+     *
+     * @return int representation of string.
+     */
     public static int intValidationInput() {
         Integer parseInt = null;
         do {
@@ -32,6 +57,11 @@ public class InputUtil {
         return parseInt;
     }
 
+    /**
+     * Read and validate string from console to long value.
+     *
+     * @return long representation of string.
+     */
     public static long longValidationInput() {
         Long parseLong = null;
         do {
@@ -40,6 +70,11 @@ public class InputUtil {
         return parseLong;
     }
 
+    /**
+     * Read and validate string from console to double value.
+     *
+     * @return double representation of string.
+     */
     public static double doubleValidationInput() {
         Double parseDouble = null;
         do {
@@ -48,6 +83,11 @@ public class InputUtil {
         return parseDouble;
     }
 
+    /**
+     * Read string from console and return it own.
+     *
+     * @return inputed string.
+     */
     public static String stringValidationInput() {
         String string = null;
         do {
