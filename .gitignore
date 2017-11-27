@@ -1,4 +1,4 @@
-# compiled classes ignore
+﻿# compiled classes ignore
 *.class
 
 # log files
@@ -25,3 +25,4 @@
 /task1 git pracrice II/
 
 /.idea/
+/out/
