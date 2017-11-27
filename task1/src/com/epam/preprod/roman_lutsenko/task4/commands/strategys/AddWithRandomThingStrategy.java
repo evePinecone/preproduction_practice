@@ -8,7 +8,8 @@ import com.epam.preprod.roman_lutsenko.task4.util.InputRandomUtil;
  *
  * @param <T>
  */
-public abstract class AddWithRandomThingStrategy<T extends Thing> implements InputStrategy<T> {
+public abstract class AddWithRandomThingStrategy<T extends Thing>
+        implements InputStrategy<T> {
 
     @Override
     public T input(T thing) {

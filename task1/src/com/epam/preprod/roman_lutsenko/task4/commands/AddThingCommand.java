@@ -7,8 +7,6 @@ import com.epam.preprod.roman_lutsenko.task4.context.Context;
 import com.epam.preprod.roman_lutsenko.task4.context.StrategyContext;
 import com.epam.preprod.roman_lutsenko.task4.util.InputUtil;
 
-import java.util.Scanner;
-
 /**
  * Add specified type element to the catalog with setted strategy.
  * Strategies established at the beginning of program.
@@ -25,9 +23,15 @@ public class AddThingCommand implements Command {
         context.getLocalProductService().put(thing);
     }
 
+    /**
+     * Shows available element to add, and return chosen element.
+     *
+     * @return chosen element.
+     */
     private Thing chooseThingToADD() {
         EntityContainer.show();
-        return new EntityContainer().getEntity(InputUtil.stringValidationInput());
+        return new EntityContainer().getEntity(
+                InputUtil.stringValidationInput());
     }
 
 }

@@ -5,9 +5,11 @@ import com.epam.preprod.roman_lutsenko.task4.util.InputUtil;
 
 /**
  * Setting with keyboard fields of element specified by type Laptop.
+ *
  * @param <T>
  */
-public class AddWithKeyboardLaptopStrategy<T extends Laptop> extends AddWithKeyboardComputerStrategy<T> {
+public class AddWithKeyboardLaptopStrategy<T extends Laptop>
+        extends AddWithKeyboardComputerStrategy<T> {
 
     @Override
     public T input(T thing) {

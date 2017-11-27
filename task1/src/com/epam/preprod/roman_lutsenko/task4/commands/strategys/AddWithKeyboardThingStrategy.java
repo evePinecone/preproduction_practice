@@ -8,7 +8,8 @@ import com.epam.preprod.roman_lutsenko.task4.util.InputUtil;
  *
  * @param <T>
  */
-public abstract class AddWithKeyboardThingStrategy<T extends Thing> implements InputStrategy<T> {
+public abstract class AddWithKeyboardThingStrategy<T extends Thing>
+        implements InputStrategy<T> {
 
     public T input(T thing) {
         System.out.println("Enter Id > ");

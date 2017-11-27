@@ -8,7 +8,7 @@ import com.epam.preprod.roman_lutsenko.task4.util.InputRandomUtil;
  *
  * @param <T>
  */
-public class AddWithRandomDesktopStrategy<T extends Desktop> extends AddWithRandomComputerStrategy<T>{
+public class AddWithRandomDesktopStrategy<T extends Desktop> extends AddWithRandomComputerStrategy<T> {
 
     @Override
     public T input(T thing) {

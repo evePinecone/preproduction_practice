@@ -8,8 +8,10 @@ import com.epam.preprod.roman_lutsenko.task4.util.InputRandomUtil;
  *
  * @param <T>
  */
-public abstract class AddWithRandomComputerStrategy<T extends Computer> extends AddWithRandomThingStrategy<T> {
+public abstract class AddWithRandomComputerStrategy<T extends Computer>
+        extends AddWithRandomThingStrategy<T> {
 
+    @Override
     public T input(T thing) {
         super.input(thing);
         final String PROCESSORS_FIELD = "processor" + InputRandomUtil.getRandomInt();

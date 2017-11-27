@@ -8,7 +8,8 @@ import com.epam.preprod.roman_lutsenko.task4.util.InputUtil;
  *
  * @param <T>
  */
-public abstract class AddWithKeyboardComputerStrategy<T extends Computer> extends AddWithKeyboardThingStrategy<T> {
+public abstract class AddWithKeyboardComputerStrategy<T extends Computer>
+        extends AddWithKeyboardThingStrategy<T> {
 
     @Override
     public T input(T thing) {

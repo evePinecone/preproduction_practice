@@ -8,7 +8,8 @@ import com.epam.preprod.roman_lutsenko.task4.util.InputRandomUtil;
  *
  * @param <T>
  */
-public class AddWithRandomFitnessBraceletStrategy<T extends FitnessBracelet> extends AddWithRandomPortableGadgetStrategy<T> {
+public class AddWithRandomFitnessBraceletStrategy<T extends FitnessBracelet>
+        extends AddWithRandomPortableGadgetStrategy<T> {
 
     @Override
     public T input(T thing) {

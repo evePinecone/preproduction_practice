@@ -5,9 +5,11 @@ import com.epam.preprod.roman_lutsenko.task4.util.InputUtil;
 
 /**
  * Setting with keyboard fields of element specified by type Desktop.
+ *
  * @param <T>
  */
-public class AddWithKeyboardDesktopStrategy<T extends Desktop> extends AddWithKeyboardComputerStrategy<T> {
+public class AddWithKeyboardDesktopStrategy<T extends Desktop>
+        extends AddWithKeyboardComputerStrategy<T> {
 
     @Override
     public T input(T thing) {
