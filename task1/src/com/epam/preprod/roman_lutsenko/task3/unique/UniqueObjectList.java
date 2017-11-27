@@ -1,6 +1,10 @@
 package com.epam.preprod.roman_lutsenko.task3.unique;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
 import java.util.function.UnaryOperator;
 
 public class UniqueObjectList<E> extends ArrayList<E> implements List<E> {

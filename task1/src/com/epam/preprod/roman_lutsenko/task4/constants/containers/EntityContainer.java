@@ -1,11 +1,18 @@
 package com.epam.preprod.roman_lutsenko.task4.constants.containers;
 
-import com.epam.preprod.roman_lutsenko.task1.entity.*;
+import com.epam.preprod.roman_lutsenko.task1.entity.Desktop;
+import com.epam.preprod.roman_lutsenko.task1.entity.FitnessBracelet;
+import com.epam.preprod.roman_lutsenko.task1.entity.Laptop;
+import com.epam.preprod.roman_lutsenko.task1.entity.NoSuchEntity;
+import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
 
 import java.util.Map;
 import java.util.TreeMap;
 
-import static com.epam.preprod.roman_lutsenko.task4.constants.CommandConstants.*;
+import static com.epam.preprod.roman_lutsenko.task4.constants.CommandConstants.ENTITY_ID_DESKTOP;
+import static com.epam.preprod.roman_lutsenko.task4.constants.CommandConstants.ENTITY_ID_FITNESS_BRACELET;
+import static com.epam.preprod.roman_lutsenko.task4.constants.CommandConstants.ENTITY_ID_LAPTOP;
+import static com.epam.preprod.roman_lutsenko.task4.constants.CommandConstants.ENTITY_ID_NO_SUCH_ENTITY;
 
 public class EntityContainer {
 

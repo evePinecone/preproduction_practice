@@ -1,6 +1,13 @@
 package com.epam.preprod.roman_lutsenko.task4.constants.containers;
 
-import com.epam.preprod.roman_lutsenko.task4.commands.strategys.*;
+import com.epam.preprod.roman_lutsenko.task4.commands.strategys.AddWithKeyboardDesktopStrategy;
+import com.epam.preprod.roman_lutsenko.task4.commands.strategys.AddWithKeyboardFitnessBraceletStrategy;
+import com.epam.preprod.roman_lutsenko.task4.commands.strategys.AddWithKeyboardLaptopStrategy;
+import com.epam.preprod.roman_lutsenko.task4.commands.strategys.AddWithRandomDesktopStrategy;
+import com.epam.preprod.roman_lutsenko.task4.commands.strategys.AddWithRandomFitnessBraceletStrategy;
+import com.epam.preprod.roman_lutsenko.task4.commands.strategys.AddWithRandomLaptopStrategy;
+import com.epam.preprod.roman_lutsenko.task4.commands.strategys.InputStrategy;
+import com.epam.preprod.roman_lutsenko.task4.commands.strategys.NoSuchStrategy;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -23,7 +30,7 @@ public class StrategyContainer {
 
     private Map<String, InputStrategy> strategyList = new TreeMap<>();
 
-    public StrategyContainer(){
+    public StrategyContainer() {
         //Here put elements.
         strategyList.put(STRATEGY_KEYBOARD_DESKTOP, new AddWithKeyboardDesktopStrategy());
         strategyList.put(STRATEGY_KEYBOARD_LAPTOP, new AddWithKeyboardLaptopStrategy());

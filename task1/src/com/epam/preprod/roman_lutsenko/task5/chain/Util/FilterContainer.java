@@ -1,6 +1,10 @@
 package com.epam.preprod.roman_lutsenko.task5.chain.Util;
 
-import com.epam.preprod.roman_lutsenko.task5.chain.filters.*;
+import com.epam.preprod.roman_lutsenko.task5.chain.filters.DateFilter;
+import com.epam.preprod.roman_lutsenko.task5.chain.filters.ExtensionFilter;
+import com.epam.preprod.roman_lutsenko.task5.chain.filters.FileNameFilter;
+import com.epam.preprod.roman_lutsenko.task5.chain.filters.FilterInterface;
+import com.epam.preprod.roman_lutsenko.task5.chain.filters.SizeFilter;
 
 import java.util.Scanner;
 
@@ -21,7 +25,7 @@ public class FilterContainer {
         if (InputUtil.confirmedInput(scanner)) {
             System.out.println("Enter extension >");
             String extension = scanner.nextLine();
-           return filter = new ExtensionFilter(filter, extension);
+            return filter = new ExtensionFilter(filter, extension);
         }
         return filter;
     }
