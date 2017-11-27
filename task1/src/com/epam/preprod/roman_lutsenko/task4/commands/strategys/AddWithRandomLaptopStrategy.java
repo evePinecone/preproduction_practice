@@ -13,9 +13,13 @@ public class AddWithRandomLaptopStrategy<T extends Laptop>
 
     @Override
     public T input(T thing) {
+        final double RANGE_DISPLAY_SIZE = 8;
+        final double LOW_BORDER_DISPLYAY_SIZE = 12;
+        final double RANGE_WEIGHT = 2;
+        final double LOW_BORDER_WEIGHT = 0.5;
         super.input(thing);
-        thing.setDisplayResolution(InputRandomUtil.getRandomDouble(8, 12));
-        thing.setWeight(InputRandomUtil.getRandomDouble(2, 0.5));
+        thing.setDisplayResolution(InputRandomUtil.getRandomDouble(RANGE_DISPLAY_SIZE, LOW_BORDER_DISPLYAY_SIZE));
+        thing.setWeight(InputRandomUtil.getRandomDouble(RANGE_WEIGHT, LOW_BORDER_WEIGHT));
         return thing;
     }
 }

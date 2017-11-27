@@ -1,14 +1,9 @@
 package com.epam.preprod.roman_lutsenko.task4.controller;
 
-import com.epam.preprod.roman_lutsenko.task1.entity.Desktop;
-import com.epam.preprod.roman_lutsenko.task1.entity.FitnessBracelet;
-import com.epam.preprod.roman_lutsenko.task1.entity.Laptop;
 import com.epam.preprod.roman_lutsenko.task4.commands.Command;
 import com.epam.preprod.roman_lutsenko.task4.constants.containers.CommandsContainer;
-import com.epam.preprod.roman_lutsenko.task4.constants.containers.StrategyContainer;
 import com.epam.preprod.roman_lutsenko.task4.context.Context;
 import com.epam.preprod.roman_lutsenko.task4.context.StrategyContext;
-import com.epam.preprod.roman_lutsenko.task4.util.InputUtil;
 
 import java.util.Scanner;
 
@@ -40,7 +35,6 @@ public class MenuController {
         System.out.println("\t8. Add thing to catalog");
         System.out.println("\texit. End of program.");
     }
-
 
 
 }
