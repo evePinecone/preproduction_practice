@@ -1,4 +1,15 @@
-﻿/task1/bin/
+﻿# compiled classes ignore
+*.class
+
+# log files
+*.log
+
+# package files
+*.jar
+*.rar
+*.zip
+
+/task1/bin/
 
 /.metadata/
 

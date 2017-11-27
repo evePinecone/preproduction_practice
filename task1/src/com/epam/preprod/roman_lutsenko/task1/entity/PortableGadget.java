@@ -62,4 +62,4 @@ public abstract class PortableGadget extends Thing {
 		return super.toString()+"[autonomy=" + autonomy + "]";
 	}
 
-}
+}

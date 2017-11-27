@@ -83,4 +83,4 @@ public abstract class Computer extends Thing {
 		return super.toString() + "[nameProcessor=" + nameProcessor + ", ram=" + ram + "]";
 	}
 
-}
+}
