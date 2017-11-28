@@ -12,9 +12,12 @@ import com.epam.preprod.roman_lutsenko.task4.dao.impl.LocalProductDAO;
 import com.epam.preprod.roman_lutsenko.task4.services.impl.LocalCartService;
 import com.epam.preprod.roman_lutsenko.task4.services.impl.LocalOrderService;
 import com.epam.preprod.roman_lutsenko.task4.services.impl.LocalProductService;
+import com.epam.preprod.roman_lutsenko.task4.util.InputUtil;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 public class TestCart {
 
@@ -24,13 +27,14 @@ public class TestCart {
         LocalCartDAO localCartDAO = new LocalCartDAO();
         LocalOrderDAO localOrderDAO = new LocalOrderDAO();
         StrategyController strategyController = new StrategyController();
+        ResourceBundle resourceBundle = getResourceBundle();
 
         LocalProductService localProductService = new LocalProductService(localProductDAO);
         LocalCartService localCartService = new LocalCartService(localCartDAO);
         LocalOrderService localOrderService = new LocalOrderService(localOrderDAO);
         StrategyContext strategyContext = strategyController.getStrategyContext();
 
-        Context context = new Context(localProductService, localCartService, localOrderService, strategyContext);
+        Context context = new Context(localProductService, localCartService, localOrderService, strategyContext, resourceBundle);
         new MenuController().menu(context);
     }
 
@@ -45,5 +49,11 @@ public class TestCart {
             productList.put(laptop.getId(), laptop);
         }
         return productList;
+    }
+
+    private static ResourceBundle getResourceBundle(){
+        System.out.println("Enter locale");
+        String localeString = InputUtil.stringValidationInput();
+        return ResourceBundle.getBundle("resources\\ThingsLocalisation", new Locale(localeString));
     }
 }

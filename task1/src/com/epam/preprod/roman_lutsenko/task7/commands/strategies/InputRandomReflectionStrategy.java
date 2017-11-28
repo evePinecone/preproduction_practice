@@ -1,20 +1,21 @@
-package com.epam.preprod.roman_lutsenko.task7.builder;
+package com.epam.preprod.roman_lutsenko.task7.commands.strategies;
 
-import com.epam.preprod.roman_lutsenko.task1.entity.Laptop;
 import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
+import com.epam.preprod.roman_lutsenko.task4.context.Context;
 import com.epam.preprod.roman_lutsenko.task4.util.InputRandomUtil;
 import com.epam.preprod.roman_lutsenko.task7.SetAnnotation;
+import com.epam.preprod.roman_lutsenko.task7.commands.InputReflectionStrategy;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Objects;
 
-public class LaptopRandomBuilder<T extends Laptop> implements Builder<T> {
+public class InputRandomReflectionStrategy<T extends Thing> implements InputReflectionStrategy<T> {
     private Class utilClass = InputRandomUtil.class;
 
     @Override
-    public void build(T t) {
+    public void build(T t, Context context) {
         Class clazz = t.getClass();
         do {
             Method[] methods = clazz.getMethods();
@@ -23,8 +24,7 @@ public class LaptopRandomBuilder<T extends Laptop> implements Builder<T> {
                 if (!Objects.isNull(annotation)) {
                     Class typeInput = method.getParameterTypes()[0];
                     try {
-                     //   System.err.println("TYPE INPUT = " + typeInput + "\n Method input = " + method);
-                        method.invoke(t, findMethodRandom(typeInput));// findMethodRandom(typeInput).invoke(utilClass));
+                        method.invoke(t, findMethodRandom(typeInput));
                     } catch (IllegalAccessException | InvocationTargetException e) {
                         System.err.println("HEHEHEHEHEHE");
                     }
@@ -35,19 +35,18 @@ public class LaptopRandomBuilder<T extends Laptop> implements Builder<T> {
     }
 
     private Object findMethodRandom(Class typeMethod) {
-        Object object = null;
+        Object object;
         Method[] inputMethods = utilClass.getMethods();
         for (Method inputMethod : inputMethods) {
-            if (Objects.equals(inputMethod.getReturnType(), typeMethod)) {
+            if (Objects.equals(inputMethod.getReturnType(), typeMethod) && inputMethod.getParameterTypes().length == 0) {
                 try {
-                    //System.err.println("INPUT METHOD = " + inputMethod);
                     object = inputMethod.invoke(utilClass);
-                    break;
+                    return object;
                 } catch (IllegalAccessException | InvocationTargetException e) {
                     e.printStackTrace();
                 }
             }
         }
-        return object;
+        return null;
     }
 }

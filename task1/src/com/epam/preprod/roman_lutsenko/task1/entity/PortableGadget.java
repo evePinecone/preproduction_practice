@@ -1,5 +1,7 @@
 package com.epam.preprod.roman_lutsenko.task1.entity;
 
+import com.epam.preprod.roman_lutsenko.task7.SetAnnotation;
+
 public abstract class PortableGadget extends Thing {
 	private String autonomy;
 	
@@ -14,6 +16,7 @@ public abstract class PortableGadget extends Thing {
 		return autonomy;
 	}
 
+    @SetAnnotation(name = "portableGadgetAutonomy")
 	public void setAutonomy(String autonomy) {
 		this.autonomy = autonomy;
 	}
@@ -62,4 +65,4 @@ public abstract class PortableGadget extends Thing {
 		return super.toString()+"[autonomy=" + autonomy + "]";
 	}
 
-}
+}

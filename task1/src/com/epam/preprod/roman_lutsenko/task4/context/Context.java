@@ -5,6 +5,8 @@ import com.epam.preprod.roman_lutsenko.task4.services.FileSavable;
 import com.epam.preprod.roman_lutsenko.task4.services.OrderService;
 import com.epam.preprod.roman_lutsenko.task4.services.ProductService;
 
+import java.util.ResourceBundle;
+
 /**
  * Wrapper to unite services.
  */
@@ -14,12 +16,14 @@ public class Context {
     private CartService localCartService;
     private OrderService localOrderService;
     private StrategyContext strategyContext;
+    private ResourceBundle resourceBundle;
 
-    public Context(ProductService localProductService, CartService localCartService, OrderService localOrderService, StrategyContext strategyContext) {
+    public Context(ProductService localProductService, CartService localCartService, OrderService localOrderService, StrategyContext strategyContext, ResourceBundle resourceBundle) {
         this.localProductService = localProductService;
         this.localCartService = localCartService;
         this.localOrderService = localOrderService;
         this.strategyContext = strategyContext;
+        this.resourceBundle = resourceBundle;
         ((FileSavable)getLocalProductService()).unSerializeProduct();
     }
 
@@ -37,6 +41,10 @@ public class Context {
 
     public StrategyContext getStrategyContext() {
         return strategyContext;
+    }
+
+    public ResourceBundle getResourceBundle() {
+        return resourceBundle;
     }
 
 }

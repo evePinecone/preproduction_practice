@@ -1,5 +1,7 @@
 package com.epam.preprod.roman_lutsenko.task1.entity;
 
+import com.epam.preprod.roman_lutsenko.task7.SetAnnotation;
+
 public class Desktop extends Computer {
 	private String formFactor;
 	private String typeWorkspace;
@@ -17,6 +19,7 @@ public class Desktop extends Computer {
 		return formFactor;
 	}
 
+    @SetAnnotation(name = "desktopFormFactor")
 	public void setFormFactor(String formFactor) {
 		this.formFactor = formFactor;
 	}
@@ -25,6 +28,7 @@ public class Desktop extends Computer {
 		return typeWorkspace;
 	}
 
+    @SetAnnotation(name = "desktopTypeWorkspace")
 	public void setTypeWorkspace(String typeWorkspace) {
 		this.typeWorkspace = typeWorkspace;
 	}
