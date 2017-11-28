@@ -1,4 +1,4 @@
-package com.epam.preprod.roman_lutsenko.task7.constants;
+package com.epam.preprod.roman_lutsenko.task4.constants;
 
 public class ReflectionStrategyConstants {
     public static final String STRATEGY_ID_INPUT_KEYBOARD_REFLECTION = "1";

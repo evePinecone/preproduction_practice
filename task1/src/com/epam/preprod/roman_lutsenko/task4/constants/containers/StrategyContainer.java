@@ -1,13 +1,13 @@
 package com.epam.preprod.roman_lutsenko.task4.constants.containers;
 
-import com.epam.preprod.roman_lutsenko.task4.commands.strategys.AddWithKeyboardDesktopStrategy;
-import com.epam.preprod.roman_lutsenko.task4.commands.strategys.AddWithKeyboardFitnessBraceletStrategy;
-import com.epam.preprod.roman_lutsenko.task4.commands.strategys.AddWithKeyboardLaptopStrategy;
-import com.epam.preprod.roman_lutsenko.task4.commands.strategys.AddWithRandomDesktopStrategy;
-import com.epam.preprod.roman_lutsenko.task4.commands.strategys.AddWithRandomFitnessBraceletStrategy;
-import com.epam.preprod.roman_lutsenko.task4.commands.strategys.AddWithRandomLaptopStrategy;
+import com.epam.preprod.roman_lutsenko.task4.commands.strategys.input.AddWithKeyboardDesktopStrategy;
+import com.epam.preprod.roman_lutsenko.task4.commands.strategys.input.AddWithKeyboardFitnessBraceletStrategy;
+import com.epam.preprod.roman_lutsenko.task4.commands.strategys.input.AddWithKeyboardLaptopStrategy;
+import com.epam.preprod.roman_lutsenko.task4.commands.strategys.input.AddWithRandomDesktopStrategy;
+import com.epam.preprod.roman_lutsenko.task4.commands.strategys.input.AddWithRandomFitnessBraceletStrategy;
+import com.epam.preprod.roman_lutsenko.task4.commands.strategys.input.AddWithRandomLaptopStrategy;
 import com.epam.preprod.roman_lutsenko.task4.commands.strategys.InputStrategy;
-import com.epam.preprod.roman_lutsenko.task4.commands.strategys.NoSuchStrategy;
+import com.epam.preprod.roman_lutsenko.task4.commands.strategys.input.NoSuchStrategy;
 
 import java.util.Map;
 import java.util.TreeMap;

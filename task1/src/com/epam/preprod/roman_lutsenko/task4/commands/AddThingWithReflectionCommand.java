@@ -4,8 +4,8 @@ import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
 import com.epam.preprod.roman_lutsenko.task4.constants.containers.EntityContainer;
 import com.epam.preprod.roman_lutsenko.task4.context.Context;
 import com.epam.preprod.roman_lutsenko.task4.util.InputUtil;
-import com.epam.preprod.roman_lutsenko.task7.commands.InputReflectionStrategy;
-import com.epam.preprod.roman_lutsenko.task7.constants.containers.ReflectionStrategyContainer;
+import com.epam.preprod.roman_lutsenko.task4.commands.strategys.InputReflectionStrategy;
+import com.epam.preprod.roman_lutsenko.task4.constants.containers.ReflectionStrategyContainer;
 
 public class AddThingWithReflectionCommand implements Command {
 

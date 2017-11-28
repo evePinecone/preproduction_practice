@@ -1,4 +1,4 @@
-package com.epam.preprod.roman_lutsenko.task7;
+package com.epam.preprod.roman_lutsenko.task4.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

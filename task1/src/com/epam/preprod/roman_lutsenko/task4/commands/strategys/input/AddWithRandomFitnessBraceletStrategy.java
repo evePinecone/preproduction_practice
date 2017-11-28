@@ -1,4 +1,4 @@
-package com.epam.preprod.roman_lutsenko.task4.commands.strategys;
+package com.epam.preprod.roman_lutsenko.task4.commands.strategys.input;
 
 import com.epam.preprod.roman_lutsenko.task1.entity.FitnessBracelet;
 import com.epam.preprod.roman_lutsenko.task4.util.InputRandomUtil;

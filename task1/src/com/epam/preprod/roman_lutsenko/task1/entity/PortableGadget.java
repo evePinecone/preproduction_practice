@@ -1,6 +1,6 @@
 package com.epam.preprod.roman_lutsenko.task1.entity;
 
-import com.epam.preprod.roman_lutsenko.task7.SetAnnotation;
+import com.epam.preprod.roman_lutsenko.task4.annotations.SetAnnotation;
 
 public abstract class PortableGadget extends Thing {
 	private String autonomy;
