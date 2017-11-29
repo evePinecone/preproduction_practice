@@ -17,6 +17,7 @@ public class ThingMapProxy implements InvocationHandler{
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         String[] string = methodField(method.getName());
         if(isGet(string[0]) && map.containsKey(string[1])) {
+            //для примитивов - дефолт валью
             return map.get(string[1]);
         }
         if(isSet(string[0])) {
