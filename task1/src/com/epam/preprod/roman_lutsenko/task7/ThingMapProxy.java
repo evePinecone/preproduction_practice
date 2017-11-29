@@ -1,12 +1,13 @@
 package com.epam.preprod.roman_lutsenko.task7;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class ThingMapProxy implements InvocationHandler{
+public class ThingMapProxy implements InvocationHandler {
     private Map<String, Object> map;
 
     public ThingMapProxy() {
@@ -16,11 +17,13 @@ public class ThingMapProxy implements InvocationHandler{
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         String[] string = methodField(method.getName());
-        if(isGet(string[0]) && map.containsKey(string[1])) {
-            //для примитивов - дефолт валью
+        if (isGet(string[0])) {
+            if (method.getReturnType().isPrimitive() && !map.containsKey(string[1])) {
+                return defaultValue(method.getReturnType());
+            }
             return map.get(string[1]);
         }
-        if(isSet(string[0])) {
+        if (isSet(string[0])) {
             return map.put(string[1], args[0]);
         }
         return method.invoke(map, args);
@@ -35,6 +38,10 @@ public class ThingMapProxy implements InvocationHandler{
     }
 
     private String[] methodField(String str) {
-        return new String[]{str.substring(0,3), str.substring(3)};
+        return new String[]{str.substring(0, 3), str.substring(3)};
+    }
+
+    private static  Object defaultValue(Class clazz) {
+        return Array.get(Array.newInstance(clazz, 1), 0);
     }
 }
