@@ -1,6 +1,9 @@
 package com.epam.preprod.roman_lutsenko.task3;
 
-import com.epam.preprod.roman_lutsenko.task1.entity.*;
+import com.epam.preprod.roman_lutsenko.task1.entity.Desktop;
+import com.epam.preprod.roman_lutsenko.task1.entity.FitnessBracelet;
+import com.epam.preprod.roman_lutsenko.task1.entity.Laptop;
+import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
 import com.epam.preprod.roman_lutsenko.task3.wrapper.StringFourHashWrapper;
 import com.epam.preprod.roman_lutsenko.task3.wrapper.StringLengthHashWrapper;
 
@@ -19,30 +22,30 @@ public class DemoWrappers {
 
         hashMapLengKey.put(new StringLengthHashWrapper("1"), new Laptop());
         hashMapLengKey.put(new StringLengthHashWrapper("2"), new Desktop());
-        hashMapLengKey.put(new StringLengthHashWrapper("3"), new Computer());
+        // hashMapLengKey.put(new StringLengthHashWrapper("3"), new Computer());
         hashMapLengKey.put(new StringLengthHashWrapper("4"), new FitnessBracelet());
 
         linkedHashMapLengKey = new LinkedHashMap<>();
 
         linkedHashMapLengKey.put(new StringLengthHashWrapper("1"), new Laptop());
         linkedHashMapLengKey.put(new StringLengthHashWrapper("2"), new Desktop());
-        linkedHashMapLengKey.put(new StringLengthHashWrapper("3"), new Computer());
+        //  linkedHashMapLengKey.put(new StringLengthHashWrapper("3"), new Computer());
         linkedHashMapLengKey.put(new StringLengthHashWrapper("4"), new FitnessBracelet());
 
         hashMapFourKey = new HashMap<>();
 
         hashMapFourKey.put(new StringFourHashWrapper("1111"), new Laptop());
         hashMapFourKey.put(new StringFourHashWrapper("2222"), new Desktop());
-        hashMapFourKey.put(new StringFourHashWrapper("3333"), new Computer());
+        //hashMapFourKey.put(new StringFourHashWrapper("3333"), new Computer());
         hashMapFourKey.put(new StringFourHashWrapper("4444"), new FitnessBracelet());
-        hashMapFourKey.put(new StringFourHashWrapper("5555"), new Computer());
+        //hashMapFourKey.put(new StringFourHashWrapper("5555"), new Computer());
         hashMapFourKey.put(new StringFourHashWrapper("6666"), new FitnessBracelet());
 
         linkedHashMapFourKey = new LinkedHashMap<>();
 
         linkedHashMapFourKey.put(new StringFourHashWrapper("1"), new Laptop());
         linkedHashMapFourKey.put(new StringFourHashWrapper("2"), new Desktop());
-        linkedHashMapFourKey.put(new StringFourHashWrapper("3"), new Computer());
+        //linkedHashMapFourKey.put(new StringFourHashWrapper("3"), new Computer());
         linkedHashMapFourKey.put(new StringFourHashWrapper("4"), new FitnessBracelet());
 
     }

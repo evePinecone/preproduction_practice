@@ -1,13 +1,10 @@
 package com.epam.preprod.roman_lutsenko.task5.chain;
 
 import com.epam.preprod.roman_lutsenko.task5.chain.Util.FilterContainer;
-import com.epam.preprod.roman_lutsenko.task5.chain.filters.*;
+import com.epam.preprod.roman_lutsenko.task5.chain.filters.FilterInterface;
 
 import java.io.File;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -49,11 +46,11 @@ public class FilterController {
 
     public List<File> searchFile(File file) {
         File[] files = file.listFiles();
-        if(files != null && files.length > 0) {
+        if (files != null && files.length > 0) {
             for (File file1 : files) {
-                if(file1.isDirectory()) {
+                if (file1.isDirectory()) {
                     searchFile(file1);
-                } else if(filter!= null && filter.execute(file1)) {
+                } else if (filter != null && filter.execute(file1)) {
                     filteredFileList.add(file1);
                 }
             }

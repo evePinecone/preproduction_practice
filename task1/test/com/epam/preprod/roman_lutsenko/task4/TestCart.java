@@ -3,7 +3,9 @@ package com.epam.preprod.roman_lutsenko.task4;
 import com.epam.preprod.roman_lutsenko.task1.entity.Laptop;
 import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
 import com.epam.preprod.roman_lutsenko.task4.context.Context;
+import com.epam.preprod.roman_lutsenko.task4.context.StrategyContext;
 import com.epam.preprod.roman_lutsenko.task4.controller.MenuController;
+import com.epam.preprod.roman_lutsenko.task4.controller.StrategyController;
 import com.epam.preprod.roman_lutsenko.task4.dao.impl.LocalCartDAO;
 import com.epam.preprod.roman_lutsenko.task4.dao.impl.LocalOrderDAO;
 import com.epam.preprod.roman_lutsenko.task4.dao.impl.LocalProductDAO;
@@ -21,12 +23,14 @@ public class TestCart {
         LocalProductDAO localProductDAO = new LocalProductDAO(fill());
         LocalCartDAO localCartDAO = new LocalCartDAO();
         LocalOrderDAO localOrderDAO = new LocalOrderDAO();
+        StrategyController strategyController = new StrategyController();
 
         LocalProductService localProductService = new LocalProductService(localProductDAO);
         LocalCartService localCartService = new LocalCartService(localCartDAO);
         LocalOrderService localOrderService = new LocalOrderService(localOrderDAO);
+        StrategyContext strategyContext = strategyController.getStrategyContext();
 
-        Context context = new Context(localProductService, localCartService, localOrderService);
+        Context context = new Context(localProductService, localCartService, localOrderService, strategyContext);
         new MenuController().menu(context);
     }
 

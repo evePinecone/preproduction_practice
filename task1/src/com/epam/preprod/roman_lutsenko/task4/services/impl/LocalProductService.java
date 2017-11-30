@@ -1,12 +1,22 @@
 package com.epam.preprod.roman_lutsenko.task4.services.impl;
 
 import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
+import com.epam.preprod.roman_lutsenko.task4.constants.PathsConstants;
 import com.epam.preprod.roman_lutsenko.task4.dao.ProductDAO;
+import com.epam.preprod.roman_lutsenko.task4.services.FileSavable;
 import com.epam.preprod.roman_lutsenko.task4.services.ProductService;
+import com.epam.preprod.roman_lutsenko.task4.util.IncorrectIdException;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
-public class LocalProductService implements ProductService {
+public class LocalProductService implements ProductService, FileSavable {
 
     private ProductDAO productDAO;
 
@@ -22,7 +32,11 @@ public class LocalProductService implements ProductService {
 
     @Override
     public void put(Thing thing) {
-        productDAO.put(thing);
+        if (Objects.isNull(productDAO.get(thing.getId()))) {
+            productDAO.put(thing);
+        } else {
+            throw new IncorrectIdException("Incorrect id for input thing");
+        }
     }
 
     @Override
@@ -52,5 +66,28 @@ public class LocalProductService implements ProductService {
         }
     }
 
+    @Override
+    public void serializeProduct() {
+        try (ObjectOutputStream oos = new ObjectOutputStream(
+                new FileOutputStream(PathsConstants.SERIALIZE_PRODUCT_FILE_NAME_PATH))) {
+            oos.writeObject(getAllItems());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void unSerializeProduct() {
+        Map<Integer, Thing> map = new HashMap<>();
+        try (ObjectInputStream oos = new ObjectInputStream(new FileInputStream(PathsConstants.SERIALIZE_PRODUCT_FILE_NAME_PATH))) {
+            map = (Map<Integer, Thing>) oos.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            System.err.println("No file to deserialize.");
+        }
+
+        for (Thing value : map.values()) {
+            put(value);
+        }
+    }
 
 }

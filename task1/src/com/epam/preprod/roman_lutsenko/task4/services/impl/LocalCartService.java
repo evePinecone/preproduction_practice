@@ -44,7 +44,7 @@ public class LocalCartService implements CartService {
     }
 
     @Override
-    public Map<Integer, Integer> getCacheOfLastFiveAddings(){
+    public Map<Integer, Integer> getCacheOfLastFiveAddings() {
         return cartDAO.getCacheOfLastFiveAddings();
     }
 

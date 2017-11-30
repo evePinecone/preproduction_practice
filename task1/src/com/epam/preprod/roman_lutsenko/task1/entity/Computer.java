@@ -1,6 +1,6 @@
 package com.epam.preprod.roman_lutsenko.task1.entity;
 
-public class Computer extends Thing {
+public abstract class Computer extends Thing {
 	private String nameProcessor;
 	private int ram;
 
@@ -83,4 +83,4 @@ public class Computer extends Thing {
 		return super.toString() + "[nameProcessor=" + nameProcessor + ", ram=" + ram + "]";
 	}
 
-}
+}

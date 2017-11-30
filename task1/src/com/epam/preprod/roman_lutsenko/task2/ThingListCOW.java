@@ -1,14 +1,13 @@
 package com.epam.preprod.roman_lutsenko.task2;
 
+import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
-import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
-
-import java.util.*;
 
 /**
  * Container for elements that extends Things. Based on array. Extension by step
@@ -183,7 +182,7 @@ public class ThingListCOW<E extends Thing> implements List<Thing> {
         }
         checkEdit();
         resizePlus(collection.size() + 1);
-        System.arraycopy(collection.toArray(), 0, arrayList, size , collection.size());
+        System.arraycopy(collection.toArray(), 0, arrayList, size, collection.size());
         size += collection.size();
         return true;
     }
@@ -196,7 +195,7 @@ public class ThingListCOW<E extends Thing> implements List<Thing> {
         checkIndexAdding(index);
         checkEdit();
         resizePlus(collection.size() + 1);
-        System.arraycopy(arrayList,index, arrayList,index+collection.size(), size-index);
+        System.arraycopy(arrayList, index, arrayList, index + collection.size(), size - index);
         System.arraycopy(collection.toArray(), 0, arrayList, index, collection.size());
         size += collection.size();
         return true;

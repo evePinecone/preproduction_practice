@@ -1,6 +1,6 @@
 package com.epam.preprod.roman_lutsenko.task1.entity;
 
-public class PortableGadget extends Thing {
+public abstract class PortableGadget extends Thing {
 	private String autonomy;
 	
 	public PortableGadget() {}
@@ -62,4 +62,4 @@ public class PortableGadget extends Thing {
 		return super.toString()+"[autonomy=" + autonomy + "]";
 	}
 
-}
+}
