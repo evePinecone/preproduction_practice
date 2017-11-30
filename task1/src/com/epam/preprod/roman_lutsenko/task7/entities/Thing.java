@@ -1,12 +1,16 @@
-package com.epam.preprod.roman_lutsenko.task7;
+package com.epam.preprod.roman_lutsenko.task7.entities;
 
-public class Thing implements ThingInterface{
+/**
+ * Implementation of ThingInterface. Copy of base entity from task1.
+ */
+public class Thing implements ThingInterface {
 
     private String nameModel;
     private int id;
     private long price;
 
-    public Thing() { }
+    public Thing() {
+    }
 
     public Thing(String nameModel, int id, long price) {
         this.nameModel = nameModel;
@@ -46,8 +50,7 @@ public class Thing implements ThingInterface{
         Thing thing = (Thing) o;
 
         if (id != thing.id) return false;
-        if (price != thing.price) return false;
-        return nameModel != null ? nameModel.equals(thing.nameModel) : thing.nameModel == null;
+        return price == thing.price && (nameModel != null ? nameModel.equals(thing.nameModel) : thing.nameModel == null);
     }
 
     @Override
@@ -60,7 +63,7 @@ public class Thing implements ThingInterface{
 
     @Override
     public String toString() {
-        return "[id=" + id + ", nameModel=" + nameModel +  ", price=" + price + "]";
+        return "[id=" + id + ", nameModel=" + nameModel + ", price=" + price + "]";
     }
 
 

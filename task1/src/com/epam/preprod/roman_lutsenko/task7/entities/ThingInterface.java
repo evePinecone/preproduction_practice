@@ -1,4 +1,4 @@
-package com.epam.preprod.roman_lutsenko.task7;
+package com.epam.preprod.roman_lutsenko.task7.entities;
 
 import java.io.Serializable;
 

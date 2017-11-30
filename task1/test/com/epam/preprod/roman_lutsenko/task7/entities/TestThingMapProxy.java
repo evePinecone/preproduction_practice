@@ -1,5 +1,6 @@
-package com.epam.preprod.roman_lutsenko.task7;
+package com.epam.preprod.roman_lutsenko.task7.entities;
 
+import com.epam.preprod.roman_lutsenko.task7.proxy_holder.ThingMapProxy;
 import org.junit.Test;
 
 import java.lang.reflect.Proxy;

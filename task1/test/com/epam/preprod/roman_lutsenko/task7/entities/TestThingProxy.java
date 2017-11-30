@@ -1,5 +1,6 @@
-package com.epam.preprod.roman_lutsenko.task7;
+package com.epam.preprod.roman_lutsenko.task7.entities;
 
+import com.epam.preprod.roman_lutsenko.task7.proxy_holder.ThingProxy;
 import org.junit.Test;
 
 import java.lang.reflect.Proxy;
@@ -8,7 +9,7 @@ import static junit.framework.TestCase.assertEquals;
 
 public class TestThingProxy {
 
-    @Test (expected = UnsupportedOperationException.class)
+    @Test(expected = UnsupportedOperationException.class)
     public void testThingProxyThrowingException() {
         ThingInterface thingInterface = (ThingInterface) Proxy.newProxyInstance(
                 Thing.class.getClassLoader(), Thing.class.getInterfaces(), new ThingProxy(new Thing()));

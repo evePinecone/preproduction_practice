@@ -1,4 +1,4 @@
-package com.epam.preprod.roman_lutsenko.task7;
+package com.epam.preprod.roman_lutsenko.task7.proxy_holder;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.InvocationHandler;
@@ -8,6 +8,9 @@ import java.util.Map;
 import java.util.Objects;
 
 public class ThingMapProxy implements InvocationHandler {
+    /**
+     * Container for all fields of Thing element.
+     */
     private Map<String, Object> map;
 
     public ThingMapProxy() {
@@ -37,10 +40,21 @@ public class ThingMapProxy implements InvocationHandler {
         return Objects.equals(name, "set");
     }
 
+    /**
+     * Separates input method to field and method.
+     * string [0] - equals method. string[1] - equals field.
+     * @param str String to split.
+     * @return Array of two string, contains method get or set with field.
+     */
     private String[] methodField(String str) {
         return new String[]{str.substring(0, 3), str.substring(3)};
     }
 
+    /**
+     * Return default value for primitive type.
+     * @param clazz Primitive class.
+     * @return default value for clazz type.
+     */
     private static  Object defaultValue(Class clazz) {
         return Array.get(Array.newInstance(clazz, 1), 0);
     }
