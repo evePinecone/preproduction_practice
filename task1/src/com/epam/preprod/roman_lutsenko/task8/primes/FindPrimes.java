@@ -24,6 +24,7 @@ public class FindPrimes {
     }
 
     public void findPrimes() {
+        List <Thread> list = new ArrayList<>();
         for (int i = 0; i < numberOfThreads; i++) {
             Thread thread = new Thread(() -> {
                 while (!queue.isEmpty()) {
@@ -42,14 +43,11 @@ public class FindPrimes {
                 }
             });
             thread.start();
+            list.add(thread);
+        };
+        for (Thread thread : list) {
+            while(thread.isAlive());
         }
-        try {
-
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        //Запихать сюда ожидание
     }
 
     private void setQueueWithAllDeltaPrimes() {

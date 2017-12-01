@@ -28,7 +28,7 @@ public class TestFindPrimes {
 
     @Test
     public void equalsArrayWithTwoMethods() throws InterruptedException {
-        FindPrimes findPrimes = new FindPrimes(4, 2, 10000);
+        FindPrimes findPrimes = new FindPrimes(1, 2, 10000);
         findPrimes.findPrimes();
         Thread thread = new Thread() {
             @Override
