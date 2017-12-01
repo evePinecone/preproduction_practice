@@ -4,6 +4,8 @@ import com.epam.preprod.roman_lutsenko.task4.commands.strategys.InputReflectionS
 import com.epam.preprod.roman_lutsenko.task4.commands.strategys.input_reflection.InputKeyboardReflectionStrategy;
 import com.epam.preprod.roman_lutsenko.task4.commands.strategys.input_reflection.InputRandomReflectionStrategy;
 import com.epam.preprod.roman_lutsenko.task4.commands.strategys.input_reflection.NoSuchReflectionStrategy;
+import com.epam.preprod.roman_lutsenko.task4.util.InputRandomUtil;
+import com.epam.preprod.roman_lutsenko.task4.util.InputUtil;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -17,8 +19,8 @@ public class ReflectionStrategyContainer {
 
     public ReflectionStrategyContainer() {
         //Here put elements.
-        strategyMap.put(STRATEGY_ID_INPUT_KEYBOARD_REFLECTION, new InputKeyboardReflectionStrategy());
-        strategyMap.put(STRATEGY_ID_INPUT_RANDOM_REFLECTION, new InputRandomReflectionStrategy());
+        strategyMap.put(STRATEGY_ID_INPUT_KEYBOARD_REFLECTION, new InputRandomReflectionStrategy(InputRandomUtil.class));
+        strategyMap.put(STRATEGY_ID_INPUT_RANDOM_REFLECTION, new InputKeyboardReflectionStrategy(InputUtil.class));
         strategyMap.put(STRATEGY_ID_NO_SUCH_STRATEGY, new NoSuchReflectionStrategy());
 
     }
@@ -31,7 +33,7 @@ public class ReflectionStrategyContainer {
     }
 
     public static void show() {
-        System.out.println("1. InputKeyboardReflectionStrategy()");
-        System.out.println("2. InputRandomReflectionStrategy()");
+        System.out.println("1. InputRandomReflectionStrategy()");
+        System.out.println("2. InputKeyboardReflectionStrategy()");
     }
 }
