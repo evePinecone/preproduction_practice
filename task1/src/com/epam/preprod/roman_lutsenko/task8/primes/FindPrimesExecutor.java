@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Queue;
-import java.util.concurrent.AbstractExecutorService;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedTransferQueue;
+import java.util.concurrent.TimeUnit;
 
 public class FindPrimesExecutor {
 
@@ -48,13 +47,13 @@ public class FindPrimesExecutor {
             });
             executorService.execute(thread);
         }
+        executorService.shutdown();
         try {
-
-            Thread.sleep(1000);
+            while (!executorService.awaitTermination(10, TimeUnit.MILLISECONDS)) {
+            }
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            System.err.println("Interrupted while waiting");
         }
-        //Запихать сюда ожидание
     }
 
     private void setQueueWithAllDeltaPrimes() {

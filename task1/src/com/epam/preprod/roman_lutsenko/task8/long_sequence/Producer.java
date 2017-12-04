@@ -37,7 +37,7 @@ public class Producer extends Thread {
                     e.printStackTrace();
                 }
             }
-            System.out.println(Arrays.toString(buffer.getResultBytes()));
+            System.out.println("added to map");
         }
     }
 }

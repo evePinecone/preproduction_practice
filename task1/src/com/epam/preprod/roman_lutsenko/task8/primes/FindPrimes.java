@@ -45,6 +45,7 @@ public class FindPrimes {
             thread.start();
             list.add(thread);
         };
+        //в метод и поставить таймер 10мс
         for (Thread thread : list) {
             while(thread.isAlive());
         }
