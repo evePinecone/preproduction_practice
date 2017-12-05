@@ -3,12 +3,15 @@ package com.epam.preprod.roman_lutsenko.task8.long_sequence;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 import static com.epam.preprod.roman_lutsenko.task8.long_sequence.Producer.MONITOR;
+import static com.epam.preprod.roman_lutsenko.task8.long_sequence.Producer.MONITOR_END;
 
 public class LongSequence extends Thread {
 
@@ -20,17 +23,28 @@ public class LongSequence extends Thread {
 
     @Override
     public void run() {
-        while (Objects.isNull(buffer.getFile())) {
-            synchronized (MONITOR) {
-                try {
-                    MONITOR.wait();
-                } catch (InterruptedException e) {
-                    System.out.println("Interrupted waiting in LongSequence.class");
+        while (true) {
+            while (Objects.isNull(buffer.getFile())) {
+                synchronized (MONITOR) {
+                    try {
+                        MONITOR.wait();
+                    } catch (InterruptedException e) {
+                        System.out.println("Interrupted waiting in LongSequence.class");
+                    }
                 }
             }
+            byte[] bytes = getBytesFromFile(buffer.getFile().getName());
+            Byte[] bytesWrapper = bytesToWrapper(bytes);
+            List<Byte> listByte = getBiggestSequence(bytesWrapper);
+            synchronized (MONITOR_END) {
+                try {
+                    MONITOR_END.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                buffer.clear();
+            }
         }
-        byte[] bytes = getBytesFromFile(buffer.getFile().getName());
-        getMapWithSequences(bytes);
     }
 
     private byte[] getBytesFromFile(String fileName) {
@@ -42,38 +56,51 @@ public class LongSequence extends Thread {
         return null;
     }
 
-    private Map<Byte[], Integer> getMapWithSequences(byte[] bytes1) {
-        Map<Byte[], Integer> map = new HashMap<>();
-        Byte [] bytes = new Byte[]{1, 2, 1,2};
-        for (int outer = 0; outer < bytes.length; outer++) {
-            for (int i = outer+1; i <= bytes.length; i++) {
-                Byte[] bufBytes = Arrays.copyOfRange(bytes, outer, i);
-                for (Byte bufByte : bufBytes) {
-                    System.out.print(bufByte);
+    private List<Byte> getBiggestSequence(Byte[] bytes) {
+        List<Byte> baseListByte = convertBytesToList(bytes);
+        Map<List<Byte>, Integer> resultContainer = new HashMap<>();
+        for (int i = baseListByte.size(); i > 0; i--) {
+            for (int j = 0; j < i; j++) {
+                List<Byte> subListByte = baseListByte.subList(j, i);
+                if (resultContainer.containsKey(subListByte)) {
+                    buffer.setResult(convertListBytesToArr(subListByte), j, resultContainer.get(subListByte));
+                    return subListByte;
                 }
-                System.out.println();
-                if (map.containsKey(bufBytes)) {
-                    map.put(bufBytes, map.get(bufBytes) + 1);
-                  //  if(Objects.nonNull(buffer.getResultBytes()) && buffer.getResultBytes().length < bufBytes.length) {
-                        buffer.setResultBytes(bufBytes);
-                   // }
-                } else {
-                    map.put(bufBytes, 0);
-                }
+                resultContainer.put(subListByte, j);
+                // System.err.println(subListByte);
+                buffer.setResultBytes(convertListBytesToArr(subListByte));
             }
         }
-        return map;
+        return new ArrayList<>();
     }
-    /*
-    1
-    12
-    121
-    1212
-    2
-    21
-    212
-    1
-    12
-    2
-     */
+
+    private List<Byte> convertBytesToList(Byte[] bytes) {
+        //Uncomment to work.
+//        List byteList = Arrays.asList(bytes);
+        Byte[] byteqwe = new Byte[]{1, 2, 1, 2, 1, 2};
+        List byteList = Arrays.asList(byteqwe);
+        return new ArrayList<>(byteList);
+    }
+
+    private Byte[] convertListBytesToArr(List<Byte> list) {
+        if (Objects.isNull(list)) {
+            return new Byte[]{};
+        }
+        Byte[] bytes = new Byte[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            bytes[i] = list.get(i);
+        }
+        return bytes;
+    }
+
+    public static Byte[] bytesToWrapper(byte[] bytes) {
+        if (Objects.isNull(bytes)) {
+            return null;
+        }
+        Byte[] bytesResult = new Byte[bytes.length];
+        for (int i = 0; i < bytes.length; i++) {
+            bytesResult[i] = bytes[i];
+        }
+        return bytesResult;
+    }
 }
