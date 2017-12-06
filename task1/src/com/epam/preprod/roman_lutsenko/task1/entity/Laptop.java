@@ -1,5 +1,7 @@
 package com.epam.preprod.roman_lutsenko.task1.entity;
 
+import com.epam.preprod.roman_lutsenko.task4.annotations.SetAnnotation;
+
 public class Laptop extends Computer {
 	private double displayResolution;
 	private double weight;
@@ -18,6 +20,7 @@ public class Laptop extends Computer {
 		return displayResolution;
 	}
 
+	@SetAnnotation(name = "laptopDisplayResolution")
 	public void setDisplayResolution(double displayResolution) {
 		this.displayResolution = displayResolution;
 	}
@@ -26,6 +29,7 @@ public class Laptop extends Computer {
 		return weight;
 	}
 
+    @SetAnnotation(name = "laptopWeight")
 	public void setWeight(double weight) {
 		this.weight = weight;
 	}

@@ -1,5 +1,7 @@
 package com.epam.preprod.roman_lutsenko.task1.entity;
 
+import com.epam.preprod.roman_lutsenko.task4.annotations.SetAnnotation;
+
 public class FitnessBracelet extends PortableGadget {
 	private String display;
 	private String strapMaterial;
@@ -17,6 +19,7 @@ public class FitnessBracelet extends PortableGadget {
 		return display;
 	}
 
+    @SetAnnotation(name = "fitnessBraceletDisplay")
 	public void setDisplay(String display) {
 		this.display = display;
 	}
@@ -25,6 +28,7 @@ public class FitnessBracelet extends PortableGadget {
 		return strapMaterial;
 	}
 
+    @SetAnnotation(name = "fitnessBraceletStrapMaterial")
 	public void setStrapMaterial(String strapMaterial) {
 		this.strapMaterial = strapMaterial;
 	}

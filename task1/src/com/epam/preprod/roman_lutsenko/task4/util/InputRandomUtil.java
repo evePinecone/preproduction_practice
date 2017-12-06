@@ -12,9 +12,12 @@ public final class InputRandomUtil {
     /**
      * Blocked constructor.
      */
-    private InputRandomUtil() {}
+    private InputRandomUtil() {
+    }
+
     /**
      * Returns random int number.
+     *
      * @return int random number in range RANDOM_LOWER_THRESHOLD_NUMBER with delta = RANDOM_DELTA_NUMBER.
      */
     public static int getRandomInt() {
@@ -23,6 +26,7 @@ public final class InputRandomUtil {
 
     /**
      * Returns random long number.
+     *
      * @return long random number in range RANDOM_LOWER_THRESHOLD_NUMBER with delta = RANDOM_DELTA_NUMBER.
      */
     public static long getRandomLong() {
@@ -31,6 +35,7 @@ public final class InputRandomUtil {
 
     /**
      * Returns random double number.
+     *
      * @return double random number in range RANDOM_LOWER_THRESHOLD_NUMBER with delta = RANDOM_DELTA_NUMBER.
      */
     public static double getRandomDouble() {
@@ -39,12 +44,17 @@ public final class InputRandomUtil {
 
     /**
      * Returns double format number from range RANDOM_LOWER_THRESHOLD_NUMBER - low border and with delta = RANDOM_DELTA_NUMBER.
+     *
      * @param rangeWidth delta of the range.
-     * @param lowBorder low border of double number.
+     * @param lowBorder  low border of double number.
      * @return double random number.
      */
     public static double getRandomDouble(double rangeWidth, double lowBorder) {
         return (double) (Math.random() * rangeWidth + lowBorder);
+    }
+
+    public static String getString() {
+        return "string" + getRandomInt();
     }
 
 }
