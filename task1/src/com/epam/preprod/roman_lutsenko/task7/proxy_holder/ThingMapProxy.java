@@ -12,6 +12,8 @@ public class ThingMapProxy implements InvocationHandler {
      * Container for all fields of Thing element.
      */
     private Map<String, Object> map;
+    private final String GET_STRING_CONSTANT = "get";
+    private final String SET_STRING_CONSTANT = "set";
 
     public ThingMapProxy() {
         map = new HashMap<>();
@@ -19,25 +21,25 @@ public class ThingMapProxy implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        String[] string = methodField(method.getName());
-        if (isGet(string[0])) {
-            if (method.getReturnType().isPrimitive() && !map.containsKey(string[1])) {
+        String fieldName = methodField(method.getName());
+        if (isGet(method.getName())) {
+            if (method.getReturnType().isPrimitive() && !map.containsKey(fieldName)) {
                 return defaultValue(method.getReturnType());
             }
-            return map.get(string[1]);
+            return map.get(fieldName);
         }
-        if (isSet(string[0])) {
-            return map.put(string[1], args[0]);
+        if (isSet(method.getName())) {
+            return map.put(fieldName, args[0]);
         }
         return method.invoke(map, args);
     }
 
     private boolean isGet(String name) {
-        return Objects.equals(name, "get");
+        return name.startsWith(GET_STRING_CONSTANT);
     }
 
     private boolean isSet(String name) {
-        return Objects.equals(name, "set");
+        return name.startsWith(SET_STRING_CONSTANT);
     }
 
     /**
@@ -46,8 +48,8 @@ public class ThingMapProxy implements InvocationHandler {
      * @param str String to split.
      * @return Array of two string, contains method get or set with field.
      */
-    private String[] methodField(String str) {
-        return new String[]{str.substring(0, 3), str.substring(3)};
+    private String methodField(String str) {
+        return str.substring(3);
     }
 
     /**

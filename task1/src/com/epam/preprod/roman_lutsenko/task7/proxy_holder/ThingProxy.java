@@ -10,13 +10,14 @@ import java.lang.reflect.Method;
  */
 public class ThingProxy implements InvocationHandler {
     private Thing thing;
+    private final String SET_STRING_CONSTANT = "set";
 
     public ThingProxy(Thing thing) {
         this.thing = thing;
     }
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        if(method.getName().startsWith("set")) {
+        if(method.getName().startsWith(SET_STRING_CONSTANT)) {
             throw new UnsupportedOperationException();
         }
         return method.invoke(thing, args);
