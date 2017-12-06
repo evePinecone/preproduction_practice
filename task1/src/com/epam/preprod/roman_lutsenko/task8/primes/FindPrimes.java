@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.LinkedTransferQueue;
 
+/**
+ * Find prime numbers with simple Thread usage.
+ */
 public class FindPrimes {
 
     private List<Integer> arrayOfPrimes;
@@ -14,6 +17,13 @@ public class FindPrimes {
     private final int highBorder;
     private Queue<Integer> queue;
 
+    /**
+     * Constructor to create an instance of FindPrimes.
+     *
+     * @param numberOfThreads numberOfThread with which algorithm will work.
+     * @param lowBorder       lowest number from which searching will start.
+     * @param highBorder      to which searching will go.
+     */
     public FindPrimes(int numberOfThreads, int lowBorder, int highBorder) {
         this.numberOfThreads = numberOfThreads;
         this.lowBorder = lowBorder;
@@ -23,8 +33,11 @@ public class FindPrimes {
         setQueueWithAllDeltaPrimes();
     }
 
+    /**
+     * Fills up arrayOfPrimes with prime numbers in <b>numberOfThreads</b> threads.
+     */
     public void findPrimes() {
-        List <Thread> list = new ArrayList<>();
+        List<Thread> list = new ArrayList<>();
         for (int i = 0; i < numberOfThreads; i++) {
             Thread thread = new Thread(() -> {
                 while (!queue.isEmpty()) {
@@ -44,11 +57,9 @@ public class FindPrimes {
             });
             thread.start();
             list.add(thread);
-        };
-        //в метод и поставить таймер 10мс
-        for (Thread thread : list) {
-            while(thread.isAlive());
         }
+        ;
+        waitingAllThreads(list);
     }
 
     private void setQueueWithAllDeltaPrimes() {
@@ -58,9 +69,26 @@ public class FindPrimes {
         }
     }
 
+    /**
+     * Returns arrayOfPrimes.
+     *
+     * @return integer list of prime numbers.
+     */
     public List<Integer> getArrayOfPrimes() {
         Collections.sort(arrayOfPrimes);
         return arrayOfPrimes;
     }
 
+    private void waitingAllThreads(List<Thread> list) {
+        for (Thread thread : list) {
+            while (thread.isAlive()) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
 }

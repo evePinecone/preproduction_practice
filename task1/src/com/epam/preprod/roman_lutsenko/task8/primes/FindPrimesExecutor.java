@@ -9,6 +9,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedTransferQueue;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Find prime numbers with using Executor and it service.
+ */
 public class FindPrimesExecutor {
 
     private List<Integer> arrayOfPrimes;
@@ -17,6 +20,13 @@ public class FindPrimesExecutor {
     private final int highBorder;
     private Queue<Integer> queue;
 
+    /**
+     * Constructor to create an instance of FindPrimesExecutor.
+     *
+     * @param numberOfThreads numberOfThread with which algorithm will work.
+     * @param lowBorder       lowest number from which searching will start.
+     * @param highBorder      to which searching will go.
+     */
     public FindPrimesExecutor(int numberOfThreads, int lowBorder, int highBorder) {
         this.numberOfThreads = numberOfThreads;
         this.lowBorder = lowBorder;
@@ -26,6 +36,9 @@ public class FindPrimesExecutor {
         setQueueWithAllDeltaPrimes();
     }
 
+    /**
+     * Fills up arrayOfPrimes with prime numbers in <b>numberOfThreads</b> threads.
+     */
     public void findPrimes() {
         ExecutorService executorService = Executors.newFixedThreadPool(numberOfThreads);
         for (int i = 0; i < numberOfThreads; i++) {
@@ -63,6 +76,11 @@ public class FindPrimesExecutor {
         }
     }
 
+    /**
+     * Returns arrayOfPrimes.
+     *
+     * @return integer list of prime numbers.
+     */
     public List<Integer> getArrayOfPrimes() {
         Collections.sort(arrayOfPrimes);
         return arrayOfPrimes;
