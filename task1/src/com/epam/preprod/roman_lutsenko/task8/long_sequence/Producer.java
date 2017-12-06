@@ -1,18 +1,24 @@
 package com.epam.preprod.roman_lutsenko.task8.long_sequence;
 
 import java.io.File;
-import java.util.Arrays;
-import java.util.Objects;
 import java.util.Scanner;
 
+/**
+ * Initiation of finding algorithm.
+ * Produces output final result and intermediate result while thread Buffer works.
+ */
 public class Producer extends Thread {
     public static final Object MONITOR = new Object();
     public static final Object MONITOR_SETTED = new Object();
     public static final Object MONITOR_END = new Object();
 
     private final Buffer buffer;
-    private static String PATH = "\\task1\\testt";
 
+    /**
+     * Start of searcher program.
+     *
+     * @param args is null.
+     */
     public static void main(String[] args) {
         Buffer buffer = new Buffer();
         LongSequence longSequence = new LongSequence(buffer);
@@ -21,27 +27,36 @@ public class Producer extends Thread {
         producer.start();
     }
 
+    /**
+     * Set the Buffer element to classes.
+     * Must be one object that is added to LongSequence.
+     *
+     * @param buffer buffer object with which threads are communicated.
+     */
     public Producer(Buffer buffer) {
         this.buffer = buffer;
     }
 
     @Override
     public void run() {
-        while(true) {
+        while (true) {
             Scanner scanner = new Scanner(System.in);
+            File file = null;
             System.out.println("Enter file name");
-            String fileName = scanner.nextLine();
-            buffer.setFile(new File(PATH));
+            while (file == null || !file.isFile()) {
+                String fileName = scanner.nextLine();
+                file = new File(fileName);
+            }
+            buffer.setFile(file);
 
-
-            while (Objects.isNull(buffer.result)) {
+            while (!buffer.isEnd()) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 synchronized (MONITOR_SETTED) {
-                    try {
-                        MONITOR_SETTED.wait(100);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    System.out.println("Length of processed sequence " + buffer.getResultBytes().length);
+                    System.out.println("Length of processed sequence " + buffer.getResult().length);
                 }
             }
             synchronized (MONITOR_END) {

@@ -11,12 +11,20 @@ import java.util.Map;
 import java.util.Objects;
 
 import static com.epam.preprod.roman_lutsenko.task8.long_sequence.Producer.MONITOR;
-import static com.epam.preprod.roman_lutsenko.task8.long_sequence.Producer.MONITOR_END;
 
+/**
+ * Contains algorithm of searching and notify Producer about it progress by buffer sync.
+ */
 public class LongSequence extends Thread {
 
     private Buffer buffer;
 
+    /**
+     * Set the Buffer element to classes.
+     * Must be one object that is added to Producer.
+     *
+     * @param buffer buffer object with which threads are communicated.
+     */
     public LongSequence(Buffer buffer) {
         this.buffer = buffer;
     }
@@ -33,17 +41,10 @@ public class LongSequence extends Thread {
                     }
                 }
             }
-            byte[] bytes = getBytesFromFile(buffer.getFile().getName());
+            byte[] bytes = getBytesFromFile(buffer.getFile().getAbsolutePath());
             Byte[] bytesWrapper = bytesToWrapper(bytes);
-            List<Byte> listByte = getBiggestSequence(bytesWrapper);
-            synchronized (MONITOR_END) {
-                try {
-                    MONITOR_END.wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                buffer.clear();
-            }
+            getBiggestSequence(bytesWrapper);
+            buffer.clear();
         }
     }
 
@@ -56,29 +57,24 @@ public class LongSequence extends Thread {
         return null;
     }
 
-    private List<Byte> getBiggestSequence(Byte[] bytes) {
+    private void getBiggestSequence(Byte[] bytes) {
         List<Byte> baseListByte = convertBytesToList(bytes);
         Map<List<Byte>, Integer> resultContainer = new HashMap<>();
         for (int i = baseListByte.size(); i > 0; i--) {
-            for (int j = 0; j < i; j++) {
+            for (int j = 0; j <= i; j++) {
                 List<Byte> subListByte = baseListByte.subList(j, i);
-                if (resultContainer.containsKey(subListByte)) {
+                if (resultContainer.containsKey(subListByte) && buffer.getResult().length < subListByte.size()) {
                     buffer.setResult(convertListBytesToArr(subListByte), j, resultContainer.get(subListByte));
-                    return subListByte;
+                } else {
+                    resultContainer.put(subListByte, j);
                 }
-                resultContainer.put(subListByte, j);
-                // System.err.println(subListByte);
-                buffer.setResultBytes(convertListBytesToArr(subListByte));
             }
         }
-        return new ArrayList<>();
+        buffer.setEnd(true);
     }
 
     private List<Byte> convertBytesToList(Byte[] bytes) {
-        //Uncomment to work.
-//        List byteList = Arrays.asList(bytes);
-        Byte[] byteqwe = new Byte[]{1, 2, 1, 2, 1, 2};
-        List byteList = Arrays.asList(byteqwe);
+        List byteList = Arrays.asList(bytes);
         return new ArrayList<>(byteList);
     }
 
@@ -93,7 +89,7 @@ public class LongSequence extends Thread {
         return bytes;
     }
 
-    public static Byte[] bytesToWrapper(byte[] bytes) {
+    private static Byte[] bytesToWrapper(byte[] bytes) {
         if (Objects.isNull(bytes)) {
             return null;
         }

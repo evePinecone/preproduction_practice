@@ -7,11 +7,31 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Objects;
 
+/**
+ * Interface of creation strategy with reflection.
+ *
+ * @param <T>
+ */
 public interface InputReflectionStrategy<T extends Thing> {
 
+    /**
+     * Creation method for input thing.
+     *
+     * @param t       element to create.
+     * @param context context of the shop.
+     */
     void build(T t, Context context);
 
-    public default Object findMethodRandom(Class utilClass, Class typeMethod) {
+    /**
+     * Find input static method in utilClass to the type parameter typeMethod.
+     * Method need to be with no input parameters.
+     * If there is no such method in utilClass returns null value instead input element.
+     *
+     * @param utilClass  in where class need to find.
+     * @param typeMethod type of need element
+     * @return crated field or if no such method to creae returns null.
+     */
+    default Object findMethodRandom(Class utilClass, Class typeMethod) {
         Object object;
         Method[] inputMethods = utilClass.getMethods();
         for (Method inputMethod : inputMethods) {
