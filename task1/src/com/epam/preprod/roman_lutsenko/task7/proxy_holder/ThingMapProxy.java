@@ -9,7 +9,7 @@ import java.util.Objects;
 
 public class ThingMapProxy implements InvocationHandler {
     /**
-     * Container for all fields of Thing element.
+     * container for all fields of Thing element.
      */
     private Map<String, Object> map;
 

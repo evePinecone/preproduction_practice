@@ -29,7 +29,7 @@ import static com.epam.preprod.roman_lutsenko.task4.constants.CommandConstants.C
 import static com.epam.preprod.roman_lutsenko.task4.constants.CommandConstants.COMMAND_ID_SHOW_ORDERS_BETWEEN_DATE_TIME;
 
 /**
- * Container for commands in menu.
+ * container for commands in menu.
  */
 public class CommandsContainer {
 

@@ -10,7 +10,7 @@ import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 /**
- * Container for elements that extends Things. Based on array. Extension by step
+ * container for elements that extends Things. Based on array. Extension by step
  * STEP_RESIZE.
  *
  * @param <E>

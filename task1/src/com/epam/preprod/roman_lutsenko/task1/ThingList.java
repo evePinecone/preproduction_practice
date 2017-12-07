@@ -13,7 +13,7 @@ import com.epam.preprod.roman_lutsenko.task1.filters.Filter;
 import com.epam.preprod.roman_lutsenko.task1.filters.FilterableIterator;
 
 /**
- * Container for elements that extends Things. Based on array. Extension by step
+ * container for elements that extends Things. Based on array. Extension by step
  * STEP_RESIZE.
  * 
  * @author Roman_Lutsenko

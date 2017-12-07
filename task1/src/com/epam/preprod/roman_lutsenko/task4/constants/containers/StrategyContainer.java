@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
- * Container for all strategies specified with type plus index of type strategy.
+ * container for all strategies specified with type plus index of type strategy.
  * <b>1</b> - Keyboard strategy.
  * <b>2</b> - Random strategy.
  */

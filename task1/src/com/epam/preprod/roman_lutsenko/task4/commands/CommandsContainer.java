@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
- * Container for commands in menu.
+ * container for commands in menu.
  */
 public class CommandsContainer {
 
