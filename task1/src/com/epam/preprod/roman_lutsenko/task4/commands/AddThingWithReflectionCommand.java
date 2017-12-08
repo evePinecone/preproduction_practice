@@ -13,6 +13,7 @@ public class AddThingWithReflectionCommand implements Command {
     @Override
     public void execute(Context context) {
         Thing thing = chooseThingToADD();
+
         InputReflectionStrategy inputReflectionStrategy = chooseInputReflectionStrategy();
         inputReflectionStrategy.build(thing, context);
         System.out.println(thing);
