@@ -30,16 +30,17 @@ public class Shop implements Runnable{
 
 
     @Override
-    public void run() { // я не умею пользоваться дебагером)
+    public void run() {
         initContext(context);
         initServer(context);
+        new MenuController().menu(context);
     }
 
     private void initContext(Context context) {
         LocalProductDAO localProductDAO = new LocalProductDAO(fill());
         LocalCartDAO localCartDAO = new LocalCartDAO();
         LocalOrderDAO localOrderDAO = new LocalOrderDAO();
-        StrategyController strategyController = new StrategyController(); //эм, краш?
+        StrategyController strategyController = new StrategyController();
         ResourceBundle resourceBundle = getResourceBundle();
 
         LocalProductService localProductService = new LocalProductService(localProductDAO);
@@ -53,9 +54,9 @@ public class Shop implements Runnable{
         try {
             int i = 0;
             ServerSocket server = new ServerSocket(3000);
-            // this.simpleTcpServer = ;
+
             Thread thread = new  SimpleTcpServer(context, server);
-            thread.start(); //крашится тут дальше внутри
+            thread.start();
         } catch (UnknownHostException e) {
             System.out.println("UnknownHostException in Shop#initServer" + e);
         } catch (IOException e) {

@@ -1,8 +1,7 @@
 package com.epam.preprod.roman_lutsenko.task9.constants.container;
 
-import com.epam.preprod.roman_lutsenko.task4.commands.Command;
-import com.epam.preprod.roman_lutsenko.task4.commands.NoSuchCommand;
 import com.epam.preprod.roman_lutsenko.task9.commands.GetCountServerCommand;
+import com.epam.preprod.roman_lutsenko.task9.commands.GetNameItemAndPriceServerCommand;
 import com.epam.preprod.roman_lutsenko.task9.commands.NoSuchServerCommand;
 import com.epam.preprod.roman_lutsenko.task9.commands.ServerCommand;
 
@@ -10,6 +9,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import static com.epam.preprod.roman_lutsenko.task9.constants.ServerCommandConstants.SERVER_COMMAND_ID_GET_COUNT_ITEMS;
+import static com.epam.preprod.roman_lutsenko.task9.constants.ServerCommandConstants.SERVER_COMMAND_ID_GET_NAME_ITEM_AND_PRICE;
 import static com.epam.preprod.roman_lutsenko.task9.constants.ServerCommandConstants.SERVER_COMMAND_ID_NO_SUCH;
 
 
@@ -19,6 +19,7 @@ public class ServerCommandsContainer {
     public ServerCommandsContainer() {
         //Here put elements.
         commandsList.put(SERVER_COMMAND_ID_GET_COUNT_ITEMS, new GetCountServerCommand());
+        commandsList.put(SERVER_COMMAND_ID_GET_NAME_ITEM_AND_PRICE, new GetNameItemAndPriceServerCommand());
         commandsList.put(SERVER_COMMAND_ID_NO_SUCH, new NoSuchServerCommand());
     }
 

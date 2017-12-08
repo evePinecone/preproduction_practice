@@ -1,6 +1,9 @@
 package com.epam.preprod.roman_lutsenko.task9;
 
 import com.epam.preprod.roman_lutsenko.task4.context.Context;
+import com.epam.preprod.roman_lutsenko.task9.commands.ServerCommand;
+import com.epam.preprod.roman_lutsenko.task9.constants.container.ServerCommandsContainer;
+import com.epam.preprod.roman_lutsenko.task9.util.ParseTcpRequest;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -19,15 +22,14 @@ public class SimpleTcpServer extends Thread {
     public SimpleTcpServer(Context context, ServerSocket serverSocket) {
         this.serverSocket = serverSocket;
         this.context = context;
-       // setDaemon(true); блять. просто надо было не расчитывать сразу на полноценную работу я же думал что потоки будут жить пока магазин работает, а вешать магазин забыл
+        //setDaemon(true);
     }
 
     @Override
     public void run() {
-        System.err.println("run() start"); //всё, по ф8 офнулась
         try {
             while (true) {
-                Socket socket = serverSocket.accept(); // вот тут идет закрытие потока без единой ошибки и вообще ничего
+                Socket socket = serverSocket.accept();
                 System.err.println("run() accepted");
                 InputStream inputStream = new BufferedInputStream(socket.getInputStream());
 
@@ -37,12 +39,20 @@ public class SimpleTcpServer extends Thread {
                 // читаем 64кб от клиента, результат - кол-во реально принятых данных
                 int readBytes = inputStream.read(buf);
 
-                // создаём строку, содержащую полученную от клиента информацию
 
                 String readData = new String(buf, 0, readBytes);
-                if (readData.equalsIgnoreCase("get count")) {
-                    outputStream.write(("" + context.getLocalProductService().getAllItems().size()).getBytes());
-                }
+
+                String[] request = ParseTcpRequest.parseToRequestAndAttr(readData);
+
+                ServerCommandsContainer serverCommandsContainer = new ServerCommandsContainer();
+
+                ServerCommand serverCommand = serverCommandsContainer.getCommand(request[0]);
+                String response = serverCommand.execute(context, readData);
+
+                outputStream.write(response.getBytes());
+
+
+
                 outputStream.flush();
             }
             //socket.close();
