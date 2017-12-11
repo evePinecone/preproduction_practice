@@ -12,6 +12,10 @@ public class ServerCommandConstants {
     public static final String SERVER_COMMAND_ID_GET_COUNT_ITEMS = "get_count";
     public static final String SERVER_COMMAND_ID_GET_NAME_ITEM_AND_PRICE = "get_item";
 
+    public static final String SERVER_COMMAND_ID_HTTP_GET_COUNT_ITEMS = "\\shop\\count";
+    public static final String SERVER_COMMAND_ID_HTTP_GET_NAME_ITEM_AND_PRICE = "\\shop\\item";
+
+
     public static final String SERVER_COMMAND_ID_NO_SUCH = "noSuchCommand";
 
 }

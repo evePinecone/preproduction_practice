@@ -14,7 +14,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 
-public class SimpleTcpServer extends Thread {
+public class SimpleTcpServer implements Runnable {
 
     private ServerSocket serverSocket;
     private Context context;

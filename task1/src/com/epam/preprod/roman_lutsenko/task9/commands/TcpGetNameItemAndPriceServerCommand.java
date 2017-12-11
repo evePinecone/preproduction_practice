@@ -7,9 +7,9 @@ import com.epam.preprod.roman_lutsenko.task9.util.ParseTcpRequest;
 
 import java.util.Objects;
 
-public class GetNameItemAndPriceServerCommand implements ServerCommand {
+public class TcpGetNameItemAndPriceServerCommand implements ServerCommand {
 
-    private static final String NO_SUCH_ITEM_IN_SHOP = "No item with this id in shop";
+    public static final String NO_SUCH_ITEM_IN_SHOP = "No item with this id in shop";
 
     @Override
     public String execute(Context context, String request) {

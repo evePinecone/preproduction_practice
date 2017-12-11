@@ -52,11 +52,13 @@ public class Shop implements Runnable{
 
     public void initServer(Context context) {
         try {
-            int i = 0;
-            ServerSocket server = new ServerSocket(3000);
+            ServerSocket serverTCP = new ServerSocket(3000);
+            Runnable threadTCP = new  SimpleTcpServer(context, serverTCP);
+            new Thread(threadTCP).start();
+            ServerSocket serverHTTP = new ServerSocket(8080);
+            Runnable threadHTTP = new SimpleHttpServer(context, serverHTTP);
+            new Thread(threadHTTP).start();
 
-            Thread thread = new  SimpleTcpServer(context, server);
-            thread.start();
         } catch (UnknownHostException e) {
             System.out.println("UnknownHostException in Shop#initServer" + e);
         } catch (IOException e) {

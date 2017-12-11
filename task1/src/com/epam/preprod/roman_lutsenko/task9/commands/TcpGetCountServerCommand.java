@@ -2,7 +2,7 @@ package com.epam.preprod.roman_lutsenko.task9.commands;
 
 import com.epam.preprod.roman_lutsenko.task4.context.Context;
 
-public class GetCountServerCommand implements ServerCommand {
+public class TcpGetCountServerCommand implements ServerCommand {
 
     @Override
     public String execute(Context context, String request) {
