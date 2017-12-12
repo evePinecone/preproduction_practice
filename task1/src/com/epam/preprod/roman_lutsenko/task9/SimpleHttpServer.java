@@ -15,6 +15,10 @@ import java.util.TimeZone;
 
 import static com.epam.preprod.roman_lutsenko.task9.util.ParseHttpRequest.getPath;
 
+
+/**
+ * Thread class for implementation HTTP server on port that sets in ServerSocket variable our local machine
+ */
 public class SimpleHttpServer implements Runnable {
     private static final String NOT_FOUND_RESPONSE_404 = "%s Content-Type: text/plain\nConnection: close\nServer: SimpleHTTPServer\nPragma: no-cache\n\n";
     private static final String BAD_REQUEST_RESPONSE_400 = "%sConnection: close\nServer: SimpleHttpServer\nPragma: no-cache\n\n";
@@ -23,6 +27,12 @@ public class SimpleHttpServer implements Runnable {
     private Context context;
 
 
+    /**
+     * Initiating common context in server and shop.
+     *
+     * @param context      context of our shop
+     * @param serverSocket opened socked for server.
+     */
     public SimpleHttpServer(Context context, ServerSocket serverSocket) {
         this.context = context;
         this.serverSocket = serverSocket;
@@ -53,7 +63,7 @@ public class SimpleHttpServer implements Runnable {
                 ServerCommand serverCommand = new ServerCommandsContainer().getCommand(path);
                 String response = serverCommand.execute(context, readData);
 
-                if(Objects.nonNull(response)) {
+                if (Objects.nonNull(response)) {
                     outputStream.write(response.getBytes());
                     socket.close();
                     continue;
@@ -87,7 +97,7 @@ public class SimpleHttpServer implements Runnable {
         df.setTimeZone(TimeZone.getTimeZone("GMT"));
         response = response + "Date: " + df.format(new Date()) + "\n";
 
-        response = String.format(NOT_FOUND_RESPONSE_404 , response);
+        response = String.format(NOT_FOUND_RESPONSE_404, response);
 
         return response + "File " + path + " not found!";
     }

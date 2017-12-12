@@ -8,6 +8,9 @@ import java.util.Objects;
 import static com.epam.preprod.roman_lutsenko.task9.commands.TcpGetNameItemAndPriceServerCommand.NO_SUCH_ITEM_IN_SHOP;
 import static com.epam.preprod.roman_lutsenko.task9.util.ParseHttpRequest.extract;
 
+/**
+ * HTTP interpretation of get_item command.
+ */
 public class HttpGetNameItemAndPriceServerCommand implements ServerCommand {
 
     private static final String NO_SUCH_ELEMENT = "No element with such ID";
@@ -16,7 +19,7 @@ public class HttpGetNameItemAndPriceServerCommand implements ServerCommand {
     @Override
     public String execute(Context context, String request) {
         String result = extract(request, GET_INFO_PARAMETER, " ");
-        if(Objects.isNull(result)) {
+        if (Objects.isNull(result)) {
             return NO_SUCH_ELEMENT;
         }
         Integer id = Integer.parseInt(result);

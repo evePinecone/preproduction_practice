@@ -15,7 +15,6 @@ import com.epam.preprod.roman_lutsenko.task4.services.impl.LocalProductService;
 import com.epam.preprod.roman_lutsenko.task4.util.InputUtil;
 
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.UnknownHostException;
 import java.util.HashMap;
@@ -23,7 +22,10 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-public class Shop implements Runnable{
+/**
+ * Class for control our shop.
+ */
+public class Shop implements Runnable {
 
     private Context context;
     private SimpleTcpServer simpleTcpServer;
@@ -36,7 +38,7 @@ public class Shop implements Runnable{
         new MenuController().menu(context);
     }
 
-    public void initContext(Context context) {
+    private void initContext(Context context) {
         LocalProductDAO localProductDAO = new LocalProductDAO(fill());
         LocalCartDAO localCartDAO = new LocalCartDAO();
         LocalOrderDAO localOrderDAO = new LocalOrderDAO();
@@ -50,10 +52,10 @@ public class Shop implements Runnable{
         this.context = context = new Context(localProductService, localCartService, localOrderService, strategyContext, resourceBundle);
     }
 
-    public void initServer(Context context) {
+    private void initServer(Context context) {
         try {
             ServerSocket serverTCP = new ServerSocket(3000);
-            Runnable threadTCP = new  SimpleTcpServer(context, serverTCP);
+            Runnable threadTCP = new SimpleTcpServer(context, serverTCP);
             new Thread(threadTCP).start();
             ServerSocket serverHTTP = new ServerSocket(8080);
             Runnable threadHTTP = new SimpleHttpServer(context, serverHTTP);
@@ -67,7 +69,7 @@ public class Shop implements Runnable{
 
     }
 
-    private static ResourceBundle getResourceBundle(){
+    private static ResourceBundle getResourceBundle() {
         System.out.println("Enter locale");
         String localeString = InputUtil.stringValidationInput();
         return ResourceBundle.getBundle("resources\\ThingsLocalisation", new Locale(localeString));

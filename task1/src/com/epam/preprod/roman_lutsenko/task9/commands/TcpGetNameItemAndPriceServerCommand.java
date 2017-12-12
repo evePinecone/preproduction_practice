@@ -7,6 +7,9 @@ import com.epam.preprod.roman_lutsenko.task9.util.ParseTcpRequest;
 
 import java.util.Objects;
 
+/**
+ * TCP Command for input command "get_item=ID";
+ */
 public class TcpGetNameItemAndPriceServerCommand implements ServerCommand {
 
     public static final String NO_SUCH_ITEM_IN_SHOP = "No item with this id in shop";
@@ -16,7 +19,7 @@ public class TcpGetNameItemAndPriceServerCommand implements ServerCommand {
         Integer id = getIdFromRequest(request);
         StringBuilder response = new StringBuilder();
         Thing thing = context.getLocalProductService().get(id);
-        if(Objects.isNull(thing)){
+        if (Objects.isNull(thing)) {
             return NO_SUCH_ITEM_IN_SHOP;
         }
         response.append(thing.getNameModel());

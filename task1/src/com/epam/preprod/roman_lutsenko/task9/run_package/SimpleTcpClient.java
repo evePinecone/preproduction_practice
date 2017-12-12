@@ -4,10 +4,13 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Scanner;
 
+/**
+ * Client for TCP server.
+ */
 public class SimpleTcpClient extends Thread {
     public static void main(String args[]) {
         try {
-            while(true) {
+            while (true) {
                 Socket s = new Socket(InetAddress.getLocalHost(), 3000);
                 SimpleTcpClient simpleTcpClient = new SimpleTcpClient();
                 simpleTcpClient.showAvailableRequest();

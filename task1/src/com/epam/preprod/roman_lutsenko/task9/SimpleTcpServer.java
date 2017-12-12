@@ -13,12 +13,20 @@ import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-
+/**
+ * Thread class for implementation TCP server on port that sets in ServerSocket variable our local machine.
+ */
 public class SimpleTcpServer implements Runnable {
 
     private ServerSocket serverSocket;
     private Context context;
 
+    /**
+     * Initiating common context in server and shop.
+     *
+     * @param context      context of our shop
+     * @param serverSocket opened socked for server.
+     */
     public SimpleTcpServer(Context context, ServerSocket serverSocket) {
         this.serverSocket = serverSocket;
         this.context = context;

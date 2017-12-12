@@ -2,6 +2,9 @@ package com.epam.preprod.roman_lutsenko.task9.util;
 
 import java.io.File;
 
+/**
+ * Util method for parsing http request.
+ */
 public class ParseHttpRequest {
 
     public static String extract(String str, String start, String end) {
