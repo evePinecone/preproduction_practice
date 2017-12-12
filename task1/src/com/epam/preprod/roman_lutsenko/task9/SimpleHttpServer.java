@@ -16,6 +16,9 @@ import java.util.TimeZone;
 import static com.epam.preprod.roman_lutsenko.task9.util.ParseHttpRequest.getPath;
 
 public class SimpleHttpServer implements Runnable {
+    private static final String NOT_FOUND_RESPONSE_404 = "%s Content-Type: text/plain\nConnection: close\nServer: SimpleHTTPServer\nPragma: no-cache\n\n";
+    private static final String BAD_REQUEST_RESPONSE_400 = "%sConnection: close\nServer: SimpleHttpServer\nPragma: no-cache\n\n";
+
     private ServerSocket serverSocket;
     private Context context;
 
@@ -47,7 +50,6 @@ public class SimpleHttpServer implements Runnable {
                     socket.close();
                     continue;
                 }
-                System.err.println("PATH = " + path);
                 ServerCommand serverCommand = new ServerCommandsContainer().getCommand(path);
                 String response = serverCommand.execute(context, readData);
 
@@ -74,10 +76,7 @@ public class SimpleHttpServer implements Runnable {
         df.setTimeZone(TimeZone.getTimeZone("GMT"));
         response = response + "Date: " + df.format(new Date()) + "\n";
 
-        return response
-                + "Connection: close\n"
-                + "Server: SimpleHttpServer\n"
-                + "Pragma: no-cache\n\n";
+        return String.format(BAD_REQUEST_RESPONSE_400, response);
 
     }
 
@@ -88,7 +87,7 @@ public class SimpleHttpServer implements Runnable {
         df.setTimeZone(TimeZone.getTimeZone("GMT"));
         response = response + "Date: " + df.format(new Date()) + "\n";
 
-        response = String.format("%s Content-Type: text/plain\nConnection: close\nServer: SimpleHTTPServer\nPragma: no-cache\n\n", response);
+        response = String.format(NOT_FOUND_RESPONSE_404 , response);
 
         return response + "File " + path + " not found!";
     }

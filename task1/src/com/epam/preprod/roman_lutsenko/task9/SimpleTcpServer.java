@@ -22,7 +22,6 @@ public class SimpleTcpServer implements Runnable {
     public SimpleTcpServer(Context context, ServerSocket serverSocket) {
         this.serverSocket = serverSocket;
         this.context = context;
-        //setDaemon(true);
     }
 
     @Override
@@ -51,11 +50,8 @@ public class SimpleTcpServer implements Runnable {
 
                 outputStream.write(response.getBytes());
 
-
-
                 outputStream.flush();
             }
-            //socket.close();
         } catch (IOException e) {
             System.err.println("init error: " + e);
         }

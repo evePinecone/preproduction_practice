@@ -36,7 +36,7 @@ public class Shop implements Runnable{
         new MenuController().menu(context);
     }
 
-    private void initContext(Context context) {
+    public void initContext(Context context) {
         LocalProductDAO localProductDAO = new LocalProductDAO(fill());
         LocalCartDAO localCartDAO = new LocalCartDAO();
         LocalOrderDAO localOrderDAO = new LocalOrderDAO();
