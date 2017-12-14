@@ -32,11 +32,7 @@ out
 task1.iml
 ### Java template
 # Compiled class file
-*.class
-
 # Log file
-*.log
-
 # BlueJ files
 *.ctxt
 
@@ -44,13 +40,9 @@ task1.iml
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.ear
-*.zip
 *.tar.gz
-*.rar
-
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 ### Eclipse template
@@ -107,3 +99,14 @@ local.properties
 
 .classpath
 .project
+.gradle/
+gradlew
+gradlew.bat
+task10_gradle/src/main/java/
+task10_gradle/src/main/resources/
+task10_gradle/src/main/webapp/WEB-INF/
+task10_gradle/src/test/
+!/task10_gradle/gradle/wrapper/gradle-wrapper.jar
+task10_gradle/.gradle/
+task10_gradle/gradlew
+task10_gradle/gradlew.bat
