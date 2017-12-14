@@ -563,6 +563,7 @@
 			position: relative;
 		}
 
+		
 	.homepage #logo {
 		display: none;
 	}
@@ -621,7 +622,7 @@
 				#nav > ul > li:first-child {
 					margin-left: 0;
 				}
-
+				
 				#nav > ul > li.active a {
 					color: white;
 				}
@@ -629,6 +630,7 @@
 				#nav > ul > li > ul {
 					display: none;
 				}
+		
 
 /* Dropotron */
 
