@@ -14,7 +14,8 @@
 		<script src="js/jquery.dropotron.min.js"></script>
 		<script src="js/skel.min.js"></script>
 		<script src="js/skel-layers.min.js"></script>
-		<script src="js/init.js"></script>
+        <script src="js/init.js"></script>
+        <script src="js/registration.js"></script>
 		<noscript>
 			<link rel="stylesheet" href="css/skel.css" />
 			<link rel="stylesheet" href="css/style.css" />
@@ -66,30 +67,30 @@
                             <div class="row double">
                                 <!--  -->
                                     <div class="6u">
-                                            <form action="#" method="POST">
-                                        <header class="major">
-                                            <h2>Registration</h2>
-                                            <span class="byline"></span>
-                                        </header>
-                                        <div>
-                                            <input name="name" placeholder="Name" type="text" />
-                                        </div>
-                                        <div >
-                                            <input name="email" placeholder="Email" type="email" />
-                                        </div>
-                                        <div >
-                                            <input name="phone" placeholder="Phone number" type="text"></input>
-                                        </div>
-                                        <div >
-                                            <input name="password" placeholder="Password" type="password" />
-                                        </div>
-                                        <div >
-                                            <input name="password" placeholder="Confirm password" type="password" />
-                                        </div>
-                                    
-                                        <ul class="actions">
-                                                <li><input type="submit" class="special" value="Submit" /></li>
-                                                <li><input type="reset" class="alt" value="Reset" /></li>
+                                        <form onsubmit="return validateName()" name="registrationForm" action="#" method="POST">
+                                            <header class="major">
+                                                <h2>Registration</h2>
+                                                <span class="byline"></span>
+                                            </header>
+                                            <div>
+                                                <input id = "1" name="name" placeholder="Name" type="text" />
+                                            </div>
+                                            <div >
+                                                <input name="email" placeholder="Email" type="email" />
+                                            </div>
+                                            <div >
+                                                <input name="phone" placeholder="Phone number" type="text"></input>
+                                            </div>
+                                            <div >
+                                                <input name="password" placeholder="Password" type="password" />
+                                            </div>
+                                            <div >
+                                                <input name="password" placeholder="Confirm password" type="password" />
+                                            </div>
+                                        
+                                            <ul class="actions">
+                                                    <li><input type="submit" class="special" value="Submit" /></li>
+                                                    <li><input type="reset" class="alt" value="Reset" /></li>
                                             </ul>
                                         </form>
                                     </div>
