@@ -1,12 +1,14 @@
 group 'com.epam.preprod.roman_lutsenko'
 version '0.1'
 
+
+String tomcatHomeWebapps = System.getenv("CATALINA_HOME")+"/webapps"
+
 apply plugin: 'java'
 apply plugin: 'war'
 apply plugin: 'wrapper'
 
 sourceCompatibility = 1.8
-
 
 
 repositories {
@@ -17,8 +19,6 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
-
-String tomcatHomeWebapps = "D:/"
 
 task copyJarToBin {
     doLast {
@@ -31,8 +31,5 @@ task copyJarToBin {
 }
 
 build.finalizedBy(copyJarToBin)
-//war {
-//    setBuildDir("D:\\");
-//}
 
 
