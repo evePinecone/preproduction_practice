@@ -16,7 +16,9 @@
     <script src="js/skel.min.js"></script>
     <script src="js/skel-layers.min.js"></script>
     <script src="js/init.js"></script>
-    <script src="js/registration.js"></script>
+    <!-- <script src="js/registration.js"></script> -->
+    <!-- to use js validation. -->
+    <script src="js/registration_jq.js"></script> 
     <noscript>
 			<link rel="stylesheet" href="css/skel.css" />
 			<link rel="stylesheet" href="css/style.css" />
@@ -68,8 +70,9 @@
             <section class="container">
                 <div class="row double">
                     <div class="6u">
-                        <!-- <form id="qwe" onsubmit="return validateFields()" name="registrationForm" method="POST"> -->
-                        <form id="form1" name="registrationForm" method="POST">
+                            <!-- onsubmit="return validateFields()" -->
+                        <form id="form1"  name="registrationForm" method="POST">
+                        <!-- <form id="form1" name="registrationForm" method="POST"> -->
                             <header class="major">
                                 <h2 class="">Registration</h2>
                                 <span class="byline"></span>

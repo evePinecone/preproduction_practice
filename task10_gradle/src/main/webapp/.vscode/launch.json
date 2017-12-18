@@ -8,7 +8,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome",
-            "url": "file:///C:/Users/inc_f/IdeaProjects/preproduction_practice/task10_gradle/src/main/webapp/registration.html",
+            "url": "file:///C:/Users/Roman_Lutsenko/preproduction_practice/preproduction_practice/task10_gradle/src/main/webapp/registration.html",
             "webRoot": "${workspaceFolder}"
         }
         // },
