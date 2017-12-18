@@ -21,11 +21,11 @@ dependencies {
 }
 
 task copyJarToBin {
-    doLast {
-        copy {
-            from 'build/libs/task10_gradle-0.1.war'
-            into tomcatHomeWebapps
-        }
+        doLast {
+            copy {
+                from 'build/libs/task10_gradle-0.1.war'
+                into tomcatHomeWebapps
+            }
 
     }
 }
