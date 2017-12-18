@@ -1,12 +1,10 @@
-<!DOCTYPE HTML>
-<!--
-	Solarize by TEMPLATED
-	templated.co @templatedco
-	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
--->
-<html>
+<%@include file="/WEB-INF/jspf/directives/page.jspf"%>
 
-<head>
+<!DOCTYPE HTML>
+<html>
+<%-- <%@include file="/WEB-INF/jspf/head.jspf"%> --%>
+
+ <head>
     <title>PineconeEve shop</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="description" content="" />
@@ -25,52 +23,17 @@
 </head>
 
 <body class="homepage">
-
-    <!-- Header Wrapper -->
     <div class="wrapper style1">
 
-        <!-- Header -->
-        <div id="header">
-            <div class="container">
-
-                <!-- Logo -->
-                <h1><a href="catalog.html" id="logo">PineconeEve Shop</a></h1>
-
-                <!-- Nav -->
-
-                <nav id="nav">
-                    <ul>
-                        <li class="active"><a href="registration.jsp">Home</a></li>
-                        <!-- <li class="active"><a href="index.html">Home</a></li> -->
-                        <li><a href="catalog.html">Catalog</a></li>
-                        <li><a href="no-sidebar.html">About</a></li>
-                        <li>
-                            <a href="">%username%</a>
-                            <ul>
-                                <li><a href="#">Sign in</a></li>
-                                <li><a href="registration.html">Registration</a></li>
-                                <li>
-                                    <a href="">%language%</a>
-                                    <ul>
-                                        <li><a href="#">English</a></li>
-                                        <li><a href="#">Русский</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-
-
+        <%@include file="/WEB-INF/jspf/header.jspf"%>
+     
         <!-- Field registration -->
-        <div class="wrapper style2">
+        <div class="wrapper style2"> 
             <section class="container">
                 <div class="row double">
                     <div class="6u">
                         <!-- <form id="qwe" onsubmit="return validateFields()" name="registrationForm" method="POST"> -->
-                        <form id="form1" name="registrationForm" method="POST">
+                        <form id="form1" action="controller" name="registrationForm" method="POST">
                             <header class="major">
                                 <h2 class="">Registration</h2>
                                 <span class="byline"></span>
@@ -112,27 +75,7 @@
         </div>
 
         <!-- Footer -->
-        <div id="footer">
-            <section class="container">
-                <header class="major">
-                    <h2>Connect with us</h2>
-                    <span class="byline">Integer sit amet pede vel arcu aliquet pretium</span>
-                </header>
-                <ul class="icons">
-                    <li class="active"><a href="#" class="fa fa-facebook"><span>Facebook</span></a></li>
-                    <li><a href="#" class="fa fa-twitter"><span>Twitter</span></a></li>
-                    <li><a href="#" class="fa fa-dribbble"><span>Pinterest</span></a></li>
-                    <li><a href="#" class="fa fa-google-plus"><span>Google+</span></a></li>
-                </ul>
-                <hr />
-            </section>
-
-            <!-- Copyright -->
-            <div id="copyright">
-                Design: <a href="http://templated.co">TEMPLATED</a> Images: <a href="http://unsplash.com">Unsplash</a> (<a href="http://unsplash.com/cc0">CC0</a>)
-            </div>
-        </div>
-
+        <%@include file="/WEB-INF/jspf/footer.jspf"%>
+    </div>
 </body>
-
 </html>

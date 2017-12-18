@@ -110,3 +110,4 @@ task10_gradle/src/test/
 task10_gradle/.gradle/
 task10_gradle/gradlew
 task10_gradle/gradlew.bat
+.vscode
