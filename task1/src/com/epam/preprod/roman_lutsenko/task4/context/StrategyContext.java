@@ -11,7 +11,7 @@ import java.util.Map;
 public class StrategyContext {
 
     /**
-     * Container for strategies.
+     * container for strategies.
      */
     private Map<Class, InputStrategy> strategyMap = new HashMap<>();
 

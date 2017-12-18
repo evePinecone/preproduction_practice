@@ -1,4 +1,4 @@
-package com.epam.preprod.roman_lutsenko.task4;
+package com.epam.preprod.roman_lutsenko.task9;
 
 import com.epam.preprod.roman_lutsenko.task1.entity.Laptop;
 import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
@@ -14,19 +14,31 @@ import com.epam.preprod.roman_lutsenko.task4.services.impl.LocalOrderService;
 import com.epam.preprod.roman_lutsenko.task4.services.impl.LocalProductService;
 import com.epam.preprod.roman_lutsenko.task4.util.InputUtil;
 
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-public class TestCart {
+/**
+ * Class for control our shop.
+ */
+public class Shop implements Runnable {
 
-    public TestCart() {
-        main(new String[]{});
+    private Context context;
+    private SimpleTcpServer simpleTcpServer;
+
+
+    @Override
+    public void run() {
+        initContext(context);
+        initServer(context);
+        new MenuController().menu(context);
     }
 
-    public static void main(String[] args) {
-
+    private void initContext(Context context) {
         LocalProductDAO localProductDAO = new LocalProductDAO(fill());
         LocalCartDAO localCartDAO = new LocalCartDAO();
         LocalOrderDAO localOrderDAO = new LocalOrderDAO();
@@ -37,9 +49,30 @@ public class TestCart {
         LocalCartService localCartService = new LocalCartService(localCartDAO);
         LocalOrderService localOrderService = new LocalOrderService(localOrderDAO);
         StrategyContext strategyContext = strategyController.getStrategyContext();
+        this.context = context = new Context(localProductService, localCartService, localOrderService, strategyContext, resourceBundle);
+    }
 
-        Context context = new Context(localProductService, localCartService, localOrderService, strategyContext, resourceBundle);
-        new MenuController().menu(context);
+    private void initServer(Context context) {
+        try {
+            ServerSocket serverTCP = new ServerSocket(3000);
+            Runnable threadTCP = new SimpleTcpServer(context, serverTCP);
+            new Thread(threadTCP).start();
+            ServerSocket serverHTTP = new ServerSocket(8080);
+            Runnable threadHTTP = new SimpleHttpServer(context, serverHTTP);
+            new Thread(threadHTTP).start();
+
+        } catch (UnknownHostException e) {
+            System.out.println("UnknownHostException in Shop#initServer" + e);
+        } catch (IOException e) {
+            System.out.println("IOException in Shop#initServer" + e);
+        }
+
+    }
+
+    private static ResourceBundle getResourceBundle() {
+        System.out.println("Enter locale");
+        String localeString = InputUtil.stringValidationInput();
+        return ResourceBundle.getBundle("resources\\ThingsLocalisation", new Locale(localeString));
     }
 
     private static Map<Integer, Thing> fill() {
@@ -53,11 +86,5 @@ public class TestCart {
             productList.put(laptop.getId(), laptop);
         }
         return productList;
-    }
-
-    private static ResourceBundle getResourceBundle(){
-        System.out.println("Enter locale");
-        String localeString = InputUtil.stringValidationInput();
-        return ResourceBundle.getBundle("resources\\ThingsLocalisation", new Locale(localeString));
     }
 }
