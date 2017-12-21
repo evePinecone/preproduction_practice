@@ -1,5 +1,5 @@
 window.onload = function() {
-    var form = $("#form1");
+    var form = $("#registration_form");
     form.submit(function(event) {
         var error = false;
         var emailRegExp = /^[A-z0-9._-]+@[A-z0-9.-]+\.[A-z]{2,4}$/;
