@@ -1,0 +1,35 @@
+group 'com.epam.preprod.roman_lutsenko'
+version '0.1'
+
+
+String tomcatHomeWebapps = System.getenv("CATALINA_HOME")+"/webapps"
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'wrapper'
+
+sourceCompatibility = 1.8
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+
+task copyJarToBin {
+    doLast {
+        copy {
+            from 'build/libs/task10_gradle-0.1.war'
+            into tomcatHomeWebapps
+        }
+
+    }
+}
+
+build.finalizedBy(copyJarToBin)
+
+

@@ -4,7 +4,6 @@ import com.epam.preprod.roman_lutsenko.task1.entity.Laptop;
 import com.epam.preprod.roman_lutsenko.task1.entity.Thing;
 import com.epam.preprod.roman_lutsenko.task4.context.Context;
 import com.epam.preprod.roman_lutsenko.task4.services.impl.LocalProductService;
-import com.epam.preprod.roman_lutsenko.task9.run_package.SimpleTcpClient;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -52,10 +51,7 @@ public class ServerTest {
     public void tcpServerReturnCount5() {
         try {
             Socket s = new Socket(InetAddress.getLocalHost(), 3000);
-            SimpleTcpClient simpleTcpClient = new SimpleTcpClient();
-
             String request = "get_count";
-
             s.getOutputStream().write(request.getBytes());
 
             byte buf[] = new byte[64 * 1024];
@@ -74,10 +70,7 @@ public class ServerTest {
     public void tcpServerGetItem1() {
         try {
             Socket s = new Socket(InetAddress.getLocalHost(), 3000);
-            SimpleTcpClient simpleTcpClient = new SimpleTcpClient();
-
             String request = "get_item=1";
-
             s.getOutputStream().write(request.getBytes());
 
             byte buf[] = new byte[64 * 1024];
