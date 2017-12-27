@@ -14,7 +14,6 @@
     <script src="js/skel.min.js"></script>
     <script src="js/skel-layers.min.js"></script>
     <script src="js/init.js"></script>
-    <script src="js/registration.js"></script>
     <noscript>
 			<link rel="stylesheet" href="css/skel.css" />
 			<link rel="stylesheet" href="css/style.css" />
@@ -32,39 +31,37 @@
             <section class="container">
                 <div class="row double">
                     <div class="6u">
-                        <!-- <form id="qwe" onsubmit="return validateFields()" name="registrationForm" method="POST"> -->
-                        <form id="form1" action="controller" name="registrationForm" method="POST">
+                         <form id="registration_form" action="controller" name="registrationForm" method="POST">
                             <header class="major">
                                 <h2 class="">Registration</h2>
                                 <span class="byline"></span>
                             </header>
                             <div class="form__item">
-                                <input name="name" placeholder="Name" type="text" title="Enter your name" />
+                                <input id="name" name="name" placeholder="Name" type="text" title="Enter your name" />
                                 <div class="invalid_input">Invalid name</div>
                             </div>
                             <div class="form__item">
-                                <input name="email" placeholder="Email" type="email" />
+                                <input id="email" name="email" placeholder="Email" type="email" />
                                 <div class="invalid_input">Invalid email</div>
                             </div>
                             <div class="form__item">
-                                <input name="phone" placeholder="Phone number" type="text"></input>
+                                <input id="phone" name="phone" placeholder="Phone number" type="text"></input>
                                 <div class="invalid_input">Invalid phone simple "+3801112223"</div>
                             </div>
                             <div class="form__item">
-                                <input name="password" placeholder="Password" type="password" />
-                                <div class="invalid_input">Invalid password</div>
+                                <input id="password" name="password" placeholder="Password" type="password" />
+                                <div id="password_" class="invalid_input">Invalid password</div>
                             </div>
                             <div class="form__item">
-                                <input name="password_confirm" placeholder="Confirm password" type="password" />
-                                <div class="invalid_input">Invalid password</div>
+                                <input id="password_confirm" name="password_confirm" placeholder="Confirm password" type="password" />
+                                <div id="password_confirm_" class="invalid_input">Invalid password</div>
                             </div>
 
                             <ul class="actions">
-                                <li><input type="submit" class="special" value="Submit" /></li>
+                                <li><input id="submit" type="submit" class="special" value="Submit" /></li>
                                 <li><input href="#" type="reset" class="alt" value="Reset" /></li>
                             </ul>
                         </form>
-
                     </div>
                     <!-- </form> -->
                     <!-- <div class="6u">
@@ -77,5 +74,6 @@
         <!-- Footer -->
         <%@include file="/WEB-INF/jspf/footer.jspf"%>
     </div>
+     <script src="js/registration_jq.js"></script>
 </body>
 </html>

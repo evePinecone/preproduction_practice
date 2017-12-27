@@ -1,0 +1,13 @@
+<web-app>
+
+    <servlet>
+        <servlet-name>controller</servlet-name>
+        <servlet-class>com.epam.preprod.roman_lutsenko.servlets.RegistrationServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>controller</servlet-name>
+        <url-pattern>/controller</url-pattern>
+    </servlet-mapping>
+
+</web-app>
