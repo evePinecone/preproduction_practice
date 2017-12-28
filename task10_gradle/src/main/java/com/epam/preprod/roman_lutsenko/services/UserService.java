@@ -20,25 +20,25 @@ public interface UserService {
      * @param phone unique index of user in container.
      * @return User with such phone, or null if user with such number didn't find.
      */
-    User get(String phone);
+    User get(Integer phone);
 
     /**
      * Returns map of user from container.
      * @return Map with all users;
      */
-    Map<String, User> getAllUsers();
+    Map<Integer, User> getAllUsers();
 
     /**
      * Removes user from container with such phone.
      * @param phone Phone of removing user.
      * @return Result of operation. <b>true</b> if user removed succesfull, <b>false</b> if no such user.
      */
-    boolean remove(String phone);
+    boolean remove(Integer phone);
 
     /**
      * Check if user with such phone contains in container.
      * @param phone Unique index of user in container.
      * @return <b>true</b> if such user contains in our container.
      */
-    boolean contains(String phone);
+    boolean contains(Integer phone);
 }

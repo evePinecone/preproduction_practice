@@ -1,7 +1,5 @@
 package com.epam.preprod.roman_lutsenko.util;
 
-import java.util.regex.Matcher;
-
 public class ParseInputData {
 
     public static Integer phoneFromString(String string) {
