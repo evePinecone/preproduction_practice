@@ -74,6 +74,6 @@
         <!-- Footer -->
         <%@include file="/WEB-INF/jspf/footer.jspf"%>
     </div>
-     <script src="js/registration_jq.js"></script>
+    <script src="js/registration_jq.js"></script>
 </body>
 </html>

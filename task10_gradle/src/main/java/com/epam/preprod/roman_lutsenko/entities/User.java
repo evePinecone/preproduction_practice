@@ -4,7 +4,7 @@ public class User extends Entity{
 
     private String name;
     private String email;
-    private String phone;
+    private Integer phone;
     private String password;
     private String avatar;
 
@@ -24,11 +24,11 @@ public class User extends Entity{
         this.email = email;
     }
 
-    public String getPhone() {
+    public Integer getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(Integer phone) {
         this.phone = phone;
     }
 

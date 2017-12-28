@@ -2,7 +2,7 @@ $(document).ready(function () {
     var validation = {
 
         name: function () {
-            var nameRegExp = /\w{3,}/;
+            var nameRegExp = /^\w{3,}$/;
             if (!nameRegExp.test($("input[name='name']").val())) {
                 $("input[name='name']").addClass('invalid');
                 return false;
@@ -22,7 +22,7 @@ $(document).ready(function () {
             }
         },
         phone: function () {
-            var phoneRegExp = /\+\d{9,12}/;
+            var phoneRegExp = /^\+\d{9,12}$/;
             if (!phoneRegExp.test($("input[name='phone']").val())) {
                 $("input[name='phone']").addClass('invalid');
                 return false;
@@ -75,10 +75,9 @@ $(document).ready(function () {
             && validation.phone()  === true
             && validation.password()  === true
             && validation.password_confirm()  === true) {
-            alert("No errors");
             return true;
         }
-        alert("error false");
+        alert("fields are incorrect");
         event.preventDefault();
     });
 });

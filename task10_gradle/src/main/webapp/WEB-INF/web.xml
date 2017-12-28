@@ -1,0 +1,28 @@
+<web-app>
+
+    <servlet>
+        <servlet-name>controller</servlet-name>
+        <servlet-class>com.epam.preprod.roman_lutsenko.web.servlets.RegistrationServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>controller</servlet-name>
+        <url-pattern>/controller</url-pattern>
+    </servlet-mapping>
+
+    <listner>
+        <listner-class>com.epam.preprod.roman_lutsenko.web.listeners.ShopContextListener</listner-class>
+    </listner>
+    <!--<listner>-->
+        <!--<listner-class>com.epam.preprod.roman_lutsenko.util.ServicesUtil</listner-class>-->
+    <!--</listner>-->
+
+    <context-param>
+        <param-name>UserDao</param-name>
+        <param-value>LocalUserDao</param-value>
+    </context-param>
+    <context-param>
+        <param-name>UserService</param-name>
+        <param-value>com.epam.preprod.roman_lutsenko.services.localImpl.LocalUserService</param-value>
+    </context-param>
+</web-app>
