@@ -12,6 +12,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+@Deprecated
 @WebListener
 public class ServicesUtil implements ServletContextListener{
     private final static Logger logger = Logger.getLogger(Context.class);

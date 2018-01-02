@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public class LocalUserDao implements UserDao {
 
-    private Map<Integer, User> map;
+    private Map<String, User> map;
 
     public LocalUserDao() {
         map = new HashMap<>();
@@ -29,17 +29,17 @@ public class LocalUserDao implements UserDao {
     }
 
     @Override
-    public Map<Integer, User> getAllUsers(){
-        return new HashMap<Integer, User>(map);
+    public Map<String, User> getAllUsers(){
+        return new HashMap<String, User>(map);
     }
 
     @Override
-    public boolean remove(Integer phone) {
+    public boolean remove(String phone) {
        //TODO: crate remove logic for DAO impl.
         return false;
     }
     @Override
-    public User get(Integer phone) {
+    public User get(String phone) {
         return map.get(phone);
     }
 
@@ -52,7 +52,7 @@ public class LocalUserDao implements UserDao {
             user.setId(index);
             user.setName("name" + index);
             user.setEmail("email" + index);
-            user.setPhone(10000000 + index);
+            user.setPhone("38000000000" + index);
             user.setPassword("password" + index);
             map.put(user.getPhone(), user);
         }

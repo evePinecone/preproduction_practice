@@ -18,20 +18,20 @@ public interface UserDao {
      * Returns User by his telephone in database.
      * If no user with such phone in impl than returns <b>null</b> element.
      * @param phone unique index of user in container.
-     * @return User with such phone, or null if user with such number didn't find.
+     * @return User with such phone, or <b>null</b> if user with such number didn't find.
      */
-    User get(Integer phone);
+    User get(String phone);
 
     /**
      * Returns map of user from container.
      * @return Map with all users;
      */
-    Map<Integer, User> getAllUsers();
+    Map<String, User> getAllUsers();
 
     /**
      * Removes user from container with such phone.
      * @param phone Phone of removing user.
      * @return Result of operation. <b>true</b> if user removed succesfull, <b>false</b> if no such user.
      */
-    boolean remove(Integer phone);
+    boolean remove(String phone);
 }

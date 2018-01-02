@@ -22,26 +22,23 @@ public class LocalUserService implements UserService {
     }
 
     @Override
-    public User get(Integer phone) {
+    public User get(String phone) {
         return userDao.get(phone);
     }
 
     @Override
-    public Map<Integer, User> getAllUsers() {
+    public Map<String, User> getAllUsers() {
         return userDao.getAllUsers();
     }
 
     @Override
-    public boolean remove(Integer phone) {
+    public boolean remove(String phone) {
         return userDao.remove(phone);
     }
 
     @Override
-    public boolean contains(Integer phone) {
+    public boolean contains(String phone) {
         User user = userDao.get(phone);
-        if(Objects.isNull(user)) {
-            return false;
-        }
-        return true;
+        return Objects.nonNull(user);
     }
 }

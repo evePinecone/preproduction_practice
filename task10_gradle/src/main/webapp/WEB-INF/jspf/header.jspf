@@ -1,5 +1,5 @@
 <%@include file="directives/page.jspf"%>
-<html>
+<%-- <html> --%>
 <body class='homepage'>
 
  <div id="header">
@@ -12,14 +12,14 @@
 
                 <nav id="nav">
                     <ul>
-                        <li class="active"><a href="index.html">Home</a></li>
+                        <li class="active"><a href="index.jsp">Home</a></li>
                         <li><a href="catalog.html">Catalog</a></li>
                         <li><a href="no-sidebar.html">About</a></li>
                         <li>
                             <a href="">%username%</a>
                             <ul>
                                 <li><a href="#">Sign in</a></li>
-                                <li><a href="registration.html">Registration</a></li>
+                                <li><a href="registration.jsp">Registration</a></li>
                                 <li>
                                     <a href="">%language%</a>
                                     <ul>
@@ -35,4 +35,4 @@
         </div>
 
 </body>
-</html>
+<%-- </html> --%>
