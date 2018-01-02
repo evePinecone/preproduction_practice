@@ -16,5 +16,5 @@ public class Messages {
     public static final String VALID_BEGIN_PASSWORD = "Validation for password field";
 
 
-    public static final String REGISTRATION_DUPLICATE_USER = "User with such phone are registered";
+    public static final String REGISTRATION_DUPLICATE_USER = "User with such phone is registered";
 }

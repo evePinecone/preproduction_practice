@@ -1,12 +1,12 @@
-<%@include file="WEB-INF/jspf/directives/page.jspf"%>
+<%@include file="/WEB-INF/jspf/directives/page.jspf"%>
 
 <html>
 <%@include file="WEB-INF/jspf/head.jspf"%>
 <body class="homepage">
 			
-        <%@include file="WEB-INF/jspf/header.jspf"%>
 			<!-- Banner -->
             <div class="wrapper style1">
+               <%@include file="WEB-INF/jspf/header.jspf"%>
 				<div id="banner">
 					<section class="container">
 						<h2>Pinecone SHOP</h2>
@@ -148,7 +148,7 @@
 					</div>
 				</section>
 			</div>
-    <%@include file="WEB-INF/jspf/footer.jspf"%>
+     <%@include file="/WEB-INF/jspf/footer.jspf"%>
 
     </body>
 </html>

@@ -13,7 +13,7 @@
                 <nav id="nav">
                     <ul>
                         <li class="active"><a href="index.jsp">Home</a></li>
-                        <li><a href="catalog.html">Catalog</a></li>
+                        <li><a href="catalog.jsp">Catalog</a></li>
                         <li><a href="no-sidebar.html">About</a></li>
                         <li>
                             <a href="">%username%</a>
