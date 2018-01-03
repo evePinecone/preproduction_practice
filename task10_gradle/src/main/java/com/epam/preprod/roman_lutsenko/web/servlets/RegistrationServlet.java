@@ -36,9 +36,9 @@ public class RegistrationServlet extends HttpServlet {
         logger.debug("TELEPHONE " + req.getParameter(FORM_REGISTRATION_PHONE));
         if (containsUser(context, ParseInputData.phoneFromString((String)req.getParameter(FORM_REGISTRATION_PHONE)))) {
             req.getSession().setAttribute(SESSION_ERR_MESS, REGISTRATION_DUPLICATE_USER);
-            resp.sendRedirect("index.jsp");
-        } else {
             resp.sendRedirect("registration");
+        } else {
+            resp.sendRedirect("index.jsp");
         }
         logger.debug(getClass() + Messages.ENDED);
     }

@@ -1,6 +1,5 @@
 <%@include file="directives/page.jspf"%>
 <%-- <%@include file="directives/taglib.jspf"%> --%>
-<%-- <%@include file="directives/taglib.jspf"%> --%>
 <head>
     <title>PineconeEve shop</title>
     <%-- <meta http-equiv="content-type" content="text/html; charset=utf-8" /> --%>

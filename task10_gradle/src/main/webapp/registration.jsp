@@ -39,7 +39,9 @@
                                 <input id="password_confirm" name="password_confirm" placeholder="Confirm password" type="password" />
                                 <div id="password_confirm_" class="invalid_input">Invalid password</div>
                             </div>
-
+                            <div class="form__item">
+                                <cpt:Captcha />
+                            </div>
                             <ul class="actions">
                                 <li><input id="submit" type="submit" class="special" value="Submit" /></li>
                                 <li><input href="#" type="reset" class="alt" value="Reset" /></li>

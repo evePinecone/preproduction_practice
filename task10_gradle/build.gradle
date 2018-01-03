@@ -16,10 +16,13 @@ repositories {
 }
 
 dependencies {
+//    compile group: 'org.apache.tomcat', name: 'servlet-api', version: '6.0.53'
     providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compile group: 'log4j', name: 'log4j', version: '1.2.17'
-   // compile group: 'org.apache.logging.log4j', name: 'log4j-web', version: '2.10.0'
+    compile group: 'jstl', name: 'jstl', version: '1.2'
+    compile group: 'javax', name: 'javaee-web-api', version: '7.0'
+
 }
 
 task copyJarToBin {
