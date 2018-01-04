@@ -7,9 +7,5 @@
         <name>Captcha</name>
         <tag-class>com.epam.preprod.roman_lutsenko.web.tags.CaptchaTag</tag-class>
         <body-content>empty</body-content>
-
-        <!--<attribute>-->
-            <!--<name>value</name>-->
-        <!--</attribute>-->
     </tag>
 </taglib>

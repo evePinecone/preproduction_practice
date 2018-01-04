@@ -11,7 +11,7 @@ public class Messages {
 
     //Validation messages
     public static final String VALID_BEGIN_PHONE = "Validation for phone field";
-    public static final String VALID_BEGIN_NAME  = "Validation for name field";
+    public static final String VALID_BEGIN_NAME = "Validation for name field";
     public static final String VALID_BEGIN_EMAIL = "Validation for email field";
     public static final String VALID_BEGIN_PASSWORD = "Validation for password field";
 
@@ -21,4 +21,5 @@ public class Messages {
 
     public static final String GET_METHOD_START = " GET method started";
     public static final String POST_METHOD_START = " POST method started";
+    public static final String GET_METHOD_ENDED = " GET method ended";
 }

@@ -2,7 +2,6 @@ package com.epam.preprod.roman_lutsenko.web.servlets;
 
 import com.epam.preprod.roman_lutsenko.constants.Messages;
 import com.epam.preprod.roman_lutsenko.context.Context;
-import com.epam.preprod.roman_lutsenko.entities.Captcha;
 import com.epam.preprod.roman_lutsenko.entities.User;
 import com.epam.preprod.roman_lutsenko.services.UserService;
 import com.epam.preprod.roman_lutsenko.util.ParseInputData;
@@ -16,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Objects;
-import java.util.UUID;
 
 import static com.epam.preprod.roman_lutsenko.constants.FieldsName.FORM_REGISTRATION_EMAIL;
 import static com.epam.preprod.roman_lutsenko.constants.FieldsName.FORM_REGISTRATION_NAME;
@@ -24,7 +22,6 @@ import static com.epam.preprod.roman_lutsenko.constants.FieldsName.FORM_REGISTRA
 import static com.epam.preprod.roman_lutsenko.constants.FieldsName.FORM_REGISTRATION_PHONE;
 import static com.epam.preprod.roman_lutsenko.constants.FieldsName.SESSION_CONTEXT;
 import static com.epam.preprod.roman_lutsenko.constants.FieldsName.SESSION_ERR_MESS;
-import static com.epam.preprod.roman_lutsenko.constants.FieldsName.TAG_CAPTCHA_ID_CAPTCHA;
 import static com.epam.preprod.roman_lutsenko.constants.FieldsName.TAG_CAPTCHA_INPUT_VALUE;
 import static com.epam.preprod.roman_lutsenko.constants.Messages.REGISTRATION_DUPLICATE_USER;
 import static com.epam.preprod.roman_lutsenko.constants.Messages.REGISTRATION_NON_VALID_FIELDS;
@@ -33,14 +30,12 @@ import static com.epam.preprod.roman_lutsenko.constants.Messages.REGISTRATION_NO
 public class RegistrationServlet extends HttpServlet {
     private final Logger logger = Logger.getLogger(RegistrationServlet.class);
 
-    //TODO: DO GET mast set captcha to the scope and show jsp.
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         logger.debug(getClass() + Messages.STARTED);
         Context context = (Context) req.getServletContext().getAttribute(SESSION_CONTEXT);
-        if(isValidCaptcha(req, context)) {
-            User user = initUserFromForm(req);
-
+        User user = initUserFromForm(req);
+        if (isValidCaptcha(req, context)) {
             logger.debug("TELEPHONE " + req.getParameter(FORM_REGISTRATION_PHONE));
             if (containsUser(context, ParseInputData.phoneFromString((String) req.getParameter(FORM_REGISTRATION_PHONE)))) {
                 req.getSession().setAttribute(SESSION_ERR_MESS, REGISTRATION_DUPLICATE_USER);
@@ -52,6 +47,8 @@ public class RegistrationServlet extends HttpServlet {
                 //TODO: insert user to database;
                 resp.sendRedirect("index.jsp");
             }
+        } else {
+            resp.sendRedirect("registration");
         }
         logger.debug(getClass() + Messages.ENDED);
     }
@@ -59,9 +56,11 @@ public class RegistrationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         logger.info("DO GET " + getServletName());
+
         Context context = (Context) req.getServletContext().getAttribute(SESSION_CONTEXT);
-        Captcha captcha = context.getCaptchaService().addCaptcha();
-        req.getSession().setAttribute(TAG_CAPTCHA_ID_CAPTCHA, captcha.getUuid());
+        context.getCaptchaService().addCaptcha(req, resp);
+        ;
+
         req.getRequestDispatcher("registration.jsp").forward(req, resp);
     }
 
@@ -114,9 +113,7 @@ public class RegistrationServlet extends HttpServlet {
 
     private boolean isValidCaptcha(HttpServletRequest request, Context context) {
         String captureValue = request.getParameter(TAG_CAPTCHA_INPUT_VALUE);
-        UUID uuid = (UUID) request.getSession().getAttribute(TAG_CAPTCHA_ID_CAPTCHA);
-
-        return context.getCaptchaService().isCorrectCaptcha(uuid, captureValue);
+        return context.getCaptchaService().isCorrectCaptcha(request, captureValue);
     }
 
     private boolean containsUser(Context context, String phone) {

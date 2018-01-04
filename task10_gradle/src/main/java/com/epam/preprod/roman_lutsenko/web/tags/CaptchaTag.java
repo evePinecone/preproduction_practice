@@ -1,7 +1,7 @@
 package com.epam.preprod.roman_lutsenko.web.tags;
 
 
-import com.epam.preprod.roman_lutsenko.context.Context;
+import com.epam.preprod.roman_lutsenko.constants.FieldsName;
 import org.apache.log4j.Logger;
 
 import javax.servlet.jsp.JspException;
@@ -18,21 +18,24 @@ public class CaptchaTag extends TagSupport {
     @Override
     public int doStartTag() throws JspException {
         JspWriter out = pageContext.getOut();
-        Context context = (Context) pageContext.getAttribute("context");
-        //TODO: CREATE CAPTURE SERVICE!!! in capture service create map container with captcha. no captcha in session
         try {
-            logger.debug("TAG SESSION UUID = " + pageContext.getSession().getAttribute("id_captcha"));
-            out.print("<ul class=\"actions\">\n" );
+            logger.debug("TAG SESSION UUID = " + pageContext.getSession().getAttribute(FieldsName.TAG_CAPTCHA_ID_CAPTCHA));
+            out.print("<ul class=\"actions\">\n");
+            UUID id_captcha = null;
+            id_captcha = (UUID) pageContext.getSession().getAttribute(FieldsName.TAG_CAPTCHA_ID_CAPTCHA);
 
-            UUID id_captcha = (UUID)pageContext.getSession().getAttribute("id_captcha");
             out.print("<li id=\"captcha_confirm\" class=\"captcha\">\n" +
-                    "<img src=\"captcha\" id=\"id_captcha\" value=\""+ id_captcha +"\"/>\n" +
+                    "<img src=\"captcha\" id=\"id_captcha\" value=\"" + id_captcha + "\"/>\n" +
                     "</li>\n" +
                     "<li class=\"form__item captcha\">\n" +
                     "<input id=\"captcha_value\" name=\"captcha_value\" type=\"text\" placeholder=\"Captcha\"/>\n" +
                     "<div class=\"invalid_input\">Invalid captcha</div>\n" +
                     "</li>\n" +
                     "</ul>");
+            id_captcha = (UUID) pageContext.getServletContext().getAttribute(FieldsName.TAG_CAPTCHA_ID_CAPTCHA);
+            out.print("<input type=\"hidden\" id=\"hidden\" name=\"hidden\" value=\"" + id_captcha + "\"/>");
+            out.flush();
+
         } catch (IOException e) {
             logger.error(getClass() + e.toString());
         }

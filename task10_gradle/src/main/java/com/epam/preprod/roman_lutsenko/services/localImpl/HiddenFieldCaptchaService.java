@@ -13,20 +13,22 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
-public class ContextCaptchaService implements CaptchaService {
+public class HiddenFieldCaptchaService implements CaptchaService {
 
     private static final Logger logger = Logger.getLogger(ContextCaptchaService.class);
 
     private Map<UUID, Captcha> map;
 
-    public ContextCaptchaService() {
+    public HiddenFieldCaptchaService() {
         map = new HashMap<>();
     }
 
     @Override
     public Captcha getCaptcha(HttpServletRequest request) {
-        UUID uuid = (UUID) request.getSession().getAttribute(FieldsName.TAG_CAPTCHA_ID_CAPTCHA);
-        return map.get(uuid);
+        logger.debug("request.getParameter(hidden) = " + request.getParameter(FieldsName.TAG_CAPTCHA_ID_CAPTCHA));
+        UUID captchaId = (UUID) request.getServletContext().getAttribute(FieldsName.TAG_CAPTCHA_ID_CAPTCHA);
+        logger.debug(getClass() + " captchaId " + captchaId);
+        return map.get(captchaId);
     }
 
     @Override
@@ -38,8 +40,8 @@ public class ContextCaptchaService implements CaptchaService {
     @Override
     public void addCaptcha(HttpServletRequest request, HttpServletResponse response) {
         Captcha captcha = GenerateCaptcha.generateCaptcha();
+        request.getServletContext().setAttribute(FieldsName.TAG_CAPTCHA_ID_CAPTCHA, captcha.getUuid());
         map.put(captcha.getUuid(), captcha);
-        request.getSession().setAttribute(FieldsName.TAG_CAPTCHA_ID_CAPTCHA, captcha.getUuid());
-
+        logger.debug(" addCaptcha " + captcha.getUuid() + " get attr = " + request.getServletContext().getAttribute(FieldsName.TAG_CAPTCHA_ID_CAPTCHA));
     }
 }

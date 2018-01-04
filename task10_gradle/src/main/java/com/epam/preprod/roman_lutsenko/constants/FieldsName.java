@@ -16,4 +16,12 @@ public class FieldsName {
     public static final String SESSION_CONTEXT = "context";
     public static final String SESSION_ERR_MESS = "err_mess";
 
+
+    //Listener
+    public static final String INIT_LISTENER_CAPTCHA = "Captcha";
+    public static final String INIT_LISTENER_CONTEXT_CLASS = "com.epam.preprod.roman_lutsenko.services.localImpl.ContextCaptchaService";
+    public static final String INIT_LISTENER_COOKIE_CLASS = "com.epam.preprod.roman_lutsenko.services.localImpl.CookieCaptchaService";
+    public static final String INIT_LISTENER_HIDDEN_FIELD_CLASS = "com.epam.preprod.roman_lutsenko.services.localImpl.HiddenFieldCaptchaService";
+
+
 }
