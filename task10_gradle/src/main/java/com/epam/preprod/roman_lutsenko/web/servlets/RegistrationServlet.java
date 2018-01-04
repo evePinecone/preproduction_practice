@@ -2,6 +2,7 @@ package com.epam.preprod.roman_lutsenko.web.servlets;
 
 import com.epam.preprod.roman_lutsenko.constants.Messages;
 import com.epam.preprod.roman_lutsenko.context.Context;
+import com.epam.preprod.roman_lutsenko.entities.Captcha;
 import com.epam.preprod.roman_lutsenko.entities.User;
 import com.epam.preprod.roman_lutsenko.services.UserService;
 import com.epam.preprod.roman_lutsenko.util.ParseInputData;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Objects;
+import java.util.UUID;
 
 import static com.epam.preprod.roman_lutsenko.constants.FieldsName.FORM_REGISTRATION_EMAIL;
 import static com.epam.preprod.roman_lutsenko.constants.FieldsName.FORM_REGISTRATION_NAME;
@@ -22,30 +24,44 @@ import static com.epam.preprod.roman_lutsenko.constants.FieldsName.FORM_REGISTRA
 import static com.epam.preprod.roman_lutsenko.constants.FieldsName.FORM_REGISTRATION_PHONE;
 import static com.epam.preprod.roman_lutsenko.constants.FieldsName.SESSION_CONTEXT;
 import static com.epam.preprod.roman_lutsenko.constants.FieldsName.SESSION_ERR_MESS;
+import static com.epam.preprod.roman_lutsenko.constants.FieldsName.TAG_CAPTCHA_ID_CAPTCHA;
+import static com.epam.preprod.roman_lutsenko.constants.FieldsName.TAG_CAPTCHA_INPUT_VALUE;
 import static com.epam.preprod.roman_lutsenko.constants.Messages.REGISTRATION_DUPLICATE_USER;
+import static com.epam.preprod.roman_lutsenko.constants.Messages.REGISTRATION_NON_VALID_FIELDS;
 
 @WebServlet("/registration")
 public class RegistrationServlet extends HttpServlet {
     private final Logger logger = Logger.getLogger(RegistrationServlet.class);
 
+    //TODO: DO GET mast set captcha to the scope and show jsp.
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         logger.debug(getClass() + Messages.STARTED);
         Context context = (Context) req.getServletContext().getAttribute(SESSION_CONTEXT);
-        User user = initUserFromForm(req);
-        logger.debug("TELEPHONE " + req.getParameter(FORM_REGISTRATION_PHONE));
-        if (containsUser(context, ParseInputData.phoneFromString((String)req.getParameter(FORM_REGISTRATION_PHONE)))) {
-            req.getSession().setAttribute(SESSION_ERR_MESS, REGISTRATION_DUPLICATE_USER);
-            resp.sendRedirect("registration");
-        } else {
-            resp.sendRedirect("index.jsp");
+        if(isValidCaptcha(req, context)) {
+            User user = initUserFromForm(req);
+
+            logger.debug("TELEPHONE " + req.getParameter(FORM_REGISTRATION_PHONE));
+            if (containsUser(context, ParseInputData.phoneFromString((String) req.getParameter(FORM_REGISTRATION_PHONE)))) {
+                req.getSession().setAttribute(SESSION_ERR_MESS, REGISTRATION_DUPLICATE_USER);
+                resp.sendRedirect("registration");
+            } else if (Objects.isNull(user)) {
+                req.getSession().setAttribute(SESSION_ERR_MESS, REGISTRATION_NON_VALID_FIELDS);
+                resp.sendRedirect("registration");
+            } else {
+                //TODO: insert user to database;
+                resp.sendRedirect("index.jsp");
+            }
         }
         logger.debug(getClass() + Messages.ENDED);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        logger.info("DO GET " + getClass() + Messages.REDIRECTED + getServletName());
+        logger.info("DO GET " + getServletName());
+        Context context = (Context) req.getServletContext().getAttribute(SESSION_CONTEXT);
+        Captcha captcha = context.getCaptchaService().addCaptcha();
+        req.getSession().setAttribute(TAG_CAPTCHA_ID_CAPTCHA, captcha.getUuid());
         req.getRequestDispatcher("registration.jsp").forward(req, resp);
     }
 
@@ -56,36 +72,51 @@ public class RegistrationServlet extends HttpServlet {
         if (Objects.nonNull(field) && ValidateInput.validName(field)) {
             user.setName(field);
             request.getSession().setAttribute(FORM_REGISTRATION_NAME, field);
+            logger.debug(FORM_REGISTRATION_NAME + "valid");
         } else {
+            logger.debug(FORM_REGISTRATION_NAME + "NON valid");
             user = null;
         }
         field = (String) request.getParameter(FORM_REGISTRATION_PHONE);
         if (Objects.nonNull(field) && ValidateInput.validPhone(field)) {
             if (Objects.nonNull(user)) {
                 user.setPhone(ParseInputData.phoneFromString(field));
+                logger.debug(FORM_REGISTRATION_PHONE + "valid");
             }
             request.getSession().setAttribute(FORM_REGISTRATION_PHONE, field);
         } else {
+            logger.debug(FORM_REGISTRATION_PHONE + "NON valid");
             user = null;
         }
         field = (String) request.getParameter(FORM_REGISTRATION_EMAIL);
         if (Objects.nonNull(field) && ValidateInput.validEmail(field)) {
             if (Objects.nonNull(user)) {
                 user.setEmail((String) request.getAttribute(FORM_REGISTRATION_EMAIL));
+                logger.debug(FORM_REGISTRATION_EMAIL + "valid");
             }
             request.getSession().setAttribute(FORM_REGISTRATION_EMAIL, field);
         } else {
+            logger.debug(FORM_REGISTRATION_EMAIL + "NON valid");
             user = null;
         }
         field = (String) request.getParameter(FORM_REGISTRATION_PASSWORD);
         if (Objects.nonNull(field) && ValidateInput.validPassword(field)) {
             if (Objects.nonNull(user)) {
+                logger.debug(FORM_REGISTRATION_PASSWORD + "valid = " + field);
                 user.setPassword(field);
             }
         } else {
+            logger.debug(FORM_REGISTRATION_PASSWORD + "NON valid = " + field);
             user = null;
         }
         return user;
+    }
+
+    private boolean isValidCaptcha(HttpServletRequest request, Context context) {
+        String captureValue = request.getParameter(TAG_CAPTCHA_INPUT_VALUE);
+        UUID uuid = (UUID) request.getSession().getAttribute(TAG_CAPTCHA_ID_CAPTCHA);
+
+        return context.getCaptchaService().isCorrectCaptcha(uuid, captureValue);
     }
 
     private boolean containsUser(Context context, String phone) {

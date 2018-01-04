@@ -8,6 +8,10 @@ public class FieldsName {
     public static final String FORM_REGISTRATION_PHONE = "phone";
     public static final String FORM_REGISTRATION_PASSWORD = "password";
 
+    //tag captcha
+    public static final String TAG_CAPTCHA_INPUT_VALUE = "captcha_value";
+    public static final String TAG_CAPTCHA_ID_CAPTCHA = "id_captcha";
+
     //Session attributes
     public static final String SESSION_CONTEXT = "context";
     public static final String SESSION_ERR_MESS = "err_mess";

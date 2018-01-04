@@ -17,6 +17,7 @@ public class Messages {
 
 
     public static final String REGISTRATION_DUPLICATE_USER = "User with such phone is registered";
+    public static final String REGISTRATION_NON_VALID_FIELDS = "Some fields are incorrect";
 
     public static final String GET_METHOD_START = " GET method started";
     public static final String POST_METHOD_START = " POST method started";

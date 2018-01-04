@@ -1,9 +1,13 @@
 package com.epam.preprod.roman_lutsenko.services;
 
+import com.epam.preprod.roman_lutsenko.entities.Captcha;
+
+import java.util.UUID;
+
 public interface CaptchaService {
-    String getCaptcha(Integer idCaptcha);
+    Captcha getCaptcha(UUID idCaptcha);
 
-    boolean isCorrectCaptcha(Integer idCaptcha, String captcha);
+    boolean isCorrectCaptcha(UUID idCaptcha, String captchaValue);
 
-    void addCaptcha(Integer idCaptcha, String captcha);
+    Captcha addCaptcha();
 }

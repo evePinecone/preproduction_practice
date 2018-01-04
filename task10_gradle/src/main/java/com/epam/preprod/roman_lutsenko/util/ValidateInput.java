@@ -25,7 +25,7 @@ public class ValidateInput {
     }
     public static boolean validPassword(String password) {
         logger.info(Messages.VALID_BEGIN_PASSWORD);
-        Pattern pattern = Pattern.compile("(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})");
+        Pattern pattern = Pattern.compile(".{8,}");
         return pattern.matcher(password).matches();
     }
 }

@@ -20,6 +20,7 @@
                             <ul>
                                 <li><a href="#">Sign in</a></li>
                                 <li><a href="registration.jsp">Registration</a></li>
+                                <li><a href="registration">registrationServlet</a>
                                 <li>
                                     <a href="">%language%</a>
                                     <ul>
