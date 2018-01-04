@@ -26,6 +26,9 @@ import static com.epam.preprod.roman_lutsenko.constants.FieldsName.TAG_CAPTCHA_I
 import static com.epam.preprod.roman_lutsenko.constants.Messages.REGISTRATION_DUPLICATE_USER;
 import static com.epam.preprod.roman_lutsenko.constants.Messages.REGISTRATION_NON_VALID_FIELDS;
 
+/**
+ * Process registration form and check if user with this phone consist in User container.
+ */
 @WebServlet("/registration")
 public class RegistrationServlet extends HttpServlet {
     private final Logger logger = Logger.getLogger(RegistrationServlet.class);
@@ -64,6 +67,11 @@ public class RegistrationServlet extends HttpServlet {
         req.getRequestDispatcher("registration.jsp").forward(req, resp);
     }
 
+    /**
+     * Parse request into User entity and check if data is valid, if valid - set it to session.
+     * @param request request from user.
+     * @return User instance with setted fields or <b>null</b> if user cannot insert to user container.
+     */
     private User initUserFromForm(HttpServletRequest request) {
         clearSessionFromUserFields(request);
         User user = new User();
@@ -71,41 +79,41 @@ public class RegistrationServlet extends HttpServlet {
         if (Objects.nonNull(field) && ValidateInput.validName(field)) {
             user.setName(field);
             request.getSession().setAttribute(FORM_REGISTRATION_NAME, field);
-            logger.debug(FORM_REGISTRATION_NAME + "valid");
+            logger.debug(FORM_REGISTRATION_NAME + " valid");
         } else {
-            logger.debug(FORM_REGISTRATION_NAME + "NON valid");
+            logger.debug(FORM_REGISTRATION_NAME + " NON valid");
             user = null;
         }
         field = (String) request.getParameter(FORM_REGISTRATION_PHONE);
         if (Objects.nonNull(field) && ValidateInput.validPhone(field)) {
             if (Objects.nonNull(user)) {
                 user.setPhone(ParseInputData.phoneFromString(field));
-                logger.debug(FORM_REGISTRATION_PHONE + "valid");
+                logger.debug(FORM_REGISTRATION_PHONE + " valid");
             }
             request.getSession().setAttribute(FORM_REGISTRATION_PHONE, field);
         } else {
-            logger.debug(FORM_REGISTRATION_PHONE + "NON valid");
+            logger.debug(FORM_REGISTRATION_PHONE + " NON valid");
             user = null;
         }
         field = (String) request.getParameter(FORM_REGISTRATION_EMAIL);
         if (Objects.nonNull(field) && ValidateInput.validEmail(field)) {
             if (Objects.nonNull(user)) {
                 user.setEmail((String) request.getAttribute(FORM_REGISTRATION_EMAIL));
-                logger.debug(FORM_REGISTRATION_EMAIL + "valid");
+                logger.debug(FORM_REGISTRATION_EMAIL + " valid");
             }
             request.getSession().setAttribute(FORM_REGISTRATION_EMAIL, field);
         } else {
-            logger.debug(FORM_REGISTRATION_EMAIL + "NON valid");
+            logger.debug(FORM_REGISTRATION_EMAIL + " NON valid");
             user = null;
         }
         field = (String) request.getParameter(FORM_REGISTRATION_PASSWORD);
         if (Objects.nonNull(field) && ValidateInput.validPassword(field)) {
             if (Objects.nonNull(user)) {
-                logger.debug(FORM_REGISTRATION_PASSWORD + "valid = " + field);
+                logger.debug(FORM_REGISTRATION_PASSWORD + " valid");
                 user.setPassword(field);
             }
         } else {
-            logger.debug(FORM_REGISTRATION_PASSWORD + "NON valid = " + field);
+            logger.debug(FORM_REGISTRATION_PASSWORD + " NON valid");
             user = null;
         }
         return user;

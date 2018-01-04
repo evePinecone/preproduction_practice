@@ -6,6 +6,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
+/**
+ * Util class that generates captha.
+ */
 public class GenerateCaptcha {
     public static Captcha generateCaptcha() {
         int width = 150;

@@ -13,6 +13,9 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Captcha that saved its id in hidden field on form.
+ */
 public class HiddenFieldCaptchaService implements CaptchaService {
 
     private static final Logger logger = Logger.getLogger(ContextCaptchaService.class);
@@ -25,7 +28,6 @@ public class HiddenFieldCaptchaService implements CaptchaService {
 
     @Override
     public Captcha getCaptcha(HttpServletRequest request) {
-        logger.debug("request.getParameter(hidden) = " + request.getParameter(FieldsName.TAG_CAPTCHA_ID_CAPTCHA));
         UUID captchaId = (UUID) request.getServletContext().getAttribute(FieldsName.TAG_CAPTCHA_ID_CAPTCHA);
         logger.debug(getClass() + " captchaId " + captchaId);
         return map.get(captchaId);

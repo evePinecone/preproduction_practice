@@ -3,6 +3,9 @@ package com.epam.preprod.roman_lutsenko.entities;
 import java.awt.image.BufferedImage;
 import java.util.UUID;
 
+/**
+ * Class container for Captcha entity.
+ */
 public class Captcha {
 
     private UUID uuid;
@@ -25,14 +28,5 @@ public class Captcha {
 
     public BufferedImage getBufferedImage() {
         return bufferedImage;
-    }
-
-    @Override
-    public String toString() {
-        return "Captcha{" +
-                "uuid=" + uuid +
-                ", value='" + value + '\'' +
-                ", bufferedImage=" + bufferedImage +
-                '}';
     }
 }

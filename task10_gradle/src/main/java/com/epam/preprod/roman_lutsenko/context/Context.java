@@ -11,7 +11,6 @@ public class Context{
     public Context(UserService userService, CaptchaService captchaService) {
         this.userService = userService;
         this.captchaService = captchaService;
-        System.out.println("Context created");
     }
 
     public UserService getUserService() {

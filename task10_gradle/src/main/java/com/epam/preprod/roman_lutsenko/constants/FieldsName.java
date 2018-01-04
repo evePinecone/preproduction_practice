@@ -1,5 +1,8 @@
 package com.epam.preprod.roman_lutsenko.constants;
 
+/**
+ * Fields from requests and configuration.
+ */
 public class FieldsName {
 
     //registration.jsp

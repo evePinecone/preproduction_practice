@@ -16,13 +16,17 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+
+/**
+ * Initiates context of the program with services with parameters from the configuration files.
+ */
 @WebListener
 public class ShopContextListener implements ServletContextListener {
     private final Logger logger = Logger.getLogger(ShopContextListener.class);
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
-        logger.debug(getClass() + "START" + Messages.INITIALIZED);
+        logger.debug(getClass() + Messages.INITIALIZED);
         ServletContext servletContext = servletContextEvent.getServletContext();
 
         String captchaServiceString = servletContext.getInitParameter(FieldsName.INIT_LISTENER_CAPTCHA);

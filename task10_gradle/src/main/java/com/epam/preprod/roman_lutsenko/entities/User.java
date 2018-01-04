@@ -1,5 +1,8 @@
 package com.epam.preprod.roman_lutsenko.entities;
 
+/**
+ * User entity.
+ */
 public class User extends Entity{
 
     private String name;

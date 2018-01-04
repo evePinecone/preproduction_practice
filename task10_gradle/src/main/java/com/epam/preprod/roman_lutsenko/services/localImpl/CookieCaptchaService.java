@@ -14,6 +14,9 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Captcha that saved its id in clients cookies.
+ */
 public class CookieCaptchaService implements CaptchaService {
 
     private static final Logger logger = Logger.getLogger(CookieCaptchaService.class);
@@ -49,7 +52,6 @@ public class CookieCaptchaService implements CaptchaService {
         if (Objects.nonNull(cookies)) {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals(FieldsName.TAG_CAPTCHA_ID_CAPTCHA)) {
-                    logger.debug("cookie get from client " + map.get(UUID.fromString(cookie.getValue())));
                     return map.get(UUID.fromString(cookie.getValue()));
                 }
             }

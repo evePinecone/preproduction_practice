@@ -20,12 +20,10 @@ public class CaptchaServiceFactory {
         map.put(FieldsName.INIT_LISTENER_CONTEXT_CLASS, new ContextCaptchaService());
         map.put(FieldsName.INIT_LISTENER_COOKIE_CLASS, new CookieCaptchaService());
         map.put(FieldsName.INIT_LISTENER_HIDDEN_FIELD_CLASS, new HiddenFieldCaptchaService());
-        logger.debug(getClass() + Messages.ENDED);
     }
 
     public CaptchaService getCaptchaService(String className) {
-        logger.debug("loaded class = " + className);
-        logger.debug(map.get(className));
+        logger.debug(Messages.LOADED + className);
         return map.get(className);
     }
 }

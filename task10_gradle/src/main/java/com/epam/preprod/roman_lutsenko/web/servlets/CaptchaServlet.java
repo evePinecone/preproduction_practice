@@ -15,6 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 
+/**
+ * Drawing captcha with specified service method.
+ */
 @WebServlet("/captcha")
 public class CaptchaServlet extends HttpServlet {
 
@@ -23,14 +26,14 @@ public class CaptchaServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response)
-            throws ServletException, IOException {
+            throws IOException {
         logger.debug(getServletName() + Messages.GET_METHOD_START);
         response.setContentType("image/png");
         OutputStream os = response.getOutputStream();
 
         Context context = (Context) request.getServletContext().getAttribute(FieldsName.SESSION_CONTEXT);
         CaptchaService captchaService = context.getCaptchaService();
-        logger.debug(captchaService.getCaptcha(request).getBufferedImage());
+
         ImageIO.write(captchaService.getCaptcha(request).getBufferedImage(), "png", os);
         logger.debug(getServletName() + Messages.GET_METHOD_ENDED);
     }

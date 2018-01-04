@@ -1,6 +1,7 @@
 package com.epam.preprod.roman_lutsenko.services.localImpl;
 
 import com.epam.preprod.roman_lutsenko.constants.FieldsName;
+import com.epam.preprod.roman_lutsenko.constants.Messages;
 import com.epam.preprod.roman_lutsenko.entities.Captcha;
 import com.epam.preprod.roman_lutsenko.services.CaptchaService;
 import com.epam.preprod.roman_lutsenko.util.GenerateCaptcha;
@@ -13,6 +14,9 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Captcha that saved its id in session attributes.
+ */
 public class ContextCaptchaService implements CaptchaService {
 
     private static final Logger logger = Logger.getLogger(ContextCaptchaService.class);
@@ -40,6 +44,6 @@ public class ContextCaptchaService implements CaptchaService {
         Captcha captcha = GenerateCaptcha.generateCaptcha();
         map.put(captcha.getUuid(), captcha);
         request.getSession().setAttribute(FieldsName.TAG_CAPTCHA_ID_CAPTCHA, captcha.getUuid());
-
+        logger.debug(getClass() + Messages.INITIALIZED);
     }
 }

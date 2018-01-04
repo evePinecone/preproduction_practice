@@ -19,7 +19,6 @@ public class CaptchaTag extends TagSupport {
     public int doStartTag() throws JspException {
         JspWriter out = pageContext.getOut();
         try {
-            logger.debug("TAG SESSION UUID = " + pageContext.getSession().getAttribute(FieldsName.TAG_CAPTCHA_ID_CAPTCHA));
             out.print("<ul class=\"actions\">\n");
             UUID id_captcha = null;
             id_captcha = (UUID) pageContext.getSession().getAttribute(FieldsName.TAG_CAPTCHA_ID_CAPTCHA);

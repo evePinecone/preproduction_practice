@@ -1,11 +1,15 @@
 package com.epam.preprod.roman_lutsenko.constants;
 
+/**
+ * Container for all log messages.
+ */
 public class Messages {
 
     public static final String INITIALIZED = " was inited";
     public static final String DESTROYED = " was destroyed";
     public static final String STARTED = " was started";
     public static final String ENDED = " was ended";
+    public static final String LOADED = "Loaded ";
     public static final String REDIRECTED = " was redirected to ";
 
 
