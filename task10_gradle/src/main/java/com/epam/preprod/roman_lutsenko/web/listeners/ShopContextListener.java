@@ -2,7 +2,11 @@ package com.epam.preprod.roman_lutsenko.web.listeners;
 
 import com.epam.preprod.roman_lutsenko.constants.Messages;
 import com.epam.preprod.roman_lutsenko.context.Context;
+import com.epam.preprod.roman_lutsenko.dao.UserDao;
 import com.epam.preprod.roman_lutsenko.dao.localImpl.LocalUserDao;
+import com.epam.preprod.roman_lutsenko.services.CaptchaService;
+import com.epam.preprod.roman_lutsenko.services.UserService;
+import com.epam.preprod.roman_lutsenko.services.localImpl.ContextCaptchaService;
 import com.epam.preprod.roman_lutsenko.services.localImpl.LocalUserService;
 import org.apache.log4j.Logger;
 
@@ -18,7 +22,13 @@ public class ShopContextListener implements ServletContextListener{
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         ServletContext servletContext = servletContextEvent.getServletContext();
-        Context context = new Context(new LocalUserService(new LocalUserDao()));
+
+        UserDao userDao = new LocalUserDao();
+
+        UserService userService = new LocalUserService(userDao);
+        CaptchaService captchaService = new ContextCaptchaService();
+
+        Context context = new Context(userService, captchaService);
         servletContext.setAttribute("context", context);
         logger.debug(getClass() + Messages.INITIALIZED);
     }

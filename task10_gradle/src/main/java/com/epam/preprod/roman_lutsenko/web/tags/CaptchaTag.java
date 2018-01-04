@@ -20,9 +20,9 @@ public class CaptchaTag extends TagSupport {
     public int doStartTag() throws JspException {
         JspWriter out = pageContext.getOut();
         Context context = (Context) pageContext.getAttribute("context");
-        //TODO: CREATE CAPTURE SERVICE!!! in capture service create map container with captcha.
+        //TODO: CREATE CAPTURE SERVICE!!! in capture service create map container with captcha. no captcha in session
         try {
-            out.print("<img src='captcha' id='" + 123+ "'/>");
+            out.print("<img src='captcha' id='${sessionScope.captcha}'/>");
         } catch (IOException e) {
             logger.error(getClass() + e.toString());
         }
