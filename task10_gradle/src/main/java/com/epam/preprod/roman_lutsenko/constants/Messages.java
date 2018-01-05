@@ -26,4 +26,22 @@ public class Messages {
     public static final String GET_METHOD_START = " GET method started";
     public static final String POST_METHOD_START = " POST method started";
     public static final String GET_METHOD_ENDED = " GET method ended";
+
+    //err
+    public static final String ERR_CANNOT_OBTAIN_CONNECTION = "Cannot obtain a connection from the pool";
+    public static final String ERR_CANNOT_OBTAIN_DATA_SOURCE = "Cannot obtain the data source";
+    public static final String ERR_CANNOT_CLOSE_CONNECTION = "Cannot close a connection";
+    public static final String ERR_CANNOT_CLOSE_RESULTSET = "Cannot close a result set";
+    public static final String ERR_CANNOT_CLOSE_STATEMENT = "Cannot close a statement";
+    public static final String ERR_CANNOT_ROLL_BACK_CONNECTION = "Cannot roll back a connection";
+    public static final String ERR_CANNOT_INSTANTIATE_DAO_FACTORY = "Cannot instantiate DAOFactory object";
+
+
+    //success
+    public static final String SUCCESS_DATA_SOURCE_OBTAINED = "Data source has been successfully obtained: ";
+    public static final String SUCCESS_CONNECTION_CLOSED = "Connection has been successfully closed";
+    public static final String SUCCESS_STATEMENT_CLOSED = "Statement has been successfully closed";
+    public static final String SUCCESS_RESULTSET_CLOSED = "ResultSet has been successfully closed";
+    public static final String SUCCESS_CONNECTION_ROLLED_BACK = "Connection has been rolled back";
+    public static final String SUCCESS_DAO_FACTORY_INSTANCE_OBTAINED = "DAOFActory instance has been successfully obtained: ";
 }
