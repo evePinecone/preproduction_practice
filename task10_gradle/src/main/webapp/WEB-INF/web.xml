@@ -18,4 +18,9 @@
         <param-name>UserService</param-name>
         <param-value>com.epam.preprod.roman_lutsenko.services.localImpl.LocalUserService</param-value>
     </context-param>
+
+    <context-param>
+        <param-name>DataBaseClassFactory</param-name>
+        <param-value>MySqlServiceFactory</param-value>
+    </context-param>
 </web-app>

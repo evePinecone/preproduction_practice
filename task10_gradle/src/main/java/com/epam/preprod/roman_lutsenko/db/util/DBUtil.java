@@ -34,11 +34,6 @@ public class DBUtil {
     private static final Logger logger = Logger.getLogger(DBUtil.class);
 
     /**
-     * Full Class Name of Mysql implementation of DAOFactory.
-     */
-    public static final String MYSQL_DAO_FACTORY_FCN = "ua.pinecone.database.dao.mysql.MysqlDAOFactory";
-
-    /**
      * Creates (or takes from a pool) Data Base connection.
      *
      * @return Connection object.
@@ -51,7 +46,7 @@ public class DBUtil {
         try {
             connection = ds.getConnection();
             connection.setAutoCommit(false);
-            //logger.trace("Connection ==> " + connection);
+            logger.trace("Connection ==> " + connection);
         } catch (SQLException e) {
             logger.error(Messages.ERR_CANNOT_OBTAIN_CONNECTION);
             throw new DBException(Messages.ERR_CANNOT_OBTAIN_CONNECTION, e);
@@ -70,7 +65,7 @@ public class DBUtil {
                 Context initialContext = new InitialContext();
                 // ЧТО ЭТО ТАКОЕ?!
                 Context shopContext = (Context) initialContext.lookup("java:/comp/env");
-                ds = (DataSource) shopContext.lookup("jdbc/shop");
+                ds = (DataSource) shopContext.lookup("jdbc/task10_gradle");
                 logger.trace(Messages.SUCCESS_DATA_SOURCE_OBTAINED + ds);
             } catch (NamingException e) {
                 logger.error(Messages.ERR_CANNOT_OBTAIN_DATA_SOURCE);

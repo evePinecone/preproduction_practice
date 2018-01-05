@@ -6,7 +6,7 @@ package com.epam.preprod.roman_lutsenko.exceptions;
  * @author Roman Lutsenko
  *
  */
-public class DBException extends Exception {
+public class DBException extends RuntimeException{
 
 	public DBException() {
 		super();
@@ -14,5 +14,9 @@ public class DBException extends Exception {
 
 	public DBException(String message, Throwable cause) {
 		super(message, cause);
+	}
+
+	public DBException(String message) {
+		super(message);
 	}
 }

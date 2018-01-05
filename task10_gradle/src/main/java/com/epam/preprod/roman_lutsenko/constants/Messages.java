@@ -34,7 +34,8 @@ public class Messages {
     public static final String ERR_CANNOT_CLOSE_RESULTSET = "Cannot close a result set";
     public static final String ERR_CANNOT_CLOSE_STATEMENT = "Cannot close a statement";
     public static final String ERR_CANNOT_ROLL_BACK_CONNECTION = "Cannot roll back a connection";
-    public static final String ERR_CANNOT_INSTANTIATE_DAO_FACTORY = "Cannot instantiate DAOFactory object";
+    public static final String ERR_CANNOT_INSTANTIATE_SERVICE_FACTORY = "Cannot instantiate DBServiceFactory object";
+    public static final String ERR_CANNOT_OBTAIN_TEST = "Cannot obtain tests from a database";
 
 
     //success
@@ -44,4 +45,20 @@ public class Messages {
     public static final String SUCCESS_RESULTSET_CLOSED = "ResultSet has been successfully closed";
     public static final String SUCCESS_CONNECTION_ROLLED_BACK = "Connection has been rolled back";
     public static final String SUCCESS_DAO_FACTORY_INSTANCE_OBTAINED = "DAOFActory instance has been successfully obtained: ";
+
+    //trace
+    // Trace messages
+    public static final String TRACE_COOKIE_FOUNDED = "Value of a cookie that has been founded in a response: ";
+    public static final String TRACE_COOKIE_CHANGED = "Cookie had initialized or changed. Curren cookie value: ";
+    public static final String TRACE_CURRENT_SESSION = "Current session object is: ";
+    public static final String TRACE_DAO_OBJECT_CREATED = "DBServiceFactory object has been created: ";
+    public static final String TRACE_CONTROLLER_FINISHED = "Controller has finished it's work.";
+    public static final String TRACE_DESTINATION_URL = "Current destination URL: ";
+    public static final String TRACE_ATRIBUTE_ADDED_TO_REQUEST = "Attribute has added to the request scope: ";
+    public static final String TRACE_ATRIBUTE_ADDED_TO_SESSION = "Attribute has added to the session scope: ";
+    public static final String TRACE_FOUNDED_IN_DATA_BASE = "Objct founded in database: ";
+    public static final String TRACE_USER_ROLE = "User role obtained by user.roleId: ";
+    public static final String TRACE_REQUES_PARAMETER = "Parameter obtained from the request: ";
+
+
 }

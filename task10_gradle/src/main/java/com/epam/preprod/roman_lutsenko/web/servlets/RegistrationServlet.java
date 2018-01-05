@@ -16,13 +16,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Objects;
 
-import static com.epam.preprod.roman_lutsenko.constants.FieldsName.FORM_REGISTRATION_EMAIL;
-import static com.epam.preprod.roman_lutsenko.constants.FieldsName.FORM_REGISTRATION_NAME;
-import static com.epam.preprod.roman_lutsenko.constants.FieldsName.FORM_REGISTRATION_PASSWORD;
-import static com.epam.preprod.roman_lutsenko.constants.FieldsName.FORM_REGISTRATION_PHONE;
-import static com.epam.preprod.roman_lutsenko.constants.FieldsName.SESSION_CONTEXT;
-import static com.epam.preprod.roman_lutsenko.constants.FieldsName.SESSION_ERR_MESS;
-import static com.epam.preprod.roman_lutsenko.constants.FieldsName.TAG_CAPTCHA_INPUT_VALUE;
+import static com.epam.preprod.roman_lutsenko.constants.Fields.FORM_REGISTRATION_EMAIL;
+import static com.epam.preprod.roman_lutsenko.constants.Fields.FORM_REGISTRATION_NAME;
+import static com.epam.preprod.roman_lutsenko.constants.Fields.FORM_REGISTRATION_PASSWORD;
+import static com.epam.preprod.roman_lutsenko.constants.Fields.FORM_REGISTRATION_PHONE;
+import static com.epam.preprod.roman_lutsenko.constants.Fields.SESSION_CONTEXT;
+import static com.epam.preprod.roman_lutsenko.constants.Fields.SESSION_ERR_MESS;
+import static com.epam.preprod.roman_lutsenko.constants.Fields.TAG_CAPTCHA_INPUT_VALUE;
 import static com.epam.preprod.roman_lutsenko.constants.Messages.REGISTRATION_DUPLICATE_USER;
 import static com.epam.preprod.roman_lutsenko.constants.Messages.REGISTRATION_NON_VALID_FIELDS;
 

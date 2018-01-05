@@ -1,12 +1,14 @@
 package com.epam.preprod.roman_lutsenko.web.listeners;
 
 import com.epam.preprod.roman_lutsenko.constants.CaptchaServiceFactory;
-import com.epam.preprod.roman_lutsenko.constants.FieldsName;
+import com.epam.preprod.roman_lutsenko.constants.DBServiceFactory;
+import com.epam.preprod.roman_lutsenko.constants.Fields;
 import com.epam.preprod.roman_lutsenko.constants.Messages;
 import com.epam.preprod.roman_lutsenko.context.Context;
 import com.epam.preprod.roman_lutsenko.dao.UserDao;
 import com.epam.preprod.roman_lutsenko.dao.localImpl.LocalUserDao;
 import com.epam.preprod.roman_lutsenko.services.CaptchaService;
+import com.epam.preprod.roman_lutsenko.services.TestService;
 import com.epam.preprod.roman_lutsenko.services.UserService;
 import com.epam.preprod.roman_lutsenko.services.localImpl.LocalUserService;
 import org.apache.log4j.Logger;
@@ -29,7 +31,8 @@ public class ShopContextListener implements ServletContextListener {
         logger.debug(getClass() + Messages.INITIALIZED);
         ServletContext servletContext = servletContextEvent.getServletContext();
 
-        String captchaServiceString = servletContext.getInitParameter(FieldsName.INIT_LISTENER_CAPTCHA);
+        String captchaServiceString = servletContext.getInitParameter(Fields.INIT_LISTENER_CAPTCHA);
+        String dbChoice = servletContext.getInitParameter(Fields.INIT_LISTENER_DBFACTORY);
 
         UserDao userDao = new LocalUserDao();
 
@@ -38,8 +41,12 @@ public class ShopContextListener implements ServletContextListener {
         CaptchaService captchaService = (new CaptchaServiceFactory()).getCaptchaService(captchaServiceString);
         logger.debug("captureServiceClass = " + captchaService.getClass());
 
-        Context context = new Context(userService, captchaService);
-        servletContext.setAttribute(FieldsName.SESSION_CONTEXT, context);
+        DBServiceFactory dbServiceFactory = new DBServiceFactory();
+        dbServiceFactory.setServiceFactoryName(dbChoice);
+        TestService testService = dbServiceFactory.getInstance().getTestService();
+
+        Context context = new Context(userService, captchaService, testService);
+        servletContext.setAttribute(Fields.SESSION_CONTEXT, context);
         logger.debug(getClass() + Messages.INITIALIZED);
     }
 

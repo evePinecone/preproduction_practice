@@ -1,6 +1,6 @@
 package com.epam.preprod.roman_lutsenko.services.localImpl;
 
-import com.epam.preprod.roman_lutsenko.constants.FieldsName;
+import com.epam.preprod.roman_lutsenko.constants.Fields;
 import com.epam.preprod.roman_lutsenko.constants.Messages;
 import com.epam.preprod.roman_lutsenko.entities.Captcha;
 import com.epam.preprod.roman_lutsenko.services.CaptchaService;
@@ -29,7 +29,7 @@ public class ContextCaptchaService implements CaptchaService {
 
     @Override
     public Captcha getCaptcha(HttpServletRequest request) {
-        UUID uuid = (UUID) request.getSession().getAttribute(FieldsName.TAG_CAPTCHA_ID_CAPTCHA);
+        UUID uuid = (UUID) request.getSession().getAttribute(Fields.TAG_CAPTCHA_ID_CAPTCHA);
         return map.get(uuid);
     }
 
@@ -43,7 +43,7 @@ public class ContextCaptchaService implements CaptchaService {
     public void addCaptcha(HttpServletRequest request, HttpServletResponse response) {
         Captcha captcha = GenerateCaptcha.generateCaptcha();
         map.put(captcha.getUuid(), captcha);
-        request.getSession().setAttribute(FieldsName.TAG_CAPTCHA_ID_CAPTCHA, captcha.getUuid());
+        request.getSession().setAttribute(Fields.TAG_CAPTCHA_ID_CAPTCHA, captcha.getUuid());
         logger.debug(getClass() + Messages.INITIALIZED);
     }
 }

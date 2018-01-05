@@ -1,6 +1,6 @@
 package com.epam.preprod.roman_lutsenko.services.localImpl;
 
-import com.epam.preprod.roman_lutsenko.constants.FieldsName;
+import com.epam.preprod.roman_lutsenko.constants.Fields;
 import com.epam.preprod.roman_lutsenko.entities.Captcha;
 import com.epam.preprod.roman_lutsenko.services.CaptchaService;
 import com.epam.preprod.roman_lutsenko.util.GenerateCaptcha;
@@ -43,7 +43,7 @@ public class CookieCaptchaService implements CaptchaService {
     public void addCaptcha(HttpServletRequest request, HttpServletResponse response) {
         Captcha captcha = GenerateCaptcha.generateCaptcha();
         map.put(captcha.getUuid(), captcha);
-        Cookie cookie = new Cookie(FieldsName.TAG_CAPTCHA_ID_CAPTCHA, captcha.getUuid().toString());
+        Cookie cookie = new Cookie(Fields.TAG_CAPTCHA_ID_CAPTCHA, captcha.getUuid().toString());
         response.addCookie(cookie);
         logger.debug("put cookie " + cookie);
     }
@@ -51,7 +51,7 @@ public class CookieCaptchaService implements CaptchaService {
     private Captcha getCaptchaFrom(Cookie[] cookies) {
         if (Objects.nonNull(cookies)) {
             for (Cookie cookie : cookies) {
-                if (cookie.getName().equals(FieldsName.TAG_CAPTCHA_ID_CAPTCHA)) {
+                if (cookie.getName().equals(Fields.TAG_CAPTCHA_ID_CAPTCHA)) {
                     return map.get(UUID.fromString(cookie.getValue()));
                 }
             }

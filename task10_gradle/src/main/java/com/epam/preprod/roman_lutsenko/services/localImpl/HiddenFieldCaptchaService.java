@@ -1,6 +1,6 @@
 package com.epam.preprod.roman_lutsenko.services.localImpl;
 
-import com.epam.preprod.roman_lutsenko.constants.FieldsName;
+import com.epam.preprod.roman_lutsenko.constants.Fields;
 import com.epam.preprod.roman_lutsenko.entities.Captcha;
 import com.epam.preprod.roman_lutsenko.services.CaptchaService;
 import com.epam.preprod.roman_lutsenko.util.GenerateCaptcha;
@@ -28,7 +28,7 @@ public class HiddenFieldCaptchaService implements CaptchaService {
 
     @Override
     public Captcha getCaptcha(HttpServletRequest request) {
-        UUID captchaId = (UUID) request.getServletContext().getAttribute(FieldsName.TAG_CAPTCHA_ID_CAPTCHA);
+        UUID captchaId = (UUID) request.getServletContext().getAttribute(Fields.TAG_CAPTCHA_ID_CAPTCHA);
         logger.debug(getClass() + " captchaId " + captchaId);
         return map.get(captchaId);
     }
@@ -42,8 +42,8 @@ public class HiddenFieldCaptchaService implements CaptchaService {
     @Override
     public void addCaptcha(HttpServletRequest request, HttpServletResponse response) {
         Captcha captcha = GenerateCaptcha.generateCaptcha();
-        request.getServletContext().setAttribute(FieldsName.TAG_CAPTCHA_ID_CAPTCHA, captcha.getUuid());
+        request.getServletContext().setAttribute(Fields.TAG_CAPTCHA_ID_CAPTCHA, captcha.getUuid());
         map.put(captcha.getUuid(), captcha);
-        logger.debug(" addCaptcha " + captcha.getUuid() + " get attr = " + request.getServletContext().getAttribute(FieldsName.TAG_CAPTCHA_ID_CAPTCHA));
+        logger.debug(" addCaptcha " + captcha.getUuid() + " get attr = " + request.getServletContext().getAttribute(Fields.TAG_CAPTCHA_ID_CAPTCHA));
     }
 }

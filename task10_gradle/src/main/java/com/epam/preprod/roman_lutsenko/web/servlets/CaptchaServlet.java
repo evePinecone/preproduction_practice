@@ -1,13 +1,12 @@
 package com.epam.preprod.roman_lutsenko.web.servlets;
 
-import com.epam.preprod.roman_lutsenko.constants.FieldsName;
+import com.epam.preprod.roman_lutsenko.constants.Fields;
 import com.epam.preprod.roman_lutsenko.constants.Messages;
 import com.epam.preprod.roman_lutsenko.context.Context;
 import com.epam.preprod.roman_lutsenko.services.CaptchaService;
 import org.apache.log4j.Logger;
 
 import javax.imageio.ImageIO;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,7 +30,7 @@ public class CaptchaServlet extends HttpServlet {
         response.setContentType("image/png");
         OutputStream os = response.getOutputStream();
 
-        Context context = (Context) request.getServletContext().getAttribute(FieldsName.SESSION_CONTEXT);
+        Context context = (Context) request.getServletContext().getAttribute(Fields.SESSION_CONTEXT);
         CaptchaService captchaService = context.getCaptchaService();
 
         ImageIO.write(captchaService.getCaptcha(request).getBufferedImage(), "png", os);
