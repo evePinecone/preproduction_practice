@@ -6,14 +6,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Interface of captcha setting.
+ * Interface of captchas setting.
  */
 public interface CaptchaService {
 
     /**
-     * Return captcha from the map by with specified type setting.
+     * Return captchas from the map by with specified type setting.
      * @param request request from client or jsp.
-     * @return captcha instance from map with unique UUID.
+     * @return captchas instance from map with unique UUID.
      */
     Captcha getCaptcha(HttpServletRequest request);
 
@@ -26,7 +26,7 @@ public interface CaptchaService {
     boolean isCorrectCaptcha(HttpServletRequest request, String captureValue);
 
     /**
-     * Generate captcha and set specified identificator with choose realisation.
+     * Generate captchas and set specified identificator with choose realisation.
      * @param request request from the client or jsp.
      * @param response responce for client or jsp.
      */

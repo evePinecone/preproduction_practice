@@ -6,39 +6,35 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
+import static java.awt.RenderingHints.KEY_ANTIALIASING;
+import static java.awt.RenderingHints.VALUE_ANTIALIAS_ON;
+
 /**
  * Util class that generates captha.
  */
+
+//генерировать капчу с помощью UUID и обрезать
 public class GenerateCaptcha {
+    // дДобавить константу для длины капчи
+
     public static Captcha generateCaptcha() {
+       // Move to const
         int width = 150;
         int height = 50;
-
-        char data[][] = {
-                {'z', 'e', 't', 'c', 'o', 'd', 'e'},
-                {'l', 'i', 'n', 'u', 'x'},
-                {'f', 'r', 'e', 'e', 'b', 's', 'd'},
-                {'u', 'b', 'u', 'n', 't', 'u'},
-                {'j', 'e', 'e'}
-        };
-
 
         BufferedImage bufferedImage = new BufferedImage(width, height,
                 BufferedImage.TYPE_INT_RGB);
 
         Graphics2D g2d = bufferedImage.createGraphics();
 
+        // Please, use const
         Font font = new Font("Georgia", Font.BOLD, 18);
         g2d.setFont(font);
 
-        RenderingHints rh = new RenderingHints(
-                RenderingHints.KEY_ANTIALIASING,
-                RenderingHints.VALUE_ANTIALIAS_ON);
+        RenderingHints renderingHints = new RenderingHints(KEY_ANTIALIASING, VALUE_ANTIALIAS_ON);
+        renderingHints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 
-        rh.put(RenderingHints.KEY_RENDERING,
-                RenderingHints.VALUE_RENDER_QUALITY);
-
-        g2d.setRenderingHints(rh);
+        g2d.setRenderingHints(renderingHints);
 
         GradientPaint gp = new GradientPaint(0, 0,
                 Color.red, 0, height / 2, Color.black, true);
@@ -51,15 +47,17 @@ public class GenerateCaptcha {
         Random r = new Random();
         int index = Math.abs(r.nextInt()) % 5;
 
-        String captchaValue = String.copyValueOf(data[index]);
+        //Please, use UUID
+        char[] data = {'q','w','e'};
+        String captchaValue = String.copyValueOf(data);
 
         int x = 0;
         int y = 0;
 
-        for (int i = 0; i < data[index].length; i++) {
+        for (int i = 0; i < 3; i++) {
             x += 10 + (Math.abs(r.nextInt()) % 15);
             y = 20 + Math.abs(r.nextInt()) % 20;
-            g2d.drawChars(data[index], i, 1, x, y);
+            g2d.drawChars(data, i, 1, x, y);
         }
 
         g2d.dispose();

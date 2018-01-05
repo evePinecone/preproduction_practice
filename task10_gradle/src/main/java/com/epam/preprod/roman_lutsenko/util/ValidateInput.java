@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 public class ValidateInput {
     private static final Logger logger = Logger.getLogger(ValidateInput.class);
 
+   //todo: //pattern to const
     public static boolean validName(String name) {
         logger.info(Messages.VALID_BEGIN_NAME);
         Pattern pattern = Pattern.compile("^\\w{3,}$");

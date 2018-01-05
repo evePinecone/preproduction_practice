@@ -1,7 +1,7 @@
 package com.epam.preprod.roman_lutsenko.util;
 
 import org.apache.log4j.Logger;
-
+@Deprecated
 public class ParseInputData {
 
     private static final Logger logger = Logger.getLogger(ParseInputData.class);

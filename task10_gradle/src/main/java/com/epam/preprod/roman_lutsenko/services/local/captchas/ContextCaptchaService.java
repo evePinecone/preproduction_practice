@@ -1,43 +1,36 @@
-package com.epam.preprod.roman_lutsenko.services.localImpl;
+package com.epam.preprod.roman_lutsenko.services.local.captchas;
 
 import com.epam.preprod.roman_lutsenko.constants.FieldsName;
 import com.epam.preprod.roman_lutsenko.constants.Messages;
 import com.epam.preprod.roman_lutsenko.entities.Captcha;
-import com.epam.preprod.roman_lutsenko.services.CaptchaService;
 import com.epam.preprod.roman_lutsenko.util.GenerateCaptcha;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
 
 /**
  * Captcha that saved its id in session attributes.
  */
-public class ContextCaptchaService implements CaptchaService {
+
+//todo: rename to session
+public class ContextCaptchaService extends AbstractCaptchaService {
 
     private static final Logger logger = Logger.getLogger(ContextCaptchaService.class);
 
-    private Map<UUID, Captcha> map;
-
     public ContextCaptchaService() {
-        map = new HashMap<>();
+        map = Collections.synchronizedMap(new HashMap<>());
     }
 
     @Override
     public Captcha getCaptcha(HttpServletRequest request) {
-        UUID uuid = (UUID) request.getSession().getAttribute(FieldsName.TAG_CAPTCHA_ID_CAPTCHA);
+        String uuid = (String) request.getSession().getAttribute(FieldsName.TAG_CAPTCHA_ID_CAPTCHA);
+        cleanInvalidCaptcha(map);
         return map.get(uuid);
     }
 
-    @Override
-    public boolean isCorrectCaptcha(HttpServletRequest request, String captchaValue) {
-        Captcha captchaBase = getCaptcha(request);
-        return (Objects.nonNull(captchaBase) && captchaBase.getValue().equals(captchaValue));
-    }
 
     @Override
     public void addCaptcha(HttpServletRequest request, HttpServletResponse response) {

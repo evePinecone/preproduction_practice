@@ -37,7 +37,7 @@ public class RegistrationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         logger.debug(getClass() + Messages.STARTED);
         Context context = (Context) req.getServletContext().getAttribute(SESSION_CONTEXT);
-        User user = initUserFromForm(req);
+        User user = getUserFromReques(req);
         if (isValidCaptcha(req, context)) {
             logger.debug("TELEPHONE " + req.getParameter(FORM_REGISTRATION_PHONE));
             if (containsUser(context, ParseInputData.phoneFromString((String) req.getParameter(FORM_REGISTRATION_PHONE)))) {
@@ -72,7 +72,8 @@ public class RegistrationServlet extends HttpServlet {
      * @param request request from user.
      * @return User instance with setted fields or <b>null</b> if user cannot insert to user container.
      */
-    private User initUserFromForm(HttpServletRequest request) {
+    //  move to class with refactored mothods
+    private User getUserFromReques(HttpServletRequest request) {
         clearSessionFromUserFields(request);
         User user = new User();
         String field = (String) request.getParameter(FORM_REGISTRATION_NAME);

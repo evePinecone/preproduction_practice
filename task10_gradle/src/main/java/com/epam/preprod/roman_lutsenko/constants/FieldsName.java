@@ -11,9 +11,11 @@ public class FieldsName {
     public static final String FORM_REGISTRATION_PHONE = "phone";
     public static final String FORM_REGISTRATION_PASSWORD = "password";
 
-    //tag captcha
+    //tag captchas
     public static final String TAG_CAPTCHA_INPUT_VALUE = "captcha_value";
     public static final String TAG_CAPTCHA_ID_CAPTCHA = "id_captcha";
+    public static final String TAG_CAPTCHA_TIMEOUT = "captcha_timeout";
+
 
     //Session attributes
     public static final String SESSION_CONTEXT = "context";
@@ -22,9 +24,9 @@ public class FieldsName {
 
     //Listener
     public static final String INIT_LISTENER_CAPTCHA = "Captcha";
-    public static final String INIT_LISTENER_CONTEXT_CLASS = "com.epam.preprod.roman_lutsenko.services.localImpl.ContextCaptchaService";
-    public static final String INIT_LISTENER_COOKIE_CLASS = "com.epam.preprod.roman_lutsenko.services.localImpl.CookieCaptchaService";
-    public static final String INIT_LISTENER_HIDDEN_FIELD_CLASS = "com.epam.preprod.roman_lutsenko.services.localImpl.HiddenFieldCaptchaService";
+    public static final String INIT_LISTENER_CONTEXT_CLASS = "com.epam.preprod.roman_lutsenko.services.local.captchas.ContextCaptchaService";
+    public static final String INIT_LISTENER_COOKIE_CLASS = "com.epam.preprod.roman_lutsenko.services.local.captchas.CookieCaptchaService";
+    public static final String INIT_LISTENER_HIDDEN_FIELD_CLASS = "com.epam.preprod.roman_lutsenko.services.local.captchas.HiddenFieldCaptchaService";
 
 
 }

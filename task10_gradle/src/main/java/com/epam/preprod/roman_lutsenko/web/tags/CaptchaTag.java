@@ -8,30 +8,28 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
-import java.util.UUID;
-
 
 public class CaptchaTag extends TagSupport {
 
     private final static Logger logger = Logger.getLogger(CaptchaTag.class);
-
+//todo: captcha is not writed.
     @Override
     public int doStartTag() throws JspException {
         JspWriter out = pageContext.getOut();
         try {
             out.print("<ul class=\"actions\">\n");
-            UUID id_captcha = null;
-            id_captcha = (UUID) pageContext.getSession().getAttribute(FieldsName.TAG_CAPTCHA_ID_CAPTCHA);
+            String id_captcha = null;
+            id_captcha = (String)pageContext.getSession().getAttribute(FieldsName.TAG_CAPTCHA_ID_CAPTCHA);
 
-            out.print("<li id=\"captcha_confirm\" class=\"captcha\">\n" +
-                    "<img src=\"captcha\" id=\"id_captcha\" value=\"" + id_captcha + "\"/>\n" +
+            out.print("<li id=\"captcha_confirm\" class=\"captchas\">\n" +
+                    "<img src=\"captchas\" id=\"id_captcha\" value=\"" + id_captcha + "\"/>\n" +
                     "</li>\n" +
-                    "<li class=\"form__item captcha\">\n" +
+                    "<li class=\"form__item captchas\">\n" +
                     "<input id=\"captcha_value\" name=\"captcha_value\" type=\"text\" placeholder=\"Captcha\"/>\n" +
-                    "<div class=\"invalid_input\">Invalid captcha</div>\n" +
+                    "<div class=\"invalid_input\">Invalid captchas</div>\n" +
                     "</li>\n" +
                     "</ul>");
-            id_captcha = (UUID) pageContext.getServletContext().getAttribute(FieldsName.TAG_CAPTCHA_ID_CAPTCHA);
+            id_captcha = (String)pageContext.getServletContext().getAttribute(FieldsName.TAG_CAPTCHA_ID_CAPTCHA);
             out.print("<input type=\"hidden\" id=\"hidden\" name=\"hidden\" value=\"" + id_captcha + "\"/>");
             out.flush();
 
