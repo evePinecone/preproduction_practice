@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Captcha that saved its id in clients cookies.
@@ -20,7 +21,7 @@ public class CookieCaptchaService extends AbstractCaptchaService {
 
 
     public CookieCaptchaService() {
-        map = Collections.synchronizedMap(new HashMap<>());
+        map = new ConcurrentHashMap<>();
     }
 
     @Override
@@ -41,13 +42,11 @@ public class CookieCaptchaService extends AbstractCaptchaService {
     }
 
     private Captcha getCaptchaFrom(Cookie[] cookies) {
-//        if (Objects.nonNull(cookies)) {
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals(FieldsName.TAG_CAPTCHA_ID_CAPTCHA)) {
                 return map.get(cookie.getValue());
             }
         }
-//        }
         return null;
     }
 }

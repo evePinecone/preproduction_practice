@@ -1,7 +1,7 @@
 package com.epam.preprod.roman_lutsenko.constants;
 
 import com.epam.preprod.roman_lutsenko.services.CaptchaService;
-import com.epam.preprod.roman_lutsenko.services.local.captchas.ContextCaptchaService;
+import com.epam.preprod.roman_lutsenko.services.local.captchas.SessionCaptchaService;
 import com.epam.preprod.roman_lutsenko.services.local.captchas.CookieCaptchaService;
 import com.epam.preprod.roman_lutsenko.services.local.captchas.HiddenFieldCaptchaService;
 import org.apache.log4j.Logger;
@@ -17,7 +17,7 @@ public class CaptchaServiceProvider {
 
     public CaptchaServiceProvider() {
         logger.debug(getClass() + Messages.INITIALIZED);
-        map.put(FieldsName.INIT_LISTENER_CONTEXT_CLASS, new ContextCaptchaService());
+        map.put(FieldsName.INIT_LISTENER_CONTEXT_CLASS, new SessionCaptchaService());
         map.put(FieldsName.INIT_LISTENER_COOKIE_CLASS, new CookieCaptchaService());
         map.put(FieldsName.INIT_LISTENER_HIDDEN_FIELD_CLASS, new HiddenFieldCaptchaService());
     }

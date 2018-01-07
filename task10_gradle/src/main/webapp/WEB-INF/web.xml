@@ -11,7 +11,7 @@
 
     <context-param>
         <param-name>Captcha</param-name>
-        <param-value>com.epam.preprod.roman_lutsenko.services.local.captchas.ContextCaptchaService</param-value>
+        <param-value>com.epam.preprod.roman_lutsenko.services.local.captchas.SessionCaptchaService</param-value>
     </context-param>
 
     <context-param>
@@ -21,7 +21,7 @@
 
     <context-param>
         <param-name>captcha_timeout</param-name>
-        <param-value>3</param-value>
+        <param-value>1</param-value>
     </context-param>
 
 </web-app>

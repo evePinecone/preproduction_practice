@@ -18,6 +18,7 @@ public abstract class AbstractCaptchaService implements CaptchaService {
     }
 
     void cleanInvalidCaptcha(Map<String, Captcha> mapCaptcha) {
+
         mapCaptcha.forEach((key, value) -> {
             if (Objects.equals(value.getValue(), "")) {
                 mapCaptcha.remove(key);

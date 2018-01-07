@@ -31,15 +31,15 @@ import static com.epam.preprod.roman_lutsenko.constants.Messages.REGISTRATION_NO
  */
 @WebServlet("/registration")
 public class RegistrationServlet extends HttpServlet {
-    private final Logger logger = Logger.getLogger(RegistrationServlet.class);
+    private final Logger LOG = Logger.getLogger(RegistrationServlet.class);
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        logger.debug(getClass() + Messages.STARTED);
+        LOG.debug(getClass() + Messages.STARTED);
         Context context = (Context) req.getServletContext().getAttribute(SESSION_CONTEXT);
         User user = getUserFromReques(req);
         if (isValidCaptcha(req, context)) {
-            logger.debug("TELEPHONE " + req.getParameter(FORM_REGISTRATION_PHONE));
+            LOG.debug("TELEPHONE " + req.getParameter(FORM_REGISTRATION_PHONE));
             if (containsUser(context, ParseInputData.phoneFromString((String) req.getParameter(FORM_REGISTRATION_PHONE)))) {
                 req.getSession().setAttribute(SESSION_ERR_MESS, REGISTRATION_DUPLICATE_USER);
                 resp.sendRedirect("registration");
@@ -53,17 +53,17 @@ public class RegistrationServlet extends HttpServlet {
         } else {
             resp.sendRedirect("registration");
         }
-        logger.debug(getClass() + Messages.ENDED);
+        LOG.debug(getClass() + Messages.ENDED);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        logger.info("DO GET " + getServletName());
+        LOG.debug("DO GET " + getServletName());
 
         Context context = (Context) req.getServletContext().getAttribute(SESSION_CONTEXT);
         context.getCaptchaService().addCaptcha(req, resp);
-        ;
 
+        LOG.debug("to request dispatcher");
         req.getRequestDispatcher("registration.jsp").forward(req, resp);
     }
 
@@ -80,41 +80,41 @@ public class RegistrationServlet extends HttpServlet {
         if (Objects.nonNull(field) && ValidateInput.validName(field)) {
             user.setName(field);
             request.getSession().setAttribute(FORM_REGISTRATION_NAME, field);
-            logger.debug(FORM_REGISTRATION_NAME + " valid");
+            LOG.debug(FORM_REGISTRATION_NAME + " valid");
         } else {
-            logger.debug(FORM_REGISTRATION_NAME + " NON valid");
+            LOG.debug(FORM_REGISTRATION_NAME + " NON valid");
             user = null;
         }
         field = (String) request.getParameter(FORM_REGISTRATION_PHONE);
         if (Objects.nonNull(field) && ValidateInput.validPhone(field)) {
             if (Objects.nonNull(user)) {
                 user.setPhone(ParseInputData.phoneFromString(field));
-                logger.debug(FORM_REGISTRATION_PHONE + " valid");
+                LOG.debug(FORM_REGISTRATION_PHONE + " valid");
             }
             request.getSession().setAttribute(FORM_REGISTRATION_PHONE, field);
         } else {
-            logger.debug(FORM_REGISTRATION_PHONE + " NON valid");
+            LOG.debug(FORM_REGISTRATION_PHONE + " NON valid");
             user = null;
         }
         field = (String) request.getParameter(FORM_REGISTRATION_EMAIL);
         if (Objects.nonNull(field) && ValidateInput.validEmail(field)) {
             if (Objects.nonNull(user)) {
                 user.setEmail((String) request.getAttribute(FORM_REGISTRATION_EMAIL));
-                logger.debug(FORM_REGISTRATION_EMAIL + " valid");
+                LOG.debug(FORM_REGISTRATION_EMAIL + " valid");
             }
             request.getSession().setAttribute(FORM_REGISTRATION_EMAIL, field);
         } else {
-            logger.debug(FORM_REGISTRATION_EMAIL + " NON valid");
+            LOG.debug(FORM_REGISTRATION_EMAIL + " NON valid");
             user = null;
         }
         field = (String) request.getParameter(FORM_REGISTRATION_PASSWORD);
         if (Objects.nonNull(field) && ValidateInput.validPassword(field)) {
             if (Objects.nonNull(user)) {
-                logger.debug(FORM_REGISTRATION_PASSWORD + " valid");
+                LOG.debug(FORM_REGISTRATION_PASSWORD + " valid");
                 user.setPassword(field);
             }
         } else {
-            logger.debug(FORM_REGISTRATION_PASSWORD + " NON valid");
+            LOG.debug(FORM_REGISTRATION_PASSWORD + " NON valid");
             user = null;
         }
         return user;

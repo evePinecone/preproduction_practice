@@ -9,16 +9,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Captcha that saved its id in hidden field on form.
  */
 public class HiddenFieldCaptchaService extends AbstractCaptchaService{
 
-    private static final Logger logger = Logger.getLogger(ContextCaptchaService.class);
+    private static final Logger logger = Logger.getLogger(SessionCaptchaService.class);
 
     public HiddenFieldCaptchaService() {
-        map = Collections.synchronizedMap(new HashMap<>());
+//        map = Collections.synchronizedMap(new HashMap<>());
+        map = new ConcurrentHashMap<>();
     }
 
     @Override

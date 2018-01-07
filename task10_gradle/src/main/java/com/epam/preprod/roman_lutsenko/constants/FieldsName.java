@@ -24,7 +24,7 @@ public class FieldsName {
 
     //Listener
     public static final String INIT_LISTENER_CAPTCHA = "Captcha";
-    public static final String INIT_LISTENER_CONTEXT_CLASS = "com.epam.preprod.roman_lutsenko.services.local.captchas.ContextCaptchaService";
+    public static final String INIT_LISTENER_CONTEXT_CLASS = "com.epam.preprod.roman_lutsenko.services.local.captchas.SessionCaptchaService";
     public static final String INIT_LISTENER_COOKIE_CLASS = "com.epam.preprod.roman_lutsenko.services.local.captchas.CookieCaptchaService";
     public static final String INIT_LISTENER_HIDDEN_FIELD_CLASS = "com.epam.preprod.roman_lutsenko.services.local.captchas.HiddenFieldCaptchaService";
 

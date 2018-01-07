@@ -39,7 +39,7 @@ public class ShopContextListener implements ServletContextListener {
         UserService userService = new LocalUserService(userDao);
         logger.debug("captureService = " + captchaServiceString);
         CaptchaService captchaService = (new CaptchaServiceProvider()).getCaptchaService(captchaServiceString);
-        logger.debug("captureServiceClass = " + captchaService.getClass());
+        logger.debug("captureServiceClass = " + captchaService.getClass().getSimpleName());
 
         Context context = new Context(userService, captchaService);
         servletContext.setAttribute(FieldsName.SESSION_CONTEXT, context);
