@@ -1,4 +1,4 @@
-package com.epam.preprod.roman_lutsenko.services.local.captchas;
+package com.epam.preprod.roman_lutsenko.services.local.captcha;
 
 import com.epam.preprod.roman_lutsenko.constants.FieldsName;
 import com.epam.preprod.roman_lutsenko.entities.Captcha;
@@ -7,27 +7,24 @@ import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Captcha that saved its id in hidden field on form.
  */
-public class HiddenFieldCaptchaService extends AbstractCaptchaService{
+public class HiddenFieldCaptchaService extends AbstractCaptchaService {
 
     private static final Logger logger = Logger.getLogger(SessionCaptchaService.class);
 
     public HiddenFieldCaptchaService() {
-//        map = Collections.synchronizedMap(new HashMap<>());
         map = new ConcurrentHashMap<>();
     }
 
     @Override
     public Captcha getCaptcha(HttpServletRequest request) {
-        String captchaId = (String)request.getServletContext().getAttribute(FieldsName.TAG_CAPTCHA_ID_CAPTCHA);
+        String captchaId = (String) request.getServletContext().getAttribute(FieldsName.TAG_CAPTCHA_ID_CAPTCHA);
         logger.debug(getClass() + " captchaId " + captchaId);
-        cleanInvalidCaptcha(map);
+        cleanInvalidCaptcha();
         return map.get(captchaId);
     }
 

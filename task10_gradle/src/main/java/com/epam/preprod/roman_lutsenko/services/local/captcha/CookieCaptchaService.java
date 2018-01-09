@@ -1,4 +1,4 @@
-package com.epam.preprod.roman_lutsenko.services.local.captchas;
+package com.epam.preprod.roman_lutsenko.services.local.captcha;
 
 import com.epam.preprod.roman_lutsenko.constants.FieldsName;
 import com.epam.preprod.roman_lutsenko.entities.Captcha;
@@ -8,8 +8,6 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -27,7 +25,7 @@ public class CookieCaptchaService extends AbstractCaptchaService {
     @Override
     public Captcha getCaptcha(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
-        cleanInvalidCaptcha(map);
+        cleanInvalidCaptcha();
         return getCaptchaFrom(cookies);
     }
 

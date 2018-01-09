@@ -7,11 +7,16 @@ public class FieldsName {
 
     //registration.jsp
     public static final String FORM_REGISTRATION_NAME = "name";
+    public static final String REGISTRATION_JSP = "registration.jsp";
+    public static final String REGISTRATION_SERVLET = "registration";
     public static final String FORM_REGISTRATION_EMAIL = "email";
     public static final String FORM_REGISTRATION_PHONE = "phone";
     public static final String FORM_REGISTRATION_PASSWORD = "password";
 
-    //tag captchas
+    //index.jsp
+    public static final String INDEX_JSP = "index.jsp";
+
+    //tag captcha
     public static final String TAG_CAPTCHA_INPUT_VALUE = "captcha_value";
     public static final String TAG_CAPTCHA_ID_CAPTCHA = "id_captcha";
     public static final String TAG_CAPTCHA_TIMEOUT = "captcha_timeout";
@@ -24,9 +29,9 @@ public class FieldsName {
 
     //Listener
     public static final String INIT_LISTENER_CAPTCHA = "Captcha";
-    public static final String INIT_LISTENER_CONTEXT_CLASS = "com.epam.preprod.roman_lutsenko.services.local.captchas.SessionCaptchaService";
-    public static final String INIT_LISTENER_COOKIE_CLASS = "com.epam.preprod.roman_lutsenko.services.local.captchas.CookieCaptchaService";
-    public static final String INIT_LISTENER_HIDDEN_FIELD_CLASS = "com.epam.preprod.roman_lutsenko.services.local.captchas.HiddenFieldCaptchaService";
+    public static final String INIT_LISTENER_CONTEXT_CLASS = "com.epam.preprod.roman_lutsenko.services.local.captcha.SessionCaptchaService";
+    public static final String INIT_LISTENER_COOKIE_CLASS = "com.epam.preprod.roman_lutsenko.services.local.captcha.CookieCaptchaService";
+    public static final String INIT_LISTENER_HIDDEN_FIELD_CLASS = "com.epam.preprod.roman_lutsenko.services.local.captcha.HiddenFieldCaptchaService";
 
 
 }

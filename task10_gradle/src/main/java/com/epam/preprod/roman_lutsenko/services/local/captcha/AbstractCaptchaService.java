@@ -1,4 +1,4 @@
-package com.epam.preprod.roman_lutsenko.services.local.captchas;
+package com.epam.preprod.roman_lutsenko.services.local.captcha;
 
 import com.epam.preprod.roman_lutsenko.entities.Captcha;
 import com.epam.preprod.roman_lutsenko.services.CaptchaService;
@@ -9,6 +9,7 @@ import java.util.Objects;
 
 public abstract class AbstractCaptchaService implements CaptchaService {
 
+    private static final String EMPTY_STRING = "";
     Map<String, Captcha> map;
 
     @Override
@@ -17,11 +18,11 @@ public abstract class AbstractCaptchaService implements CaptchaService {
         return (Objects.nonNull(captchaBase) && captchaBase.getValue().equals(captchaValue));
     }
 
-    void cleanInvalidCaptcha(Map<String, Captcha> mapCaptcha) {
+    void cleanInvalidCaptcha() {
 
-        mapCaptcha.forEach((key, value) -> {
-            if (Objects.equals(value.getValue(), "")) {
-                mapCaptcha.remove(key);
+        map.forEach((key, value) -> {
+            if (Objects.equals(value.getValue(), EMPTY_STRING)) {
+                map.remove(key);
             }
         });
     }

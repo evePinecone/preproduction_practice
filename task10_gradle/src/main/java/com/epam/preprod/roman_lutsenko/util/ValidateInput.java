@@ -5,16 +5,21 @@ import org.apache.log4j.Logger;
 
 import java.util.regex.Pattern;
 
-public class ValidateInput {
+public final class ValidateInput {
+
+    private ValidateInput(){
+        throw new UnsupportedOperationException();
+    }
+
     private static final Logger logger = Logger.getLogger(ValidateInput.class);
 
     private static final String NAME_REGEXP = "^\\w{3,}$";
-    private static final String EMAL_REGEXP = "^[A-z0-9._-]+@[A-z0-9.-]+\\.[A-z]{2,4}$";
+    private static final String EMAIL_REGEXP = "^[A-z0-9._-]+@[A-z0-9.-]+\\.[A-z]{2,4}$";
     private static final String PHONE_REGEXP = "^\\+\\d{9,12}$";
     private static final String PASSWORD_REGEXP = "^.{8,}$";
 
     private static final Pattern PATTERN_NAME = Pattern.compile(NAME_REGEXP);
-    private static final Pattern PATTERN_EMAIL = Pattern.compile(EMAL_REGEXP);
+    private static final Pattern PATTERN_EMAIL = Pattern.compile(EMAIL_REGEXP);
     private static final Pattern PATTERN_PHONE = Pattern.compile(PHONE_REGEXP);
     private static final Pattern PATTERN_PASSWORD = Pattern.compile(PASSWORD_REGEXP);
 

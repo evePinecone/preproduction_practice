@@ -5,31 +5,37 @@ import com.epam.preprod.roman_lutsenko.entities.Captcha;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
+import java.util.UUID;
 
 import static java.awt.RenderingHints.KEY_ANTIALIASING;
 import static java.awt.RenderingHints.VALUE_ANTIALIAS_ON;
 
 /**
- * Util class that generates captha.
+ * Util class that generates captcha.
  */
 
-//генерировать капчу с помощью UUID и обрезать
 public class GenerateCaptcha {
-    // дДобавить константу для длины капчи
+
+    private static final int WIDTH = 150;
+    private static final int HEIGHT = 50;
+    private static final int SIZE_CHARACTER = 18;
+    private static final int SIZE_CAPTCHA = 7;
+    private static final Font FONT = new Font("Georgia", Font.BOLD, SIZE_CHARACTER);
+
+    private GenerateCaptcha(){
+        throw new UnsupportedOperationException();
+    }
+
 
     public static Captcha generateCaptcha() {
-       // Move to const
-        int width = 150;
-        int height = 50;
 
-        BufferedImage bufferedImage = new BufferedImage(width, height,
+        BufferedImage bufferedImage = new BufferedImage(WIDTH, HEIGHT,
                 BufferedImage.TYPE_INT_RGB);
 
         Graphics2D g2d = bufferedImage.createGraphics();
 
-        // Please, use const
-        Font font = new Font("Georgia", Font.BOLD, 18);
-        g2d.setFont(font);
+
+        g2d.setFont(FONT);
 
         RenderingHints renderingHints = new RenderingHints(KEY_ANTIALIASING, VALUE_ANTIALIAS_ON);
         renderingHints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
@@ -37,27 +43,27 @@ public class GenerateCaptcha {
         g2d.setRenderingHints(renderingHints);
 
         GradientPaint gp = new GradientPaint(0, 0,
-                Color.red, 0, height / 2, Color.black, true);
+                Color.red, 0, HEIGHT / 2, Color.black, true);
 
         g2d.setPaint(gp);
-        g2d.fillRect(0, 0, width, height);
+        g2d.fillRect(0, 0, WIDTH, HEIGHT);
 
         g2d.setColor(new Color(255, 153, 0));
 
         Random r = new Random();
         int index = Math.abs(r.nextInt()) % 5;
 
-        //Please, use UUID
-        char[] data = {'q','w','e'};
-        String captchaValue = String.copyValueOf(data);
+        UUID uuid = UUID.randomUUID();
+        char[] chars = uuid.toString().substring(0, SIZE_CAPTCHA).toCharArray();
+        String captchaValue = String.copyValueOf(chars);
 
         int x = 0;
         int y = 0;
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < SIZE_CAPTCHA; i++) {
             x += 10 + (Math.abs(r.nextInt()) % 15);
             y = 20 + Math.abs(r.nextInt()) % 20;
-            g2d.drawChars(data, i, 1, x, y);
+            g2d.drawChars(chars, i, 1, x, y);
         }
 
         g2d.dispose();

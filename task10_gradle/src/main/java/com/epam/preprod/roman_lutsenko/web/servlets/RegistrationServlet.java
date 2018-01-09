@@ -1,10 +1,10 @@
 package com.epam.preprod.roman_lutsenko.web.servlets;
 
+import com.epam.preprod.roman_lutsenko.constants.FieldsName;
 import com.epam.preprod.roman_lutsenko.constants.Messages;
 import com.epam.preprod.roman_lutsenko.context.Context;
 import com.epam.preprod.roman_lutsenko.entities.User;
 import com.epam.preprod.roman_lutsenko.services.UserService;
-import com.epam.preprod.roman_lutsenko.util.ParseInputData;
 import com.epam.preprod.roman_lutsenko.util.ValidateInput;
 import org.apache.log4j.Logger;
 
@@ -20,6 +20,9 @@ import static com.epam.preprod.roman_lutsenko.constants.FieldsName.FORM_REGISTRA
 import static com.epam.preprod.roman_lutsenko.constants.FieldsName.FORM_REGISTRATION_NAME;
 import static com.epam.preprod.roman_lutsenko.constants.FieldsName.FORM_REGISTRATION_PASSWORD;
 import static com.epam.preprod.roman_lutsenko.constants.FieldsName.FORM_REGISTRATION_PHONE;
+import static com.epam.preprod.roman_lutsenko.constants.FieldsName.INDEX_JSP;
+import static com.epam.preprod.roman_lutsenko.constants.FieldsName.REGISTRATION_JSP;
+import static com.epam.preprod.roman_lutsenko.constants.FieldsName.REGISTRATION_SERVLET;
 import static com.epam.preprod.roman_lutsenko.constants.FieldsName.SESSION_CONTEXT;
 import static com.epam.preprod.roman_lutsenko.constants.FieldsName.SESSION_ERR_MESS;
 import static com.epam.preprod.roman_lutsenko.constants.FieldsName.TAG_CAPTCHA_INPUT_VALUE;
@@ -37,34 +40,32 @@ public class RegistrationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         LOG.debug(getClass() + Messages.STARTED);
         Context context = (Context) req.getServletContext().getAttribute(SESSION_CONTEXT);
-        User user = getUserFromReques(req);
+        User user = getUserFromRequest(req);
         if (isValidCaptcha(req, context)) {
-            LOG.debug("TELEPHONE " + req.getParameter(FORM_REGISTRATION_PHONE));
-            if (containsUser(context, ParseInputData.phoneFromString((String) req.getParameter(FORM_REGISTRATION_PHONE)))) {
+            if (containsUser(context, req.getParameter(FORM_REGISTRATION_PHONE))) {
                 req.getSession().setAttribute(SESSION_ERR_MESS, REGISTRATION_DUPLICATE_USER);
-                resp.sendRedirect("registration");
+                resp.sendRedirect(REGISTRATION_SERVLET);
             } else if (Objects.isNull(user)) {
                 req.getSession().setAttribute(SESSION_ERR_MESS, REGISTRATION_NON_VALID_FIELDS);
-                resp.sendRedirect("registration");
+                resp.sendRedirect(REGISTRATION_SERVLET);
             } else {
                 //TODO: insert user to database;
-                resp.sendRedirect("index.jsp");
+                resp.sendRedirect(INDEX_JSP);
             }
         } else {
-            resp.sendRedirect("registration");
+            resp.sendRedirect(REGISTRATION_SERVLET);
         }
         LOG.debug(getClass() + Messages.ENDED);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        LOG.debug("DO GET " + getServletName());
+        LOG.debug(Messages.GET_METHOD_START);
 
         Context context = (Context) req.getServletContext().getAttribute(SESSION_CONTEXT);
         context.getCaptchaService().addCaptcha(req, resp);
 
-        LOG.debug("to request dispatcher");
-        req.getRequestDispatcher("registration.jsp").forward(req, resp);
+        req.getRequestDispatcher(REGISTRATION_JSP).forward(req, resp);
     }
 
     /**
@@ -72,8 +73,7 @@ public class RegistrationServlet extends HttpServlet {
      * @param request request from user.
      * @return User instance with setted fields or <b>null</b> if user cannot insert to user container.
      */
-    //  move to class with refactored mothods
-    private User getUserFromReques(HttpServletRequest request) {
+    private User getUserFromRequest(HttpServletRequest request) {
         clearSessionFromUserFields(request);
         User user = new User();
         String field = (String) request.getParameter(FORM_REGISTRATION_NAME);
@@ -88,7 +88,7 @@ public class RegistrationServlet extends HttpServlet {
         field = (String) request.getParameter(FORM_REGISTRATION_PHONE);
         if (Objects.nonNull(field) && ValidateInput.validPhone(field)) {
             if (Objects.nonNull(user)) {
-                user.setPhone(ParseInputData.phoneFromString(field));
+                user.setPhone(field);
                 LOG.debug(FORM_REGISTRATION_PHONE + " valid");
             }
             request.getSession().setAttribute(FORM_REGISTRATION_PHONE, field);
@@ -99,7 +99,7 @@ public class RegistrationServlet extends HttpServlet {
         field = (String) request.getParameter(FORM_REGISTRATION_EMAIL);
         if (Objects.nonNull(field) && ValidateInput.validEmail(field)) {
             if (Objects.nonNull(user)) {
-                user.setEmail((String) request.getAttribute(FORM_REGISTRATION_EMAIL));
+                user.setEmail(field);
                 LOG.debug(FORM_REGISTRATION_EMAIL + " valid");
             }
             request.getSession().setAttribute(FORM_REGISTRATION_EMAIL, field);

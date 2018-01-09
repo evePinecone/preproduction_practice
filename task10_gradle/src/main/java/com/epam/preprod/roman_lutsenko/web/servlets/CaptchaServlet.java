@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
 import static com.epam.preprod.roman_lutsenko.constants.FieldsName.TAG_CAPTCHA_TIMEOUT;
 
 /**
- * Drawing captchas with specified service method.
+ * Drawing captcha with specified service method.
  */
 @WebServlet("/captcha")
 public class CaptchaServlet extends HttpServlet {
@@ -34,20 +34,12 @@ public class CaptchaServlet extends HttpServlet {
     private ServletContext servletContext;
     private Context context;
 
-    // context to const
-//    public CaptchaServlet() {
-//        LOG.trace(Messages.INITIALIZED);
-//        this.servletContext = this.getServletContext();
-//        this.context = (Context) servletContext.getAttribute(FieldsName.SESSION_CONTEXT);
-//        LOG.trace(FieldsName.SESSION_CONTEXT + " = " + context);
-//    }
-
     @Override
     public void init() throws ServletException {
-        LOG.trace(Messages.INITIALIZED);
+        LOG.debug(Messages.INITIALIZED);
         this.servletContext = this.getServletContext();
         this.context = (Context) servletContext.getAttribute(FieldsName.SESSION_CONTEXT);
-        LOG.trace(FieldsName.SESSION_CONTEXT + " = " + context);
+        LOG.debug(FieldsName.SESSION_CONTEXT + " = " + context);
     }
 
     protected void doGet(HttpServletRequest request,
@@ -57,14 +49,13 @@ public class CaptchaServlet extends HttpServlet {
         response.setContentType("image/png");
         OutputStream os = response.getOutputStream();
 
-       // context = (Context) getServletContext().getAttribute(FieldsName.SESSION_CONTEXT);
-        LOG.debug(FieldsName.SESSION_CONTEXT + " = " + context);
         CaptchaService captchaService = context.getCaptchaService();
         Captcha captcha = captchaService.getCaptcha(request);
-        LOG.debug("get captcha from req");
+
         Timer timer = new Timer(true);
         int minutes = Integer.parseInt(servletContext.getInitParameter(TAG_CAPTCHA_TIMEOUT));
         timer.schedule(new ScheduleTask(captcha), TimeUnit.MINUTES.toMillis(minutes));
+
         ImageIO.write(captcha.getBufferedImage(), "png", os);
         LOG.debug(getServletName() + Messages.GET_METHOD_ENDED);
     }

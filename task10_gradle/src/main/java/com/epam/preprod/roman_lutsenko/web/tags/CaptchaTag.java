@@ -23,12 +23,12 @@ public class CaptchaTag extends TagSupport {
             String id_captcha = null;
             id_captcha = (String)pageContext.getSession().getAttribute(TAG_CAPTCHA_ID_CAPTCHA);
             LOG.debug(TAG_CAPTCHA_ID_CAPTCHA + " " + id_captcha );
-            out.print("<li id=\"captcha_confirm\" class=\"captchas\">\n" +
+            out.print("<li id=\"captcha_confirm\" class=\"captcha\">\n" +
                     "<img src=\"captcha\" id=\"id_captcha\" value=\"" + id_captcha + "\"/>\n" +
                     "</li>\n" +
-                    "<li class=\"form__item captchas\">\n" +
+                    "<li class=\"form__item captcha\">\n" +
                     "<input id=\"captcha_value\" name=\"captcha_value\" type=\"text\" placeholder=\"Captcha\"/>\n" +
-                    "<div class=\"invalid_input\">Invalid captchas</div>\n" +
+                    "<div class=\"invalid_input\">Invalid captcha</div>\n" +
                     "</li>\n" +
                     "</ul>");
             id_captcha = (String)pageContext.getServletContext().getAttribute(TAG_CAPTCHA_ID_CAPTCHA);

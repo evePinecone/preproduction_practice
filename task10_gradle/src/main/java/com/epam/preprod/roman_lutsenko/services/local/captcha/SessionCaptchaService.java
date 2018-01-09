@@ -1,4 +1,4 @@
-package com.epam.preprod.roman_lutsenko.services.local.captchas;
+package com.epam.preprod.roman_lutsenko.services.local.captcha;
 
 import com.epam.preprod.roman_lutsenko.constants.FieldsName;
 import com.epam.preprod.roman_lutsenko.constants.Messages;
@@ -8,10 +8,7 @@ import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentLinkedDeque;
 
 /**
  * Captcha that saved its id in session attributes.
@@ -28,7 +25,7 @@ public class SessionCaptchaService extends AbstractCaptchaService {
     @Override
     public Captcha getCaptcha(HttpServletRequest request) {
         String uuid = (String) request.getSession().getAttribute(FieldsName.TAG_CAPTCHA_ID_CAPTCHA);
-        cleanInvalidCaptcha(map);
+        cleanInvalidCaptcha();
         return map.get(uuid);
     }
 

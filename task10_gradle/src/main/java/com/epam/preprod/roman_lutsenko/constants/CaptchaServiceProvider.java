@@ -1,9 +1,9 @@
 package com.epam.preprod.roman_lutsenko.constants;
 
 import com.epam.preprod.roman_lutsenko.services.CaptchaService;
-import com.epam.preprod.roman_lutsenko.services.local.captchas.SessionCaptchaService;
-import com.epam.preprod.roman_lutsenko.services.local.captchas.CookieCaptchaService;
-import com.epam.preprod.roman_lutsenko.services.local.captchas.HiddenFieldCaptchaService;
+import com.epam.preprod.roman_lutsenko.services.local.captcha.SessionCaptchaService;
+import com.epam.preprod.roman_lutsenko.services.local.captcha.CookieCaptchaService;
+import com.epam.preprod.roman_lutsenko.services.local.captcha.HiddenFieldCaptchaService;
 import org.apache.log4j.Logger;
 
 import java.util.HashMap;
