@@ -7,6 +7,8 @@ public class Fields {
 
     //registration.jsp
     public static final String FORM_REGISTRATION_NAME = "name";
+    public static final String REGISTRATION_JSP = "registration.jsp";
+    public static final String REGISTRATION_SERVLET = "registration";
     public static final String FORM_REGISTRATION_EMAIL = "email";
     public static final String FORM_REGISTRATION_PHONE = "phone";
     public static final String FORM_REGISTRATION_PASSWORD = "password";
@@ -15,9 +17,14 @@ public class Fields {
     public static final String ERR_DBEXCEPTION = "message";
     public static final String EXCEPTION_ATTR_IN_SESSION = "javax.servlet.error.exception";
 
+    //index.jsp
+    public static final String INDEX_JSP = "index.jsp";
+
     //tag captcha
     public static final String TAG_CAPTCHA_INPUT_VALUE = "captcha_value";
     public static final String TAG_CAPTCHA_ID_CAPTCHA = "id_captcha";
+    public static final String TAG_CAPTCHA_TIMEOUT = "captcha_timeout";
+
 
     //Session attributes
     public static final String SESSION_CONTEXT = "context";
@@ -30,6 +37,9 @@ public class Fields {
     public static final String INIT_LISTENER_CONTEXT_CLASS = "com.epam.preprod.roman_lutsenko.services.local.ContextCaptchaService";
     public static final String INIT_LISTENER_COOKIE_CLASS = "com.epam.preprod.roman_lutsenko.services.local.CookieCaptchaService";
     public static final String INIT_LISTENER_HIDDEN_FIELD_CLASS = "com.epam.preprod.roman_lutsenko.services.local.HiddenFieldCaptchaService";
+    public static final String INIT_LISTENER_CONTEXT_CLASS = "com.epam.preprod.roman_lutsenko.services.local.captcha.SessionCaptchaService";
+    public static final String INIT_LISTENER_COOKIE_CLASS = "com.epam.preprod.roman_lutsenko.services.local.captcha.CookieCaptchaService";
+    public static final String INIT_LISTENER_HIDDEN_FIELD_CLASS = "com.epam.preprod.roman_lutsenko.services.local.captcha.HiddenFieldCaptchaService";
 
     //database
     public static final String INIT_LISTENER_DBFACTORY = "DataBaseClassFactory";

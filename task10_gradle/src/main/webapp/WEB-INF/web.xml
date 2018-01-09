@@ -11,6 +11,7 @@
 
     <context-param>
         <param-name>Captcha</param-name>
+        <param-value>com.epam.preprod.roman_lutsenko.services.local.captcha.SessionCaptchaService</param-value>
         <param-value>com.epam.preprod.roman_lutsenko.services.local.CookieCaptchaService</param-value>
     </context-param>
 
@@ -18,6 +19,13 @@
         <param-name>UserService</param-name>
         <param-value>com.epam.preprod.roman_lutsenko.services.local.LocalUserService</param-value>
     </context-param>
+
+    <context-param>
+        <param-name>captcha_timeout</param-name>
+        <param-value>1</param-value>
+        <param-value>com.epam.preprod.roman_lutsenko.services.local.LocalUserService</param-value>
+    </context-param>
+
 
     <context-param>
         <param-name>DataBaseClassFactory</param-name>

@@ -2,7 +2,8 @@ package com.epam.preprod.roman_lutsenko.services.local;
 
 import com.epam.preprod.roman_lutsenko.dao.UserDao;
 import com.epam.preprod.roman_lutsenko.entities.User;
-import com.epam.preprod.roman_lutsenko.exceptions.UserDuplicateException;
+import com.epam.preprod.roman_lutsenko.exception.NoSuchUserException;
+import com.epam.preprod.roman_lutsenko.exception.UserDuplicateException;
 import com.epam.preprod.roman_lutsenko.services.UserService;
 
 import java.util.Map;
@@ -17,8 +18,12 @@ public class LocalUserService implements UserService {
     }
 
     @Override
-    public void add(User user) throws UserDuplicateException {
-        userDao.add(user);
+    public synchronized void add(User user) throws UserDuplicateException {
+        if (Objects.isNull(userDao.get(user.getPhone()))) {
+            userDao.add(user);
+        } else {
+            throw new UserDuplicateException();
+        }
     }
 
     @Override
@@ -33,7 +38,11 @@ public class LocalUserService implements UserService {
 
     @Override
     public boolean remove(String phone) {
-        return userDao.remove(phone);
+        Object object = userDao.remove(phone);
+        if(Objects.isNull(object)) {
+            throw new NoSuchUserException();
+        }
+        return true;
     }
 
     @Override

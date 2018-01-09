@@ -8,22 +8,26 @@ import java.util.UUID;
  */
 public class Captcha {
 
-    private UUID uuid;
+    private String uuid;
     private String value;
     private BufferedImage bufferedImage;
 
     public Captcha(String value, BufferedImage bufferedImage) {
-        this.uuid =  UUID.randomUUID();;
+        this.uuid =  UUID.randomUUID().toString();
         this.value = value;
         this.bufferedImage = bufferedImage;
     }
 
-    public UUID getUuid() {
+    public String getUuid() {
         return uuid;
     }
 
     public String getValue() {
         return value;
+    }
+
+    public void cleanValue() {
+        this.value = "";
     }
 
     public BufferedImage getBufferedImage() {
