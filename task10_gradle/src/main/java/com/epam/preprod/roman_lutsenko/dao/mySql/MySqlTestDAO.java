@@ -1,4 +1,4 @@
-package com.epam.preprod.roman_lutsenko.dao.mySqlImpl;
+package com.epam.preprod.roman_lutsenko.dao.mySql;
 
 import com.epam.preprod.roman_lutsenko.constants.DBCommands;
 import com.epam.preprod.roman_lutsenko.constants.Fields;

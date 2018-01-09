@@ -62,7 +62,6 @@ public class RegistrationServlet extends HttpServlet {
 
         Context context = (Context) req.getServletContext().getAttribute(SESSION_CONTEXT);
         context.getCaptchaService().addCaptcha(req, resp);
-        ;
 
         req.getRequestDispatcher("registration.jsp").forward(req, resp);
     }

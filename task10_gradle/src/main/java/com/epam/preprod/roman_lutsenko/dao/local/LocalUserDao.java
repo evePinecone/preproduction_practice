@@ -1,4 +1,4 @@
-package com.epam.preprod.roman_lutsenko.dao.localImpl;
+package com.epam.preprod.roman_lutsenko.dao.local;
 
 import com.epam.preprod.roman_lutsenko.dao.UserDao;
 import com.epam.preprod.roman_lutsenko.entities.User;

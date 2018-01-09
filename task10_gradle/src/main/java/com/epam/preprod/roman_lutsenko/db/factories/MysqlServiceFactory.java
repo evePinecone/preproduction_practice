@@ -1,11 +1,10 @@
 package com.epam.preprod.roman_lutsenko.db.factories;
 
 import com.epam.preprod.roman_lutsenko.db.ServiceFactory;
-import com.epam.preprod.roman_lutsenko.exceptions.DBException;
 import com.epam.preprod.roman_lutsenko.services.TestService;
 import com.epam.preprod.roman_lutsenko.services.UserService;
-import com.epam.preprod.roman_lutsenko.services.mySqlImpl.MySqlTestService;
-import com.epam.preprod.roman_lutsenko.services.mySqlImpl.MySqlUserService;
+import com.epam.preprod.roman_lutsenko.services.mySql.MySqlTestService;
+import com.epam.preprod.roman_lutsenko.services.mySql.MySqlUserService;
 
 /**
  * Implementation of DBServiceFactory for MySQL DataBase.

@@ -1,12 +1,13 @@
-package com.epam.preprod.roman_lutsenko.services.mySqlImpl;
+package com.epam.preprod.roman_lutsenko.services.mySql;
 
 import com.epam.preprod.roman_lutsenko.dao.TestDAO;
-import com.epam.preprod.roman_lutsenko.dao.mySqlImpl.MySqlTestDAO;
+import com.epam.preprod.roman_lutsenko.dao.mySql.MySqlTestDAO;
 import com.epam.preprod.roman_lutsenko.entities.Test;
 import com.epam.preprod.roman_lutsenko.exceptions.DBException;
 import com.epam.preprod.roman_lutsenko.services.TestService;
 import org.apache.log4j.Logger;
 
+import java.sql.SQLException;
 import java.util.Map;
 
 public class MySqlTestService implements TestService{
@@ -27,5 +28,10 @@ public class MySqlTestService implements TestService{
             logger.error(getClass(), e);
         }
         return map;
+    }
+
+    @Override
+    public void getSQLException() throws SQLException {
+        throw new SQLException();
     }
 }

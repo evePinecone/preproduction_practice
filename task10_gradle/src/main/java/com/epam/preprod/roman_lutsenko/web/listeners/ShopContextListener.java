@@ -1,16 +1,16 @@
 package com.epam.preprod.roman_lutsenko.web.listeners;
 
-import com.epam.preprod.roman_lutsenko.constants.CaptchaServiceFactory;
-import com.epam.preprod.roman_lutsenko.constants.DBServiceFactory;
+import com.epam.preprod.roman_lutsenko.constants.factories.CaptchaServiceFactory;
+import com.epam.preprod.roman_lutsenko.constants.factories.DBServiceFactory;
 import com.epam.preprod.roman_lutsenko.constants.Fields;
 import com.epam.preprod.roman_lutsenko.constants.Messages;
 import com.epam.preprod.roman_lutsenko.context.Context;
 import com.epam.preprod.roman_lutsenko.dao.UserDao;
-import com.epam.preprod.roman_lutsenko.dao.localImpl.LocalUserDao;
+import com.epam.preprod.roman_lutsenko.dao.local.LocalUserDao;
 import com.epam.preprod.roman_lutsenko.services.CaptchaService;
 import com.epam.preprod.roman_lutsenko.services.TestService;
 import com.epam.preprod.roman_lutsenko.services.UserService;
-import com.epam.preprod.roman_lutsenko.services.localImpl.LocalUserService;
+import com.epam.preprod.roman_lutsenko.services.local.LocalUserService;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletContext;

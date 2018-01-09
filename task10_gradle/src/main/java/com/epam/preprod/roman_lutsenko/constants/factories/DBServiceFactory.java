@@ -1,6 +1,8 @@
-package com.epam.preprod.roman_lutsenko.constants;
+package com.epam.preprod.roman_lutsenko.constants.factories;
 
 
+import com.epam.preprod.roman_lutsenko.constants.Fields;
+import com.epam.preprod.roman_lutsenko.constants.Messages;
 import com.epam.preprod.roman_lutsenko.db.ServiceFactory;
 import com.epam.preprod.roman_lutsenko.db.factories.MysqlServiceFactory;
 import com.epam.preprod.roman_lutsenko.exceptions.DBException;
@@ -28,6 +30,7 @@ public class DBServiceFactory {
 
     public DBServiceFactory(){
         map = new HashMap<>();
+        //put service factory
         map.put(Fields.INIT_LISTENER_MYSQL, new MysqlServiceFactory());
     }
 

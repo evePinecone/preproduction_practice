@@ -1,4 +1,4 @@
-package com.epam.preprod.roman_lutsenko.services.localImpl;
+package com.epam.preprod.roman_lutsenko.services.local;
 
 import com.epam.preprod.roman_lutsenko.constants.Fields;
 import com.epam.preprod.roman_lutsenko.entities.Captcha;
@@ -6,7 +6,6 @@ import com.epam.preprod.roman_lutsenko.services.CaptchaService;
 import com.epam.preprod.roman_lutsenko.util.GenerateCaptcha;
 import org.apache.log4j.Logger;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
@@ -15,22 +14,23 @@ import java.util.Objects;
 import java.util.UUID;
 
 /**
- * Captcha that saved its id in clients cookies.
+ * Captcha that saved its id in hidden field on form.
  */
-public class CookieCaptchaService implements CaptchaService {
+public class HiddenFieldCaptchaService implements CaptchaService {
 
-    private static final Logger logger = Logger.getLogger(CookieCaptchaService.class);
+    private static final Logger logger = Logger.getLogger(ContextCaptchaService.class);
 
     private Map<UUID, Captcha> map;
 
-    public CookieCaptchaService() {
+    public HiddenFieldCaptchaService() {
         map = new HashMap<>();
     }
 
     @Override
     public Captcha getCaptcha(HttpServletRequest request) {
-        Cookie[] cookies = request.getCookies();
-        return getCaptchaFrom(cookies);
+        UUID captchaId = (UUID) request.getServletContext().getAttribute(Fields.TAG_CAPTCHA_ID_CAPTCHA);
+        logger.debug(getClass() + " captchaId " + captchaId);
+        return map.get(captchaId);
     }
 
     @Override
@@ -42,20 +42,8 @@ public class CookieCaptchaService implements CaptchaService {
     @Override
     public void addCaptcha(HttpServletRequest request, HttpServletResponse response) {
         Captcha captcha = GenerateCaptcha.generateCaptcha();
+        request.getServletContext().setAttribute(Fields.TAG_CAPTCHA_ID_CAPTCHA, captcha.getUuid());
         map.put(captcha.getUuid(), captcha);
-        Cookie cookie = new Cookie(Fields.TAG_CAPTCHA_ID_CAPTCHA, captcha.getUuid().toString());
-        response.addCookie(cookie);
-        logger.debug("put cookie " + cookie);
-    }
-
-    private Captcha getCaptchaFrom(Cookie[] cookies) {
-        if (Objects.nonNull(cookies)) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals(Fields.TAG_CAPTCHA_ID_CAPTCHA)) {
-                    return map.get(UUID.fromString(cookie.getValue()));
-                }
-            }
-        }
-        return null;
+        logger.debug(" addCaptcha " + captcha.getUuid() + " get attr = " + request.getServletContext().getAttribute(Fields.TAG_CAPTCHA_ID_CAPTCHA));
     }
 }

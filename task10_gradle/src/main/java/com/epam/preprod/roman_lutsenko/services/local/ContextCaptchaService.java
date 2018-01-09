@@ -1,4 +1,4 @@
-package com.epam.preprod.roman_lutsenko.services.localImpl;
+package com.epam.preprod.roman_lutsenko.services.local;
 
 import com.epam.preprod.roman_lutsenko.constants.Fields;
 import com.epam.preprod.roman_lutsenko.constants.Messages;

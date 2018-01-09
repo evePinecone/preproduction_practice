@@ -11,16 +11,23 @@
 
     <context-param>
         <param-name>Captcha</param-name>
-        <param-value>com.epam.preprod.roman_lutsenko.services.localImpl.CookieCaptchaService</param-value>
+        <param-value>com.epam.preprod.roman_lutsenko.services.local.CookieCaptchaService</param-value>
     </context-param>
 
     <context-param>
         <param-name>UserService</param-name>
-        <param-value>com.epam.preprod.roman_lutsenko.services.localImpl.LocalUserService</param-value>
+        <param-value>com.epam.preprod.roman_lutsenko.services.local.LocalUserService</param-value>
     </context-param>
 
     <context-param>
         <param-name>DataBaseClassFactory</param-name>
         <param-value>MySqlServiceFactory</param-value>
     </context-param>
+
+    <error-page>
+        <exception-type>
+            com.epam.preprod.roman_lutsenko.exceptions.DBException
+        </exception-type >
+        <location>/error</location> (это центральный сервлет который обрабатоет ексепнн)
+    </error-page>
 </web-app>

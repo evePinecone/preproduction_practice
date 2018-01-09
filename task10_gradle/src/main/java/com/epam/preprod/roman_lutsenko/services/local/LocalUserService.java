@@ -1,7 +1,6 @@
-package com.epam.preprod.roman_lutsenko.services.mySqlImpl;
+package com.epam.preprod.roman_lutsenko.services.local;
 
 import com.epam.preprod.roman_lutsenko.dao.UserDao;
-import com.epam.preprod.roman_lutsenko.dao.localImpl.LocalUserDao;
 import com.epam.preprod.roman_lutsenko.entities.User;
 import com.epam.preprod.roman_lutsenko.exceptions.UserDuplicateException;
 import com.epam.preprod.roman_lutsenko.services.UserService;
@@ -9,12 +8,12 @@ import com.epam.preprod.roman_lutsenko.services.UserService;
 import java.util.Map;
 import java.util.Objects;
 
-public class MySqlUserService implements UserService{
+public class LocalUserService implements UserService {
 
     private UserDao userDao;
 
-    public MySqlUserService() {
-        userDao = new LocalUserDao();
+    public LocalUserService(UserDao userDao) {
+        this.userDao = userDao;
     }
 
     @Override
@@ -39,6 +38,7 @@ public class MySqlUserService implements UserService{
 
     @Override
     public boolean contains(String phone) {
-        return Objects.nonNull(get(phone));
+        User user = userDao.get(phone);
+        return Objects.nonNull(user);
     }
 }
