@@ -1,7 +1,7 @@
 package com.epam.preprod.roman_lutsenko.repository.local;
 
 import com.epam.preprod.roman_lutsenko.repository.UserRepository;
-import com.epam.preprod.roman_lutsenko.entities.User;
+import com.epam.preprod.roman_lutsenko.entity.User;
 
 import java.util.Collections;
 import java.util.HashMap;

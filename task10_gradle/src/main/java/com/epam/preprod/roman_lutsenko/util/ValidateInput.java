@@ -1,6 +1,6 @@
 package com.epam.preprod.roman_lutsenko.util;
 
-import com.epam.preprod.roman_lutsenko.constants.Messages;
+import com.epam.preprod.roman_lutsenko.constant.Messages;
 import org.apache.log4j.Logger;
 
 import java.util.regex.Pattern;

@@ -8,7 +8,7 @@ import com.epam.preprod.roman_lutsenko.task4.services.ProductService;
 import java.util.ResourceBundle;
 
 /**
- * Wrapper to unite services.
+ * Wrapper to unite service.
  */
 public class Context {
 

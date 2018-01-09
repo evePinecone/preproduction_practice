@@ -1,14 +1,14 @@
 package com.epam.preprod.roman_lutsenko.web.listeners;
 
-import com.epam.preprod.roman_lutsenko.constants.Fields;
-import com.epam.preprod.roman_lutsenko.constants.Messages;
-import com.epam.preprod.roman_lutsenko.constants.provider.CaptchaServiceProvider;
-import com.epam.preprod.roman_lutsenko.constants.provider.DBServiceProvider;
+import com.epam.preprod.roman_lutsenko.constant.Fields;
+import com.epam.preprod.roman_lutsenko.constant.Messages;
+import com.epam.preprod.roman_lutsenko.constant.provider.CaptchaServiceProvider;
+import com.epam.preprod.roman_lutsenko.constant.provider.DBServiceProvider;
 import com.epam.preprod.roman_lutsenko.context.Context;
-import com.epam.preprod.roman_lutsenko.entities.User;
-import com.epam.preprod.roman_lutsenko.services.CaptchaService;
-import com.epam.preprod.roman_lutsenko.services.TestService;
-import com.epam.preprod.roman_lutsenko.services.UserService;
+import com.epam.preprod.roman_lutsenko.entity.User;
+import com.epam.preprod.roman_lutsenko.service.CaptchaService;
+import com.epam.preprod.roman_lutsenko.service.TestService;
+import com.epam.preprod.roman_lutsenko.service.UserService;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletContext;
@@ -18,11 +18,11 @@ import javax.servlet.annotation.WebListener;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.epam.preprod.roman_lutsenko.constants.Messages.CAPTCHA_SERVICE_CLASS;
+import static com.epam.preprod.roman_lutsenko.constant.Messages.CAPTCHA_SERVICE_CLASS;
 
 
 /**
- * Initiates context of the program with services with parameters from the configuration files.
+ * Initiates context of the program with service with parameters from the configuration files.
  */
 @WebListener
 public class ShopContextListener implements ServletContextListener {

@@ -1,7 +1,7 @@
 package com.epam.preprod.roman_lutsenko.db.util;
 
 
-import com.epam.preprod.roman_lutsenko.constants.Messages;
+import com.epam.preprod.roman_lutsenko.constant.Messages;
 import com.epam.preprod.roman_lutsenko.exception.DBException;
 import org.apache.log4j.Logger;
 

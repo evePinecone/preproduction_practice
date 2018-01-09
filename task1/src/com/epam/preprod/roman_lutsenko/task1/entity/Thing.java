@@ -5,7 +5,7 @@ import com.epam.preprod.roman_lutsenko.task4.annotations.SetAnnotation;
 import java.io.Serializable;
 
 /**
- * The base class for our entities.
+ * The base class for our entity.
  *
  * @author Roman_Lutsenko
  *

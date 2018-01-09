@@ -1,6 +1,6 @@
 package com.epam.preprod.roman_lutsenko.util;
 
-import com.epam.preprod.roman_lutsenko.entities.Captcha;
+import com.epam.preprod.roman_lutsenko.entity.Captcha;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

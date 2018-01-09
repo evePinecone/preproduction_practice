@@ -1,6 +1,6 @@
 package com.epam.preprod.roman_lutsenko.repository;
 
-import com.epam.preprod.roman_lutsenko.entities.User;
+import com.epam.preprod.roman_lutsenko.entity.User;
 import com.epam.preprod.roman_lutsenko.exception.UserDuplicateException;
 
 import java.util.Map;

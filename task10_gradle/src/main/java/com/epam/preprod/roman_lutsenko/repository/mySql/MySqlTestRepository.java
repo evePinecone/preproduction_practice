@@ -1,11 +1,11 @@
 package com.epam.preprod.roman_lutsenko.repository.mySql;
 
-import com.epam.preprod.roman_lutsenko.constants.DBCommands;
-import com.epam.preprod.roman_lutsenko.constants.Fields;
-import com.epam.preprod.roman_lutsenko.constants.Messages;
+import com.epam.preprod.roman_lutsenko.constant.DBCommands;
+import com.epam.preprod.roman_lutsenko.constant.Fields;
+import com.epam.preprod.roman_lutsenko.constant.Messages;
 import com.epam.preprod.roman_lutsenko.repository.TestRepository;
 import com.epam.preprod.roman_lutsenko.db.util.DBUtil;
-import com.epam.preprod.roman_lutsenko.entities.Test;
+import com.epam.preprod.roman_lutsenko.entity.Test;
 import com.epam.preprod.roman_lutsenko.exception.DBException;
 import org.apache.log4j.Logger;
 
