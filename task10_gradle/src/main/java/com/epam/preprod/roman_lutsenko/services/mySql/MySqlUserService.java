@@ -1,40 +1,48 @@
 package com.epam.preprod.roman_lutsenko.services.mySql;
 
-import com.epam.preprod.roman_lutsenko.dao.UserDao;
-import com.epam.preprod.roman_lutsenko.dao.local.LocalUserDao;
 import com.epam.preprod.roman_lutsenko.entities.User;
-import com.epam.preprod.roman_lutsenko.exceptions.UserDuplicateException;
+import com.epam.preprod.roman_lutsenko.exception.UserDuplicateException;
+import com.epam.preprod.roman_lutsenko.repository.UserRepository;
+import com.epam.preprod.roman_lutsenko.repository.mySql.MySqlUserRepository;
 import com.epam.preprod.roman_lutsenko.services.UserService;
+import org.apache.log4j.Logger;
 
 import java.util.Map;
 import java.util.Objects;
 
-public class MySqlUserService implements UserService{
+public class MySqlUserService implements UserService {
 
-    private UserDao userDao;
+    public static final Logger LOG = Logger.getLogger(MySqlUserService.class);
+
+    private UserRepository userRepository;
 
     public MySqlUserService() {
-        userDao = new LocalUserDao();
+        userRepository = new MySqlUserRepository();
     }
 
     @Override
     public void add(User user) throws UserDuplicateException {
-        userDao.add(user);
+        LOG.debug("add method service");
+//        if(Objects.isNull(userRepository.getById(user.getPhone()))) {
+//            throw new UserDuplicateException();
+//        }
+        userRepository.add(user);
     }
 
     @Override
     public User get(String phone) {
-        return userDao.get(phone);
+        return userRepository.getById(phone);
     }
 
     @Override
     public Map<String, User> getAllUsers() {
-        return userDao.getAllUsers();
+        return userRepository.getAllUsers();
     }
 
     @Override
     public boolean remove(String phone) {
-        return userDao.remove(phone);
+        return false;
+        //todo: implement remove service
     }
 
     @Override

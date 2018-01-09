@@ -2,7 +2,7 @@ package com.epam.preprod.roman_lutsenko.db.util;
 
 
 import com.epam.preprod.roman_lutsenko.constants.Messages;
-import com.epam.preprod.roman_lutsenko.exceptions.DBException;
+import com.epam.preprod.roman_lutsenko.exception.DBException;
 import org.apache.log4j.Logger;
 
 import javax.naming.Context;
@@ -46,7 +46,7 @@ public class DBUtil {
         try {
             connection = ds.getConnection();
             connection.setAutoCommit(false);
-            logger.trace("Connection ==> " + connection);
+//            logger.trace("Connection ==> " + connection);
         } catch (SQLException e) {
             logger.error(Messages.ERR_CANNOT_OBTAIN_CONNECTION);
             throw new DBException(Messages.ERR_CANNOT_OBTAIN_CONNECTION, e);
@@ -63,7 +63,6 @@ public class DBUtil {
         if (ds == null) {
             try {
                 Context initialContext = new InitialContext();
-                // ЧТО ЭТО ТАКОЕ?!
                 Context shopContext = (Context) initialContext.lookup("java:/comp/env");
                 ds = (DataSource) shopContext.lookup("jdbc/task10_gradle");
                 logger.trace(Messages.SUCCESS_DATA_SOURCE_OBTAINED + ds);

@@ -7,7 +7,7 @@ import com.epam.preprod.roman_lutsenko.services.mySql.MySqlTestService;
 import com.epam.preprod.roman_lutsenko.services.mySql.MySqlUserService;
 
 /**
- * Implementation of DBServiceFactory for MySQL DataBase.
+ * Implementation of DBServiceProvider for MySQL DataBase.
  *
  * @author inc_f
  */

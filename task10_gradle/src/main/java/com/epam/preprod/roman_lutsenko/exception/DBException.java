@@ -1,4 +1,4 @@
-package com.epam.preprod.roman_lutsenko.exceptions;
+package com.epam.preprod.roman_lutsenko.exception;
 
 /**
  * An exception that provides information on a database access error.

@@ -19,7 +19,7 @@ public class GenerateCaptcha {
     private static final int WIDTH = 150;
     private static final int HEIGHT = 50;
     private static final int SIZE_CHARACTER = 18;
-    private static final int SIZE_CAPTCHA = 7;
+    private static final int SIZE_CAPTCHA = 2;
     private static final Font FONT = new Font("Georgia", Font.BOLD, SIZE_CHARACTER);
 
     private GenerateCaptcha(){

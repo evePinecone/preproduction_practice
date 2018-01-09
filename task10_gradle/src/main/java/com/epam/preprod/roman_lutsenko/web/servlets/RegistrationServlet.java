@@ -1,9 +1,9 @@
 package com.epam.preprod.roman_lutsenko.web.servlets;
 
-import com.epam.preprod.roman_lutsenko.constants.FieldsName;
 import com.epam.preprod.roman_lutsenko.constants.Messages;
 import com.epam.preprod.roman_lutsenko.context.Context;
 import com.epam.preprod.roman_lutsenko.entities.User;
+import com.epam.preprod.roman_lutsenko.exception.UserDuplicateException;
 import com.epam.preprod.roman_lutsenko.services.UserService;
 import com.epam.preprod.roman_lutsenko.util.ValidateInput;
 import org.apache.log4j.Logger;
@@ -16,16 +16,16 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Objects;
 
-import static com.epam.preprod.roman_lutsenko.constants.FieldsName.FORM_REGISTRATION_EMAIL;
-import static com.epam.preprod.roman_lutsenko.constants.FieldsName.FORM_REGISTRATION_NAME;
-import static com.epam.preprod.roman_lutsenko.constants.FieldsName.FORM_REGISTRATION_PASSWORD;
-import static com.epam.preprod.roman_lutsenko.constants.FieldsName.FORM_REGISTRATION_PHONE;
-import static com.epam.preprod.roman_lutsenko.constants.FieldsName.INDEX_JSP;
-import static com.epam.preprod.roman_lutsenko.constants.FieldsName.REGISTRATION_JSP;
-import static com.epam.preprod.roman_lutsenko.constants.FieldsName.REGISTRATION_SERVLET;
-import static com.epam.preprod.roman_lutsenko.constants.FieldsName.SESSION_CONTEXT;
-import static com.epam.preprod.roman_lutsenko.constants.FieldsName.SESSION_ERR_MESS;
-import static com.epam.preprod.roman_lutsenko.constants.FieldsName.TAG_CAPTCHA_INPUT_VALUE;
+import static com.epam.preprod.roman_lutsenko.constants.Fields.FORM_REGISTRATION_EMAIL;
+import static com.epam.preprod.roman_lutsenko.constants.Fields.FORM_REGISTRATION_NAME;
+import static com.epam.preprod.roman_lutsenko.constants.Fields.FORM_REGISTRATION_PASSWORD;
+import static com.epam.preprod.roman_lutsenko.constants.Fields.FORM_REGISTRATION_PHONE;
+import static com.epam.preprod.roman_lutsenko.constants.Fields.INDEX_JSP;
+import static com.epam.preprod.roman_lutsenko.constants.Fields.REGISTRATION_JSP;
+import static com.epam.preprod.roman_lutsenko.constants.Fields.REGISTRATION_SERVLET;
+import static com.epam.preprod.roman_lutsenko.constants.Fields.SESSION_CONTEXT;
+import static com.epam.preprod.roman_lutsenko.constants.Fields.SESSION_ERR_MESS;
+import static com.epam.preprod.roman_lutsenko.constants.Fields.TAG_CAPTCHA_INPUT_VALUE;
 import static com.epam.preprod.roman_lutsenko.constants.Messages.REGISTRATION_DUPLICATE_USER;
 import static com.epam.preprod.roman_lutsenko.constants.Messages.REGISTRATION_NON_VALID_FIELDS;
 
@@ -50,6 +50,12 @@ public class RegistrationServlet extends HttpServlet {
                 resp.sendRedirect(REGISTRATION_SERVLET);
             } else {
                 //TODO: insert user to database;
+                try {
+                    context.getUserService().add(user);
+                    LOG.debug("USER ADDED");
+                } catch (UserDuplicateException e) {
+                    LOG.debug(e.getMessage());
+                }
                 resp.sendRedirect(INDEX_JSP);
             }
         } else {
@@ -73,6 +79,7 @@ public class RegistrationServlet extends HttpServlet {
      * @param request request from user.
      * @return User instance with setted fields or <b>null</b> if user cannot insert to user container.
      */
+    //todo: Create UserRequestGetter
     private User getUserFromRequest(HttpServletRequest request) {
         clearSessionFromUserFields(request);
         User user = new User();

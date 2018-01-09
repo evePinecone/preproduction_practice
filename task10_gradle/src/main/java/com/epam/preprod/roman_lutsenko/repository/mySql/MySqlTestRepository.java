@@ -1,12 +1,12 @@
-package com.epam.preprod.roman_lutsenko.dao.mySql;
+package com.epam.preprod.roman_lutsenko.repository.mySql;
 
 import com.epam.preprod.roman_lutsenko.constants.DBCommands;
 import com.epam.preprod.roman_lutsenko.constants.Fields;
 import com.epam.preprod.roman_lutsenko.constants.Messages;
-import com.epam.preprod.roman_lutsenko.dao.TestDAO;
+import com.epam.preprod.roman_lutsenko.repository.TestRepository;
 import com.epam.preprod.roman_lutsenko.db.util.DBUtil;
 import com.epam.preprod.roman_lutsenko.entities.Test;
-import com.epam.preprod.roman_lutsenko.exceptions.DBException;
+import com.epam.preprod.roman_lutsenko.exception.DBException;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
@@ -16,11 +16,11 @@ import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MySqlTestDAO implements TestDAO{
+public class MySqlTestRepository implements TestRepository {
 
-    private static final Logger logger = Logger.getLogger(MySqlTestDAO.class);
+    private static final Logger logger = Logger.getLogger(MySqlTestRepository.class);
 
-    public MySqlTestDAO() {
+    public MySqlTestRepository() {
         logger.trace(Messages.TRACE_DAO_OBJECT_CREATED + getClass().getSimpleName());
     }
 

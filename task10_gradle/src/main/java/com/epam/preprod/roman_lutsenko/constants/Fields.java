@@ -34,9 +34,6 @@ public class Fields {
     //LISTENER
     //captcha
     public static final String INIT_LISTENER_CAPTCHA = "Captcha";
-    public static final String INIT_LISTENER_CONTEXT_CLASS = "com.epam.preprod.roman_lutsenko.services.local.ContextCaptchaService";
-    public static final String INIT_LISTENER_COOKIE_CLASS = "com.epam.preprod.roman_lutsenko.services.local.CookieCaptchaService";
-    public static final String INIT_LISTENER_HIDDEN_FIELD_CLASS = "com.epam.preprod.roman_lutsenko.services.local.HiddenFieldCaptchaService";
     public static final String INIT_LISTENER_CONTEXT_CLASS = "com.epam.preprod.roman_lutsenko.services.local.captcha.SessionCaptchaService";
     public static final String INIT_LISTENER_COOKIE_CLASS = "com.epam.preprod.roman_lutsenko.services.local.captcha.CookieCaptchaService";
     public static final String INIT_LISTENER_HIDDEN_FIELD_CLASS = "com.epam.preprod.roman_lutsenko.services.local.captcha.HiddenFieldCaptchaService";
@@ -52,6 +49,12 @@ public class Fields {
     //test table
     public static final String TEST_QWEQWE = "qweqwe";
     public static final String TEST_TEXT = "text";
+
+    //DB user
+    public static final String USER_NAME = "name";
+    public static final String USER_PHONE = "phone";
+    public static final String USER_EMAIL = "email";
+    public static final String USER_PASSWORD = "password";
 
     //jsp pages
     public static final String JSP_ERROR = "error.jsp";

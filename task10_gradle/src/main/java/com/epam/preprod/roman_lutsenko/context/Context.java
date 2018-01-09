@@ -8,7 +8,6 @@ public class Context{
 
     private UserService userService;
     private CaptchaService captchaService;
-
     private TestService testService;
 
     public Context(UserService userService, CaptchaService captchaService, TestService testService) {

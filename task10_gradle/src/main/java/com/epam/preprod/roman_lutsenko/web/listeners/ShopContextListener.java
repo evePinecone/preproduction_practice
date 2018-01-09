@@ -1,19 +1,14 @@
 package com.epam.preprod.roman_lutsenko.web.listeners;
 
-import com.epam.preprod.roman_lutsenko.constants.factories.CaptchaServiceFactory;
-import com.epam.preprod.roman_lutsenko.constants.factories.DBServiceFactory;
 import com.epam.preprod.roman_lutsenko.constants.Fields;
-import com.epam.preprod.roman_lutsenko.constants.CaptchaServiceProvider;
-import com.epam.preprod.roman_lutsenko.constants.FieldsName;
 import com.epam.preprod.roman_lutsenko.constants.Messages;
+import com.epam.preprod.roman_lutsenko.constants.provider.CaptchaServiceProvider;
+import com.epam.preprod.roman_lutsenko.constants.provider.DBServiceProvider;
 import com.epam.preprod.roman_lutsenko.context.Context;
-import com.epam.preprod.roman_lutsenko.dao.UserDao;
-import com.epam.preprod.roman_lutsenko.dao.local.LocalUserDao;
 import com.epam.preprod.roman_lutsenko.entities.User;
 import com.epam.preprod.roman_lutsenko.services.CaptchaService;
 import com.epam.preprod.roman_lutsenko.services.TestService;
 import com.epam.preprod.roman_lutsenko.services.UserService;
-import com.epam.preprod.roman_lutsenko.services.local.LocalUserService;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletContext;
@@ -23,12 +18,15 @@ import javax.servlet.annotation.WebListener;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.epam.preprod.roman_lutsenko.constants.Messages.CAPTCHA_SERVICE_CLASS;
+
 
 /**
  * Initiates context of the program with services with parameters from the configuration files.
  */
 @WebListener
 public class ShopContextListener implements ServletContextListener {
+
     private final Logger logger = Logger.getLogger(ShopContextListener.class);
 
     @Override
@@ -39,16 +37,13 @@ public class ShopContextListener implements ServletContextListener {
         String captchaServiceString = servletContext.getInitParameter(Fields.INIT_LISTENER_CAPTCHA);
         String dbChoice = servletContext.getInitParameter(Fields.INIT_LISTENER_DBFACTORY);
 
-        UserDao userDao = new LocalUserDao(fill());
-
-        UserService userService = new LocalUserService(userDao);
-        logger.debug("captureService = " + captchaServiceString);
         CaptchaService captchaService = (new CaptchaServiceProvider()).getCaptchaService(captchaServiceString);
-        logger.debug("captureServiceClass = " + captchaService.getClass().getSimpleName());
+        logger.debug(CAPTCHA_SERVICE_CLASS + captchaService.getClass().getSimpleName());
 
-        DBServiceFactory dbServiceFactory = new DBServiceFactory();
-        dbServiceFactory.setServiceFactoryName(dbChoice);
-        TestService testService = dbServiceFactory.getInstance().getTestService();
+        DBServiceProvider dbServiceProvider = new DBServiceProvider();
+        dbServiceProvider.setServiceFactoryName(dbChoice);
+        TestService testService = dbServiceProvider.getInstance().getTestService();
+        UserService userService = dbServiceProvider.getInstance().getUserService();
 
         Context context = new Context(userService, captchaService, testService);
         servletContext.setAttribute(Fields.SESSION_CONTEXT, context);

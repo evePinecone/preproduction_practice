@@ -1,25 +1,25 @@
-package com.epam.preprod.roman_lutsenko.constants.factories;
+package com.epam.preprod.roman_lutsenko.constants.provider;
 
 import com.epam.preprod.roman_lutsenko.constants.Fields;
 import com.epam.preprod.roman_lutsenko.constants.Messages;
 import com.epam.preprod.roman_lutsenko.services.CaptchaService;
-import com.epam.preprod.roman_lutsenko.services.local.ContextCaptchaService;
-import com.epam.preprod.roman_lutsenko.services.local.CookieCaptchaService;
-import com.epam.preprod.roman_lutsenko.services.local.HiddenFieldCaptchaService;
+import com.epam.preprod.roman_lutsenko.services.local.captcha.CookieCaptchaService;
+import com.epam.preprod.roman_lutsenko.services.local.captcha.HiddenFieldCaptchaService;
+import com.epam.preprod.roman_lutsenko.services.local.captcha.SessionCaptchaService;
 import org.apache.log4j.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class CaptchaServiceFactory {
+public class CaptchaServiceProvider {
 
-    private static final Logger logger = Logger.getLogger(CaptchaServiceFactory.class);
+    private static final Logger logger = Logger.getLogger(CaptchaServiceProvider.class);
 
     private Map<String, CaptchaService> map = new HashMap<>();
 
-    public CaptchaServiceFactory() {
+    public CaptchaServiceProvider() {
         logger.debug(getClass() + Messages.INITIALIZED);
-        map.put(Fields.INIT_LISTENER_CONTEXT_CLASS, new ContextCaptchaService());
+        map.put(Fields.INIT_LISTENER_CONTEXT_CLASS, new SessionCaptchaService());
         map.put(Fields.INIT_LISTENER_COOKIE_CLASS, new CookieCaptchaService());
         map.put(Fields.INIT_LISTENER_HIDDEN_FIELD_CLASS, new HiddenFieldCaptchaService());
     }

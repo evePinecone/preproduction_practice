@@ -1,29 +1,29 @@
 package com.epam.preprod.roman_lutsenko.services.mySql;
 
-import com.epam.preprod.roman_lutsenko.dao.TestDAO;
-import com.epam.preprod.roman_lutsenko.dao.mySql.MySqlTestDAO;
+import com.epam.preprod.roman_lutsenko.repository.TestRepository;
+import com.epam.preprod.roman_lutsenko.repository.mySql.MySqlTestRepository;
 import com.epam.preprod.roman_lutsenko.entities.Test;
-import com.epam.preprod.roman_lutsenko.exceptions.DBException;
+import com.epam.preprod.roman_lutsenko.exception.DBException;
 import com.epam.preprod.roman_lutsenko.services.TestService;
 import org.apache.log4j.Logger;
 
 import java.sql.SQLException;
 import java.util.Map;
 
-public class MySqlTestService implements TestService{
+public class MySqlTestService implements TestService {
 
     private static final Logger logger = Logger.getLogger(MySqlTestService.class);
 
-    private TestDAO testDAO;
+    private TestRepository testRepository;
 
     public MySqlTestService() {
-        this.testDAO = new MySqlTestDAO();
+        this.testRepository = new MySqlTestRepository();
     }
 
     public Map<Integer, Test> getAllFields() {
         Map<Integer, Test> map = null;
         try {
-            map = testDAO.getAllFields();
+            map = testRepository.getAllFields();
         } catch (DBException e) {
             logger.error(getClass(), e);
         }

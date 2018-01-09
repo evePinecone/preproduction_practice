@@ -1,13 +1,11 @@
 package com.epam.preprod.roman_lutsenko.web.servlets;
 
-import com.epam.preprod.roman_lutsenko.constants.FieldsName;
 import com.epam.preprod.roman_lutsenko.constants.Messages;
 import com.epam.preprod.roman_lutsenko.context.Context;
 import com.epam.preprod.roman_lutsenko.entities.Captcha;
 import com.epam.preprod.roman_lutsenko.services.CaptchaService;
 import org.apache.log4j.Logger;
 
-import javax.faces.webapp.ConverterELTag;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -21,7 +19,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
-import static com.epam.preprod.roman_lutsenko.constants.FieldsName.TAG_CAPTCHA_TIMEOUT;
+import static com.epam.preprod.roman_lutsenko.constants.Fields.SESSION_CONTEXT;
+import static com.epam.preprod.roman_lutsenko.constants.Fields.TAG_CAPTCHA_TIMEOUT;
+
 
 /**
  * Drawing captcha with specified service method.
@@ -38,8 +38,8 @@ public class CaptchaServlet extends HttpServlet {
     public void init() throws ServletException {
         LOG.debug(Messages.INITIALIZED);
         this.servletContext = this.getServletContext();
-        this.context = (Context) servletContext.getAttribute(FieldsName.SESSION_CONTEXT);
-        LOG.debug(FieldsName.SESSION_CONTEXT + " = " + context);
+        this.context = (Context) servletContext.getAttribute(SESSION_CONTEXT);
+        LOG.debug(SESSION_CONTEXT + " = " + context);
     }
 
     protected void doGet(HttpServletRequest request,

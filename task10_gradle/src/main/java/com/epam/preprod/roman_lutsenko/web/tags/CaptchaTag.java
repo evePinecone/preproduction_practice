@@ -9,7 +9,8 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
 
-import static com.epam.preprod.roman_lutsenko.constants.FieldsName.TAG_CAPTCHA_ID_CAPTCHA;
+import static com.epam.preprod.roman_lutsenko.constants.Fields.TAG_CAPTCHA_ID_CAPTCHA;
+
 
 public class CaptchaTag extends TagSupport {
 

@@ -1,11 +1,11 @@
-package com.epam.preprod.roman_lutsenko.constants.factories;
+package com.epam.preprod.roman_lutsenko.constants.provider;
 
 
 import com.epam.preprod.roman_lutsenko.constants.Fields;
 import com.epam.preprod.roman_lutsenko.constants.Messages;
 import com.epam.preprod.roman_lutsenko.db.ServiceFactory;
 import com.epam.preprod.roman_lutsenko.db.factories.MysqlServiceFactory;
-import com.epam.preprod.roman_lutsenko.exceptions.DBException;
+import com.epam.preprod.roman_lutsenko.exception.DBException;
 import org.apache.log4j.Logger;
 
 import java.util.HashMap;
@@ -16,19 +16,19 @@ import java.util.Objects;
 /**
  * Data Access Object pattern implementation main class.
  */
-public class DBServiceFactory {
+public class DBServiceProvider {
 
     /**
      * Apache Log4j Logger
      */
-    private static final Logger LOG = Logger.getLogger(DBServiceFactory.class);
+    private static final Logger LOG = Logger.getLogger(DBServiceProvider.class);
     /**
-     * Full Class Name of a certain DBServiceFactory implementation.
+     * Full Class Name of a certain DBServiceProvider implementation.
      */
     private String serviceFactoryName;
     private Map<String, ServiceFactory> map;
 
-    public DBServiceFactory(){
+    public DBServiceProvider(){
         map = new HashMap<>();
         //put service factory
         map.put(Fields.INIT_LISTENER_MYSQL, new MysqlServiceFactory());
@@ -36,9 +36,9 @@ public class DBServiceFactory {
 
 
     /**
-     * Sets Full Class Name of a current implementation of the DBServiceFactory.
+     * Sets Full Class Name of a current implementation of the DBServiceProvider.
      *
-     * @param serviceFactoryName Full Class Name of a current implementation of the DBServiceFactory
+     * @param serviceFactoryName Full Class Name of a current implementation of the DBServiceProvider
      *                      to set.
      */
     public void setServiceFactoryName(String serviceFactoryName) {
@@ -46,10 +46,10 @@ public class DBServiceFactory {
     }
 
     /**
-     * Creates an instance of current DBServiceFactory implementation using its Full
+     * Creates an instance of current DBServiceProvider implementation using its Full
      * Class Name. Should set serviceFactoryName before.
      *
-     * @return Instance of a certain DBServiceFactory implementation.
+     * @return Instance of a certain DBServiceProvider implementation.
      * @throws DBException
      */
     public ServiceFactory getInstance() {

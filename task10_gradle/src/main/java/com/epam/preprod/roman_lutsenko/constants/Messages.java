@@ -34,8 +34,9 @@ public class Messages {
     public static final String ERR_CANNOT_CLOSE_RESULTSET = "Cannot close a result set";
     public static final String ERR_CANNOT_CLOSE_STATEMENT = "Cannot close a statement";
     public static final String ERR_CANNOT_ROLL_BACK_CONNECTION = "Cannot roll back a connection";
-    public static final String ERR_CANNOT_INSTANTIATE_SERVICE_FACTORY = "Cannot instantiate DBServiceFactory object";
+    public static final String ERR_CANNOT_INSTANTIATE_SERVICE_FACTORY = "Cannot instantiate DBServiceProvider object";
     public static final String ERR_CANNOT_OBTAIN_TEST = "Cannot obtain tests from a database";
+    public static final String ERR_CANNOT_OBTAIN_USERS = "Cannot obtain users from a database";
 
 
     //success
@@ -51,7 +52,7 @@ public class Messages {
     public static final String TRACE_COOKIE_FOUNDED = "Value of a cookie that has been founded in a response: ";
     public static final String TRACE_COOKIE_CHANGED = "Cookie had initialized or changed. Curren cookie value: ";
     public static final String TRACE_CURRENT_SESSION = "Current session object is: ";
-    public static final String TRACE_DAO_OBJECT_CREATED = "DBServiceFactory object has been created: ";
+    public static final String TRACE_DAO_OBJECT_CREATED = "DBServiceProvider object has been created: ";
     public static final String TRACE_CONTROLLER_FINISHED = "Controller has finished it's work.";
     public static final String TRACE_DESTINATION_URL = "Current destination URL: ";
     public static final String TRACE_ATRIBUTE_ADDED_TO_REQUEST = "Attribute has added to the request scope: ";
@@ -60,5 +61,7 @@ public class Messages {
     public static final String TRACE_USER_ROLE = "User role obtained by user.roleId: ";
     public static final String TRACE_REQUES_PARAMETER = "Parameter obtained from the request: ";
 
+
+    public static final String CAPTCHA_SERVICE_CLASS = "captchaServiceClass = ";
 
 }
