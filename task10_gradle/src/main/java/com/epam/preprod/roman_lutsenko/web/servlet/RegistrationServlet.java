@@ -48,6 +48,7 @@ public class RegistrationServlet extends HttpServlet {
             } else {
                 try {
                     context.getUserService().add(user);
+                    //todo:message.
                     LOG.debug("USER ADDED");
                 } catch (UserDuplicateException e) {
                     LOG.debug(e.getMessage());

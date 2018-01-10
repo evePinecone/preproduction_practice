@@ -2,6 +2,7 @@ package com.epam.preprod.roman_lutsenko.db.util;
 
 
 import com.epam.preprod.roman_lutsenko.constant.Messages;
+import com.epam.preprod.roman_lutsenko.db.IExecutable;
 import com.epam.preprod.roman_lutsenko.exception.DBException;
 import org.apache.log4j.Logger;
 
@@ -13,7 +14,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-//import org.apache.tomcat.jdbc.pool.PoolProperties;
 
 
 /**
@@ -21,7 +21,7 @@ import java.sql.Statement;
  *
  * @author inc_f
  */
-public class DBUtil {
+public class TransactionManager {
 
     /**
      * JNDI connections pool data source.
@@ -31,7 +31,23 @@ public class DBUtil {
     /**
      * Apache Log4j logger
      */
-    private static final Logger logger = Logger.getLogger(DBUtil.class);
+    private static final Logger logger = Logger.getLogger(TransactionManager.class);
+
+    public <T> T execute(IExecutable<T> iExecutable) {
+        Connection connection = null;
+        T res = null;
+        try {
+            connection = getConnection();
+            ConnectionHolder.setConnection(connection);
+            res = (T)iExecutable.executeTransaction();
+            connection.close();
+        } catch (SQLException | DBException e) {
+           rollBack(connection);
+        } finally {
+            close(connection);
+        }
+        return res;
+    }
 
     /**
      * Creates (or takes from a pool) Data Base connection.
@@ -41,11 +57,11 @@ public class DBUtil {
      */
     public static Connection getConnection() throws DBException {
         initDatasource();
-
         Connection connection = null;
         try {
             connection = ds.getConnection();
             connection.setAutoCommit(false);
+//            connection.setTransactionIsolation(Connection.TRANSACTION_READ_UNCOMMITTED);
 //            logger.trace("Connection ==> " + connection);
         } catch (SQLException e) {
             logger.error(Messages.ERR_CANNOT_OBTAIN_CONNECTION);

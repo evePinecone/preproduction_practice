@@ -11,8 +11,18 @@ public class Messages {
     public static final String ENDED = " was ended";
     public static final String LOADED = "Loaded ";
     public static final String REDIRECTED = " was redirected to ";
+
+    //repositories
     public static final String ADD_METHOD_REPOSITORY = "Adding method, repository";
     public static final String REMOVE_METHOD_REPOSITORY = "Remove method, repository";
+    public static final String GET_ELEMENT_REPOSITORY = "Get element, repository";
+
+    //services
+    public static final String CONTAINS_SERVICE = "Contains, service";
+    public static final String REMOVE_SERVICE = "Remove, service";
+    public static final String GET_ALL_USERS_SERVICE = "GetAllUsers, service";
+    public static final String GET_BY_ID_SERVICE = "GetById, service";
+    public static final String ADD_METHOD_SERVICE = "Add method, service";
 
 
     //Validation messages
@@ -40,6 +50,7 @@ public class Messages {
     public static final String ERR_CANNOT_OBTAIN_TEST = "Cannot obtain tests from a database";
     public static final String ERR_CANNOT_OBTAIN_USERS = "Cannot obtain users from a database";
     public static final String ERR_CANNOT_REMOVE_USER_FROM_DATABASE = "Cannot remove user from database";
+    public static final String ERR_EXTRACTION_USER_FROM_RESULT_SET = "Err extraction user from ResultSet ";
 
 
     //success

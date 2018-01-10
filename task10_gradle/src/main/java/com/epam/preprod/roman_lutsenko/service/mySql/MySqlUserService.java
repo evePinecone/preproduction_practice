@@ -1,53 +1,72 @@
 package com.epam.preprod.roman_lutsenko.service.mySql;
 
+import com.epam.preprod.roman_lutsenko.db.util.TransactionManager;
 import com.epam.preprod.roman_lutsenko.entity.User;
 import com.epam.preprod.roman_lutsenko.exception.UserDuplicateException;
 import com.epam.preprod.roman_lutsenko.repository.UserRepository;
-import com.epam.preprod.roman_lutsenko.repository.mySql.MySqlUserRepository;
+import com.epam.preprod.roman_lutsenko.repository.mySql.MySqlUserRepositoryWithConnection;
 import com.epam.preprod.roman_lutsenko.service.UserService;
 import org.apache.log4j.Logger;
 
 import java.util.Map;
 import java.util.Objects;
 
+import static com.epam.preprod.roman_lutsenko.constant.Messages.ADD_METHOD_SERVICE;
+import static com.epam.preprod.roman_lutsenko.constant.Messages.CONTAINS_SERVICE;
+import static com.epam.preprod.roman_lutsenko.constant.Messages.GET_ALL_USERS_SERVICE;
+import static com.epam.preprod.roman_lutsenko.constant.Messages.GET_BY_ID_SERVICE;
+import static com.epam.preprod.roman_lutsenko.constant.Messages.REMOVE_SERVICE;
+
 public class MySqlUserService implements UserService {
 
-    public static final Logger LOG = Logger.getLogger(MySqlUserService.class);
+    private static final Logger LOG = Logger.getLogger(MySqlUserService.class);
 
+    private TransactionManager transactionManager;
     private UserRepository userRepository;
 
-    public MySqlUserService() {
-        userRepository = new MySqlUserRepository();
+    public MySqlUserService(TransactionManager transactionManager) {
+        //todo: change repository.
+        this.userRepository = new MySqlUserRepositoryWithConnection();
+        this.transactionManager = transactionManager;
     }
 
     @Override
     public void add(User user) throws UserDuplicateException {
-        LOG.debug("add method service");
-        //todo: log refactor, logic on exception
-//        if(Objects.isNull(userRepository.getById(user.getPhone()))) {
-//            throw new UserDuplicateException();
-//        }
-        userRepository.add(user);
+        LOG.debug(ADD_METHOD_SERVICE);
+        Object resultAdd = transactionManager.execute(() -> {
+            User userBuf = userRepository.getById(user.getPhone());
+            if (Objects.isNull(userBuf)) {
+                return null;
+            }
+            return userRepository.add(user);
+        });
+        if (Objects.isNull(resultAdd)) {
+            throw new UserDuplicateException();
+        }
     }
 
     @Override
-    public User get(String phone) {
-        return userRepository.getById(phone);
+    public User getById(String phone) {
+        LOG.debug(GET_BY_ID_SERVICE);
+        Object result = transactionManager.execute(() -> userRepository.getById(phone));
+        return (User) result;
     }
 
     @Override
     public Map<String, User> getAllUsers() {
-        return userRepository.getAllUsers();
+        LOG.debug(GET_ALL_USERS_SERVICE);
+        return transactionManager.execute(() -> userRepository.getAllUsers());
     }
 
     @Override
     public boolean remove(String phone) {
-        return false;
-        //todo: implement remove service
+        LOG.debug(REMOVE_SERVICE);
+        return transactionManager.execute(() -> userRepository.remove(phone));
     }
 
     @Override
     public boolean contains(String phone) {
-        return Objects.nonNull(get(phone));
+        LOG.debug(CONTAINS_SERVICE);
+        return transactionManager.execute(() -> Objects.nonNull(userRepository.getById(phone)));
     }
 }

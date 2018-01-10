@@ -1,10 +1,11 @@
-package com.epam.preprod.roman_lutsenko.web.listeners;
+package com.epam.preprod.roman_lutsenko.web.listener;
 
 import com.epam.preprod.roman_lutsenko.constant.Fields;
 import com.epam.preprod.roman_lutsenko.constant.Messages;
 import com.epam.preprod.roman_lutsenko.constant.provider.CaptchaServiceProvider;
 import com.epam.preprod.roman_lutsenko.constant.provider.DBServiceProvider;
 import com.epam.preprod.roman_lutsenko.context.Context;
+import com.epam.preprod.roman_lutsenko.db.util.TransactionManager;
 import com.epam.preprod.roman_lutsenko.entity.User;
 import com.epam.preprod.roman_lutsenko.service.CaptchaService;
 import com.epam.preprod.roman_lutsenko.service.TestService;
@@ -40,7 +41,8 @@ public class ShopContextListener implements ServletContextListener {
         CaptchaService captchaService = (new CaptchaServiceProvider()).getCaptchaService(captchaServiceString);
         logger.debug(CAPTCHA_SERVICE_CLASS + captchaService.getClass().getSimpleName());
 
-        DBServiceProvider dbServiceProvider = new DBServiceProvider();
+        TransactionManager transactionManager = new TransactionManager();
+        DBServiceProvider dbServiceProvider = new DBServiceProvider(transactionManager);
         dbServiceProvider.setServiceFactoryName(dbChoice);
         TestService testService = dbServiceProvider.getInstance().getTestService();
         UserService userService = dbServiceProvider.getInstance().getUserService();

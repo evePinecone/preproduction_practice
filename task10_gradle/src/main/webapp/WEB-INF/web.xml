@@ -1,7 +1,7 @@
 <web-app>
 
     <listner>
-        <listner-class>com.epam.preprod.roman_lutsenko.web.listeners.ShopContextListener</listner-class>
+        <listner-class>com.epam.preprod.roman_lutsenko.web.listener.ShopContextListener</listner-class>
     </listner>
 
     <context-param>

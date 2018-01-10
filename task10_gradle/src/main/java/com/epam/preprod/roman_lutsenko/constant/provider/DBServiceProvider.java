@@ -5,6 +5,7 @@ import com.epam.preprod.roman_lutsenko.constant.Fields;
 import com.epam.preprod.roman_lutsenko.constant.Messages;
 import com.epam.preprod.roman_lutsenko.db.ServiceFactory;
 import com.epam.preprod.roman_lutsenko.db.factory.MysqlServiceFactory;
+import com.epam.preprod.roman_lutsenko.db.util.TransactionManager;
 import com.epam.preprod.roman_lutsenko.exception.DBException;
 import org.apache.log4j.Logger;
 
@@ -28,10 +29,10 @@ public class DBServiceProvider {
     private String serviceFactoryName;
     private Map<String, ServiceFactory> map;
 
-    public DBServiceProvider(){
+    public DBServiceProvider(TransactionManager transactionManager){
         map = new HashMap<>();
         //put service factory
-        map.put(Fields.INIT_LISTENER_MYSQL, new MysqlServiceFactory());
+        map.put(Fields.INIT_LISTENER_MYSQL, new MysqlServiceFactory(transactionManager));
     }
 
 

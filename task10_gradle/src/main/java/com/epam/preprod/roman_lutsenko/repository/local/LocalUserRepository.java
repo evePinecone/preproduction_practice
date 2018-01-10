@@ -1,11 +1,12 @@
 package com.epam.preprod.roman_lutsenko.repository.local;
 
-import com.epam.preprod.roman_lutsenko.repository.UserRepository;
 import com.epam.preprod.roman_lutsenko.entity.User;
+import com.epam.preprod.roman_lutsenko.repository.UserRepository;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * LocalUserRepository with primary key for registration is phone number.
@@ -19,8 +20,9 @@ public class LocalUserRepository implements UserRepository {
     }
 
     @Override
-    public void add(User user) {
+    public boolean add(User user) {
         map.put(user.getPhone(), user);
+        return true;
     }
 
     @Override
@@ -29,8 +31,8 @@ public class LocalUserRepository implements UserRepository {
     }
 
     @Override
-    public Object remove(String phone) {
-        return map.remove(phone);
+    public boolean remove(String phone) {
+        return Objects.nonNull(map.remove(phone));
     }
 
     @Override

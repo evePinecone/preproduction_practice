@@ -4,7 +4,7 @@ import com.epam.preprod.roman_lutsenko.constant.DBCommands;
 import com.epam.preprod.roman_lutsenko.constant.Fields;
 import com.epam.preprod.roman_lutsenko.constant.Messages;
 import com.epam.preprod.roman_lutsenko.repository.TestRepository;
-import com.epam.preprod.roman_lutsenko.db.util.DBUtil;
+import com.epam.preprod.roman_lutsenko.db.util.TransactionManager;
 import com.epam.preprod.roman_lutsenko.entity.Test;
 import com.epam.preprod.roman_lutsenko.exception.DBException;
 import org.apache.log4j.Logger;
@@ -28,7 +28,7 @@ public class MySqlTestRepository implements TestRepository {
     @Override
     public Map<Integer, Test> getAllFields() throws DBException {
         Map<Integer, Test> testMap = new HashMap<>();
-        Connection connection = DBUtil.getConnection();
+        Connection connection = TransactionManager.getConnection();
         Statement statement = null;
         ResultSet resultSet = null;
         try {
@@ -43,7 +43,7 @@ public class MySqlTestRepository implements TestRepository {
             logger.error(Messages.ERR_CANNOT_OBTAIN_TEST, e);
             throw new DBException(Messages.ERR_CANNOT_OBTAIN_TEST, e);
         }
-        DBUtil.close(connection, statement, resultSet);
+        TransactionManager.close(connection, statement, resultSet);
         return testMap;
     }
 

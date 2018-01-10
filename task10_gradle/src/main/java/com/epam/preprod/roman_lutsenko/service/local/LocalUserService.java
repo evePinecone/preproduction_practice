@@ -1,9 +1,8 @@
 package com.epam.preprod.roman_lutsenko.service.local;
 
-import com.epam.preprod.roman_lutsenko.repository.UserRepository;
 import com.epam.preprod.roman_lutsenko.entity.User;
-import com.epam.preprod.roman_lutsenko.exception.NoSuchUserException;
 import com.epam.preprod.roman_lutsenko.exception.UserDuplicateException;
+import com.epam.preprod.roman_lutsenko.repository.UserRepository;
 import com.epam.preprod.roman_lutsenko.service.UserService;
 
 import java.util.Map;
@@ -27,7 +26,7 @@ public class LocalUserService implements UserService {
     }
 
     @Override
-    public User get(String phone) {
+    public User getById(String phone) {
         return userRepository.getById(phone);
     }
 
@@ -38,11 +37,7 @@ public class LocalUserService implements UserService {
 
     @Override
     public boolean remove(String phone) {
-        Object object = userRepository.remove(phone);
-        if(Objects.isNull(object)) {
-            throw new NoSuchUserException();
-        }
-        return true;
+        return userRepository.remove(phone);
     }
 
     @Override

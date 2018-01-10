@@ -38,7 +38,7 @@ NONE  READ_COMMITTED  READ_UNCOMMITTED  REPEATABLE_READ SERIALIZABLE
   			auth="Container" 
   			type="javax.sql.DataSource"
 			maxActive="100" maxIdle="30" maxWait="10000"
-			username="" password=""
+			username="Eve" password="BX.8W5Muiiqw"
 			driverClassName="com.mysql.jdbc.Driver"
 			defaultAutoCommit="true"
 			useSSL="false"

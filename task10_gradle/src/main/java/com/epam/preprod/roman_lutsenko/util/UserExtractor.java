@@ -8,10 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
-import java.util.ResourceBundle;
 
-import static com.epam.preprod.roman_lutsenko.constant.Fields.*;
+import static com.epam.preprod.roman_lutsenko.constant.Fields.FORM_REGISTRATION_EMAIL;
+import static com.epam.preprod.roman_lutsenko.constant.Fields.FORM_REGISTRATION_NAME;
 import static com.epam.preprod.roman_lutsenko.constant.Fields.FORM_REGISTRATION_PASSWORD;
+import static com.epam.preprod.roman_lutsenko.constant.Fields.FORM_REGISTRATION_PHONE;
+import static com.epam.preprod.roman_lutsenko.constant.Fields.SESSION_ERR_MESS;
+import static com.epam.preprod.roman_lutsenko.constant.Messages.ERR_EXTRACTION_USER_FROM_RESULT_SET;
 
 public class UserExtractor {
 
@@ -23,6 +26,7 @@ public class UserExtractor {
 
     /**
      * Parse request into User entity and check if data is valid, if valid - set it to session.
+     *
      * @param request request from user.
      * @return User instance with setted fields or <b>null</b> if user cannot insert to user container.
      */
@@ -80,13 +84,21 @@ public class UserExtractor {
         request.getSession().removeAttribute(FORM_REGISTRATION_PHONE);
     }
 
-    public static User extractUserFromResultSer(ResultSet resultSet) throws SQLException {
+    public static User extractUserFromResultSet(ResultSet resultSet) throws SQLException {
         User user = new User();
-        user.setId(resultSet.getInt(Fields.ID));
-        user.setName(resultSet.getString(Fields.USER_NAME));
-        user.setEmail(resultSet.getString(Fields.USER_EMAIL));
-        user.setPhone(resultSet.getString(Fields.USER_PHONE));
-        user.setPassword(resultSet.getString(Fields.USER_PASSWORD));
+        if (!resultSet.next()) {
+            return null;
+        }
+        try {
+            user.setId(resultSet.getInt(Fields.ID));
+            user.setName(resultSet.getString(Fields.USER_NAME));
+            user.setEmail(resultSet.getString(Fields.USER_EMAIL));
+            user.setPhone(resultSet.getString(Fields.USER_PHONE));
+            user.setPassword(resultSet.getString(Fields.USER_PASSWORD));
+        } catch (SQLException e) {
+            LOG.error(ERR_EXTRACTION_USER_FROM_RESULT_SET, e);
+            throw e;
+        }
         return user;
     }
 
