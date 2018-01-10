@@ -1,0 +1,37 @@
+<%@include file="directives/page.jspf"%>
+
+<body class='homepage'>
+
+ <div id="header">
+            <div class="container">
+
+                <!-- Logo -->
+                <h1><a href="catalog.jsp" id="logo">PineconeEve Shop</a></h1>
+
+                <!-- Nav -->
+
+                <nav id="nav">
+                    <ul>
+                        <li class="active"><a href="index.jsp">Home</a></li>
+                        <li><a href="catalog.jsp">Catalog</a></li>
+                        <li><a href="about.jsp">About</a></li>
+                        <li>
+                            <a href="">%username%</a>
+                            <ul>
+                                <li><a href="#">Sign in</a></li>
+                                <li><a href="registration">Registration</a></li>
+                                <li>
+                                    <a href="">%language%</a>
+                                    <ul>
+                                        <li><a href="#">English</a></li>
+                                        <li><a href="#">Русский</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+</body>

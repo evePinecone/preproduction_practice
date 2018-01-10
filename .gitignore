@@ -102,11 +102,8 @@ local.properties
 .gradle/
 gradlew
 gradlew.bat
-task10_gradle/src/main/java/
-task10_gradle/src/main/resources/
-task10_gradle/src/main/webapp/WEB-INF/
-task10_gradle/src/test/
 !/task10_gradle/gradle/wrapper/gradle-wrapper.jar
 task10_gradle/.gradle/
 task10_gradle/gradlew
 task10_gradle/gradlew.bat
+.vscode

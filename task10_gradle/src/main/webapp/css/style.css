@@ -234,6 +234,10 @@ input[type="email"] {
     display: block;
 }
 
+.form__item captcha {
+    border-radius: 5px;
+}
+
 .actions {
     display: flex;
     justify-content: space-between
@@ -247,6 +251,14 @@ input[type="email"] {
     width: 100%;
     border-radius: 15px;
 }
+
+.actions captcha {
+    border-radius: 5px;
+}
+
+/* .actions captcha {
+    border-radius: 15px;
+} */
 
 
 /* Image */
