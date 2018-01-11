@@ -2,7 +2,6 @@ package com.epam.preprod.roman_lutsenko.web.servlet;
 
 import com.epam.preprod.roman_lutsenko.context.Context;
 import com.epam.preprod.roman_lutsenko.entity.User;
-import com.epam.preprod.roman_lutsenko.exception.UserDuplicateException;
 import com.epam.preprod.roman_lutsenko.util.ValidateInput;
 import org.apache.log4j.Logger;
 
@@ -39,13 +38,13 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = extractLoginFromRequest(req);
-        try {
-            context.getUserService().add(user);
-            context.getUserService().getById(user.getPhone());
-        } catch (UserDuplicateException e) {
-            LOG.error("User with such phone registered, sorry");
+        user = context.getUserService().getById(user.getPhone());
+        if(Objects.isNull(user)) {
+            req.getSession().setAttribute("err_mess", "Incorrect data");
+            resp.sendRedirect("login.jsp");
+        } else {
+            resp.sendRedirect("catalog.jsp");
         }
-        req.getSession().setAttribute("User", user);
         LOG.debug("IS IT WORKING?? ");
     }
 

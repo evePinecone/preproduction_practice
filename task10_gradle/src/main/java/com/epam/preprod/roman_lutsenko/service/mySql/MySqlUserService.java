@@ -4,7 +4,7 @@ import com.epam.preprod.roman_lutsenko.db.util.TransactionManager;
 import com.epam.preprod.roman_lutsenko.entity.User;
 import com.epam.preprod.roman_lutsenko.exception.UserDuplicateException;
 import com.epam.preprod.roman_lutsenko.repository.UserRepository;
-import com.epam.preprod.roman_lutsenko.repository.mySql.MySqlUserRepositoryWithConnection;
+import com.epam.preprod.roman_lutsenko.repository.mySql.MySqlUserRepository;
 import com.epam.preprod.roman_lutsenko.service.UserService;
 import org.apache.log4j.Logger;
 
@@ -26,7 +26,7 @@ public class MySqlUserService implements UserService {
 
     public MySqlUserService(TransactionManager transactionManager) {
         //todo: change repository.
-        this.userRepository = new MySqlUserRepositoryWithConnection();
+        this.userRepository = new MySqlUserRepository();
         this.transactionManager = transactionManager;
     }
 
@@ -61,7 +61,9 @@ public class MySqlUserService implements UserService {
     @Override
     public boolean remove(String phone) {
         LOG.debug(REMOVE_SERVICE);
-        return transactionManager.execute(() -> userRepository.remove(phone));
+        return transactionManager.execute(() -> {
+            return !Objects.isNull(userRepository.getById(phone)) && userRepository.remove(phone);
+        });
     }
 
     @Override

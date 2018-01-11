@@ -33,16 +33,14 @@ import static com.epam.preprod.roman_lutsenko.constant.Messages.REGISTRATION_NON
 public class RegistrationServlet extends HttpServlet {
     private final Logger LOG = Logger.getLogger(RegistrationServlet.class);
 
+    //todo: need to be refactored
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         LOG.debug(getClass() + Messages.STARTED);
         Context context = (Context) req.getServletContext().getAttribute(SESSION_CONTEXT);
         User user = UserExtractor.extractUserFromRequest(req);
         if (isValidCaptcha(req, context)) {
-            if (containsUser(context, req.getParameter(FORM_REGISTRATION_PHONE))) {
-                req.getSession().setAttribute(SESSION_ERR_MESS, REGISTRATION_DUPLICATE_USER);
-                resp.sendRedirect(REGISTRATION_SERVLET);
-            } else if (Objects.isNull(user)) {
+            if (Objects.isNull(user)) {
                 req.getSession().setAttribute(SESSION_ERR_MESS, REGISTRATION_NON_VALID_FIELDS);
                 resp.sendRedirect(REGISTRATION_SERVLET);
             } else {
@@ -50,11 +48,11 @@ public class RegistrationServlet extends HttpServlet {
                     context.getUserService().add(user);
                     //todo:message.
                     LOG.debug("USER ADDED");
+                    resp.sendRedirect(INDEX_JSP);
                 } catch (UserDuplicateException e) {
                     LOG.debug(e.getMessage());
-                    resp.sendRedirect(REGISTRATION_SERVLET);
+                   // resp.sendRedirect(REGISTRATION_SERVLET);
                 }
-                resp.sendRedirect(INDEX_JSP);
             }
         } else {
             resp.sendRedirect(REGISTRATION_SERVLET);
@@ -76,11 +74,6 @@ public class RegistrationServlet extends HttpServlet {
     private boolean isValidCaptcha(HttpServletRequest request, Context context) {
         String captureValue = request.getParameter(TAG_CAPTCHA_INPUT_VALUE);
         return context.getCaptchaService().isCorrectCaptcha(request, captureValue);
-    }
-
-    private boolean containsUser(Context context, String phone) {
-        UserService userService = context.getUserService();
-        return userService.contains(phone);
     }
 
 }
