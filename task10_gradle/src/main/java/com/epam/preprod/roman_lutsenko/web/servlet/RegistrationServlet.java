@@ -4,7 +4,6 @@ import com.epam.preprod.roman_lutsenko.constant.Messages;
 import com.epam.preprod.roman_lutsenko.context.Context;
 import com.epam.preprod.roman_lutsenko.entity.User;
 import com.epam.preprod.roman_lutsenko.exception.UserDuplicateException;
-import com.epam.preprod.roman_lutsenko.service.UserService;
 import com.epam.preprod.roman_lutsenko.util.UserExtractor;
 import org.apache.log4j.Logger;
 
@@ -13,18 +12,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Objects;
 
-import static com.epam.preprod.roman_lutsenko.constant.Fields.FORM_REGISTRATION_PHONE;
 import static com.epam.preprod.roman_lutsenko.constant.Fields.INDEX_JSP;
 import static com.epam.preprod.roman_lutsenko.constant.Fields.REGISTRATION_JSP;
 import static com.epam.preprod.roman_lutsenko.constant.Fields.REGISTRATION_SERVLET;
 import static com.epam.preprod.roman_lutsenko.constant.Fields.SESSION_CONTEXT;
 import static com.epam.preprod.roman_lutsenko.constant.Fields.SESSION_ERR_MESS;
 import static com.epam.preprod.roman_lutsenko.constant.Fields.TAG_CAPTCHA_INPUT_VALUE;
-import static com.epam.preprod.roman_lutsenko.constant.Messages.REGISTRATION_DUPLICATE_USER;
 import static com.epam.preprod.roman_lutsenko.constant.Messages.REGISTRATION_NON_VALID_FIELDS;
+import static com.epam.preprod.roman_lutsenko.util.UserExtractor.phoneNumbers;
 
 /**
  * Process registration form and check if user with this phone consist in User container.
@@ -46,12 +47,14 @@ public class RegistrationServlet extends HttpServlet {
             } else {
                 try {
                     context.getUserService().add(user);
+                    LOG.debug("added");
+                    //getAvatar(req, user);
                     //todo:message.
                     LOG.debug("USER ADDED");
                     resp.sendRedirect(INDEX_JSP);
                 } catch (UserDuplicateException e) {
-                    LOG.debug(e.getMessage());
-                   // resp.sendRedirect(REGISTRATION_SERVLET);
+                    LOG.debug("UserDupl ", e);
+                    // resp.sendRedirect(REGISTRATION_SERVLET);
                 }
             }
         } else {
@@ -70,10 +73,37 @@ public class RegistrationServlet extends HttpServlet {
         req.getRequestDispatcher(REGISTRATION_JSP).forward(req, resp);
     }
 
-
     private boolean isValidCaptcha(HttpServletRequest request, Context context) {
         String captureValue = request.getParameter(TAG_CAPTCHA_INPUT_VALUE);
         return context.getCaptchaService().isCorrectCaptcha(request, captureValue);
     }
 
+    private void getAvatar(HttpServletRequest req, User user) {
+        final String filePath = "images/user/" + phoneNumbers(user.getPhone()) + ".jpg";
+
+        if (isAvatarUploaded(req)) {
+            try (OutputStream out = new FileOutputStream(filePath);
+                 InputStream fileContent = req.getPart("image").getInputStream()) {
+                int read;
+                final byte[] bytes = new byte[1024];
+
+                while ((read = fileContent.read(bytes)) != -1) {
+                    out.write(bytes, 0, read);
+                }
+            } catch (Exception e) {
+                LOG.warn("image", e);
+            }
+        }
+    }
+
+    private boolean isAvatarUploaded(HttpServletRequest req) {
+        try {
+            if (req.getPart("image").getSize() == 0) {
+                return false;
+            }
+        } catch (IOException | ServletException e) {
+            LOG.warn("image", e);
+        }
+        return true;
+    }
 }

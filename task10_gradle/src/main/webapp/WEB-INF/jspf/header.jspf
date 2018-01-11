@@ -23,7 +23,7 @@
                             <c:choose>
                                 <c:when test="${not empty user}">
                                     ${user.name}
-                                    <img src="images/user/default.jpg" alt="/images/user/default.jpg" height="42" width="42"> 
+                                    <img src="${sessionScope.avatar}" alt="/images/user/default.jpg" height="42" width="42"> 
                                 </c:when>
                                 <c:otherwise>
                                     Please, login.

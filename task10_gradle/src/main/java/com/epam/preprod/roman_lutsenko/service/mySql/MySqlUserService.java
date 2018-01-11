@@ -36,9 +36,9 @@ public class MySqlUserService implements UserService {
         Object resultAdd = transactionManager.execute(() -> {
             User userBuf = userRepository.getById(user.getPhone());
             if (Objects.isNull(userBuf)) {
-                return null;
+                return userRepository.add(user);
             }
-            return userRepository.add(user);
+            return null;
         });
         if (Objects.isNull(resultAdd)) {
             throw new UserDuplicateException();

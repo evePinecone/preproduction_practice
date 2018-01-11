@@ -40,12 +40,14 @@ public class MySqlUserRepository implements UserRepository{
             preparedStatement.setString(counter++, user.getEmail());
             preparedStatement.setString(counter++, user.getPhone());
             preparedStatement.setString(counter, user.getPassword());
-            preparedStatement.executeUpdate();
+            LOG.debug("prepSt add = " + preparedStatement);
+            return preparedStatement.executeUpdate()>-1;
+
         } catch (SQLException e) {
             LOG.error(ERR_CANNOT_OBTAIN_USERS, e);
             throw new DBException(ERR_CANNOT_OBTAIN_USERS, e);
         }
-        return true;
+       // return true;
     }
 
     @Override

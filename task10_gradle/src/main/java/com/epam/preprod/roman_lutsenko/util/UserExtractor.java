@@ -102,4 +102,7 @@ public class UserExtractor {
         return user;
     }
 
+    public static String phoneNumbers(String phone) {
+        return phone.substring(1);
+    }
 }

@@ -39,6 +39,9 @@
                                 <input id="password_confirm" name="password_confirm" placeholder="Confirm password" type="password" />
                                 <div id="password_confirm_" class="invalid_input">Invalid password</div>
                             </div>
+                            <%-- <div class="form__item">
+                                <input id="image" name="image" placeholder="image" type="file" accept="image/jpeg,image/png"/>
+                            </div> --%>
                             <div class="form__item">
                                 <cpt:Captcha />
                             </div>

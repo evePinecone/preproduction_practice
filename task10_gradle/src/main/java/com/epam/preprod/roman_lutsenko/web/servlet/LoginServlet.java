@@ -16,9 +16,11 @@ import java.util.Objects;
 import static com.epam.preprod.roman_lutsenko.constant.Fields.EMPTY_STRING;
 import static com.epam.preprod.roman_lutsenko.constant.Fields.FORM_REGISTRATION_PASSWORD;
 import static com.epam.preprod.roman_lutsenko.constant.Fields.FORM_REGISTRATION_PHONE;
+import static com.epam.preprod.roman_lutsenko.constant.Fields.SESSION_AVATAR;
 import static com.epam.preprod.roman_lutsenko.constant.Fields.SESSION_CONTEXT;
 import static com.epam.preprod.roman_lutsenko.constant.Fields.SESSION_ERR_MESS;
 import static com.epam.preprod.roman_lutsenko.constant.Fields.SESSION_USER;
+import static com.epam.preprod.roman_lutsenko.util.UserExtractor.phoneNumbers;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -43,12 +45,14 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = extractLoginFromRequest(req);
         User userFromDB = context.getUserService().getById(user.getPhone());
-        if(Objects.isNull(userFromDB) || !Objects.equals(userFromDB.getPassword(), user.getPassword())) {
+        if (Objects.isNull(userFromDB) || !Objects.equals(userFromDB.getPassword(), user.getPassword())) {
             req.getSession().setAttribute(SESSION_ERR_MESS, "Incorrect data");
             resp.sendRedirect("login.jsp");
         } else {
             LOG.debug("user = " + userFromDB.getName());
             userFromDB.setPassword(EMPTY_STRING);
+            String imgName = "images/user/" + phoneNumbers(user.getPhone()) + ".jpg";
+            req.getSession().setAttribute(SESSION_AVATAR, imgName);
             req.getSession().setAttribute(SESSION_USER, userFromDB);
             resp.sendRedirect("catalog.jsp");
         }
@@ -67,4 +71,6 @@ public class LoginServlet extends HttpServlet {
         }
         return user;
     }
+
+
 }
