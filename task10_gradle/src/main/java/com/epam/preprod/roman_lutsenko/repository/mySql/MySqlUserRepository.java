@@ -70,11 +70,14 @@ public class MySqlUserRepository implements UserRepository{
         ResultSet resultSet = null;
         User user = null;
         Connection connection = ConnectionHolder.getConnection();
+        LOG.debug("connection get = " + connection);
         try {
             preparedStatement = connection.prepareStatement(SQL_FIND_USER_BY_PHONE);
             preparedStatement.setString(1, phone);
+            LOG.debug("prepSt = " + preparedStatement);
             resultSet = preparedStatement.executeQuery();
             user = extractUserFromResultSet(resultSet);
+            LOG.debug("user = " + user);
         } catch (SQLException e) {
             LOG.error(ERR_CANNOT_OBTAIN_USERS, e);
             throw new DBException(ERR_CANNOT_OBTAIN_USERS, e);

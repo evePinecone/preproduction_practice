@@ -5,6 +5,8 @@ package com.epam.preprod.roman_lutsenko.constant;
  */
 public class Fields {
 
+    public static final String EMPTY_STRING = "";
+
     //registration.jsp
     public static final String FORM_REGISTRATION_NAME = "name";
     public static final String REGISTRATION_JSP = "registration.jsp";
@@ -29,6 +31,8 @@ public class Fields {
     //Session attributes
     public static final String SESSION_CONTEXT = "context";
     public static final String SESSION_ERR_MESS = "err_mess";
+    public static final String SESSION_USER = "user";
+    public static final String SESSION_AVATAR = "avatar";
 
 
     //LISTENER

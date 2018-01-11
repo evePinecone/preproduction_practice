@@ -13,9 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Objects;
 
+import static com.epam.preprod.roman_lutsenko.constant.Fields.EMPTY_STRING;
 import static com.epam.preprod.roman_lutsenko.constant.Fields.FORM_REGISTRATION_PASSWORD;
 import static com.epam.preprod.roman_lutsenko.constant.Fields.FORM_REGISTRATION_PHONE;
 import static com.epam.preprod.roman_lutsenko.constant.Fields.SESSION_CONTEXT;
+import static com.epam.preprod.roman_lutsenko.constant.Fields.SESSION_ERR_MESS;
+import static com.epam.preprod.roman_lutsenko.constant.Fields.SESSION_USER;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -32,23 +35,27 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getSession().removeAttribute(SESSION_ERR_MESS);
         req.getRequestDispatcher("login.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = extractLoginFromRequest(req);
-        user = context.getUserService().getById(user.getPhone());
-        if(Objects.isNull(user)) {
-            req.getSession().setAttribute("err_mess", "Incorrect data");
+        User userFromDB = context.getUserService().getById(user.getPhone());
+        if(Objects.isNull(userFromDB) || !Objects.equals(userFromDB.getPassword(), user.getPassword())) {
+            req.getSession().setAttribute(SESSION_ERR_MESS, "Incorrect data");
             resp.sendRedirect("login.jsp");
         } else {
+            LOG.debug("user = " + userFromDB.getName());
+            userFromDB.setPassword(EMPTY_STRING);
+            req.getSession().setAttribute(SESSION_USER, userFromDB);
             resp.sendRedirect("catalog.jsp");
         }
         LOG.debug("IS IT WORKING?? ");
     }
 
-    public static User extractLoginFromRequest(HttpServletRequest request) {
+    private static User extractLoginFromRequest(HttpServletRequest request) {
         User user = new User();
         String field = (String) request.getParameter(FORM_REGISTRATION_PHONE);
         if (Objects.nonNull(field) && ValidateInput.validPhone(field)) {
