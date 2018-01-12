@@ -14,7 +14,7 @@
             <section class="container">
                 <div class="row double">
                     <div class="6u">
-                         <form id="registration_form" action="registration" name="registrationForm" method="POST">
+                         <form id="registration_form" action="registration" name="registrationForm" method="POST" enctype="multipart/form-data">
                             <header class="major">
                                 <h2 class="">Registration</h2>
                                 <span class="byline"></span>
@@ -39,9 +39,9 @@
                                 <input id="password_confirm" name="password_confirm" placeholder="Confirm password" type="password" />
                                 <div id="password_confirm_" class="invalid_input">Invalid password</div>
                             </div>
-                            <%-- <div class="form__item">
-                                <input id="image" name="image" placeholder="image" type="file" accept="image/jpeg,image/png"/>
-                            </div> --%>
+                            <div class="form__item">
+                                <input id="avatar" name="avatar" placeholder="image" type="file" accept="image/jpeg,image/png"/>
+                            </div>
                             <div class="form__item">
                                 <cpt:Captcha />
                             </div>

@@ -1,5 +1,7 @@
 package com.epam.preprod.roman_lutsenko.web.servlet;
 
+import com.epam.preprod.roman_lutsenko.constant.Fields;
+import com.epam.preprod.roman_lutsenko.constant.Messages;
 import com.epam.preprod.roman_lutsenko.context.Context;
 import com.epam.preprod.roman_lutsenko.entity.User;
 import com.epam.preprod.roman_lutsenko.util.ValidateInput;
@@ -16,6 +18,7 @@ import java.util.Objects;
 import static com.epam.preprod.roman_lutsenko.constant.Fields.EMPTY_STRING;
 import static com.epam.preprod.roman_lutsenko.constant.Fields.FORM_REGISTRATION_PASSWORD;
 import static com.epam.preprod.roman_lutsenko.constant.Fields.FORM_REGISTRATION_PHONE;
+import static com.epam.preprod.roman_lutsenko.constant.Fields.SAVE_AVATAR_PATH;
 import static com.epam.preprod.roman_lutsenko.constant.Fields.SESSION_AVATAR;
 import static com.epam.preprod.roman_lutsenko.constant.Fields.SESSION_CONTEXT;
 import static com.epam.preprod.roman_lutsenko.constant.Fields.SESSION_ERR_MESS;
@@ -24,6 +27,7 @@ import static com.epam.preprod.roman_lutsenko.util.UserExtractor.phoneNumbers;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
+
 
     //todo: login transaction create.
     private Context context;
@@ -43,20 +47,21 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        LOG.debug(Messages.POST_METHOD_START);
         User user = extractLoginFromRequest(req);
         User userFromDB = context.getUserService().getById(user.getPhone());
         if (Objects.isNull(userFromDB) || !Objects.equals(userFromDB.getPassword(), user.getPassword())) {
             req.getSession().setAttribute(SESSION_ERR_MESS, "Incorrect data");
             resp.sendRedirect("login.jsp");
         } else {
-            LOG.debug("user = " + userFromDB.getName());
+            LOG.debug(Fields.SESSION_USER + userFromDB.getName());
             userFromDB.setPassword(EMPTY_STRING);
-            String imgName = "images/user/" + phoneNumbers(user.getPhone()) + ".jpg";
+            String imgName = SAVE_AVATAR_PATH+ phoneNumbers(user.getPhone()) + ".jpg";
             req.getSession().setAttribute(SESSION_AVATAR, imgName);
             req.getSession().setAttribute(SESSION_USER, userFromDB);
             resp.sendRedirect("catalog.jsp");
         }
-        LOG.debug("IS IT WORKING?? ");
+        LOG.debug(Messages.POST_METHOD_END);
     }
 
     private static User extractLoginFromRequest(HttpServletRequest request) {

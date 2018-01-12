@@ -37,6 +37,7 @@ public class Messages {
 
     public static final String GET_METHOD_START = " GET method started";
     public static final String POST_METHOD_START = " POST method started";
+    public static final String POST_METHOD_END = " POST method ended";
     public static final String GET_METHOD_ENDED = " GET method ended";
 
     //err
@@ -51,6 +52,7 @@ public class Messages {
     public static final String ERR_CANNOT_OBTAIN_USERS = "Cannot obtain users from a database";
     public static final String ERR_CANNOT_REMOVE_USER_FROM_DATABASE = "Cannot remove user from database";
     public static final String ERR_EXTRACTION_USER_FROM_RESULT_SET = "Err extraction user from ResultSet ";
+    public static final String ERR_USER_WITH_SUCH_PHONE_REGISTERED = "User with such phone registered.";
 
 
     //success

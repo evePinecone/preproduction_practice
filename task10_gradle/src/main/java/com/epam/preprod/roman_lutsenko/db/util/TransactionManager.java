@@ -40,7 +40,7 @@ public class TransactionManager {
             connection = getConnection();
             ConnectionHolder.setConnection(connection);
             res = (T)iExecutable.executeTransaction();
-            connection.close();
+            connection.commit();
         } catch (SQLException | DBException e) {
            rollBack(connection);
         } finally {

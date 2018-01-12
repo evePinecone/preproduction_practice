@@ -8,6 +8,7 @@ import com.epam.preprod.roman_lutsenko.util.UserExtractor;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,12 +19,15 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Objects;
 
+import static com.epam.preprod.roman_lutsenko.constant.Fields.FORM_REGISTERED_AVATAR;
 import static com.epam.preprod.roman_lutsenko.constant.Fields.INDEX_JSP;
 import static com.epam.preprod.roman_lutsenko.constant.Fields.REGISTRATION_JSP;
 import static com.epam.preprod.roman_lutsenko.constant.Fields.REGISTRATION_SERVLET;
+import static com.epam.preprod.roman_lutsenko.constant.Fields.SAVE_AVATAR_PATH;
 import static com.epam.preprod.roman_lutsenko.constant.Fields.SESSION_CONTEXT;
 import static com.epam.preprod.roman_lutsenko.constant.Fields.SESSION_ERR_MESS;
 import static com.epam.preprod.roman_lutsenko.constant.Fields.TAG_CAPTCHA_INPUT_VALUE;
+import static com.epam.preprod.roman_lutsenko.constant.Messages.ERR_USER_WITH_SUCH_PHONE_REGISTERED;
 import static com.epam.preprod.roman_lutsenko.constant.Messages.REGISTRATION_NON_VALID_FIELDS;
 import static com.epam.preprod.roman_lutsenko.util.UserExtractor.phoneNumbers;
 
@@ -31,6 +35,7 @@ import static com.epam.preprod.roman_lutsenko.util.UserExtractor.phoneNumbers;
  * Process registration form and check if user with this phone consist in User container.
  */
 @WebServlet("/registration")
+@MultipartConfig
 public class RegistrationServlet extends HttpServlet {
     private final Logger LOG = Logger.getLogger(RegistrationServlet.class);
 
@@ -48,13 +53,12 @@ public class RegistrationServlet extends HttpServlet {
                 try {
                     context.getUserService().add(user);
                     LOG.debug("added");
-                    //getAvatar(req, user);
-                    //todo:message.
-                    LOG.debug("USER ADDED");
+                    getAvatar(req, user);
                     resp.sendRedirect(INDEX_JSP);
                 } catch (UserDuplicateException e) {
                     LOG.debug("UserDupl ", e);
-                    // resp.sendRedirect(REGISTRATION_SERVLET);
+                    req.getSession().setAttribute(SESSION_ERR_MESS, ERR_USER_WITH_SUCH_PHONE_REGISTERED);
+                    resp.sendRedirect(REGISTRATION_SERVLET);
                 }
             }
         } else {
@@ -79,11 +83,11 @@ public class RegistrationServlet extends HttpServlet {
     }
 
     private void getAvatar(HttpServletRequest req, User user) {
-        final String filePath = "images/user/" + phoneNumbers(user.getPhone()) + ".jpg";
+        final String filePath = SAVE_AVATAR_PATH + phoneNumbers(user.getPhone()) + ".jpg";
 
         if (isAvatarUploaded(req)) {
             try (OutputStream out = new FileOutputStream(filePath);
-                 InputStream fileContent = req.getPart("image").getInputStream()) {
+                 InputStream fileContent = req.getPart(FORM_REGISTERED_AVATAR).getInputStream()) {
                 int read;
                 final byte[] bytes = new byte[1024];
 
@@ -91,18 +95,18 @@ public class RegistrationServlet extends HttpServlet {
                     out.write(bytes, 0, read);
                 }
             } catch (Exception e) {
-                LOG.warn("image", e);
+                LOG.warn(FORM_REGISTERED_AVATAR, e);
             }
         }
     }
 
     private boolean isAvatarUploaded(HttpServletRequest req) {
         try {
-            if (req.getPart("image").getSize() == 0) {
+            if (req.getPart(FORM_REGISTERED_AVATAR).getSize() == 0) {
                 return false;
             }
         } catch (IOException | ServletException e) {
-            LOG.warn("image", e);
+            LOG.warn(FORM_REGISTERED_AVATAR, e);
         }
         return true;
     }
