@@ -18,18 +18,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Objects;
+import java.util.Set;
 
-import static com.epam.preprod.roman_lutsenko.constant.Fields.FORM_REGISTERED_AVATAR;
-import static com.epam.preprod.roman_lutsenko.constant.Fields.INDEX_JSP;
-import static com.epam.preprod.roman_lutsenko.constant.Fields.REGISTRATION_JSP;
-import static com.epam.preprod.roman_lutsenko.constant.Fields.REGISTRATION_SERVLET;
-import static com.epam.preprod.roman_lutsenko.constant.Fields.SAVE_AVATAR_PATH;
-import static com.epam.preprod.roman_lutsenko.constant.Fields.SESSION_CONTEXT;
-import static com.epam.preprod.roman_lutsenko.constant.Fields.SESSION_ERR_MESS;
-import static com.epam.preprod.roman_lutsenko.constant.Fields.TAG_CAPTCHA_INPUT_VALUE;
+import static com.epam.preprod.roman_lutsenko.constant.Fields.*;
 import static com.epam.preprod.roman_lutsenko.constant.Messages.ERR_USER_WITH_SUCH_PHONE_REGISTERED;
 import static com.epam.preprod.roman_lutsenko.constant.Messages.REGISTRATION_NON_VALID_FIELDS;
 import static com.epam.preprod.roman_lutsenko.util.UserExtractor.phoneNumbers;
+import static com.epam.preprod.roman_lutsenko.util.UserSessionSaver.clearSessionFromUserFields;
+import static com.epam.preprod.roman_lutsenko.util.UserSessionSaver.setValidFieldsToSession;
+import static com.epam.preprod.roman_lutsenko.util.UserValidation.validateFields;
 
 /**
  * Process registration form and check if user with this phone consist in User container.
@@ -45,6 +42,7 @@ public class RegistrationServlet extends HttpServlet {
         LOG.debug(getClass() + Messages.STARTED);
         Context context = (Context) req.getServletContext().getAttribute(SESSION_CONTEXT);
         User user = UserExtractor.extractUserFromRequest(req);
+        user = isValidUser(req, user);
         if (isValidCaptcha(req, context)) {
             if (Objects.isNull(user)) {
                 req.getSession().setAttribute(SESSION_ERR_MESS, REGISTRATION_NON_VALID_FIELDS);
@@ -80,6 +78,19 @@ public class RegistrationServlet extends HttpServlet {
     private boolean isValidCaptcha(HttpServletRequest request, Context context) {
         String captureValue = request.getParameter(TAG_CAPTCHA_INPUT_VALUE);
         return context.getCaptchaService().isCorrectCaptcha(request, captureValue);
+    }
+
+    /**
+     * @return User instance with setted fields or <b>null</b> if user cannot insert to user container.
+     */
+    private User isValidUser(HttpServletRequest request, User user) {
+        Set set = validateFields(user);
+        if (set.isEmpty()) {
+            clearSessionFromUserFields(request);
+            return user;
+        }
+        setValidFieldsToSession(request, user);
+        return null;
     }
 
     private void getAvatar(HttpServletRequest req, User user) {

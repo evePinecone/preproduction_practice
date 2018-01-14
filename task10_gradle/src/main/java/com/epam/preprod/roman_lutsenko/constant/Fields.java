@@ -6,8 +6,7 @@ package com.epam.preprod.roman_lutsenko.constant;
 public class Fields {
 
     public static final String EMPTY_STRING = "";
-    public static final String AVATAR_PATH = "images/user/";
-    public static final String SAVE_AVATAR_PATH = "C:\\Users\\Roman_Lutsenko\\preproduction_practice\\preproduction_practice\\task10_gradle\\src\\main\\webapp\\images\\user\\";
+    public static final String SAVE_AVATAR_PATH = System.getProperty("catalina.home") + "/webapps/task10_gradle-0.1/images/user/";
 
     //registration.jsp
     public static final String FORM_REGISTRATION_NAME = "name";
@@ -16,6 +15,7 @@ public class Fields {
     public static final String FORM_REGISTRATION_EMAIL = "email";
     public static final String FORM_REGISTRATION_PHONE = "phone";
     public static final String FORM_REGISTRATION_PASSWORD = "password";
+    public static final String FORM_REGISTRATION_PASSWORD_CONFIRM = "password_confirm";
     public static final String FORM_REGISTERED_AVATAR = "avatar";
 
     //error.jsp
@@ -53,9 +53,6 @@ public class Fields {
     //base entity
     public static final String ID = "id";
 
-    //test table
-    public static final String TEST_QWEQWE = "qweqwe";
-    public static final String TEST_TEXT = "text";
 
     //DB user
     public static final String USER_NAME = "name";

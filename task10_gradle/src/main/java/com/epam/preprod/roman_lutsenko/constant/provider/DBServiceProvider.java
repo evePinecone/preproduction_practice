@@ -29,7 +29,7 @@ public class DBServiceProvider {
     private String serviceFactoryName;
     private Map<String, ServiceFactory> map;
 
-    public DBServiceProvider(TransactionManager transactionManager){
+    public DBServiceProvider(TransactionManager transactionManager) {
         map = new HashMap<>();
         //put service factory
         map.put(Fields.INIT_LISTENER_MYSQL, new MysqlServiceFactory(transactionManager));
@@ -40,7 +40,7 @@ public class DBServiceProvider {
      * Sets Full Class Name of a current implementation of the DBServiceProvider.
      *
      * @param serviceFactoryName Full Class Name of a current implementation of the DBServiceProvider
-     *                      to set.
+     *                           to set.
      */
     public void setServiceFactoryName(String serviceFactoryName) {
         this.serviceFactoryName = serviceFactoryName;
@@ -55,7 +55,7 @@ public class DBServiceProvider {
      */
     public ServiceFactory getInstance() {
         ServiceFactory serviceFactory = map.get(serviceFactoryName);
-        if(Objects.isNull(serviceFactory)) {
+        if (Objects.isNull(serviceFactory)) {
             LOG.error(Messages.ERR_CANNOT_INSTANTIATE_SERVICE_FACTORY);
             throw new DBException(Messages.ERR_CANNOT_INSTANTIATE_SERVICE_FACTORY);
         }

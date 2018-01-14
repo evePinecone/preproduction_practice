@@ -39,10 +39,10 @@ public class TransactionManager {
         try {
             connection = getConnection();
             ConnectionHolder.setConnection(connection);
-            res = (T)iExecutable.executeTransaction();
+            res = (T) iExecutable.executeTransaction();
             connection.commit();
         } catch (SQLException | DBException e) {
-           rollBack(connection);
+            rollBack(connection);
         } finally {
             close(connection);
         }
@@ -61,8 +61,7 @@ public class TransactionManager {
         try {
             connection = ds.getConnection();
             connection.setAutoCommit(false);
-//            connection.setTransactionIsolation(Connection.TRANSACTION_READ_UNCOMMITTED);
-//            logger.trace("Connection ==> " + connection);
+            connection.setTransactionIsolation(Connection.TRANSACTION_READ_UNCOMMITTED);
         } catch (SQLException e) {
             logger.error(Messages.ERR_CANNOT_OBTAIN_CONNECTION);
             throw new DBException(Messages.ERR_CANNOT_OBTAIN_CONNECTION, e);
@@ -71,7 +70,7 @@ public class TransactionManager {
     }
 
     /**
-     * Initializes a data source object.
+     * Initializes a data sourc e object.
      *
      * @throws DBException
      */

@@ -8,7 +8,6 @@ import com.epam.preprod.roman_lutsenko.context.Context;
 import com.epam.preprod.roman_lutsenko.db.util.TransactionManager;
 import com.epam.preprod.roman_lutsenko.entity.User;
 import com.epam.preprod.roman_lutsenko.service.CaptchaService;
-import com.epam.preprod.roman_lutsenko.service.TestService;
 import com.epam.preprod.roman_lutsenko.service.UserService;
 import org.apache.log4j.Logger;
 
@@ -44,10 +43,9 @@ public class ShopContextListener implements ServletContextListener {
         TransactionManager transactionManager = new TransactionManager();
         DBServiceProvider dbServiceProvider = new DBServiceProvider(transactionManager);
         dbServiceProvider.setServiceFactoryName(dbChoice);
-        TestService testService = dbServiceProvider.getInstance().getTestService();
         UserService userService = dbServiceProvider.getInstance().getUserService();
 
-        Context context = new Context(userService, captchaService, testService);
+        Context context = new Context(userService, captchaService);
         servletContext.setAttribute(Fields.SESSION_CONTEXT, context);
         logger.debug(getClass() + Messages.INITIALIZED);
     }

@@ -41,13 +41,11 @@ public class MySqlUserRepository implements UserRepository{
             preparedStatement.setString(counter++, user.getPhone());
             preparedStatement.setString(counter, user.getPassword());
             LOG.debug("prepSt add = " + preparedStatement);
-            return preparedStatement.executeUpdate()>-1;
-
+            return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             LOG.error(ERR_CANNOT_OBTAIN_USERS, e);
             throw new DBException(ERR_CANNOT_OBTAIN_USERS, e);
         }
-       // return true;
     }
 
     @Override
@@ -58,12 +56,11 @@ public class MySqlUserRepository implements UserRepository{
             Connection connection = ConnectionHolder.getConnection();
             preparedStatement = connection.prepareStatement(DBCommands.SQL_REMOVE_USER_BY_PHONE);
             preparedStatement.setString(1, phone);
-            preparedStatement.executeUpdate();
+            return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             LOG.error(ERR_CANNOT_REMOVE_USER_FROM_DATABASE, e);
             throw new DBException(ERR_CANNOT_REMOVE_USER_FROM_DATABASE, e);
         }
-        return true;
     }
 
     public User getById(String phone) {

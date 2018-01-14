@@ -11,6 +11,9 @@ import org.apache.log4j.Logger;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Returns implementation of captcha service.
+ */
 public class CaptchaServiceProvider {
 
     private static final Logger logger = Logger.getLogger(CaptchaServiceProvider.class);

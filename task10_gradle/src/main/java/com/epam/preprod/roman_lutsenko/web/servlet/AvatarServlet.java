@@ -27,26 +27,23 @@ public class AvatarServlet extends HttpServlet{
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String filePath = (String) req.getSession().getAttribute(Fields.SESSION_AVATAR);;
         resp.setContentType("image/jpeg");
-        ServletOutputStream out;
-        out = resp.getOutputStream();
-        if (Objects.isNull(filePath)) {
-            filePath = SAVE_AVATAR_PATH + "default.jpg";
+        try(ServletOutputStream out = resp.getOutputStream()) {
+            if (Objects.isNull(filePath)) {
+                filePath = SAVE_AVATAR_PATH + "default.jpg";
+            }
+            File file = new File(filePath);
+            if (!file.exists()) {
+                filePath = SAVE_AVATAR_PATH + "default.jpg";
+            }
+            LOG.debug("filePath " + filePath);
+            try (FileInputStream fin = new FileInputStream(filePath);
+                 BufferedInputStream bin = new BufferedInputStream(fin);
+                 BufferedOutputStream bout = new BufferedOutputStream(out)) {
+                int ch = 0;
+                while ((ch = bin.read()) != -1) {
+                    bout.write(ch);
+                }
+            }
         }
-        File file = new File(filePath);
-        if (!file.exists()) {
-            filePath = SAVE_AVATAR_PATH + "default.jpg";
-        }
-        LOG.debug("filePath " + filePath);
-        FileInputStream fin = new FileInputStream(filePath);
-        BufferedInputStream bin = new BufferedInputStream(fin);
-        BufferedOutputStream bout = new BufferedOutputStream(out);
-        int ch = 0;
-        while ((ch = bin.read()) != -1) {
-            bout.write(ch);
-        }
-        bin.close();
-        fin.close();
-        bout.close();
-        out.close();
     }
 }
