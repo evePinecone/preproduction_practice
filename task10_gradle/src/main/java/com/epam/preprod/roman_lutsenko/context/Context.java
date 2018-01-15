@@ -1,7 +1,7 @@
 package com.epam.preprod.roman_lutsenko.context;
 
-import com.epam.preprod.roman_lutsenko.services.CaptchaService;
-import com.epam.preprod.roman_lutsenko.services.UserService;
+import com.epam.preprod.roman_lutsenko.service.CaptchaService;
+import com.epam.preprod.roman_lutsenko.service.UserService;
 
 public class Context{
 

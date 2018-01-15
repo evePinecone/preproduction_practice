@@ -1,8 +1,10 @@
 <%@include file="directives/page.jspf"%>
+<%-- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <body class='homepage'>
 
- <div id="header">
+        <div id="header">
             <div class="container">
 
                 <!-- Logo -->
@@ -16,10 +18,32 @@
                         <li><a href="catalog.jsp">Catalog</a></li>
                         <li><a href="about.jsp">About</a></li>
                         <li>
-                            <a href="">%username%</a>
+                            <a href="">
+                            <%-- <c:set var="user" value="${sessionScope.user.name}" scope="session" /> --%>
+                            <c:choose>
+                                <c:when test="${not empty user}">
+                                    ${user.name}
+                                    <%-- <img class="lazy" src="${sessionScope.avatar}" srcset="images/user/default.jpg" data-original="images/user/default.jpg" alt="avatar" style=""  height="42" width="42"> --%>
+                                    <img src="avatar" height="42" width="42">
+                                </c:when>
+                                <c:otherwise>
+                                    Please, login.
+                                </c:otherwise>
+                            </c:choose> 
+                            </a>
+                            <%-- <img class="lazy" width="220" src="images/catalog/w660_h440_crop_8_7.jpg" data-original="images/catalog/w660_h440_crop_8_7.jpg" alt="art. 001-054" style=""> --%>
                             <ul>
-                                <li><a href="#">Sign in</a></li>
-                                <li><a href="registration">Registration</a></li>
+                            <c:choose>
+                                <c:when test="${empty user}">
+                                    <li><a href="login">Sign in</a></li>
+                                    <li><a href="registration">Registration</a></li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li><a href="logout">Logout</a></li>
+                                </c:otherwise>
+                            </c:choose> 
+                                <%-- <li><a href="login">Sign in</a></li>
+                                <li><a href="registration">Registration</a></li> --%>
                                 <li>
                                     <a href="">%language%</a>
                                     <ul>

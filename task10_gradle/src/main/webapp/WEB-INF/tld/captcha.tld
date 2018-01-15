@@ -5,7 +5,7 @@
 
     <tag>
         <name>Captcha</name>
-        <tag-class>com.epam.preprod.roman_lutsenko.web.tags.CaptchaTag</tag-class>
+        <tag-class>com.epam.preprod.roman_lutsenko.web.tag.CaptchaTag</tag-class>
         <body-content>empty</body-content>
     </tag>
 </taglib>

@@ -107,3 +107,5 @@ task10_gradle/.gradle/
 task10_gradle/gradlew
 task10_gradle/gradlew.bat
 .vscode
+/task10_gradle/src/main/resources/log4j.properties
+/task10_gradle/src/main/webapp/META-INF/context.xml

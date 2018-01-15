@@ -1040,3 +1040,8 @@ input[type="button"].small,
     display: inline;
     margin: 0 2px
 }
+
+.err_mess {
+    font-family: monospace;
+    color: red;
+}

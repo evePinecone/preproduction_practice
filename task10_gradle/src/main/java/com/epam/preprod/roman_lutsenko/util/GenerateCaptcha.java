@@ -1,6 +1,6 @@
 package com.epam.preprod.roman_lutsenko.util;
 
-import com.epam.preprod.roman_lutsenko.entities.Captcha;
+import com.epam.preprod.roman_lutsenko.entity.Captcha;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -19,7 +19,7 @@ public class GenerateCaptcha {
     private static final int WIDTH = 150;
     private static final int HEIGHT = 50;
     private static final int SIZE_CHARACTER = 18;
-    private static final int SIZE_CAPTCHA = 7;
+    private static final int SIZE_CAPTCHA = 2;
     private static final Font FONT = new Font("Georgia", Font.BOLD, SIZE_CHARACTER);
 
     private GenerateCaptcha(){

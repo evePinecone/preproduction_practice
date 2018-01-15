@@ -10,7 +10,7 @@ public interface Command {
     /**
      * Create a logic in implemented class.
      *
-     * @param context contains all services and set logic of program.
+     * @param context contains all service and set logic of program.
      */
     void execute(Context context);
 }

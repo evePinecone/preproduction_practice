@@ -1,0 +1,15 @@
+ <taglib>
+    <tlib-version>1.0</tlib-version>
+    <jsp-version>2.0</jsp-version>
+    <short-name>Captcha</short-name>
+    
+    <tag> 
+        <description> 
+            Login pop-up form.
+        </description> 
+        <name>Login</name>
+        <tag-class>com.epam.preprod.roman_lutsenko.web.tag.LoginTag</tag-class>
+        <!-- <body-content>scriptless</body-content>  -->
+            <body-content>empty</body-content>
+    </tag> 
+ </taglib>
