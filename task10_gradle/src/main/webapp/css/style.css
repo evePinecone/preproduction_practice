@@ -256,6 +256,7 @@ input[type="email"] {
     border-radius: 5px;
 }
 
+
 /* .actions captcha {
     border-radius: 15px;
 } */
@@ -704,6 +705,12 @@ input[type="button"].small,
 
 #nav>ul>li>ul {
     display: none;
+}
+
+.header__avatar {
+    position: relative;
+    top: 10px;
+    left: 10px;
 }
 
 

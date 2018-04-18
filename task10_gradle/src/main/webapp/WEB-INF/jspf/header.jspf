@@ -24,7 +24,7 @@
                                 <c:when test="${not empty user}">
                                     ${user.name}
                                     <%-- <img class="lazy" src="${sessionScope.avatar}" srcset="images/user/default.jpg" data-original="images/user/default.jpg" alt="avatar" style=""  height="42" width="42"> --%>
-                                    <img src="avatar" height="42" width="42">
+                                    <img class="header__avatar" src="avatar" height="42" width="42">
                                 </c:when>
                                 <c:otherwise>
                                     Please, login.
