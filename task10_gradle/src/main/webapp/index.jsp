@@ -30,7 +30,7 @@
 						<div class="6u">
 							<h3>All items in shop are handmade</h3>
 							<p>We have a lot of contacts around the world for this time. At the begining, me and my friend begen to create some historic weapon for cosplay to serials and games. Duaring the party we got a lot of questions about buying some similar accessories. In time we understood that we can do our favourite job and help people to bring they dreams come true. We work above 4 years. Our delivery work among all planet. Masters from all corner the world works with us.</p>
-							<a href="catalog.html" class="button">To the shop</a>
+							<a href="catalog.jsp" class="button">To the shop</a>
 						</div>
 					</div>
 				</section>

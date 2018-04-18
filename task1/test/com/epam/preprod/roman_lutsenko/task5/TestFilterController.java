@@ -17,7 +17,7 @@ import static org.junit.Assert.assertEquals;
 public class TestFilterController {
 
     private Filter filter;
-    private static final String DIRECTORY = "C:\\Users\\Roman_Lutsenko\\preproduction_practice\\preproduction_practice\\task1\\test\\resources";
+    private static final String DIRECTORY = "test\\resources";
 
     @Before
     public void init(){
@@ -26,7 +26,6 @@ public class TestFilterController {
 
     @Test
     public void listAllFilesInResourcesFolder(){
-
         System.setIn(new ByteArrayInputStream(DIRECTORY.getBytes()));
         FilterController filterController = new FilterController();
         System.setIn(System.in);
